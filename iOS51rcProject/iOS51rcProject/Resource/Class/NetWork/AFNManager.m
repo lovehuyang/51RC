@@ -10,6 +10,8 @@
 #import <AFNetworking.h>
 #import "Reachability.h"
 #import "Common.h"
+#import "GDataXMLNode.h"
+#import "Common.h"
 
 @interface AFNManager()<NSXMLParserDelegate>
 
@@ -17,7 +19,7 @@
 
 @implementation AFNManager
 
-+(void)requestWithMethod:(RequestMethod)method ParamDict:(NSDictionary *)paramDict url:(NSString *)url successBlock:(SuccessBlock)successBlock failureBlock:(FailureBlock)failureBlock{
++(void)requestWithMethod:(RequestMethod)method ParamDict:(NSDictionary *)paramDict url:(NSString *)url tableName:(NSString *)tableName successBlock:(SuccessBlock)successBlock failureBlock:(FailureBlock)failureBlock{
     
     // 判断是否有网络链接
     if(![[self alloc] isConnectionAvailable])
@@ -42,18 +44,16 @@
                          "</soap:Body>\n"
                          "</soap:Envelope>\n", url, nameSpace, soapParam, url
                          ];
-    NSLog(@"%@",soapMsg);
-    
-    
+
     // 请求地址
     NSString * urlString = [NSString stringWithFormat:@"%@",WebURL];
     // 请求类
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
+
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/xml",nil];
     [manager.requestSerializer setValue:@"text/xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"%zd", soapMsg.length] forHTTPHeaderField:@"Content-Length"];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
     // 设置HTTPBody
     [manager.requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, NSDictionary *parameters, NSError *__autoreleasing *error) {
@@ -63,13 +63,18 @@
         [manager POST:urlString parameters:paramDict progress:^(NSProgress * _Nonnull uploadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            NSXMLParser *parser = (NSXMLParser *)responseObject;
-            [[self alloc] xmlParser:parser];
-            DLog(@"");
+            
+            NSString *xmlStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSError *error = nil;
+            GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:&error];
+            NSArray *arrayPaMain = [Common getArrayFromXml:xmlDoc tableName:tableName];
+            successBlock(arrayPaMain, arrayPaMain[0]);
 
+            DLog(@"");
+            
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
-            failureBlock(error.code ,@"网络请求失败，请稍后重试");
+            failureBlock(error.code ,@"网络请求失败，请重试");
         }];
         
     }else{
@@ -77,8 +82,14 @@
         [manager GET:urlString parameters:paramDict progress:^(NSProgress * _Nonnull downloadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            // 统一处理请求数据
-//            [self dealwithreturnDataWithRequestData:responseObject successBlock:successBlock faileBlock:failureBlock];
+            
+            NSString *xmlStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSError *error = nil;
+            GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:&error];
+            NSArray *arrayPaMain = [Common getArrayFromXml:xmlDoc tableName:tableName];
+            successBlock(arrayPaMain, arrayPaMain[0]);
+            
+            DLog(@"");
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             failureBlock(error.code,@"网络请求失败，请稍后重试");
@@ -109,49 +120,5 @@
     
     return isExistenceNetwork;
 }
-
-
-#pragma mark - 解析xml数据
-- (void)xmlParser:(NSXMLParser *)parser{
-    parser.delegate = self;
-    [parser parse];
-}
-//1.开始解析XML文档的时候
--(void)parserDidStartDocument:(NSXMLParser *)parser
-{
-    NSLog(@"%s",__func__);
-}
-
-//2.开始解析某个元素
--(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict
-{
-    NSLog(@"开始解析%@---%@",elementName,attributeDict);
-    //过滤根元素
-    if ([elementName isEqualToString:@"Table"]) {
-        
-        return;
-    }
-    
-    // attributeDict中存放的是XML文档元素中的内容，以字典的形式
-    //字典转模型
-    //    [self.videos addObject:[XMGVideo mj_objectWithKeyValues:attributeDict]];
-}
-
-//3.某个元素解析完毕
--(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
-{
-    if ([elementName isEqualToString:@"Table"]) {
-        
-        return;
-    }
-    NSLog(@"结束解析%@",elementName);
-}
-
-//4.结束解析
--(void)parserDidEndDocument:(NSXMLParser *)parser
-{
-    NSLog(@"%s",__func__);
-}
-
 
 @end

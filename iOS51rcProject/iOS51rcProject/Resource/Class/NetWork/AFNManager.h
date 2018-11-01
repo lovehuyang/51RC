@@ -25,11 +25,11 @@ typedef NS_ENUM(NSInteger ,RequestMethod) {
 
 /**
  请求成功的回调
- 
- @param requestData 请求shuju
- @param dataDict 数据
+
+ @param requestData 原始数据解析完的数组
+ @param dataDict 数字第一个元素
  */
-typedef void(^SuccessBlock) (id requestData, NSDictionary *dataDict);
+typedef void(^SuccessBlock) (NSArray * requestData, NSDictionary *dataDict);
 
 /**
  请求失败的block
@@ -49,6 +49,6 @@ typedef void(^FailureBlock) (NSInteger errCode , NSString *msg);
  @param successBlock 成功回调
  @param failureBlock 失败的回调
  */
-+(void)requestWithMethod:(RequestMethod)method ParamDict:(NSDictionary *)paramDict url:(NSString *)url successBlock:(SuccessBlock)successBlock failureBlock:(FailureBlock)failureBlock;
++(void)requestWithMethod:(RequestMethod)method ParamDict:(NSDictionary *)paramDict url:(NSString *)url tableName:(NSString *)tableName successBlock:(SuccessBlock)successBlock failureBlock:(FailureBlock)failureBlock;
 
 @end

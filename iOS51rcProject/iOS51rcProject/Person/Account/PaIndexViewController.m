@@ -152,18 +152,20 @@
 }
 
 - (void)getPaInfo {
-    [self.btnLogout setHidden:NO];
-    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetPaMain" Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", nil] viewController:self];
-    [request setTag:1];
-    [request setDelegate:self];
-    [request startAsynchronous];
-    self.runningRequest = request;
-    
-//    [AFNManager requestWithMethod:POST ParamDict:[NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", nil] url:@"GetPaMain" successBlock:^(id requestData, NSDictionary *dataDict) {
-//        DLog(@"");
-//    } failureBlock:^(NSInteger errCode, NSString *msg) {
-//        DLog(@"");
-//    }];
+//    [self.btnLogout setHidden:NO];
+//    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetPaMain" Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", nil] viewController:self];
+//    [request setTag:1];
+//    [request setDelegate:self];
+//    [request startAsynchronous];
+//    self.runningRequest = request;
+    NSDictionary *param = @{@"paMainID":PAMAINID,
+                            @"code":[USER_DEFAULT valueForKey:@"paMainCode"],
+                            };
+    [AFNManager requestWithMethod:POST ParamDict:param url:@"GetPaMain" tableName:@"Table" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        DLog(@"");
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        DLog(@"");
+    }];
 }
 
 - (void)fillPaInfo:(NSDictionary *)data {
