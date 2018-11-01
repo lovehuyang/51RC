@@ -1,0 +1,11 @@
+platform :ios, ‘8.0’
+
+target "iOS51rcProject" do
+pod 'BaiduMapKit' #百度地图
+pod 'MJRefresh'
+pod 'SDWebImage'
+pod 'SDWebImage/GIF’
+pod ‘FMDB’
+pod 'AFNetworking'
+pod 'SDAutoLayout'
+end

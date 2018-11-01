@@ -1,0 +1,35 @@
+//
+//  CommonTools.m
+//  iOS51rcProject
+//
+//  Created by Lucifer on 2018/11/1.
+//  Copyright © 2018年 Jerry. All rights reserved.
+//
+
+#import "CommonTools.h"
+
+@implementation CommonTools
+
+#pragma mark - 获取状态栏的高度
+
+/**
+ 获取状态栏的高度
+ 
+ @return 状态栏高度
+ */
++ (CGFloat)getStatusHight{
+    
+    CGRect StatusRect = [[UIApplication sharedApplication]statusBarFrame];
+    return StatusRect.size.height;
+}
+
+/**
+ 获取状态栏和导航栏的高度
+ 
+ @return 状态栏和导航栏的高度
+ */
++ (CGFloat)getStatusAndNavHight{
+    
+    return  [self getStatusHight] + 44;
+}
+@end
