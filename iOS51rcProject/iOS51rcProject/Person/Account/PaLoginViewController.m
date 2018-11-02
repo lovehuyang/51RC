@@ -4,7 +4,7 @@
 //
 //  Created by Lucifer on 2017/6/5.
 //  Copyright © 2017年 Lucifer. All rights reserved.
-//
+//  账号密码登录
 
 #import "PaLoginViewController.h"
 #import "CommonMacro.h"
@@ -18,14 +18,19 @@
 #import "NavBar.h"
 
 @interface PaLoginViewController ()<UITextFieldDelegate, NetWebServiceRequestDelegate>
-
+{
+    BOOL isPasswordLogin;// 默认是密码登录
+}
 @property (nonatomic, strong) NetWebServiceRequest *runningRequest;
+@property (nonatomic , strong)UILabel *loginTypeLab;
 @end
 
 @implementation PaLoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    isPasswordLogin = YES;
     // 假导航栏
     NavBar *navView = [[NavBar alloc]initWithTitle:@"" leftItem:@"nav_return"];
     [self.view addSubview:navView];
@@ -49,6 +54,7 @@
     loginTypeLab.text = @"密码登录";
     loginTypeLab.textAlignment = NSTextAlignmentCenter;
     loginTypeLab.font = SMALLERFONT;
+    self.loginTypeLab = loginTypeLab;
     
     navView.sd_layout
     .leftSpaceToView(self.view, 0)
@@ -205,19 +211,32 @@
     [self presentViewController:agreementNav animated:YES completion:nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - 切换登录方式
+
+- (IBAction)changeLoginType:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+    if ([btn.titleLabel.text isEqualToString:@"验证码登录"]) {
+        [btn setTitle:@"密码登录" forState:UIControlStateNormal];
+        isPasswordLogin = NO;
+    }else{
+        [btn setTitle:@"验证码登录" forState:UIControlStateNormal];
+        isPasswordLogin = YES;
+    }
+    [self changeUIStatus];
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - 改变控件的状态
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)changeUIStatus{
+    if (isPasswordLogin) {
+        self.loginTypeLab.text = @"密码登录";
+        self.txtUsername.placeholder = @"请输入邮箱或手机号";
+        self.txtPassword.placeholder = @"请输入密码";
+    }else{
+        self.loginTypeLab.text = @"验证码登录";
+        self.txtUsername.placeholder = @"请输入已认证手机号";
+        self.txtPassword.placeholder = @"短信验证码";
+        self.passwordBtn.hidden = YES;
+    }
 }
-*/
-
 @end
