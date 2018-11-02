@@ -276,6 +276,7 @@
 		996C9084218934B600C0EF66 /* ComplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 996C9083218934B600C0EF66 /* ComplainViewController.m */; };
 		996C90882189368D00C0EF66 /* ComplainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 996C90872189368D00C0EF66 /* ComplainView.m */; };
 		996C908C21894F8500C0EF66 /* AFNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 996C908B21894F8500C0EF66 /* AFNManager.m */; };
+		996EB7AB218BE824000B475E /* RCToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 996EB7AA218BE824000B475E /* RCToast.m */; };
 		996F504E2188292900D2A7E9 /* OptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 996F504D2188292900D2A7E9 /* OptionView.m */; };
 		996F50572188340200D2A7E9 /* TABButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 996F50562188340200D2A7E9 /* TABButton.m */; };
 		997B067A1F5500A000391289 /* AccountManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B061D1F5500A000391289 /* AccountManagerViewController.m */; };
@@ -767,6 +768,8 @@
 		996C90872189368D00C0EF66 /* ComplainView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComplainView.m; sourceTree = "<group>"; };
 		996C908A21894F8500C0EF66 /* AFNManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNManager.h; sourceTree = "<group>"; };
 		996C908B21894F8500C0EF66 /* AFNManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFNManager.m; sourceTree = "<group>"; };
+		996EB7A9218BE824000B475E /* RCToast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCToast.h; sourceTree = "<group>"; };
+		996EB7AA218BE824000B475E /* RCToast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCToast.m; sourceTree = "<group>"; };
 		996F504C2188292900D2A7E9 /* OptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionView.h; sourceTree = "<group>"; };
 		996F504D2188292900D2A7E9 /* OptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionView.m; sourceTree = "<group>"; };
 		996F505121882FDE00D2A7E9 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -1355,6 +1358,8 @@
 			children = (
 				9919FA3F1EDFC24400BE51F0 /* UIView+Toast.h */,
 				9919FA401EDFC24400BE51F0 /* UIView+Toast.m */,
+				996EB7A9218BE824000B475E /* RCToast.h */,
+				996EB7AA218BE824000B475E /* RCToast.m */,
 			);
 			path = Toast;
 			sourceTree = "<group>";
@@ -2533,6 +2538,7 @@
 				997B06981F5500A000391289 /* InterviewViewController.m in Sources */,
 				991C6F7F200C4995009FD82A /* CpModifyViewController.m in Sources */,
 				991C6F671FFB6277009FD82A /* OrderViewController.m in Sources */,
+				996EB7AB218BE824000B475E /* RCToast.m in Sources */,
 				99C5EEB22017293F00AC8FBD /* ChatListCpViewController.m in Sources */,
 				991A243E1EE6D7A9008CD8E9 /* ASIDownloadCache.m in Sources */,
 				997B06831F5500A000391289 /* SalaryViewController.m in Sources */,

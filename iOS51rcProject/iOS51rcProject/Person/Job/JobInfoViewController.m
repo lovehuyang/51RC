@@ -665,9 +665,9 @@
 
 #pragma mark - 点击事件
 - (void)complainClick{
-    DLog(@"投诉按钮");
     ComplainViewController *cvc = [ComplainViewController new];
     cvc.jobId = self.jobData[@"id"];
+    cvc.caMainId = self.jobData[@"caMainID"];
     [self.navigationController pushViewController:cvc animated:YES];
 }
 

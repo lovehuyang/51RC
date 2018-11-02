@@ -10,4 +10,5 @@
 
 @interface ComplainViewController : UIViewController
 PROPERTY_NSSTRING(jobId);
+PROPERTY_NSSTRING(caMainId);
 @end

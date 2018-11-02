@@ -19,13 +19,13 @@
 
 @implementation AFNManager
 
-+(void)requestWithMethod:(RequestMethod)method ParamDict:(NSDictionary *)paramDict url:(NSString *)url tableName:(NSString *)tableName successBlock:(SuccessBlock)successBlock failureBlock:(FailureBlock)failureBlock{
++(NSURLSessionDataTask *)requestWithMethod:(RequestMethod)method ParamDict:(NSDictionary *)paramDict url:(NSString *)url tableName:(NSString *)tableName successBlock:(SuccessBlock)successBlock failureBlock:(FailureBlock)failureBlock{
     
     // 判断是否有网络链接
     if(![[self alloc] isConnectionAvailable])
     {
         failureBlock(0,@"您已断开网络链接！");
-        return;
+        return nil;
     }
     
     NSString *WebURL = @"http://webservice.51rc.com/app3/appwebservice.asmx";
@@ -60,7 +60,7 @@
         return soapMsg;
     }];
     if(method == POST){
-        [manager POST:urlString parameters:paramDict progress:^(NSProgress * _Nonnull uploadProgress) {
+        NSURLSessionDataTask *task = [manager POST:urlString parameters:paramDict progress:^(NSProgress * _Nonnull uploadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
@@ -68,18 +68,23 @@
             NSError *error = nil;
             GDataXMLDocument *xmlDoc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:&error];
             NSArray *arrayPaMain = [Common getArrayFromXml:xmlDoc tableName:tableName];
-            successBlock(arrayPaMain, arrayPaMain[0]);
-
+            if (arrayPaMain.count > 0) {
+                successBlock(arrayPaMain, arrayPaMain[0]);
+            }else{
+                successBlock(arrayPaMain, nil);
+            }
+    
             DLog(@"");
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
             failureBlock(error.code ,@"网络请求失败，请重试");
         }];
+        return task;
         
     }else{
         
-        [manager GET:urlString parameters:paramDict progress:^(NSProgress * _Nonnull downloadProgress) {
+        NSURLSessionDataTask *task =[manager GET:urlString parameters:paramDict progress:^(NSProgress * _Nonnull downloadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
@@ -94,6 +99,8 @@
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             failureBlock(error.code,@"网络请求失败，请稍后重试");
         }];
+        
+        return task;
     }
 }
 

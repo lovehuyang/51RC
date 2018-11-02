@@ -49,6 +49,6 @@ typedef void(^FailureBlock) (NSInteger errCode , NSString *msg);
  @param successBlock 成功回调
  @param failureBlock 失败的回调
  */
-+(void)requestWithMethod:(RequestMethod)method ParamDict:(NSDictionary *)paramDict url:(NSString *)url tableName:(NSString *)tableName successBlock:(SuccessBlock)successBlock failureBlock:(FailureBlock)failureBlock;
++(NSURLSessionDataTask *)requestWithMethod:(RequestMethod)method ParamDict:(NSDictionary *)paramDict url:(NSString *)url tableName:(NSString *)tableName successBlock:(SuccessBlock)successBlock failureBlock:(FailureBlock)failureBlock;
 
 @end

@@ -93,24 +93,48 @@ const NSInteger tag2 = 2;// 提交投诉信息
 }
 #pragma mark - 提交事件
 - (void)submitClick{
-    DLog(@"%@",self.reasonView.content);
-    
-    DLog(@"%@\n%@\n%@\n",self.contactView.content,self.phoneView.content,self.emailView.content);
+    [self.view endEditing:YES];
+    if (!self.contactView.content.length) {
+        [RCToast showMessage:@"联系人不能为空！"];
+        return;
+    }else if (!self.phoneView.content.length){
+         [RCToast showMessage:@"手机号码不能为空！"];
+        return;
+    }else if (self.phoneView.content.length && ![Common checkMobile:self.phoneView.content]){
+        [RCToast showMessage:@"手机号格式错误"];
+        return;
+
+    }else if (!self.emailView.content.length){
+         [RCToast showMessage:@"邮箱不能为空！"];
+        return;
+    }else if (!self.reasonView.content.length){
+         [RCToast showMessage:@"投诉原因不能为空！"];
+        return;
+    }
     
     NSDictionary *param = @{@"jobId":self.jobId,
-                            @"txtComplaintWhy":@"123321",
+                            @"txtComplaintWhy":self.reasonView.content,
                             @"userName":self.contactView.content,
                             @"mobile":self.phoneView.content,
                             @"email":self.emailView.content,
-                            @"caMainId":@"",
+                            @"caMainId":self.caMainId,
                             @"paMainID":PAMAINID,
                             @"code":[USER_DEFAULT objectForKey:@"paMainCode"]
                             };
-//    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:URL_SAVECOMPLAIN Params:[NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", self.cvMainId, @"cvMainId", txtName.text, @"name", nil] viewController:nil];
-//    [request setTag:tag2];
-//    [request setDelegate:self];
-//    [request startAsynchronous];
-//    self.runningRequest = request;
+    [AFNManager requestWithMethod:POST ParamDict:param url:URL_SAVECOMPLAIN tableName:@"SaveComplaintsResponse" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        [RCToast showMessage:@"投诉成功！"];
+        
+        __weak __typeof (self)weakSelf = self;
+        dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5/*延迟执行时间*/ * NSEC_PER_SEC));
+        
+        dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        });
+        
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        [RCToast showMessage:msg];
+    }];
 }
+
 
 @end
