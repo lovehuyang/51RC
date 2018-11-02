@@ -29,17 +29,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [Common changeFontSize:self.view];
-    [self.navigationController.navigationBar setHidden:YES];
+    UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    closeBtn.frame = CGRectMake(0, 0, 26, 44);
+    [closeBtn setImage:[UIImage imageNamed:@"p_registerClose"] forState:UIControlStateNormal];
+    [closeBtn addTarget:self action:@selector(closeBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:closeBtn];
+    self.navigationItem.leftBarButtonItem = item;
     [self.btnOneMinute setTitleColor:NAVBARCOLOR forState:UIControlStateNormal];
     [self.btnOneMinute.layer setBorderWidth:1];
     [self.btnOneMinute.layer setBorderColor:[NAVBARCOLOR CGColor]];
     [self.btnOneMinute.layer setCornerRadius:VIEW_H(self.btnOneMinute) / 5];
     self.sendSecond = 180;
+    self.title = @"注册";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setHidden:YES];
+//    [self.navigationController.navigationBar setHidden:YES];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
@@ -47,11 +53,6 @@
     [super viewWillDisappear:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self.runningRequest cancel];
-}
-
-- (IBAction)dismissClick:(id)sender {
-    RoleViewController *roleCtrl = [[RoleViewController alloc] init];
-    [self presentViewController:roleCtrl animated:YES completion:nil];
 }
 
 - (IBAction)passwordClick:(UIButton *)sender {
@@ -223,18 +224,11 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - 关闭事件
+- (void)closeBtnClick{
+    RoleViewController *roleCtrl = [[RoleViewController alloc] init];
+    [self presentViewController:roleCtrl animated:YES completion:nil];
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

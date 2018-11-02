@@ -15,6 +15,7 @@
 #import "UIView+Toast.h"
 #import "JPUSHService.h"
 #import "AgreementViewController.h"
+#import "NavBar.h"
 
 @interface PaLoginViewController ()<UITextFieldDelegate, NetWebServiceRequestDelegate>
 
@@ -25,7 +26,40 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // 假导航栏
+    NavBar *navView = [[NavBar alloc]initWithTitle:@"" leftItem:@"nav_return"];
+    [self.view addSubview:navView];
+    
+    UIImageView *logoImgView = [UIImageView new];
+    [self.view addSubview:logoImgView];
+    logoImgView.sd_layout
+    .centerXEqualToView(self.view)
+    .topSpaceToView(navView, -40)
+    .widthIs(100)
+    .heightEqualToWidth();
+    logoImgView.image = [UIImage imageNamed:@"pa_loginphoto.png"];
+    
+    UILabel *loginTypeLab = [UILabel new];
+    [self.view addSubview:loginTypeLab];
+    loginTypeLab.sd_layout
+    .topSpaceToView(logoImgView, 5)
+    .centerXEqualToView(logoImgView)
+    .widthIs(100)
+    .heightIs(20);
+    loginTypeLab.text = @"密码登录";
+    loginTypeLab.textAlignment = NSTextAlignmentCenter;
+    loginTypeLab.font = SMALLERFONT;
+    
+    navView.sd_layout
+    .leftSpaceToView(self.view, 0)
+    .rightSpaceToView(self.view, 0)
+    .topSpaceToView(self.view, -100)
+    .bottomSpaceToView(self.view, SCREEN_HEIGHT - HEIGHT_STATUS_NAV);
+    __weak typeof(self)weakSelf = self;
+    navView.leftItemEvent = ^{
+        [weakSelf.navigationController popViewControllerAnimated:YES];;
+    };
+    
     [Common changeFontSize:self.view];
     [self.navigationController.navigationBar setHidden:YES];
     [self.btnOneMinute setTitleColor:NAVBARCOLOR forState:UIControlStateNormal];
@@ -42,6 +76,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self.navigationController.navigationBar setHidden:NO];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self.runningRequest cancel];
 }
@@ -95,10 +130,6 @@
         [sender setBackgroundImage:[UIImage imageNamed:@"img_password2.png"] forState:UIControlStateNormal];
         [sender setTag:0];
     }
-}
-
-- (IBAction)backClick:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

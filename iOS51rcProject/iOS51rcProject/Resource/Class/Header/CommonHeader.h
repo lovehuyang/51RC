@@ -12,6 +12,6 @@
 #define HEIGHT_STATUS [CommonTools getStatusHight]
 #define HEIGHT_STATUS_NAV [CommonTools getStatusAndNavHight]
 
-#define PROPERTY_NSSTRING(str) @property (nonatomic , copy)NSString *str
+#define PROPERTY_COPY(str) @property (nonatomic , copy)NSString *str
 
 #endif /* CommonHeader_h */

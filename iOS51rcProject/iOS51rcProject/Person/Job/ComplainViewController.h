@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ComplainViewController : UIViewController
-PROPERTY_NSSTRING(jobId);
-PROPERTY_NSSTRING(caMainId);
+PROPERTY_COPY(jobId);
+PROPERTY_COPY(caMainId);
 @end

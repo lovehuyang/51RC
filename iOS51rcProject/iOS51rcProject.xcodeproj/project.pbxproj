@@ -277,6 +277,8 @@
 		996C90882189368D00C0EF66 /* ComplainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 996C90872189368D00C0EF66 /* ComplainView.m */; };
 		996C908C21894F8500C0EF66 /* AFNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 996C908B21894F8500C0EF66 /* AFNManager.m */; };
 		996EB7AB218BE824000B475E /* RCToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 996EB7AA218BE824000B475E /* RCToast.m */; };
+		996EB7AD218C21AF000B475E /* p_registerClose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 996EB7AC218C21AE000B475E /* p_registerClose@2x.png */; };
+		996EB7B0218C3687000B475E /* NavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 996EB7AF218C3687000B475E /* NavBar.m */; };
 		996F504E2188292900D2A7E9 /* OptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 996F504D2188292900D2A7E9 /* OptionView.m */; };
 		996F50572188340200D2A7E9 /* TABButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 996F50562188340200D2A7E9 /* TABButton.m */; };
 		997B067A1F5500A000391289 /* AccountManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B061D1F5500A000391289 /* AccountManagerViewController.m */; };
@@ -770,6 +772,9 @@
 		996C908B21894F8500C0EF66 /* AFNManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFNManager.m; sourceTree = "<group>"; };
 		996EB7A9218BE824000B475E /* RCToast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCToast.h; sourceTree = "<group>"; };
 		996EB7AA218BE824000B475E /* RCToast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCToast.m; sourceTree = "<group>"; };
+		996EB7AC218C21AE000B475E /* p_registerClose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "p_registerClose@2x.png"; sourceTree = "<group>"; };
+		996EB7AE218C3687000B475E /* NavBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavBar.h; sourceTree = "<group>"; };
+		996EB7AF218C3687000B475E /* NavBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavBar.m; sourceTree = "<group>"; };
 		996F504C2188292900D2A7E9 /* OptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionView.h; sourceTree = "<group>"; };
 		996F504D2188292900D2A7E9 /* OptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionView.m; sourceTree = "<group>"; };
 		996F505121882FDE00D2A7E9 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -1665,6 +1670,7 @@
 			children = (
 				990A3B8A1F42F387006CB3CF /* Emotion */,
 				990431022093FE9700B4267D /* cp_cvrm.png */,
+				996EB7AC218C21AE000B475E /* p_registerClose@2x.png */,
 				990431002093284C00B4267D /* cp_infotips.png */,
 				991970322091C53E003C31CB /* cp_jobreply.png */,
 				991970332091C53E003C31CB /* cp_jobreplyno.png */,
@@ -1837,6 +1843,8 @@
 				996F504D2188292900D2A7E9 /* OptionView.m */,
 				996F50552188340200D2A7E9 /* TABButton.h */,
 				996F50562188340200D2A7E9 /* TABButton.m */,
+				996EB7AE218C3687000B475E /* NavBar.h */,
+				996EB7AF218C3687000B475E /* NavBar.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2165,6 +2173,7 @@
 				990A3BD91F42F387006CB3CF /* 35.gif in Resources */,
 				990A3BC31F42F387006CB3CF /* 15.gif in Resources */,
 				999070BB1F025EC500B5E289 /* job_item1.png in Resources */,
+				996EB7AD218C21AF000B475E /* p_registerClose@2x.png in Resources */,
 				995A49FB1F0A735B0047EDBE /* pa_edit.png in Resources */,
 				995C3DCD1EF7D02100277468 /* pa_remind1.png in Resources */,
 				996131AB1FDFC5A700194271 /* cp_account4.png in Resources */,
@@ -2481,6 +2490,7 @@
 				997B06991F5500A000391289 /* InvitationViewController.m in Sources */,
 				995C3D701EF7CD7100277468 /* SCNavTabBar.m in Sources */,
 				9993A573218AB1060057B6FD /* OnlineLab.m in Sources */,
+				996EB7B0218C3687000B475E /* NavBar.m in Sources */,
 				991A24431EE6D7A9008CD8E9 /* Reachability.m in Sources */,
 				997B068E1F5500A000391289 /* MultiSelectViewController.m in Sources */,
 				996F504E2188292900D2A7E9 /* OptionView.m in Sources */,
