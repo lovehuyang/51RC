@@ -71,7 +71,8 @@
             if (arrayPaMain.count > 0) {
                 successBlock(arrayPaMain, arrayPaMain[0]);
             }else{
-                successBlock(arrayPaMain, nil);
+                NSString *value = [Common getValueFromXml:xmlDoc];
+                successBlock(arrayPaMain, value);
             }
     
             DLog(@"");

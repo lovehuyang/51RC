@@ -10,5 +10,7 @@
 #define URLPath_h
 // 投诉
 #define URL_SAVECOMPLAIN @"SaveComplaints"
+// 个人用户验证码登录方式获取验证码
+#define URL_GETPAMOBILEVERIFYCODELOGIN @"GetPaMobileVerifyCodeLogin"
 
 #endif /* URLPath_h */

@@ -1411,7 +1411,7 @@
                                         </constraints>
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7dL-XT-dia">
-                                        <rect key="frame" x="50" y="50" width="220" height="50"/>
+                                        <rect key="frame" x="50" y="50" width="180" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="RMR-T7-KFL"/>
                                         </constraints>
@@ -1433,11 +1433,23 @@
                                             <action selector="passwordClick:" destination="l6A-yx-5Vr" eventType="touchUpInside" id="3HR-ga-62j"/>
                                         </connections>
                                     </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPr-5f-TWw">
+                                        <rect key="frame" x="230" y="51" width="90" height="49"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="获取验证码">
+                                            <color key="titleColor" red="0.99607843139999996" green="0.41176470590000003" blue="0.1450980392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Xyf-fe-miY" firstAttribute="top" secondItem="mxx-ck-WHw" secondAttribute="bottom" id="5kb-hr-y0s"/>
-                                    <constraint firstAttribute="trailing" secondItem="7dL-XT-dia" secondAttribute="trailing" constant="50" id="BRC-Ss-VJD"/>
+                                    <constraint firstAttribute="trailing" secondItem="JPr-5f-TWw" secondAttribute="trailing" id="6fm-PK-lzh"/>
+                                    <constraint firstItem="JPr-5f-TWw" firstAttribute="top" secondItem="Xyf-fe-miY" secondAttribute="bottom" id="9a5-Fe-b5s"/>
+                                    <constraint firstAttribute="trailing" secondItem="7dL-XT-dia" secondAttribute="trailing" constant="90" id="BRC-Ss-VJD"/>
                                     <constraint firstItem="Xyf-fe-miY" firstAttribute="top" secondItem="cG0-dR-NMN" secondAttribute="top" constant="50" id="DsT-Ms-bVe"/>
                                     <constraint firstAttribute="bottom" secondItem="X6G-28-iY3" secondAttribute="bottom" constant="15" id="Tsi-68-mEk"/>
                                     <constraint firstAttribute="height" constant="100" id="VQR-gk-E32"/>
@@ -1453,6 +1465,8 @@
                                     <constraint firstItem="X6G-28-iY3" firstAttribute="top" secondItem="Xyf-fe-miY" secondAttribute="bottom" constant="14" id="loD-da-w9F"/>
                                     <constraint firstItem="mxx-ck-WHw" firstAttribute="leading" secondItem="RP8-Yh-WOu" secondAttribute="trailing" constant="15" id="sYv-Le-M7N"/>
                                     <constraint firstItem="1Iz-Q2-YHi" firstAttribute="top" secondItem="Xyf-fe-miY" secondAttribute="bottom" constant="15" id="tNU-gw-4l0"/>
+                                    <constraint firstAttribute="bottom" secondItem="JPr-5f-TWw" secondAttribute="bottom" id="vml-UW-KNz"/>
+                                    <constraint firstItem="JPr-5f-TWw" firstAttribute="leading" secondItem="7dL-XT-dia" secondAttribute="trailing" id="wHY-55-tGz"/>
                                     <constraint firstAttribute="trailing" secondItem="1Iz-Q2-YHi" secondAttribute="trailing" constant="15" id="wqN-pZ-abt"/>
                                     <constraint firstItem="Xyf-fe-miY" firstAttribute="leading" secondItem="cG0-dR-NMN" secondAttribute="leading" id="yST-iE-nkL"/>
                                 </constraints>
@@ -1645,7 +1659,9 @@
                         <outlet property="btnAgree" destination="s51-pk-YOO" id="PUv-7n-ztT"/>
                         <outlet property="btnOneMinute" destination="Pdi-li-heJ" id="c8I-36-iB0"/>
                         <outlet property="btnPassword" destination="1Iz-Q2-YHi" id="ZWe-ai-bml"/>
+                        <outlet property="getSecurityBtn" destination="JPr-5f-TWw" id="Kq0-ms-pgg"/>
                         <outlet property="passwordBtn" destination="1Iz-Q2-YHi" id="2OS-dH-G8e"/>
+                        <outlet property="textFieldBgView" destination="cG0-dR-NMN" id="OZV-ZY-T5u"/>
                         <outlet property="txtPassword" destination="7dL-XT-dia" id="hqq-Sq-sG4"/>
                         <outlet property="txtUsername" destination="mxx-ck-WHw" id="5X9-cd-zV1"/>
                     </connections>

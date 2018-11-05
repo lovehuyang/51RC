@@ -262,6 +262,8 @@
 		995E9E231F05FAB600A34835 /* img_next2.png in Resources */ = {isa = PBXBuildFile; fileRef = 995E9E1F1F05FAB600A34835 /* img_next2.png */; };
 		995E9E241F05FAB600A34835 /* img_prev1.png in Resources */ = {isa = PBXBuildFile; fileRef = 995E9E201F05FAB600A34835 /* img_prev1.png */; };
 		995E9E251F05FAB600A34835 /* img_prev2.png in Resources */ = {isa = PBXBuildFile; fileRef = 995E9E211F05FAB600A34835 /* img_prev2.png */; };
+		9960E259218FCA95008E6DE5 /* CountdownBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 9960E258218FCA95008E6DE5 /* CountdownBtn.m */; };
+		9960E25D219019CC008E6DE5 /* MBProgressHUD+Gif.m in Sources */ = {isa = PBXBuildFile; fileRef = 9960E25C219019CC008E6DE5 /* MBProgressHUD+Gif.m */; };
 		996131A21FDFC5A700194271 /* cp_account6.png in Resources */ = {isa = PBXBuildFile; fileRef = 996131971FDFC5A500194271 /* cp_account6.png */; };
 		996131A31FDFC5A700194271 /* cp_dial.png in Resources */ = {isa = PBXBuildFile; fileRef = 996131981FDFC5A500194271 /* cp_dial.png */; };
 		996131A41FDFC5A700194271 /* cp_account5.png in Resources */ = {isa = PBXBuildFile; fileRef = 996131991FDFC5A600194271 /* cp_account5.png */; };
@@ -753,6 +755,10 @@
 		995E9E1F1F05FAB600A34835 /* img_next2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_next2.png; sourceTree = "<group>"; };
 		995E9E201F05FAB600A34835 /* img_prev1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_prev1.png; sourceTree = "<group>"; };
 		995E9E211F05FAB600A34835 /* img_prev2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_prev2.png; sourceTree = "<group>"; };
+		9960E257218FCA94008E6DE5 /* CountdownBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CountdownBtn.h; sourceTree = "<group>"; };
+		9960E258218FCA95008E6DE5 /* CountdownBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CountdownBtn.m; sourceTree = "<group>"; };
+		9960E25B219019CC008E6DE5 /* MBProgressHUD+Gif.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Gif.h"; sourceTree = "<group>"; };
+		9960E25C219019CC008E6DE5 /* MBProgressHUD+Gif.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Gif.m"; sourceTree = "<group>"; };
 		996131971FDFC5A500194271 /* cp_account6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cp_account6.png; sourceTree = "<group>"; };
 		996131981FDFC5A500194271 /* cp_dial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cp_dial.png; sourceTree = "<group>"; };
 		996131991FDFC5A600194271 /* cp_account5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cp_account5.png; sourceTree = "<group>"; };
@@ -1169,6 +1175,7 @@
 		9919F9791EDE467600BE51F0 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				9960E25A21901977008E6DE5 /* ProgressHud */,
 				9993A580218AD0C80057B6FD /* Common */,
 				9993A57C218AD0810057B6FD /* Header */,
 				9993A578218AD0190057B6FD /* Category */,
@@ -1816,6 +1823,15 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		9960E25A21901977008E6DE5 /* ProgressHud */ = {
+			isa = PBXGroup;
+			children = (
+				9960E25B219019CC008E6DE5 /* MBProgressHUD+Gif.h */,
+				9960E25C219019CC008E6DE5 /* MBProgressHUD+Gif.m */,
+			);
+			path = ProgressHud;
+			sourceTree = "<group>";
+		};
 		996C90852189366F00C0EF66 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1845,6 +1861,8 @@
 				996F50562188340200D2A7E9 /* TABButton.m */,
 				996EB7AE218C3687000B475E /* NavBar.h */,
 				996EB7AF218C3687000B475E /* NavBar.m */,
+				9960E257218FCA94008E6DE5 /* CountdownBtn.h */,
+				9960E258218FCA95008E6DE5 /* CountdownBtn.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2022,11 +2040,11 @@
 		9993A580218AD0C80057B6FD /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				9993A585218AD0C80057B6FD /* Common.h */,
 				9993A581218AD0C80057B6FD /* Common.m */,
 				9993A582218AD0C80057B6FD /* CvOperate.h */,
 				9993A583218AD0C80057B6FD /* CommonTools.m */,
 				9993A584218AD0C80057B6FD /* CvOperate.m */,
-				9993A585218AD0C80057B6FD /* Common.h */,
 				9993A586218AD0C80057B6FD /* CommonTools.h */,
 			);
 			path = Common;
@@ -2442,6 +2460,7 @@
 				9993A57B218AD0320057B6FD /* UIColor+ChangeColor.m in Sources */,
 				995231B72059104600C8836D /* ResponsibilityViewController.m in Sources */,
 				995231A02052AB0400C8836D /* ExpiredJobListViewController.m in Sources */,
+				9960E25D219019CC008E6DE5 /* MBProgressHUD+Gif.m in Sources */,
 				991A24421EE6D7A9008CD8E9 /* ASINetworkQueue.m in Sources */,
 				992985291F5539CB0021F863 /* WKTabBarController.m in Sources */,
 				9952319D2052AAE200C8836D /* IssueJobListViewController.m in Sources */,
@@ -2491,6 +2510,7 @@
 				995C3D701EF7CD7100277468 /* SCNavTabBar.m in Sources */,
 				9993A573218AB1060057B6FD /* OnlineLab.m in Sources */,
 				996EB7B0218C3687000B475E /* NavBar.m in Sources */,
+				9960E259218FCA95008E6DE5 /* CountdownBtn.m in Sources */,
 				991A24431EE6D7A9008CD8E9 /* Reachability.m in Sources */,
 				997B068E1F5500A000391289 /* MultiSelectViewController.m in Sources */,
 				996F504E2188292900D2A7E9 /* OptionView.m in Sources */,

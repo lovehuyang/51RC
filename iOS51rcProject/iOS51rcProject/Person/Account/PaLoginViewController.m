@@ -16,13 +16,16 @@
 #import "JPUSHService.h"
 #import "AgreementViewController.h"
 #import "NavBar.h"
+#import "CountdownBtn.h"
+#import <WebKit/WebKit.h>
 
 @interface PaLoginViewController ()<UITextFieldDelegate, NetWebServiceRequestDelegate>
 {
     BOOL isPasswordLogin;// 默认是密码登录
 }
-@property (nonatomic, strong) NetWebServiceRequest *runningRequest;
-@property (nonatomic , strong)UILabel *loginTypeLab;
+@property (nonatomic , strong) NetWebServiceRequest *runningRequest;
+@property (nonatomic , strong)UILabel *loginTypeLab;// 显示登录方式的Lab
+@property (nonatomic , strong)CountdownBtn *countdownBtn;//倒计时按钮
 @end
 
 @implementation PaLoginViewController
@@ -31,10 +34,24 @@
     [super viewDidLoad];
     
     isPasswordLogin = YES;
+    [self setupUI];// 初始化控件
+    [MBProgressHUD showGifHUD:self.view animated:YES];
+    
+    
+//    WKWebView *webGifWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 100, 100, 100)];
+//    webGifWebView.backgroundColor = [UIColor clearColor];
+//    [self.view addSubview:webGifWebView];
+//    NSData *gifData = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"loading" ofType:@"gif"]];
+//    [webGifWebView loadData:gifData MIMEType:@"image/gif" characterEncodingName:@"UTF8" baseURL:[NSURL URLWithString:@""]];
+}
+
+#pragma mark - 初始化页面
+
+- (void)setupUI{
     // 假导航栏
     NavBar *navView = [[NavBar alloc]initWithTitle:@"" leftItem:@"nav_return"];
     [self.view addSubview:navView];
-    
+    // 顶部logo图标
     UIImageView *logoImgView = [UIImageView new];
     [self.view addSubview:logoImgView];
     logoImgView.sd_layout
@@ -43,7 +60,7 @@
     .widthIs(100)
     .heightEqualToWidth();
     logoImgView.image = [UIImage imageNamed:@"pa_loginphoto.png"];
-    
+    // 登录方式显示的lab
     UILabel *loginTypeLab = [UILabel new];
     [self.view addSubview:loginTypeLab];
     loginTypeLab.sd_layout
@@ -78,8 +95,20 @@
     [self.btnRegister.layer setBorderColor:[NAVBARCOLOR CGColor]];
     [self.btnRegister.layer setCornerRadius:VIEW_H(self.btnOneMinute) / 5];
     [self.constraintOneMinuteWidth setConstant:SCREEN_WIDTH * 0.55];
+    
+    // 获取验证码的事件
+    [self.getSecurityBtn addTarget:self action:@selector(getVerifyCodeEvent) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
+#pragma mark - 懒加载
+- (CountdownBtn *)countdownBtn{
+    if (!_countdownBtn) {
+        _countdownBtn = [[CountdownBtn alloc]init];
+        _countdownBtn.backgroundColor = [UIColor blueColor];
+    }
+    return _countdownBtn;
+}
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.navigationController.navigationBar setHidden:NO];
@@ -96,6 +125,8 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
+
+#pragma mark - 登录事件
 
 - (IBAction)loginClick:(id)sender {
     [self.view endEditing:YES];
@@ -232,11 +263,74 @@
         self.loginTypeLab.text = @"密码登录";
         self.txtUsername.placeholder = @"请输入邮箱或手机号";
         self.txtPassword.placeholder = @"请输入密码";
+        self.passwordBtn.hidden = NO;
+        self.getSecurityBtn.hidden = YES;
     }else{
         self.loginTypeLab.text = @"验证码登录";
         self.txtUsername.placeholder = @"请输入已认证手机号";
         self.txtPassword.placeholder = @"短信验证码";
         self.passwordBtn.hidden = YES;
+        self.getSecurityBtn.hidden = NO;
     }
+}
+
+#pragma mark - 获取验证码
+
+- (void)getVerifyCodeEvent{
+    NSDictionary *paramDict = @{@"mobile":self.txtUsername.text,@"subsitename":[USER_DEFAULT objectForKey:@"subsitename"]};
+    [AFNManager requestWithMethod:POST ParamDict:paramDict url:URL_GETPAMOBILEVERIFYCODELOGIN tableName:nil successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        
+        NSInteger result = [(NSString *)dataDict integerValue];
+        if (result == 1) {
+            [self openCountdown];// 开启倒计时
+        }
+        
+        [RCToast showMessage:[Common verifyCodeLoginResult:result]];
+    
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        [RCToast showMessage:msg];
+    }];
+}
+
+#pragma mark - 处理发送验证码的网络请求结果
+- (void)getSecurityResult:(NSInteger)result{
+    
+}
+#pragma mark -  发送验证码的倒计时操作
+- (void)openCountdown{
+    
+    __block NSInteger time = 180; //倒计时时间
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0); //每秒执行
+    
+    dispatch_source_set_event_handler(_timer, ^{
+        
+        if(time <= 0){ //倒计时结束，关闭
+            
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                //设置按钮的样式
+                [self.getSecurityBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+                
+                self.getSecurityBtn.enabled = YES;
+            });
+            
+        }else{
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                //设置按钮显示读秒效果
+                [self.getSecurityBtn setTitle:[NSString stringWithFormat:@"%lds", (long)time] forState:UIControlStateNormal];
+                
+                self.getSecurityBtn.enabled = NO;
+            });
+            time--;
+        }
+    });
+    dispatch_resume(_timer);
 }
 @end

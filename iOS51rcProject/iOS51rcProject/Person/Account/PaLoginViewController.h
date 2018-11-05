@@ -10,6 +10,8 @@
 
 @interface PaLoginViewController : WKViewController
 
+@property (strong, nonatomic) IBOutlet UIView *textFieldBgView;
+@property (strong, nonatomic) IBOutlet UIButton *getSecurityBtn;
 @property (strong, nonatomic) IBOutlet UITextField *txtUsername;
 @property (strong, nonatomic) IBOutlet UITextField *txtPassword;
 @property (strong, nonatomic) IBOutlet UIButton *passwordBtn;// 密码输入框的眼睛按钮

@@ -30,6 +30,7 @@
      imageUrl:(NSString *)imageUrl;
 + (NSArray *)getArrayFromXml:(GDataXMLDocument *)xmlContent
                    tableName:(NSString *)tableName;
++ (NSString *)getValueFromXml:(GDataXMLDocument *)xmlContent;
 + (NSString *)stringFromRefreshDate:(NSString *)date;
 + (NSArray *)getTextLines:(NSString *)text font:(UIFont *)font rect:(CGRect)rect;
 + (float)getLastLineWidth:(UILabel *)label;
@@ -48,4 +49,5 @@
 + (NSString *)toDecimalSystemWithBinarySystem:(NSString *)binary;
 + (NSString *)getSalary:(NSString *)salaryId salaryMin:(NSString *)salaryMin salaryMax:(NSString *)salaryMax negotiable:(NSString *)negotiable;
 + (NSString *)enMobile:(NSString *)mobile;
++ (NSString *)verifyCodeLoginResult:(NSInteger)result;
 @end

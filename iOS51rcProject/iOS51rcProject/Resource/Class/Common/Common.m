@@ -207,6 +207,26 @@
     return arrXml;
 }
 
++ (NSString *)getValueFromXml:(GDataXMLDocument *)xmlContent{
+
+    GDataXMLElement *xmlEle = [xmlContent rootElement];
+    
+    NSArray *array = [xmlEle children];
+    if (array.count > 0) {
+        GDataXMLElement *ele = [array firstObject];
+        DLog(@"%@",[ele stringValue]);
+        return [ele stringValue];
+    }else{
+        return nil;
+    }
+    
+//    for (int i =0; i < [array count]; i++) {
+//        GDataXMLElement *ele = [array objectAtIndex:i];
+//        DLog(@"%@",[ele stringValue]);
+//        return [ele stringValue];
+//    }
+    return nil;
+}
 
 /**
  处理时间
@@ -530,4 +550,42 @@
     return str;
 }
 
+/**
+ 验证码登录时接口返回的错误码信息
+
+ @param result 返回值
+ @return 处理结果
+ */
++ (NSString *)verifyCodeLoginResult:(NSInteger)result{
+    switch (result) {
+        case -11:
+            return @"网络链接错误，请稍候重试！";
+            break;
+        case -99:
+            return @"请输入正确的手机号！";
+            break;
+        case -98:
+            return @"请输入已认证的手机号！";
+            break;
+        case -3:
+            return @"该手机号发送短信验证码次数过多！";
+            break;
+        case -2:
+            return @"该ip今天发送短信验证码次数过多！";
+            break;
+        case -1:
+            return @"您的手机号已被列入黑名单，请尝试其他方式登录！";
+        case -4:
+            return @"您输入手机号获取验证码太频繁，请稍候再试！";
+        case -5:
+            return @"您在180s内获取过验证码，请稍候重试！";
+        case -97:
+            return @"获取验证码失败，请稍候重试！";
+        case 1:
+            return @"获取验证码成功！";
+        default:
+            return @"未知错误";
+            break;
+    }
+}
 @end

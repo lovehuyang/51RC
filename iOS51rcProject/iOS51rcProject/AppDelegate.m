@@ -44,7 +44,7 @@
 //        NSData *mainBundleFile = [NSData dataWithContentsOfFile:originDbPath];
 //        [file createFileAtPath:dbPath contents:mainBundleFile attributes:nil];
 //    }
-
+    [MBProgressHUD initAnimationGif];
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
     entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {

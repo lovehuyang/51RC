@@ -25,6 +25,7 @@
 #import "AFNManager.h"
 #import "UIView+Toast.h"
 #import "RCToast.h"
+#import "MBProgressHUD+Gif.h"
 //#import "NetWebServiceRequest.h"
 
 
