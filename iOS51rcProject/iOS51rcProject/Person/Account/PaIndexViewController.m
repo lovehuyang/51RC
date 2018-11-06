@@ -17,6 +17,8 @@
 #import "AccountManagerViewController.h"
 #import "RecruitmentViewController.h"
 #import "SalaryViewController.h"
+#import "EmploymentNewsController.h"
+#import "TalentsTestController.h"
 #import "FeedbackViewController.h"
 #import "RoleViewController.h"
 #import "AboutUsViewController.h"
@@ -449,11 +451,19 @@
         salaryCtrl.title = @"查工资";
         [self.navigationController pushViewController:salaryCtrl animated:YES];
     }else if([optionTitle isEqualToString:@"就业资讯"]){
+        EmploymentNewsController *evc = [EmploymentNewsController new];
+        evc.title = @"就业资讯";
+        evc.urlString = @"/personal/news/newslist";
+        [self.navigationController pushViewController:evc animated:YES];
         
     }else if([optionTitle isEqualToString:@"人才测评"]){
-        
+        TalentsTestController *tvc = [TalentsTestController new];
+        tvc.title = @"人才测评";
+        tvc.urlString = [NSString stringWithFormat:@"/personal/assess/index?PaMainID=%@&Code=%@",PAMAINID,[USER_DEFAULT valueForKey:@"paMainCode"]];
+        [self.navigationController pushViewController:tvc animated:YES];
     }
 }
+
 - (void)careerClick {
     [self.view setTag:1];
     WKPopView *popView = [[WKPopView alloc] initWithPickerType:WKPickerTypeCareerStatus value:@""];

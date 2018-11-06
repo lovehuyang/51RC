@@ -31,7 +31,7 @@
     [Common changeFontSize:self.view];
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     closeBtn.frame = CGRectMake(0, 0, 26, 44);
-    [closeBtn setImage:[UIImage imageNamed:@"p_registerClose"] forState:UIControlStateNormal];
+    [closeBtn setImage:[UIImage imageNamed:@"img_close"] forState:UIControlStateNormal];
     [closeBtn addTarget:self action:@selector(closeBtnClick) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:closeBtn];
     self.navigationItem.leftBarButtonItem = item;

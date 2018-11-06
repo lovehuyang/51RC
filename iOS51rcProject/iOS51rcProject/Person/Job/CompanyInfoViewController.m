@@ -4,7 +4,7 @@
 //
 //  Created by Lucifer on 2017/6/26.
 //  Copyright © 2017年 Lucifer. All rights reserved.
-//
+//  企业信息页面
 
 #import "CompanyInfoViewController.h"
 #import "CommonMacro.h"
@@ -30,26 +30,28 @@
 }
 
 - (void)fillData {
+    // 顶部展示公司信息的容器
     UIView *viewCpInfo = [[UIView alloc] init];
     [viewCpInfo setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:viewCpInfo];
-    
+    // logo
     UIImageView *imgLogo = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, 50, 50)];
     [imgLogo sd_setImageWithURL:[NSURL URLWithString:[self.companyData objectForKey:@"LogoFile"]] placeholderImage:[UIImage imageNamed:@"img_defaultlogo.png"]];
     [viewCpInfo addSubview:imgLogo];
-    
+    //存放公司名、公司信息的容器
     UIView *viewInfo = [[UIView alloc] initWithFrame:CGRectMake(VIEW_BX(imgLogo), 0, SCREEN_WIDTH - VIEW_BX(imgLogo), 500)];
     [viewCpInfo addSubview:viewInfo];
     
-    float maxWidth = VIEW_W(viewInfo) - 30;
+    float maxWidth = VIEW_W(viewInfo) - 10;
     //公司名称
-    WKLabel *lbCompany = [[WKLabel alloc] initWithFixedSpacing:CGRectMake(15, 15, maxWidth - 50, 20) content:[self.companyData objectForKey:@"Name"] size:BIGGERFONTSIZE color:nil spacing:0];
+    WKLabel *lbCompany = [[WKLabel alloc] initWithFixedSpacing:CGRectMake(10, 15, maxWidth - 43.5, 20) content:[self.companyData objectForKey:@"Name"] size:BIGGERFONTSIZE color:nil spacing:0];
     [viewInfo addSubview:lbCompany];
-    //公司图标
+    //实名认证图标
     UIImageView *imgCompany;
+    
     float widthForLastline = [Common getLastLineWidth:lbCompany];
     if ([[self.companyData objectForKey:@"RealName"] isEqualToString:@"1"]) {
-        imgCompany = [[UIImageView alloc] initWithFrame:CGRectMake(VIEW_X(lbCompany) + widthForLastline + 3, VIEW_BY(lbCompany) - 15, 43.2, 15)];
+        imgCompany = [[UIImageView alloc] initWithFrame:CGRectMake(VIEW_X(lbCompany) + widthForLastline, VIEW_BY(lbCompany) - 15, 43.2, 15)];
         [imgCompany setImage:[UIImage imageNamed:@"img_realname.png"]];
     }
     else if ([[self.companyData objectForKey:@"MemberType"] intValue] > 1) {
@@ -58,25 +60,12 @@
     }
     if (imgCompany != nil) {
         [viewInfo addSubview:imgCompany];
-        if (VIEW_BX(imgCompany) > VIEW_W(viewInfo) - 50) {
+        if (VIEW_BX(imgCompany) > VIEW_W(viewInfo) - 43.5) {
             CGRect frameImgCompany = imgCompany.frame;
             frameImgCompany.origin.x = VIEW_X(lbCompany);
             frameImgCompany.origin.y = VIEW_BY(lbCompany) + 5;
             [imgCompany setFrame:frameImgCompany];
         }
-    }
-    //答复率
-    float replyRate = [[self.companyData objectForKey:@"ReplyRate"] floatValue] * 100;
-    if (replyRate > 60) {
-        WKLabel *lbRate = [[WKLabel alloc] initWithFrame:CGRectMake(VIEW_W(viewInfo) - 60, VIEW_Y(lbCompany) + 2, 60, 16) content:[NSString stringWithFormat:@"答复率%.f%%", replyRate] size:10 color:[UIColor whiteColor]];
-        [lbRate setBackgroundColor:GREENCOLOR];
-        [lbRate setTextAlignment:NSTextAlignmentCenter];
-        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:lbRate.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerBottomLeft cornerRadii:CGSizeMake(5, 5)];
-        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-        maskLayer.frame = lbRate.bounds;
-        maskLayer.path = maskPath.CGPath;
-        lbRate.layer.mask  = maskLayer;
-        [viewInfo addSubview:lbRate];
     }
     
     //公司信息
@@ -84,14 +73,35 @@
     [viewInfo addSubview:lbDetail];
     
     CGRect frameViewInfo = viewInfo.frame;
-    frameViewInfo.size.height = VIEW_BY(lbDetail) + 10;
+    frameViewInfo.size.height = VIEW_BY(lbDetail) ;
     if ([[self.companyData objectForKey:@"HomePage"] length] > 0) {
         //公司主页
         WKLabel *lbHomePage = [[WKLabel alloc] initWithFixedSpacing:CGRectMake(VIEW_X(lbCompany), VIEW_BY(lbDetail) + 5, maxWidth, 20) content:[self.companyData objectForKey:@"HomePage"] size:DEFAULTFONTSIZE color:nil spacing:0];
         [viewInfo addSubview:lbHomePage];
-        frameViewInfo.size.height = VIEW_BY(lbHomePage) + 10;
+        frameViewInfo.size.height = VIEW_BY(lbHomePage);
     }
+    
+    // 答复率
+    //答复率
+    float replyRate = [[self.companyData objectForKey:@"ReplyRate"] floatValue] * 100;
+        if (replyRate > 60) {
+            
+            UILabel *replyRateLab = [[UILabel alloc]initWithFrame:CGRectMake(VIEW_X(lbCompany), CGRectGetMaxY(frameViewInfo) + 5, 150, 16)];
+            replyRateLab.font = SMALLERFONT;
+            replyRateLab.textColor = GREENCOLOR;
+            NSString *contentStr = [NSString stringWithFormat:@"企业答复率:%.f%%", replyRate];
+            NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:contentStr];
+            NSRange redRange = NSMakeRange([[noteStr string] rangeOfString:@"企业答复率:"].location, [[noteStr string] rangeOfString:@"企业答复率:"].length);
+            //需要设置的位置
+            [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:redRange];
+            //设置颜色
+            [replyRateLab setAttributedText:noteStr];
+            [viewInfo addSubview:replyRateLab];
+            frameViewInfo.size.height = VIEW_BY(replyRateLab) + 5;
+        }
+    
     [viewInfo setFrame:frameViewInfo];
+
     //调整Logo和右边文字的位置
     if (VIEW_BY(imgLogo) > VIEW_BY(viewInfo)) {
         [viewInfo setCenter:CGPointMake(viewInfo.center.x, imgLogo.center.y)];
@@ -100,6 +110,7 @@
         [imgLogo setCenter:CGPointMake(imgLogo.center.x, viewInfo.center.y)];
     }
     
+    // 分割线
     UIView *viewSeparate = [[UIView alloc] initWithFrame:CGRectMake(15, VIEW_BY(viewInfo), SCREEN_WIDTH - 30, 1)];
     [viewSeparate setBackgroundColor:SEPARATECOLOR];
     [viewCpInfo addSubview:viewSeparate];

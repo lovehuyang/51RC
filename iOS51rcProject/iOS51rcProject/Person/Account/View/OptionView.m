@@ -22,7 +22,7 @@
 // 布局子空间
 - (void)setupSubViews{
     NSArray *titleArr = @[@"招聘会",@"查工资",@"就业资讯",@"人才测评"];
-    NSArray *imgArr = @[@"job_item3",@"pa_cvitem4",@"pa_cvitem5",@"pa_cvitem1"];
+    NSArray *imgArr = @[@"p_mine_job",@"p_mine_ salary",@"p_mine_news",@"p_mine_test"];
     CGFloat BTN_W = SCREEN_WIDTH/titleArr.count;
     for (int i = 0; i < titleArr.count ; i ++) {
         // 按钮

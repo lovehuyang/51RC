@@ -41,7 +41,7 @@
 
 - (void)setupUI{
     // 假导航栏
-    NavBar *navView = [[NavBar alloc]initWithTitle:@"" leftItem:@"nav_return"];
+    NavBar *navView = [[NavBar alloc]initWithTitle:@"" leftItem:@"img_back"];
     [self.view addSubview:navView];
     // 顶部logo图标
     UIImageView *logoImgView = [UIImageView new];

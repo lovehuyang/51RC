@@ -4,7 +4,7 @@
 //
 //  Created by Lucifer on 2017/6/20.
 //  Copyright © 2017年 Lucifer. All rights reserved.
-//
+//  面试通知页面
 
 #import "InterviewViewController.h"
 #import "Common.h"
@@ -26,6 +26,9 @@
 @property (nonatomic, strong) NetWebServiceRequest *runningRequest;
 @property (nonatomic, strong) NSMutableArray *arrData;
 @property (nonatomic, strong) WKTextView *txtRemark;
+
+@property (nonatomic , strong) UIImageView *imgReply2;// 不赴约
+@property (nonatomic , strong) UIImageView *imgReply1;// 赴约
 @property NSInteger replyStatus;
 @property NSInteger interViewId;
 @property NSInteger page;
@@ -232,7 +235,7 @@
         [cell.contentView addSubview:viewSeparate2];
         
         UIButton *btnReply = [[UIButton alloc] initWithFrame:CGRectMake(0, VIEW_BY(viewSeparate2), SCREEN_WIDTH, 40)];
-        [btnReply setTitle:@"答复" forState:UIControlStateNormal];
+        [btnReply setTitle:@"立即答复" forState:UIControlStateNormal];
         [btnReply setTitleColor:NAVBARCOLOR forState:UIControlStateNormal];
         [btnReply.titleLabel setFont:BIGGERFONT];
         [btnReply setTag:[[data objectForKey:@"ID"] integerValue]];
@@ -255,33 +258,38 @@
     [self presentViewController:jobNav animated:YES completion:nil];
 }
 
+#pragma mark - 立即答复
+
 - (void)replyInterview:(UIButton *)button {
     self.interViewId = button.tag;
     UIView *viewReply = [[UIView alloc] init];
     
+    // 赴约按钮的容器
     UIButton *btnReply1 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 46)];
-    [btnReply1 setTag:1];
     [btnReply1 addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
+    [btnReply1 setTag:1];
     [viewReply addSubview:btnReply1];
     
     self.replyStatus = 1;
+    // 对号按钮图标
     UIImageView *imgReply1 = [[UIImageView alloc] initWithFrame:CGRectMake(30, 13, 20, 20)];
-    [imgReply1 setTag:101];
     [imgReply1 setImage:[UIImage imageNamed:@"img_check1.png"]];
     [btnReply1 addSubview:imgReply1];
-    
+    self.imgReply1 = imgReply1;
+    // "赴约"Lab
     WKLabel *lbReply1 = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_BX(imgReply1) + 10, 13, 200, 20) content:@"赴约" size:BIGGERFONTSIZE color:nil];
     [btnReply1 addSubview:lbReply1];
     
+    // 不赴约按钮的容器
     UIButton *btnReply2 = [[UIButton alloc] initWithFrame:CGRectMake(0, VIEW_BY(btnReply1), SCREEN_WIDTH, 46)];
     [btnReply2 setTag:2];
     [btnReply2 addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
     [viewReply addSubview:btnReply2];
-    
+    //
     UIImageView *imgReply2 = [[UIImageView alloc] initWithFrame:CGRectMake(30, 13, 20, 20)];
-    [imgReply2 setTag:102];
     [imgReply2 setImage:[UIImage imageNamed:@"img_check2.png"]];
     [btnReply2 addSubview:imgReply2];
+    self.imgReply2 = imgReply2;
     
     WKLabel *lbReply2 = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_BX(imgReply2) + 10, 13, 200, 20) content:@"不赴约" size:BIGGERFONTSIZE color:nil];
     [btnReply2 addSubview:lbReply2];
@@ -289,7 +297,7 @@
     WKTextView *txtRemark = [[WKTextView alloc] initWithFrame:CGRectMake(25, VIEW_BY(btnReply2) + 10, SCREEN_WIDTH - 50, 80)];
     [txtRemark setDelegate:self];
     [txtRemark setTextContainerInset:UIEdgeInsetsMake(10.0f, 5.0f, 10.0f, 5.0f)];
-    [txtRemark setPlaceholder:@"给企业留言"];
+    [txtRemark setPlaceholder:@"同时给企业留言"];
     [txtRemark.layer setBorderColor:[SEPARATECOLOR CGColor]];
     [txtRemark.layer setBorderWidth:1];
     [viewReply addSubview:txtRemark];
@@ -298,21 +306,20 @@
     [viewReply setFrame:CGRectMake(0, 0, SCREEN_WIDTH, VIEW_BY(txtRemark) + 10)];
     
     WKPopView *replyPop = [[WKPopView alloc] initWithCustomView:viewReply];
+    replyPop.userInteractionEnabled = YES;
     [replyPop setDelegate:self];
     [replyPop showPopView:self];
 }
 
 - (void)replyClick:(UIButton *)button {
     self.replyStatus = button.tag;
-    UIImageView *imgReply1 = (UIImageView *)[self.view viewWithTag:101];
-    UIImageView *imgReply2 = (UIImageView *)[self.view viewWithTag:102];
     if (button.tag == 1) {
-        [imgReply1 setImage:[UIImage imageNamed:@"img_check1.png"]];
-        [imgReply2 setImage:[UIImage imageNamed:@"img_check2.png"]];
+        [self.imgReply1 setImage:[UIImage imageNamed:@"img_check1.png"]];
+        [self.imgReply2 setImage:[UIImage imageNamed:@"img_check2.png"]];
     }
     else {
-        [imgReply1 setImage:[UIImage imageNamed:@"img_check2.png"]];
-        [imgReply2 setImage:[UIImage imageNamed:@"img_check1.png"]];
+        [self.imgReply1 setImage:[UIImage imageNamed:@"img_check2.png"]];
+        [self.imgReply2 setImage:[UIImage imageNamed:@"img_check1.png"]];
     }
 }
 

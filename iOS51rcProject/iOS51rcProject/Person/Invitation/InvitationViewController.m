@@ -190,7 +190,7 @@
     }
     else if (sender.tag == 1) {
         InterviewViewController *interviewCtrl = [[InterviewViewController alloc] init];
-        interviewCtrl.title = @"面试通知";
+        interviewCtrl.title = @"面试通知1";
         [self.navigationController pushViewController:interviewCtrl animated:YES];
     }
     else if (sender.tag == 2) {

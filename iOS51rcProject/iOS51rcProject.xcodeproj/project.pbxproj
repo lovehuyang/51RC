@@ -216,8 +216,6 @@
 		995C3DA41EF7D02100277468 /* img_arrowdownclear.png in Resources */ = {isa = PBXBuildFile; fileRef = 995C3D761EF7D02000277468 /* img_arrowdownclear.png */; };
 		995C3DA51EF7D02100277468 /* img_arrowright.png in Resources */ = {isa = PBXBuildFile; fileRef = 995C3D771EF7D02000277468 /* img_arrowright.png */; };
 		995C3DA61EF7D02100277468 /* img_backgray.png in Resources */ = {isa = PBXBuildFile; fileRef = 995C3D781EF7D02000277468 /* img_backgray.png */; };
-		995C3DA71EF7D02100277468 /* img_check1.png in Resources */ = {isa = PBXBuildFile; fileRef = 995C3D791EF7D02000277468 /* img_check1.png */; };
-		995C3DA81EF7D02100277468 /* img_check2.png in Resources */ = {isa = PBXBuildFile; fileRef = 995C3D7A1EF7D02000277468 /* img_check2.png */; };
 		995C3DA91EF7D02100277468 /* img_checksmall1.png in Resources */ = {isa = PBXBuildFile; fileRef = 995C3D7B1EF7D02000277468 /* img_checksmall1.png */; };
 		995C3DAA1EF7D02100277468 /* img_checksmall2.png in Resources */ = {isa = PBXBuildFile; fileRef = 995C3D7C1EF7D02000277468 /* img_checksmall2.png */; };
 		995C3DAB1EF7D02100277468 /* img_closegray.png in Resources */ = {isa = PBXBuildFile; fileRef = 995C3D7D1EF7D02000277468 /* img_closegray.png */; };
@@ -330,6 +328,10 @@
 		997B06A61F5500A000391289 /* NearSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06791F5500A000391289 /* NearSearchViewController.m */; };
 		997B06A91F5500B700391289 /* Company.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 997B06A71F5500B700391289 /* Company.storyboard */; };
 		997B0D0920203FD100ABB4F7 /* OrderApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B0D0820203FD100ABB4F7 /* OrderApplyViewController.m */; };
+		998F8A7121913D3C003DBAB1 /* EmploymentNewsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 998F8A7021913D3C003DBAB1 /* EmploymentNewsController.m */; };
+		998F8A74219141BC003DBAB1 /* TalentsTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 998F8A73219141BC003DBAB1 /* TalentsTestController.m */; };
+		998F8A7B21916DE6003DBAB1 /* img_check1.png in Resources */ = {isa = PBXBuildFile; fileRef = 998F8A7921916DE5003DBAB1 /* img_check1.png */; };
+		998F8A7C21916DE6003DBAB1 /* img_check2.png in Resources */ = {isa = PBXBuildFile; fileRef = 998F8A7A21916DE5003DBAB1 /* img_check2.png */; };
 		99906F1B1EFB47CF00B5E289 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99906F1A1EFB47CE00B5E289 /* AboutUsViewController.m */; };
 		9990707D1EFC97D500B5E289 /* img_nodata.png in Resources */ = {isa = PBXBuildFile; fileRef = 9990707C1EFC97D500B5E289 /* img_nodata.png */; };
 		9990709C1F01FCAE00B5E289 /* job_contact.png in Resources */ = {isa = PBXBuildFile; fileRef = 9990709B1F01FCAE00B5E289 /* job_contact.png */; };
@@ -709,8 +711,6 @@
 		995C3D761EF7D02000277468 /* img_arrowdownclear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_arrowdownclear.png; sourceTree = "<group>"; };
 		995C3D771EF7D02000277468 /* img_arrowright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_arrowright.png; sourceTree = "<group>"; };
 		995C3D781EF7D02000277468 /* img_backgray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_backgray.png; sourceTree = "<group>"; };
-		995C3D791EF7D02000277468 /* img_check1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_check1.png; sourceTree = "<group>"; };
-		995C3D7A1EF7D02000277468 /* img_check2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_check2.png; sourceTree = "<group>"; };
 		995C3D7B1EF7D02000277468 /* img_checksmall1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_checksmall1.png; sourceTree = "<group>"; };
 		995C3D7C1EF7D02000277468 /* img_checksmall2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_checksmall2.png; sourceTree = "<group>"; };
 		995C3D7D1EF7D02000277468 /* img_closegray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_closegray.png; sourceTree = "<group>"; };
@@ -879,6 +879,12 @@
 		997B06A81F5500B700391289 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Company.storyboard; sourceTree = "<group>"; };
 		997B0D0720203FD100ABB4F7 /* OrderApplyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderApplyViewController.h; sourceTree = "<group>"; };
 		997B0D0820203FD100ABB4F7 /* OrderApplyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderApplyViewController.m; sourceTree = "<group>"; };
+		998F8A6F21913D3C003DBAB1 /* EmploymentNewsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmploymentNewsController.h; sourceTree = "<group>"; };
+		998F8A7021913D3C003DBAB1 /* EmploymentNewsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmploymentNewsController.m; sourceTree = "<group>"; };
+		998F8A72219141BC003DBAB1 /* TalentsTestController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TalentsTestController.h; sourceTree = "<group>"; };
+		998F8A73219141BC003DBAB1 /* TalentsTestController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TalentsTestController.m; sourceTree = "<group>"; };
+		998F8A7921916DE5003DBAB1 /* img_check1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_check1.png; sourceTree = "<group>"; };
+		998F8A7A21916DE5003DBAB1 /* img_check2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_check2.png; sourceTree = "<group>"; };
 		99906F191EFB47CE00B5E289 /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
 		99906F1A1EFB47CE00B5E289 /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
 		9990707C1EFC97D500B5E289 /* img_nodata.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_nodata.png; sourceTree = "<group>"; };
@@ -1675,6 +1681,8 @@
 		995C3D721EF7D02000277468 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				998F8A7921916DE5003DBAB1 /* img_check1.png */,
+				998F8A7A21916DE5003DBAB1 /* img_check2.png */,
 				990A3B8A1F42F387006CB3CF /* Emotion */,
 				990431022093FE9700B4267D /* cp_cvrm.png */,
 				996EB7AC218C21AE000B475E /* p_registerClose@2x.png */,
@@ -1779,8 +1787,6 @@
 				995C3D761EF7D02000277468 /* img_arrowdownclear.png */,
 				995C3D771EF7D02000277468 /* img_arrowright.png */,
 				995C3D781EF7D02000277468 /* img_backgray.png */,
-				995C3D791EF7D02000277468 /* img_check1.png */,
-				995C3D7A1EF7D02000277468 /* img_check2.png */,
 				995C3D7B1EF7D02000277468 /* img_checksmall1.png */,
 				995C3D7C1EF7D02000277468 /* img_checksmall2.png */,
 				995C3D7D1EF7D02000277468 /* img_closegray.png */,
@@ -1902,6 +1908,10 @@
 				997B062D1F5500A000391289 /* RecruitmentViewController.m */,
 				997B062E1F5500A000391289 /* SalaryViewController.h */,
 				997B062F1F5500A000391289 /* SalaryViewController.m */,
+				998F8A6F21913D3C003DBAB1 /* EmploymentNewsController.h */,
+				998F8A7021913D3C003DBAB1 /* EmploymentNewsController.m */,
+				998F8A72219141BC003DBAB1 /* TalentsTestController.h */,
+				998F8A73219141BC003DBAB1 /* TalentsTestController.m */,
 				996F504B2188292900D2A7E9 /* View */,
 			);
 			path = Account;
@@ -1976,6 +1986,7 @@
 				997B06641F5500A000391289 /* JobAttentionViewController.m */,
 				997B06651F5500A000391289 /* YourFoodViewController.h */,
 				997B06661F5500A000391289 /* YourFoodViewController.m */,
+				998F8A7521916901003DBAB1 /* View */,
 			);
 			path = Invitation;
 			sourceTree = "<group>";
@@ -2007,6 +2018,13 @@
 				996C90852189366F00C0EF66 /* View */,
 			);
 			path = Job;
+			sourceTree = "<group>";
+		};
+		998F8A7521916901003DBAB1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		9993A56D218AA9FA0057B6FD /* Model */ = {
@@ -2221,9 +2239,9 @@
 				995C3DC81EF7D02100277468 /* pa_loginphoto.png in Resources */,
 				996131A41FDFC5A700194271 /* cp_account5.png in Resources */,
 				995C3DCC1EF7D02100277468 /* pa_mobilecer2.png in Resources */,
-				995C3DA71EF7D02100277468 /* img_check1.png in Resources */,
 				995C3DA21EF7D02100277468 /* cp_guidepic1.png in Resources */,
 				990A3BD41F42F387006CB3CF /* 30.gif in Resources */,
+				998F8A7C21916DE6003DBAB1 /* img_check2.png in Resources */,
 				991C6FBA200F7D9D009FD82A /* cp_logoadd.png in Resources */,
 				990A3BCE1F42F387006CB3CF /* 25.gif in Resources */,
 				991970352091C53E003C31CB /* cp_jobreplyno.png in Resources */,
@@ -2260,6 +2278,7 @@
 				995C3DA91EF7D02100277468 /* img_checksmall1.png in Resources */,
 				999070C71F03846E00B5E289 /* img_favorite2.png in Resources */,
 				995C3DB31EF7D02100277468 /* pa_account1.png in Resources */,
+				998F8A7B21916DE6003DBAB1 /* img_check1.png in Resources */,
 				990A3BE01F42F387006CB3CF /* 41.gif in Resources */,
 				995C3DC91EF7D02100277468 /* pa_loginpsd.png in Resources */,
 				994DD94F2029839900BBEFF2 /* cp_searchjob.png in Resources */,
@@ -2376,7 +2395,6 @@
 				9990709E1F022E1A00B5E289 /* job_chat.png in Resources */,
 				990A3BD31F42F387006CB3CF /* 3.gif in Resources */,
 				990A3BDE1F42F387006CB3CF /* 4.gif in Resources */,
-				995C3DA81EF7D02100277468 /* img_check2.png in Resources */,
 				995A4A0B1F0B60570047EDBE /* pa_cvitem1.png in Resources */,
 				995C3DD21EF8BDFA00277468 /* loading.gif in Resources */,
 				99101B4820720E0200ED060B /* img_cpcheck2.png in Resources */,
@@ -2515,6 +2533,7 @@
 				9960E259218FCA95008E6DE5 /* CountdownBtn.m in Sources */,
 				991A24431EE6D7A9008CD8E9 /* Reachability.m in Sources */,
 				997B068E1F5500A000391289 /* MultiSelectViewController.m in Sources */,
+				998F8A7121913D3C003DBAB1 /* EmploymentNewsController.m in Sources */,
 				996F504E2188292900D2A7E9 /* OptionView.m in Sources */,
 				991C6FB3200E368D009FD82A /* CpBriefViewController.m in Sources */,
 				992985231F5539CB0021F863 /* WKFilterView.m in Sources */,
@@ -2592,6 +2611,7 @@
 				996C90882189368D00C0EF66 /* ComplainView.m in Sources */,
 				997B06821F5500A000391289 /* RecruitmentViewController.m in Sources */,
 				995231C0205A893B00C8836D /* JobTagViewController.m in Sources */,
+				998F8A74219141BC003DBAB1 /* TalentsTestController.m in Sources */,
 				997B06911F5500A000391289 /* SpecialityModifyViewController.m in Sources */,
 				99F7FC7E204034190060E9F1 /* CvSearchListViewController.m in Sources */,
 				99D7404820273EE5005B2CD3 /* CvRecommendViewController.m in Sources */,
