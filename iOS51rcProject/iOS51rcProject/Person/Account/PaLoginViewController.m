@@ -35,14 +35,6 @@
     
     isPasswordLogin = YES;
     [self setupUI];// 初始化控件
-    [MBProgressHUD showGifHUD:self.view animated:YES];
-    
-    
-//    WKWebView *webGifWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 100, 100, 100)];
-//    webGifWebView.backgroundColor = [UIColor clearColor];
-//    [self.view addSubview:webGifWebView];
-//    NSData *gifData = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"loading" ofType:@"gif"]];
-//    [webGifWebView loadData:gifData MIMEType:@"image/gif" characterEncodingName:@"UTF8" baseURL:[NSURL URLWithString:@""]];
 }
 
 #pragma mark - 初始化页面
@@ -130,23 +122,45 @@
 
 - (IBAction)loginClick:(id)sender {
     [self.view endEditing:YES];
+    
     if (self.txtUsername.text.length == 0) {
-        [self.view makeToast:self.txtUsername.placeholder];
+        [RCToast showMessage:self.txtUsername.placeholder];
         return;
     }
+    
     if (self.txtPassword.text.length == 0) {
-        [self.view makeToast:self.txtPassword.placeholder];
+        
+        [RCToast showMessage:self.txtPassword.placeholder];
         return;
     }
     if (self.btnAgree.tag == 0) {
-        [self.view makeToast:@"请勾选用户协议"];
+        [RCToast showMessage:@"请勾选用户协议"];
         return;
     }
-    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"Login" Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:self.txtUsername.text, @"userName", self.txtPassword.text, @"passWord", [USER_DEFAULT objectForKey:@"provinceId"], @"provinceID", @"ismobile:IOS", @"browser", @"0", @"autoLogin", [JPUSHService registrationID], @"jpushId", nil] viewController:self];
-    [request setTag:1];
-    [request setDelegate:self];
-    [request startAsynchronous];
-    self.runningRequest = request;
+    
+    // 密码登录模式
+    if (isPasswordLogin) {
+        NSDictionary *param = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.txtUsername.text, @"userName", self.txtPassword.text, @"passWord", [USER_DEFAULT objectForKey:@"provinceId"], @"provinceID", @"ismobile:IOS", @"browser", @"0", @"autoLogin", [JPUSHService registrationID], @"jpushId", nil];
+        
+        NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:URL_LOGIN Params:param viewController:self];
+        [request setTag:1];
+        [request setDelegate:self];
+        [request startAsynchronous];
+        self.runningRequest = request;
+    
+    }else{// 验证码登录
+        [SVProgressHUD show];
+        
+        NSDictionary *param = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.txtUsername.text, @"userName", self.txtPassword.text, @"mobileCerCode", [USER_DEFAULT objectForKey:@"provinceId"], @"provinceID", @"ismobile:IOS", @"browser", @"0", @"autoLogin", [JPUSHService registrationID], @"jpushId", nil];
+        
+        [AFNManager requestWithMethod:POST ParamDict:param url:URL_LOGINMOBILE tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+            [self loginResult:(NSString *)dataDict];
+            [SVProgressHUD dismiss];
+        } failureBlock:^(NSInteger errCode, NSString *msg) {
+            [SVProgressHUD dismiss];
+            [RCToast showMessage:msg];
+        }];
+    }
 }
 
 - (IBAction)forgetPasswordClick:(id)sender {
@@ -182,44 +196,7 @@
       finishedInfoToResult:(NSString *)result
               responseData:(GDataXMLDocument *)requestData {
     if (request.tag == 1) {
-        if ([result rangeOfString:@"|"].location != NSNotFound) {
-            NSArray *arrayResult = [result componentsSeparatedByString:@"|"];
-            NSString *paMainId = [arrayResult objectAtIndex:0];
-            NSString *regDate = [arrayResult objectAtIndex:1];
-            NSString *realCode = [NSString stringWithFormat:@"%@%@%@%@%@",[regDate substringWithRange:NSMakeRange(11,2)],
-             [regDate substringWithRange:NSMakeRange(0,4)],[regDate substringWithRange:NSMakeRange(14,2)],
-             [regDate substringWithRange:NSMakeRange(8,2)],[regDate substringWithRange:NSMakeRange(5,2)]];
-            
-            NSString *code = [Common MD5:[NSString stringWithFormat:@"%lld", ([realCode longLongValue] + [paMainId longLongValue])]];
-            [USER_DEFAULT setValue:paMainId forKey:@"paMainId"];
-            [USER_DEFAULT setValue:code forKey:@"paMainCode"];
-            [USER_DEFAULT setValue:[arrayResult objectAtIndex:2] forKey:@"provinceId"];
-            [USER_DEFAULT setValue:[arrayResult objectAtIndex:3] forKey:@"province"];
-            [USER_DEFAULT setValue:[[arrayResult objectAtIndex:4] stringByReplacingOccurrencesOfString:@"www." withString:@"m."] forKey:@"subsite"];
-            [USER_DEFAULT setValue:[arrayResult objectAtIndex:5] forKey:@"subsitename"];
-            
-            UITabBarController *personCtrl = [[UIStoryboard storyboardWithName:@"Person" bundle:nil] instantiateViewControllerWithIdentifier:@"personView"];
-            [personCtrl setSelectedIndex:4];
-            [self presentViewController:personCtrl animated:YES completion:^{
-                [USER_DEFAULT setObject:@"1" forKey:@"positioned"];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"paLoginSuccess" object:self];
-            }];
-        }
-        else if ([result isEqual:@"-1"]) {
-            [self.view makeToast:@"您今天的登录次数已超过20次的限制，请明天再来"];
-        }
-        else if ([result isEqual:@"-2"]) {
-            [self.view makeToast:@"请提交意见反馈向我们反映，谢谢配合"];
-        }
-        else if ([result isEqual:@"-3"]) {
-            [self.view makeToast:@"提交错误，请检查您的网络链接，并稍后重试"];
-        }
-        else if ([result isEqual:@"0"]) {
-            [self.view makeToast:@"用户名或密码错误，请重新输入"];
-        }
-        else {
-            [self.view makeToast:@"您今天的登录次数已超过20次的限制，请明天再来"];
-        }
+        [self loginResult:result];
     }
 }
 
@@ -265,10 +242,16 @@
         self.txtPassword.placeholder = @"请输入密码";
         self.passwordBtn.hidden = NO;
         self.getSecurityBtn.hidden = YES;
+        self.txtPassword.placeholder = @"请输入短信验证码";
+        self.txtPassword.text = @"";
+        self.txtPassword.secureTextEntry = YES;
+        [self.passwordBtn setBackgroundImage:[UIImage imageNamed:@"img_password2.png"] forState:UIControlStateNormal];
     }else{
         self.loginTypeLab.text = @"验证码登录";
         self.txtUsername.placeholder = @"请输入已认证手机号";
-        self.txtPassword.placeholder = @"短信验证码";
+        self.txtPassword.placeholder = @"请输入短信验证码";
+        self.txtPassword.text = @"";
+        self.txtPassword.secureTextEntry = NO;
         self.passwordBtn.hidden = YES;
         self.getSecurityBtn.hidden = NO;
     }
@@ -277,25 +260,63 @@
 #pragma mark - 获取验证码
 
 - (void)getVerifyCodeEvent{
+    if (!self.txtUsername.text.length) {
+        [RCToast showMessage:self.txtUsername.placeholder];
+        return;
+    }
     NSDictionary *paramDict = @{@"mobile":self.txtUsername.text,@"subsitename":[USER_DEFAULT objectForKey:@"subsitename"]};
+    [SVProgressHUD show];
     [AFNManager requestWithMethod:POST ParamDict:paramDict url:URL_GETPAMOBILEVERIFYCODELOGIN tableName:nil successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
         
         NSInteger result = [(NSString *)dataDict integerValue];
         if (result == 1) {
             [self openCountdown];// 开启倒计时
         }
-        
-        [RCToast showMessage:[Common verifyCodeLoginResult:result]];
+        [SVProgressHUD dismiss];
+        [RCToast showMessage:[Common verifyCodeGetResult:result]];
     
     } failureBlock:^(NSInteger errCode, NSString *msg) {
         [RCToast showMessage:msg];
+        [SVProgressHUD dismiss];
     }];
 }
 
-#pragma mark - 处理发送验证码的网络请求结果
-- (void)getSecurityResult:(NSInteger)result{
+#pragma mark - 处理登录成功的返回值信息
+- (void)loginResult:(NSString *)result{
     
+    if ([result rangeOfString:@"|"].location != NSNotFound) {
+        NSArray *arrayResult = [result componentsSeparatedByString:@"|"];
+        NSString *paMainId = [arrayResult objectAtIndex:0];
+        NSString *regDate = [arrayResult objectAtIndex:1];
+        NSString *realCode = [NSString stringWithFormat:@"%@%@%@%@%@",[regDate substringWithRange:NSMakeRange(11,2)],
+                              [regDate substringWithRange:NSMakeRange(0,4)],[regDate substringWithRange:NSMakeRange(14,2)],
+                              [regDate substringWithRange:NSMakeRange(8,2)],[regDate substringWithRange:NSMakeRange(5,2)]];
+        
+        NSString *code = [Common MD5:[NSString stringWithFormat:@"%lld", ([realCode longLongValue] + [paMainId longLongValue])]];
+        [USER_DEFAULT setValue:paMainId forKey:@"paMainId"];
+        [USER_DEFAULT setValue:code forKey:@"paMainCode"];
+        [USER_DEFAULT setValue:[arrayResult objectAtIndex:2] forKey:@"provinceId"];
+        [USER_DEFAULT setValue:[arrayResult objectAtIndex:3] forKey:@"province"];
+        [USER_DEFAULT setValue:[[arrayResult objectAtIndex:4] stringByReplacingOccurrencesOfString:@"www." withString:@"m."] forKey:@"subsite"];
+        [USER_DEFAULT setValue:[arrayResult objectAtIndex:5] forKey:@"subsitename"];
+        
+        UITabBarController *personCtrl = [[UIStoryboard storyboardWithName:@"Person" bundle:nil] instantiateViewControllerWithIdentifier:@"personView"];
+        [personCtrl setSelectedIndex:4];
+        [self presentViewController:personCtrl animated:YES completion:^{
+            [USER_DEFAULT setObject:@"1" forKey:@"positioned"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"paLoginSuccess" object:self];
+        }];
+        
+    }else if (isPasswordLogin){
+        NSInteger resultCode = [result integerValue];
+        [RCToast showMessage:[Common loginResult:resultCode]];
+        
+    }else{
+        NSInteger resultCode = [result integerValue];
+        [RCToast showMessage:[Common verifyCodeLoginResult:resultCode]];
+    }
 }
+
 #pragma mark -  发送验证码的倒计时操作
 - (void)openCountdown{
     

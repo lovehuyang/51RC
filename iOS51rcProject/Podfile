@@ -9,4 +9,5 @@ pod ‘FMDB’
 pod 'AFNetworking'
 pod 'SDAutoLayout'
 pod 'MBProgressHUD', '~> 1.1.0'
+pod 'SVProgressHUD'
 end

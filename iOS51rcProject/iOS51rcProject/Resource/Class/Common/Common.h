@@ -49,5 +49,8 @@
 + (NSString *)toDecimalSystemWithBinarySystem:(NSString *)binary;
 + (NSString *)getSalary:(NSString *)salaryId salaryMin:(NSString *)salaryMin salaryMax:(NSString *)salaryMax negotiable:(NSString *)negotiable;
 + (NSString *)enMobile:(NSString *)mobile;
+
++ (NSString *)verifyCodeGetResult:(NSInteger)result;
 + (NSString *)verifyCodeLoginResult:(NSInteger)result;
++ (NSString *)loginResult:(NSInteger)result;
 @end

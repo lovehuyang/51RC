@@ -28,6 +28,7 @@ PODS:
   - SDWebImage/GIF (4.0.0):
     - FLAnimatedImage (~> 1.0)
     - SDWebImage/Core
+  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
   - AFNetworking
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - SDAutoLayout
   - SDWebImage
   - SDWebImage/GIF
+  - SVProgressHUD
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -49,6 +51,7 @@ SPEC REPOS:
     - MJRefresh
     - SDAutoLayout
     - SDWebImage
+    - SVProgressHUD
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
@@ -59,7 +62,8 @@ SPEC CHECKSUMS:
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   SDAutoLayout: 8bf6b3bbc8b01f775d4defbb4fda2ace805461be
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 04b79bed9c75c9792fed483701a735e54aeed69b
+PODFILE CHECKSUM: b165edaee63ed0071313c7dedd2fedaeb186f642
 
 COCOAPODS: 1.5.3

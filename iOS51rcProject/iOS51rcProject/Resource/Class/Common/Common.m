@@ -551,12 +551,12 @@
 }
 
 /**
- 验证码登录时接口返回的错误码信息
+ 验证码登录:获取验证码接口返回的错误码信息
 
  @param result 返回值
  @return 处理结果
  */
-+ (NSString *)verifyCodeLoginResult:(NSInteger)result{
++ (NSString *)verifyCodeGetResult:(NSInteger)result{
     switch (result) {
         case -11:
             return @"网络链接错误，请稍候重试！";
@@ -585,6 +585,62 @@
             return @"获取验证码成功！";
         default:
             return @"未知错误";
+            break;
+    }
+}
+
+/**
+ 验证码登录接口返回的错误码信息
+ 
+ @param result 返回值
+ @return 处理结果
+ */
++ (NSString *)verifyCodeLoginResult:(NSInteger)result{
+    switch (result) {
+        case 0:
+            return @"用户名或密码错误，请重新输入";
+            break;
+        case -1:
+            return @"手机号或短信验证码为空";
+            break;
+        case -2:
+            return @"手机号错误 ";
+            break;
+        case -3:
+            return @"短信验证码错误";
+            break;
+        case -4:
+            return @"您的手机号没有获取过验证码";
+            break;
+        default:
+            return @"未知错误";
+            break;
+    }
+}
+
+
+/**
+ 账号密码登录接口返回的错误码信息
+ 
+ @param result 返回值
+ @return 处理结果
+ */
++ (NSString *)loginResult:(NSInteger)result{
+    switch (result) {
+        case -1:
+            return @"您今天的登录次数已超过20次的限制，请明天再来";
+            break;
+        case -2:
+            return @"请提交意见反馈向我们反映，谢谢配合";
+            break;
+        case -3:
+            return @"提交错误，请检查您的网络链接，并稍后重试";
+            break;
+        case 0:
+            return @"用户名或密码错误，请重新输入";
+            break;
+        default:
+            return @"您今天的登录次数已超过20次的限制，请明天再来";
             break;
     }
 }
