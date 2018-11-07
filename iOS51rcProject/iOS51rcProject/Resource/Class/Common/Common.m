@@ -644,4 +644,16 @@
             break;
     }
 }
+
+/**
+ 读取本地数据库省信息
+
+ @return 数组
+ */
++ (NSArray *)getProvince{
+    FMDatabase *dataBase;
+    NSString  *sqlString = @"SELECT * FROM dcRegion WHERE ParentId = 0 AND _id < 90";
+    NSArray *arr = [Common querySql:sqlString dataBase:dataBase];
+    return arr;
+}
 @end

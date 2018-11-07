@@ -242,7 +242,6 @@
         self.txtPassword.placeholder = @"请输入密码";
         self.passwordBtn.hidden = NO;
         self.getSecurityBtn.hidden = YES;
-        self.txtPassword.placeholder = @"请输入短信验证码";
         self.txtPassword.text = @"";
         self.txtPassword.secureTextEntry = YES;
         [self.passwordBtn setBackgroundImage:[UIImage imageNamed:@"img_password2.png"] forState:UIControlStateNormal];

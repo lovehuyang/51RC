@@ -22,6 +22,7 @@
         [self addSubview:viewNoData];
         
         UIImageView *imgNoData = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 150) / 2, 60, 150, 150 * 0.86)];
+        imgNoData.center = CGPointMake(self.center.x, self.center.y - VIEW_H(imgNoData)/2);
         [imgNoData setImage:[UIImage imageNamed:@"img_nodata.png"]];
         [imgNoData setContentMode:UIViewContentModeScaleAspectFit];
         [viewNoData addSubview:imgNoData];

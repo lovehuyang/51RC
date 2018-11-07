@@ -53,4 +53,6 @@
 + (NSString *)verifyCodeGetResult:(NSInteger)result;
 + (NSString *)verifyCodeLoginResult:(NSInteger)result;
 + (NSString *)loginResult:(NSInteger)result;
+
++ (NSArray *)getProvince;
 @end

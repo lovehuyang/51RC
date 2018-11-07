@@ -362,6 +362,7 @@
 		99A816B2208729BA0026802B /* InterviewSendRemarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A816B1208729BA0026802B /* InterviewSendRemarkViewController.m */; };
 		99A816B52088972F0026802B /* CpMobileVerifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A816B42088972F0026802B /* CpMobileVerifyViewController.m */; };
 		99A826611EEA329800609D94 /* MLImageCrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A826601EEA329800609D94 /* MLImageCrop.m */; };
+		99AA4AAD2192B7780053F750 /* NSString+CutProvince.m in Sources */ = {isa = PBXBuildFile; fileRef = 99AA4AAC2192B7780053F750 /* NSString+CutProvince.m */; };
 		99AAD49B206BD25C0053C2A0 /* JobPushViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99AAD49A206BD25C0053C2A0 /* JobPushViewController.m */; };
 		99AAF5E4201EFC220047959C /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99AAF5E3201EFC220047959C /* OrderDetailViewController.m */; };
 		99C5EEB22017293F00AC8FBD /* ChatListCpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C5EEAF2017293F00AC8FBD /* ChatListCpViewController.m */; };
@@ -930,6 +931,8 @@
 		99A816B42088972F0026802B /* CpMobileVerifyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CpMobileVerifyViewController.m; sourceTree = "<group>"; };
 		99A8265F1EEA329800609D94 /* MLImageCrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLImageCrop.h; sourceTree = "<group>"; };
 		99A826601EEA329800609D94 /* MLImageCrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLImageCrop.m; sourceTree = "<group>"; };
+		99AA4AAB2192B7780053F750 /* NSString+CutProvince.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+CutProvince.h"; sourceTree = "<group>"; };
+		99AA4AAC2192B7780053F750 /* NSString+CutProvince.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+CutProvince.m"; sourceTree = "<group>"; };
 		99AAD499206BD25C0053C2A0 /* JobPushViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobPushViewController.h; sourceTree = "<group>"; };
 		99AAD49A206BD25C0053C2A0 /* JobPushViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JobPushViewController.m; sourceTree = "<group>"; };
 		99AAF5E2201EFC220047959C /* OrderDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
@@ -2041,6 +2044,8 @@
 			children = (
 				9993A57A218AD0320057B6FD /* UIColor+ChangeColor.h */,
 				9993A579218AD0310057B6FD /* UIColor+ChangeColor.m */,
+				99AA4AAB2192B7780053F750 /* NSString+CutProvince.h */,
+				99AA4AAC2192B7780053F750 /* NSString+CutProvince.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2613,6 +2618,7 @@
 				995231C0205A893B00C8836D /* JobTagViewController.m in Sources */,
 				998F8A74219141BC003DBAB1 /* TalentsTestController.m in Sources */,
 				997B06911F5500A000391289 /* SpecialityModifyViewController.m in Sources */,
+				99AA4AAD2192B7780053F750 /* NSString+CutProvince.m in Sources */,
 				99F7FC7E204034190060E9F1 /* CvSearchListViewController.m in Sources */,
 				99D7404820273EE5005B2CD3 /* CvRecommendViewController.m in Sources */,
 				991A243B1EE6D7A9008CD8E9 /* ASIAuthenticationDialog.m in Sources */,

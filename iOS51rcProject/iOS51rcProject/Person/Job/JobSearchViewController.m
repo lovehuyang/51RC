@@ -17,13 +17,13 @@
 #import "UIImageView+WebCache.h"
 #import "WKFilterView.h"
 #import "WKPopView.h"
-#import "MJRefresh.h"
 #import "WKNavigationController.h"
 #import "JobViewController.h"
 #import "KeywordViewController.h"
 #import "NearSearchViewController.h"
 #import "UIView+Toast.h"
 #import "OnlineLab.h"
+#import "NSString+CutProvince.h"
 
 @interface JobSearchViewController ()<BMKLocationServiceDelegate, BMKGeoCodeSearchDelegate, BMKGeneralDelegate, NetWebServiceRequestDelegate, UITableViewDelegate, UITableViewDataSource, WKFilterViewDelegate, UIScrollViewDelegate, UITextFieldDelegate, KeyWordViewDelegate, WKPopViewDelegate>
 
@@ -46,6 +46,7 @@
 @property (nonatomic, strong) NSString *keyword;
 @property (nonatomic, strong) NSString *provinceId;
 @property (nonatomic, strong) NSString *province;
+@property (nonatomic, strong) NSArray *provinceArr;// 存放所有省份
 @property NSInteger page;
 @property int lastPosition;
 @end
@@ -54,7 +55,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    // 获取省信息
+    self.provinceArr = [Common getProvince];
+    
     self.txtKeyword = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 150, 30)];
     [self.txtKeyword setDelegate:self];
     [self.txtKeyword setBackgroundColor:[UIColor whiteColor]];
@@ -83,7 +87,7 @@
     [btnNearby addTarget:self action:@selector(nearClick) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btnNearby];
     
-    self.viewFilter = [[UIView alloc] initWithFrame:CGRectMake(0, NAVIGATION_BAR_HEIGHT + STATUS_BAR_HEIGHT, SCREEN_WIDTH, NAVIGATION_BAR_HEIGHT)];
+    self.viewFilter = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT_STATUS_NAV, SCREEN_WIDTH, 44)];
     [self.viewFilter setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:self.viewFilter];
     
@@ -130,14 +134,25 @@
     [viewSeparate setBackgroundColor:SEPARATECOLOR];
     [self.viewFilter addSubview:viewSeparate];
     
-    self.tableView = [[WKTableView alloc] initWithFrame:CGRectMake(0, STATUS_BAR_HEIGHT + NAVIGATION_BAR_HEIGHT * 2, SCREEN_WIDTH, SCREEN_HEIGHT - (STATUS_BAR_HEIGHT + NAVIGATION_BAR_HEIGHT * 2) - TAB_BAR_HEIGHT) style:UITableViewStylePlain noDataMsg:@"呀！啥都没有\n建议您扩大搜索范围~"];
+    self.tableView = [[WKTableView alloc] initWithFrame:CGRectMake(0, VIEW_H(self.viewFilter) + HEIGHT_STATUS_NAV, SCREEN_WIDTH, SCREEN_HEIGHT - (STATUS_BAR_HEIGHT + NAVIGATION_BAR_HEIGHT * 2) - TAB_BAR_HEIGHT) style:UITableViewStylePlain noDataMsg:@"呀！啥都没有\n建议您扩大搜索范围~"];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView setDataSource:self];
     [self.tableView setDelegate:self];
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    
+    // 添加下拉刷新
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.page =1;
+        [self getData];
+    }];
+    self.tableView.mj_header = header;
+    header.lastUpdatedTimeLabel.hidden = YES;
+    
+    // 添加上拉加载更多
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         self.page++;
         [self getData];
     }];
+    
     [self.view addSubview:self.tableView];
     
     UIView *viewStatusBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, STATUS_BAR_HEIGHT)];
@@ -316,7 +331,8 @@
     WKLabel *lbCompany = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_X(lbJob), VIEW_BY(lbJob), maxWidth - 65, 20) content:[data objectForKey:@"cpName"] size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR];
     [cell.contentView addSubview:lbCompany];
     
-    WKLabel *lbDate = [[WKLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 75, VIEW_Y(lbCompany), 70, 20) content:[Common stringFromRefreshDate:[data objectForKey:@"RefreshDate"]] size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR];
+    // 刷新时间
+    WKLabel *lbDate = [[WKLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 75, VIEW_Y(lbCompany), 70, 20) content:[Common stringFromRefreshDate:[data objectForKey:@"RefreshDate"]] size:SMALLERFONTSIZE color:TEXTGRAYCOLOR];
     [lbDate setTextAlignment:NSTextAlignmentRight];
     [cell.contentView addSubview:lbDate];
     
@@ -328,7 +344,8 @@
     if ([education length] == 0) {
         education = @"学历不限";
     }
-    WKLabel *lbDetail = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_X(lbCompany), VIEW_BY(lbCompany), maxWidth, 20) content:[NSString stringWithFormat:@"%@ | %@ | %@", [data objectForKey:@"Region"], experience, education] size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR];
+    NSString *reginStr = [NSString cutProvince:[data objectForKey:@"Region"]];
+    WKLabel *lbDetail = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_X(lbCompany), VIEW_BY(lbCompany), maxWidth, 20) content:[NSString stringWithFormat:@"%@ | %@ | %@", reginStr, experience, education] size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR];
     [cell.contentView addSubview:lbDetail];
     
     UIView *viewSeparate = [[UIView alloc] initWithFrame:CGRectMake(15, VIEW_BY(lbDetail) + 10, SCREEN_WIDTH - 30, 1)];
@@ -413,6 +430,8 @@
         [self defaultSearch];
     }
     else if (request.tag == 2) {
+        [self.tableView.mj_header endRefreshing];// 结束刷新
+        [self.tableView.mj_footer endRefreshing];// 结束加载更多
         if (self.page == 1) {
             [self.arrData removeAllObjects];
             [self.tableView setContentOffset:CGPointMake(0, 0)];
@@ -432,7 +451,6 @@
         }
         else {
             [self.tableView.mj_footer setHidden:NO];
-            [self.tableView.mj_footer endRefreshing];
         }
         self.arrJobType = [[Common getArrayFromXml:requestData tableName:@"dtJobType"] mutableCopy];
         self.arrJobPlace = [[Common getArrayFromXml:requestData tableName:@"dtJobRegion"] mutableCopy];
@@ -620,7 +638,10 @@
     [self getData];
 }
 
+#pragma mark - 导航栏左侧按钮
+
 - (void)genProvince {
+    
     UIButton *btnProvince = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 70, 30)];
     [btnProvince setTitle:self.province forState:UIControlStateNormal];
     [btnProvince setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -659,20 +680,5 @@
     self.provinceId = [data objectForKey:@"id"];
     [self defaultSearch];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end
