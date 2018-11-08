@@ -4,7 +4,8 @@
 //
 //  Created by Lucifer on 2018/3/9.
 //  Copyright © 2018年 Lucifer. All rights reserved.
-//
+//  新增职位页面
+//  职位修改页面
 
 #import "JobModifyViewController.h"
 #import "CommonMacro.h"
@@ -45,6 +46,7 @@
         [self.constraintsJobTypeTop setConstant:0];
         self.title = @"职位修改";
     }
+    
     UIBarButtonItem *btnSave = [[UIBarButtonItem alloc] initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(saveClick)];
     [btnSave setTintColor:[UIColor whiteColor]];
     [btnSave setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:BIGGERFONT,NSFontAttributeName, nil] forState:UIControlStateNormal];
@@ -305,6 +307,7 @@
     [self.navigationController pushViewController:jobPlaceCtrl animated:YES];
 }
 
+#pragma mark - 点击从模板中复制
 - (void)templateClick {
     if (self.arrayTemplate.count == 0) {
         [self.view.window makeToast:@"您还没有职位模板"];
@@ -315,7 +318,7 @@
         NSDictionary *data = [self.arrayTemplate objectAtIndex:i];
         [arrayPop addObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%ld", i], @"id", [data objectForKey:@"Name"], @"value", nil]];
     }
-    WKPopView *popView = [[WKPopView alloc] initWithArray:arrayPop value:@""];
+    WKPopView *popView = [[WKPopView alloc] initWithArray:arrayPop value:self.templateStr];
     [popView setDelegate:self];
     [popView showPopView:self];
 }
@@ -333,6 +336,7 @@
     NSDictionary *data = [arraySelect objectAtIndex:0];
     [self.currentTextField setText:[data objectForKey:@"value"]];
     if (self.currentTextField == self.txtTemplate) {
+        self.templateStr = self.currentTextField.text;
         NSInteger index = [[data objectForKey:@"id"] integerValue];
         self.jobData = [[self.arrayTemplate objectAtIndex:index] mutableCopy];
         [self.jobData setObject:self.txtJobName.text forKey:@"Name"];

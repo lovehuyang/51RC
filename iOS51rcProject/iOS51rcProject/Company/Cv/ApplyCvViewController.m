@@ -4,7 +4,7 @@
 //
 //  Created by Lucifer on 2018/3/1.
 //  Copyright © 2018年 Lucifer. All rights reserved.
-//
+//  应聘的简历页面
 
 #import "ApplyCvViewController.h"
 #import "Common.h"

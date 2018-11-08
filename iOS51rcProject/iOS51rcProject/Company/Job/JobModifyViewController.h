@@ -12,7 +12,8 @@
 @interface JobModifyViewController : WKViewController
 
 @property (strong, nonatomic) NSString *jobId;
-@property (strong, nonatomic) IBOutlet UIView *viewTemplate;
+@property (strong, nonatomic) IBOutlet UIView *viewTemplate;// 从模板中复制
+@property (nonatomic , strong) NSString *templateStr;// 模板名称
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *constraintsJobTypeTop;
 @property (strong, nonatomic) IBOutlet UITextField *txtJobName;
 @property (strong, nonatomic) IBOutlet UITextField *txtTemplate;

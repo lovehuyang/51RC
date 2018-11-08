@@ -4,7 +4,7 @@
 //
 //  Created by Lucifer on 2018/3/9.
 //  Copyright © 2018年 Lucifer. All rights reserved.
-//
+//  发布中职位页面
 
 #import "IssueJobListViewController.h"
 #import "Common.h"
@@ -44,6 +44,14 @@
     [self.tableView setDelegate:self];
     [self.tableView setDataSource:self];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.page = 1;
+        [self getData];
+    }];
+    self.tableView.mj_header = header;
+    header.lastUpdatedTimeLabel.hidden = YES;
+    
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         self.page++;
         [self getData];
@@ -79,6 +87,8 @@
 - (void)netRequestFinished:(NetWebServiceRequest *)request
       finishedInfoToResult:(NSString *)result
               responseData:(GDataXMLDocument *)requestData {
+    [self.tableView.mj_footer endRefreshing];
+    [self.tableView.mj_header endRefreshing];
     if (request.tag == 1) {
         if (self.page == 1) {
             [self.arrData removeAllObjects];
@@ -199,7 +209,9 @@
     [viewMiddle setBackgroundColor:SEPARATECOLOR];
     [btnApply addSubview:viewMiddle];
     
-    WKLabel *lbApplyCount = [[WKLabel alloc] initWithFrame:CGRectMake(15, VIEW_Y(viewMiddle) + 15, 60, 20) content:[data objectForKey:@"ApplyCount"] size:BIGGESTFONTSIZE color:GREENCOLOR];
+    // 应聘简历的数量
+    NSString *applyCountStr = [data objectForKey:@"ApplyCount"];
+    WKLabel *lbApplyCount = [[WKLabel alloc] initWithFrame:CGRectMake(15, VIEW_Y(viewMiddle) + 15, 60, 20) content:[data objectForKey:@"ApplyCount"] size:BIGGESTFONTSIZE color:[applyCountStr integerValue] == 0 ?TEXTGRAYCOLOR: GREENCOLOR];
     [lbApplyCount setTextAlignment:NSTextAlignmentCenter];
     [btnApply addSubview:lbApplyCount];
     
@@ -239,8 +251,13 @@
     [self presentViewController:jobNav animated:YES completion:nil];
 }
 
+#pragma mark - 应聘简历点击
 - (void)applyClick:(UIButton *)button {
     NSDictionary *data = [self.arrData objectAtIndex:button.tag];
+    NSString *applyCountStr = [data objectForKey:@"ApplyCount"];
+    if ([applyCountStr integerValue] ==0) {
+        return;
+    }
 //    CvManagerViewController *cvManagerCtrl = [[UIStoryboard storyboardWithName:@"Company" bundle:nil] instantiateViewControllerWithIdentifier:@"cvManagerView"];
 //    cvManagerCtrl.jobId = [data objectForKey:@"ID"];
 //    [self.navigationController pushViewController:cvManagerCtrl animated:YES];
