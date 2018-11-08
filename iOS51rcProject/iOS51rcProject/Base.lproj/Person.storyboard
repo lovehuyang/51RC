@@ -1253,7 +1253,7 @@
         <!--Job View Controller-->
         <scene sceneID="FE9-ve-epm">
             <objects>
-                <viewController id="pnL-zG-xbx" customClass="JobViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JobDetail" id="pnL-zG-xbx" customClass="JobViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="v3z-39-uAu"/>
                         <viewControllerLayoutGuide type="bottom" id="f6I-0X-Qx0"/>

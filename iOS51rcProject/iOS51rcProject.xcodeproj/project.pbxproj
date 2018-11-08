@@ -158,7 +158,6 @@
 		992985261F5539CB0021F863 /* WKLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 992985141F5539CB0021F863 /* WKLoginView.m */; };
 		992985271F5539CB0021F863 /* WKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992985161F5539CB0021F863 /* WKNavigationController.m */; };
 		992985281F5539CB0021F863 /* WKPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 992985181F5539CB0021F863 /* WKPopView.m */; };
-		992985291F5539CB0021F863 /* WKTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9929851A1F5539CB0021F863 /* WKTabBarController.m */; };
 		9929852A1F5539CB0021F863 /* WKTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9929851C1F5539CB0021F863 /* WKTableView.m */; };
 		9929852B1F5539CB0021F863 /* WKTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9929851E1F5539CB0021F863 /* WKTextView.m */; };
 		9929852C1F5539CB0021F863 /* WKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992985201F5539CB0021F863 /* WKViewController.m */; };
@@ -166,6 +165,8 @@
 		992985321F553BCE0021F863 /* CpLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992985311F553BCE0021F863 /* CpLoginViewController.m */; };
 		992DC19F206B7A2C00563456 /* ico_mapcenter.png in Resources */ = {isa = PBXBuildFile; fileRef = 992DC19E206B7A2C00563456 /* ico_mapcenter.png */; };
 		9939A603207A0AB1005D2146 /* AccountSafeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9939A602207A0AB1005D2146 /* AccountSafeViewController.m */; };
+		9947F2B22193ED25002C97F2 /* BaseTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 9947F2B02193ED25002C97F2 /* BaseTabbar.m */; };
+		9947F2B32193ED25002C97F2 /* WKTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9947F2B12193ED25002C97F2 /* WKTabBarController.m */; };
 		994A85031F4FF9F100097B44 /* job_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 994A85021F4FF9F100097B44 /* job_top.png */; };
 		994C83131F1E069C00414E98 /* pa_cvpreitem1.png in Resources */ = {isa = PBXBuildFile; fileRef = 994C830D1F1E069C00414E98 /* pa_cvpreitem1.png */; };
 		994C83141F1E069C00414E98 /* pa_cvpreitem2.png in Resources */ = {isa = PBXBuildFile; fileRef = 994C830E1F1E069C00414E98 /* pa_cvpreitem2.png */; };
@@ -635,8 +636,6 @@
 		992985161F5539CB0021F863 /* WKNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKNavigationController.m; sourceTree = "<group>"; };
 		992985171F5539CB0021F863 /* WKPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKPopView.h; sourceTree = "<group>"; };
 		992985181F5539CB0021F863 /* WKPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKPopView.m; sourceTree = "<group>"; };
-		992985191F5539CB0021F863 /* WKTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKTabBarController.h; sourceTree = "<group>"; };
-		9929851A1F5539CB0021F863 /* WKTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKTabBarController.m; sourceTree = "<group>"; };
 		9929851B1F5539CB0021F863 /* WKTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKTableView.h; sourceTree = "<group>"; };
 		9929851C1F5539CB0021F863 /* WKTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKTableView.m; sourceTree = "<group>"; };
 		9929851D1F5539CB0021F863 /* WKTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKTextView.h; sourceTree = "<group>"; };
@@ -650,6 +649,10 @@
 		992DC19E206B7A2C00563456 /* ico_mapcenter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_mapcenter.png; sourceTree = "<group>"; };
 		9939A601207A0AB1005D2146 /* AccountSafeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountSafeViewController.h; sourceTree = "<group>"; };
 		9939A602207A0AB1005D2146 /* AccountSafeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountSafeViewController.m; sourceTree = "<group>"; };
+		9947F2AE2193ED25002C97F2 /* BaseTabbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabbar.h; sourceTree = "<group>"; };
+		9947F2AF2193ED25002C97F2 /* WKTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKTabBarController.h; sourceTree = "<group>"; };
+		9947F2B02193ED25002C97F2 /* BaseTabbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabbar.m; sourceTree = "<group>"; };
+		9947F2B12193ED25002C97F2 /* WKTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKTabBarController.m; sourceTree = "<group>"; };
 		994A85021F4FF9F100097B44 /* job_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = job_top.png; sourceTree = "<group>"; };
 		994C830D1F1E069C00414E98 /* pa_cvpreitem1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pa_cvpreitem1.png; sourceTree = "<group>"; };
 		994C830E1F1E069C00414E98 /* pa_cvpreitem2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pa_cvpreitem2.png; sourceTree = "<group>"; };
@@ -1597,6 +1600,7 @@
 		992985081F5539CB0021F863 /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+				9947F2AD2193ED25002C97F2 /* Tabbar */,
 				992985091F5539CB0021F863 /* WKApplyView.h */,
 				9929850A1F5539CB0021F863 /* WKApplyView.m */,
 				9929850B1F5539CB0021F863 /* WKButton.h */,
@@ -1613,8 +1617,6 @@
 				992985161F5539CB0021F863 /* WKNavigationController.m */,
 				992985171F5539CB0021F863 /* WKPopView.h */,
 				992985181F5539CB0021F863 /* WKPopView.m */,
-				992985191F5539CB0021F863 /* WKTabBarController.h */,
-				9929851A1F5539CB0021F863 /* WKTabBarController.m */,
 				9929851B1F5539CB0021F863 /* WKTableView.h */,
 				9929851C1F5539CB0021F863 /* WKTableView.m */,
 				9929851D1F5539CB0021F863 /* WKTextView.h */,
@@ -1625,6 +1627,17 @@
 				99F7FC832041427D0060E9F1 /* WKCvTableViewCell.m */,
 			);
 			path = CustomUI;
+			sourceTree = "<group>";
+		};
+		9947F2AD2193ED25002C97F2 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				9947F2AE2193ED25002C97F2 /* BaseTabbar.h */,
+				9947F2B02193ED25002C97F2 /* BaseTabbar.m */,
+				9947F2AF2193ED25002C97F2 /* WKTabBarController.h */,
+				9947F2B12193ED25002C97F2 /* WKTabBarController.m */,
+			);
+			path = Tabbar;
 			sourceTree = "<group>";
 		};
 		995231972052AA7900C8836D /* Job */ = {
@@ -2484,10 +2497,10 @@
 				997B067A1F5500A000391289 /* AccountManagerViewController.m in Sources */,
 				9993A57B218AD0320057B6FD /* UIColor+ChangeColor.m in Sources */,
 				995231B72059104600C8836D /* ResponsibilityViewController.m in Sources */,
+				9947F2B32193ED25002C97F2 /* WKTabBarController.m in Sources */,
 				995231A02052AB0400C8836D /* ExpiredJobListViewController.m in Sources */,
 				9960E25D219019CC008E6DE5 /* MBProgressHUD+Gif.m in Sources */,
 				991A24421EE6D7A9008CD8E9 /* ASINetworkQueue.m in Sources */,
-				992985291F5539CB0021F863 /* WKTabBarController.m in Sources */,
 				9952319D2052AAE200C8836D /* IssueJobListViewController.m in Sources */,
 				99AAF5E4201EFC220047959C /* OrderDetailViewController.m in Sources */,
 				991C6F791FFE1B7B009FD82A /* InterviewCpDetailViewController.m in Sources */,
@@ -2547,6 +2560,7 @@
 				997B06811F5500A000391289 /* PaRegisterViewController.m in Sources */,
 				997B067F1F5500A000391289 /* PaIndexViewController.m in Sources */,
 				99C5EEBF2018734800AC8FBD /* PayMethodViewController.m in Sources */,
+				9947F2B22193ED25002C97F2 /* BaseTabbar.m in Sources */,
 				991A243C1EE6D7A9008CD8E9 /* ASIDataCompressor.m in Sources */,
 				991C6F7C200C3B4E009FD82A /* SysViewController.m in Sources */,
 				996C9084218934B600C0EF66 /* ComplainViewController.m in Sources */,

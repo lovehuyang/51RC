@@ -363,6 +363,15 @@
     JobViewController *jobCtrl = jobNav.viewControllers[0];
     jobCtrl.jobId = [data objectForKey:@"ID"];
     [self presentViewController:jobNav animated:YES completion:nil];
+//    [self.navigationController pushViewController:jobCtrl animated:YES];
+    
+    //JobDetail
+    
+//    JobViewController *jobvc = [[UIStoryboard storyboardWithName:@"Person" bundle:nil] instantiateViewControllerWithIdentifier:@"JobDetail"];
+//    JobViewController *jobCtrl = jobNav.viewControllers[0];
+//    jobCtrl.jobId = [data objectForKey:@"ID"];
+//    [self presentViewController:jobNav animated:YES completion:nil];
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
