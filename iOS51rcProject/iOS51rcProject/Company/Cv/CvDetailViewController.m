@@ -4,7 +4,7 @@
 //
 //  Created by Lucifer on 2018/4/10.
 //  Copyright © 2017年 Lucifer. All rights reserved.
-//
+//  简历详情页面
 
 #import "CvDetailViewController.h"
 #import "CommonMacro.h"
@@ -35,7 +35,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:SEPARATECOLOR];
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, NAVIGATION_BAR_HEIGHT + STATUS_BAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT - STATUS_BAR_HEIGHT - 50)];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, NAVIGATION_BAR_HEIGHT + STATUS_BAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT - STATUS_BAR_HEIGHT - 51)];
     [self.scrollView setDelegate:self];
     [self.view addSubview:self.scrollView];
     self.widthForView = SCREEN_WIDTH - 20;
@@ -52,6 +52,7 @@
     [self.runningRequest cancel];
 }
 
+#pragma mark - 获取简历详情
 - (void)getData {
     for (UIView *view in self.scrollView.subviews) {
         [view removeFromSuperview];
@@ -486,7 +487,7 @@
             }
         }
     }
-    if (notReply) {
+    if (notReply) {// 未答复
         WKLabel *lbReplyTips = [[WKLabel alloc] initWithFixedSpacing:CGRectMake(self.paddingLeft, 15, self.widthForView - (self.paddingLeft * 2), 10) content:@"做出答复后即可展示联系方式，请点击下方的按钮进行答复" size:DEFAULTFONTSIZE color:[UIColor grayColor] spacing:10];
         [viewContent addSubview:lbReplyTips];
         
@@ -511,9 +512,10 @@
         
         [viewContent setFrame:CGRectMake(self.paddingLeft, VIEW_BY(lbTitle) + 15, self.widthForView, VIEW_BY(btnPass) + 15)];
     }
-    else {
+    else {// 已答复
         if (arrayApply.count > 0) {
             NSDictionary *applyData = [arrayApply objectAtIndex:0];
+            // reply == 1:不符合要求 ； reply == 2：符合要求
             bool replyPass = [[applyData objectForKey:@"Reply"] isEqualToString:@"1"];
             WKLabel *lbReply = [[WKLabel alloc] initWithFixedHeight:CGRectMake(self.paddingLeft, 10, SCREEN_WIDTH, 20) content:[NSString stringWithFormat:@"已答复简历%@", (replyPass ? @"符合要求" : @"不符合要求")] size:DEFAULTFONTSIZE color:nil];
             [viewContent addSubview:lbReply];
@@ -555,7 +557,7 @@
                 [btnInterview.titleLabel setFont:DEFAULTFONT];
                 [btnInterview addTarget:self action:@selector(interviewClick) forControlEvents:UIControlEventTouchUpInside];
                 [viewContent addSubview:btnInterview];
-                
+                btnReply.backgroundColor = [UIColor redColor];
                 btnReply = [[UIButton alloc] initWithFrame:CGRectMake(VIEW_BX(btnInterview), VIEW_Y(btnInterview), widthForButton, VIEW_H(viewLink))];
                 [btnReply setTag:2];
                 [btnReply setTitle:@"改为暂不合适，放入储备人才库" forState:UIControlStateNormal];
@@ -637,33 +639,58 @@
     }
     self.heightForScroll = VIEW_BY(viewContent);
     
-    UIView *viewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, VIEW_BY(self.scrollView), SCREEN_WIDTH, 50)];
+    UIView *viewBottom = [[UIView alloc] initWithFrame:CGRectMake(0, VIEW_BY(self.scrollView) + 1, SCREEN_WIDTH, 50)];
     [viewBottom setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:viewBottom];
     if (notReply) {
-        WKButton *btnReply = [[WKButton alloc] initWithFrame:CGRectMake(50, 10, (VIEW_W(viewBottom) - 150) / 2, 30) title:@"答复" fontSize:DEFAULTFONTSIZE color:[UIColor whiteColor] bgColor:CPNAVBARCOLOR];
+        WKButton *btnReply = [[WKButton alloc] initWithFrame:CGRectMake(50, 7.5, (VIEW_W(viewBottom) - 150) / 2, 35) title:@"答复" fontSize:DEFAULTFONTSIZE color:[UIColor whiteColor] bgColor:CPNAVBARCOLOR];
         [btnReply addTarget:self action:@selector(replyScroll) forControlEvents:UIControlEventTouchUpInside];
         [viewBottom addSubview:btnReply];
+        btnReply.layer.cornerRadius = 3;
         
         WKButton *btnChat = [[WKButton alloc] initImageButtonWithFrame:CGRectMake(VIEW_BX(btnReply) + 50, VIEW_Y(btnReply), VIEW_W(btnReply), VIEW_H(btnReply)) image:@"cp_chat.png" title:@"跟TA聊聊" fontSize:DEFAULTFONTSIZE color:GREENCOLOR bgColor:[UIColor clearColor]];
         [btnChat addTarget:self action:@selector(chatClick) forControlEvents:UIControlEventTouchUpInside];
         [viewBottom addSubview:btnChat];
     }
     else {
-        WKButton *btnInvitation = [[WKButton alloc] initWithFrame:CGRectMake(30, 10, (VIEW_W(viewBottom) - 120) / 3, 30) title:@"应聘邀请" fontSize:DEFAULTFONTSIZE color:[UIColor whiteColor] bgColor:CPNAVBARCOLOR];
-        [btnInvitation addTarget:self action:@selector(invitationClick) forControlEvents:UIControlEventTouchUpInside];
-        [viewBottom addSubview:btnInvitation];
         
-        WKButton *btnInterview = [[WKButton alloc] initWithFrame:CGRectMake(VIEW_BX(btnInvitation) + 30, VIEW_Y(btnInvitation), VIEW_W(btnInvitation), VIEW_H(btnInvitation)) title:@"面试通知" fontSize:DEFAULTFONTSIZE color:[UIColor whiteColor] bgColor:CPNAVBARCOLOR];
+        NSDictionary *applyData = [arrayApply objectAtIndex:0];
+        // reply == 1:符合要求 ； reply == 2：储备;reply == 5:储备（自动）
+        NSString *replyStatus = [applyData objectForKey:@"Reply"];
+        
+//        WKButton *btnInvitation = [[WKButton alloc] initWithFrame:CGRectMake(30, 10, (VIEW_W(viewBottom) - 120) / 3, 30) title:@"应聘邀请" fontSize:DEFAULTFONTSIZE color:[UIColor whiteColor] bgColor:CPNAVBARCOLOR];
+//        [btnInvitation addTarget:self action:@selector(invitationClick) forControlEvents:UIControlEventTouchUpInside];
+//        [viewBottom addSubview:btnInvitation];
+        
+        CGFloat BTN_W = (VIEW_W(viewBottom) - 30 *3)/2;
+        CGFloat BTN_H = 35;
+        WKButton *btnInterview = [[WKButton alloc] initWithFrame:CGRectMake(30, 7.5, BTN_W,BTN_H) title:@"面试通知" fontSize:DEFAULTFONTSIZE color:[UIColor whiteColor] bgColor:CPNAVBARCOLOR];
         [btnInterview addTarget:self action:@selector(interviewClick) forControlEvents:UIControlEventTouchUpInside];
         [viewBottom addSubview:btnInterview];
+        btnInterview.layer.cornerRadius = 3;
         
-        WKButton *btnChat = [[WKButton alloc] initImageButtonWithFrame:CGRectMake(VIEW_BX(btnInterview) + 30, VIEW_Y(btnInterview), VIEW_W(btnInterview), VIEW_H(btnInterview)) image:@"cp_chat.png" title:@"跟TA聊聊" fontSize:DEFAULTFONTSIZE color:GREENCOLOR bgColor:[UIColor clearColor]];
+        WKButton *btnChat = [[WKButton alloc] initImageButtonWithFrame:CGRectMake(0, 7.5, BTN_W, BTN_H) image:@"cp_chat.png" title:@"跟TA聊聊" fontSize:DEFAULTFONTSIZE color:GREENCOLOR bgColor:[UIColor clearColor]];
         [btnChat addTarget:self action:@selector(chatClick) forControlEvents:UIControlEventTouchUpInside];
+        
+        if ([replyStatus isEqualToString:@"1"]) {// 通过
+            
+            btnInterview.frame = CGRectMake(30, 7.5, BTN_W, BTN_H);
+            btnChat.frame = CGRectMake(VIEW_BX(btnInterview) + 30, 7.5, BTN_W, BTN_H);
+            btnInterview.hidden = NO;
+            
+        }else if([replyStatus isEqualToString:@"2"]){// 已放入储备人才库
+            btnInterview.hidden = YES;
+            btnChat.center = CGPointMake(VIEW_W(viewBottom)/2, btnChat.center.y);
+        }else{
+            btnInterview.hidden = YES;
+            btnChat.center = CGPointMake(VIEW_W(viewBottom)/2, btnChat.center.y);
+        }
+        
         [viewBottom addSubview:btnChat];
     }
 }
 
+#pragma mark - 联系
 - (void)fillContact {
     NSMutableArray *arrayContact = [[NSMutableArray alloc] init];
     NSDictionary *contactData;
@@ -832,6 +859,7 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", mobile]]];
 }
 
+#pragma mark - 查看联系方式
 - (void)contactClick {
     NSDictionary *otherData = [[Common getArrayFromXml:self.xmlData tableName:@"dtOtherInfo"] objectAtIndex:0];
     NSString *noticeText = [otherData objectForKey:@"NoticeTextIOS"];

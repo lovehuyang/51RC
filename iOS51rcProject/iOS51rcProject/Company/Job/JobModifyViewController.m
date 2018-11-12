@@ -447,6 +447,8 @@
         }
         [self.txtSalary setText:salary];
     }
+    
+    [self genSalaryJobString];
 }
 
 - (void)fillData {
@@ -553,6 +555,7 @@
     [self.dataParam setObject:lat forKey:@"Lat"];
     [self.dataParam setObject:lng forKey:@"Lng"];
     [self.dataParam setObject:address forKey:@"Address"];
+    [self genSalaryJobString];
 }
 
 - (void)JobPushViewConfirm:(NSString *)pushId push:(NSString *)push {
@@ -641,6 +644,7 @@
         NSDictionary *dict = [requestData firstObject];
         NSDictionary *welfareDict = [Common welfare:dict];
         self.welfareDict = [NSDictionary dictionaryWithDictionary:welfareDict];
+        [self fillWelfare];
     }else if(requestData.count == 2){
         NSDictionary *dict1 = [requestData firstObject];
         NSDictionary *dict2 = [requestData lastObject];
@@ -663,4 +667,19 @@
     }
 }
 
+#pragma mark - 获取平均工资
+- (void)genSalaryJobString{
+    
+    NSString *reginStr = self.dataParam[@"RegionID"];
+    NSString *jobTypeIdStr = self.dataParam[@"JobTypeID"];
+    if (reginStr == nil || jobTypeIdStr == nil) {
+        return;
+    }
+    NSDictionary *paramDict = @{@"RegionID":reginStr,@"JobTypeID":jobTypeIdStr};
+    [AFNManager requestWithMethod:POST ParamDict:paramDict url:URL_GETSALARYJOBSTRING tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        DLog(@"");
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        DLog(@"");
+    }];
+}
 @end

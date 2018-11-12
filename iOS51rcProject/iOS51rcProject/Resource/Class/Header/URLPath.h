@@ -20,8 +20,13 @@
 // 账户密码登录
 #define URL_LOGIN @"Login"
 
+
+
 #pragma mark - 公司用户
+
 // 获取公司最近发布的福利待遇信息
 #define URL_GETJOBWELFAREBYCAMAINID @"GetJobWelfareByCamainID"
+// 获取平均工资
+#define URL_GETSALARYJOBSTRING @"genSalaryJobString"
 
 #endif /* URLPath_h */

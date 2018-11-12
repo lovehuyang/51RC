@@ -240,7 +240,7 @@
     [viewSeparateBottom setBackgroundColor:SEPARATECOLOR];
     [cell.contentView addSubview:viewSeparateBottom];
     
-    UIButton *btnReply = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 85, VIEW_BY(viewSeparateBottom) + 7, 70, 26)];
+    UIButton *btnReply = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 80, VIEW_BY(viewSeparateBottom) + 7, 75, 26)];
     [btnReply setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btnReply setBackgroundColor:[UIColor clearColor]];
     [btnReply.titleLabel setFont:DEFAULTFONT];
@@ -260,7 +260,7 @@
     else if ([[data objectForKey:@"Reply"] isEqualToString:@"5"]) {
         [btnReply setTitle:@"储备（自动）" forState:UIControlStateNormal];
     }
-    else {
+    else { // 2
         [btnReply setTitle:@"储备" forState:UIControlStateNormal];
     }
     
