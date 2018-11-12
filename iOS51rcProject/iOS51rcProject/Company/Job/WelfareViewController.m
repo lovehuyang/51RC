@@ -4,7 +4,7 @@
 //
 //  Created by Lucifer on 2018/3/14.
 //  Copyright © 2018年 Lucifer. All rights reserved.
-//
+//  福利待遇页面
 
 #import "WelfareViewController.h"
 #import "Common.h"
@@ -73,7 +73,7 @@
         [btnWelfare.layer setCornerRadius:5];
         [btnWelfare addTarget:self action:@selector(welfareClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btnWelfare];
-        
+        // 1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
         if ([[self.arrayWelfareIdSelected objectAtIndex:(welfareId - 1)] isEqualToString:@"1"]) {
             [btnWelfare setBackgroundColor:GREENCOLOR];
             [btnWelfare setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -99,20 +99,5 @@
     [self.delegate WelfareViewConfirm:[self.arrayWelfareIdSelected componentsJoinedByString:@","] welfare:[Common getWelfare:self.arrayWelfareIdSelected]];
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

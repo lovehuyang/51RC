@@ -656,4 +656,83 @@
     NSArray *arr = [Common querySql:sqlString dataBase:dataBase];
     return arr;
 }
+
++ (NSDictionary *)welfare:(NSDictionary *)dict{
+    NSDictionary *welfareDict = @{
+                                  @"Welfare1":dict[@"Welfare1"],
+                                  @"Welfare2":dict[@"Welfare2"],
+                                  @"Welfare3":dict[@"Welfare3"],
+                                  @"Welfare4":dict[@"Welfare4"],
+                                  @"Welfare5":dict[@"Welfare5"],
+                                  @"Welfare6":dict[@"Welfare6"],
+                                  @"Welfare7":dict[@"Welfare7"],
+                                  @"Welfare8":dict[@"Welfare8"],
+                                  @"Welfare9":dict[@"Welfare9"],
+                                  @"Welfare10":dict[@"Welfare10"],
+                                  @"Welfare11":dict[@"Welfare11"],
+                                  @"Welfare12":dict[@"Welfare12"],
+                                  @"Welfare13":dict[@"Welfare13"],
+                                  @"Welfare14":dict[@"Welfare14"],
+                                  @"Welfare15":dict[@"Welfare15"],
+                                  @"Welfare16":dict[@"Welfare16"],
+                                  @"Welfare17":dict[@"Welfare17"],
+                                  @"Welfare18":dict[@"Welfare18"],
+                                  @"Welfare19":dict[@"Welfare19"],
+                                  };
+    return welfareDict;
+}
+
++ (NSDictionary *)welfare:(NSDictionary *)dict1 dict2:(NSDictionary *)dict2{
+    NSDictionary *welfareDict =@{
+                                 @"Welfare1":[Common compareStr:dict1[@"Welfare1"] str2:dict2[@"Welfare1"]],
+                                 @"Welfare2":[Common compareStr:dict1[@"Welfare2"] str2:dict2[@"Welfare2"]],
+                                 @"Welfare3":[Common compareStr:dict1[@"Welfare3"] str2:dict2[@"Welfare3"]],
+                                 @"Welfare4":[Common compareStr:dict1[@"Welfare4"] str2:dict2[@"Welfare4"]],
+                                 @"Welfare5":[Common compareStr:dict1[@"Welfare5"] str2:dict2[@"Welfare5"]],
+                                 @"Welfare6":[Common compareStr:dict1[@"Welfare6"] str2:dict2[@"Welfare6"]],
+                                 @"Welfare7":[Common compareStr:dict1[@"Welfare7"] str2:dict2[@"Welfare7"]],
+                                 @"Welfare8":[Common compareStr:dict1[@"Welfare8"] str2:dict2[@"Welfare8"]],
+                                 @"Welfare9":[Common compareStr:dict1[@"Welfare9"] str2:dict2[@"Welfare9"]],
+                                 @"Welfare10":[Common compareStr:dict1[@"Welfare10"] str2:dict2[@"Welfare10"]],
+                                 @"Welfare11":[Common compareStr:dict1[@"Welfare11"] str2:dict2[@"Welfare11"]],
+                                 @"Welfare12":[Common compareStr:dict1[@"Welfare12"] str2:dict2[@"Welfare12"]],
+                                 @"Welfare13":[Common compareStr:dict1[@"Welfare13"] str2:dict2[@"Welfare13"]],
+                                 @"Welfare14":[Common compareStr:dict1[@"Welfare14"] str2:dict2[@"Welfare14"]],
+                                 @"Welfare15":[Common compareStr:dict1[@"Welfare15"] str2:dict2[@"Welfare15"]],
+                                 @"Welfare16":[Common compareStr:dict1[@"Welfare16"] str2:dict2[@"Welfare16"]],
+                                 @"Welfare17":[Common compareStr:dict1[@"Welfare17"] str2:dict2[@"Welfare17"]],
+                                 @"Welfare18":[Common compareStr:dict1[@"Welfare18"] str2:dict2[@"Welfare18"]],
+                                 @"Welfare19":[Common compareStr:dict1[@"Welfare19"] str2:dict2[@"Welfare19"]],
+                                 };
+    return welfareDict;
+}
+
++ (NSString *)compareStr:(NSString *)str1 str2:(NSString *)str2{
+    BOOL bool1 = [str1 boolValue];
+    BOOL bool2 = [str2 boolValue];
+    if (bool1 && bool2) {
+        return @"true";
+    }else{
+        return @"false";
+    }
+}
+
+// 获取福利待遇
++ (NSString *)getWelfareIdSelected:(NSDictionary *)welfareDict{
+    NSArray *welfareIdArray = [Common arrayWelfareId];
+    NSMutableString *selectId = [[NSMutableString alloc]init];
+    for (int i = 0; i < welfareIdArray.count; i ++) {
+        NSInteger welfareId = [welfareIdArray[i] integerValue];
+        DLog(@"welfareId:%ld",(long)welfareId);
+        BOOL selectedState = [welfareDict[[NSString stringWithFormat:@"Welfare%ld",welfareId]] boolValue];
+        if (i == welfareIdArray.count-1) {
+            [selectId appendString:selectedState ? @"1":@"0"];
+        }else{
+            [selectId appendString:selectedState ? @"1,":@"0,"];
+        }
+        
+    }
+    
+    return [NSString stringWithString:selectId];
+}
 @end

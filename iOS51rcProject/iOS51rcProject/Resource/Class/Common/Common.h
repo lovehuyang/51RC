@@ -55,4 +55,8 @@
 + (NSString *)loginResult:(NSInteger)result;
 
 + (NSArray *)getProvince;
+
++ (NSDictionary *)welfare:(NSDictionary *)dict;
++ (NSDictionary *)welfare:(NSDictionary *)dict1 dict2:(NSDictionary *)dict2;
++ (NSString *)getWelfareIdSelected:(NSDictionary *)welfareDict;
 @end

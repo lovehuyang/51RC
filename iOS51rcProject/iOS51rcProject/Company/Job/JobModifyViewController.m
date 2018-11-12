@@ -29,6 +29,7 @@
 @property (nonatomic, strong) NSMutableDictionary *jobData;
 @property (nonatomic, strong) NSDictionary *companyData;
 @property (nonatomic, strong) NSArray *arrayTemplate;
+@property (nonatomic , strong) NSDictionary *welfareDict;// 未使用模板时福利待遇默认选择以前选择过的
 @end
 
 @implementation JobModifyViewController
@@ -40,6 +41,7 @@
     if (self.jobId == nil) {
         self.jobId = @"0";
         self.title = @"新增职位";
+        [self getWelfare];
     }
     else {
         [self.viewTemplate removeFromSuperview];
@@ -88,6 +90,7 @@
     [self getCpData];
 }
 
+#pragma mark - 获取公司概况信息
 - (void)getCpData {
     NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrlCp:@"GetCpMainInfo" Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:CAMAINID, @"CaMainID", CAMAINCODE, @"Code", nil] viewController:self];
     [request setTag:1];
@@ -96,15 +99,26 @@
     self.runningRequest = request;
 }
 
+#pragma mark - 福利待遇
+- (void)getWelfare{
+    // 获取以往简历中用户经常选择的福利待遇标签
+    NSDictionary *paramDict = @{@"caMainID":CAMAINID,@"Code":CAMAINCODE};
+    [AFNManager requestCpWithMethod:POST ParamDict:paramDict url:URL_GETJOBWELFAREBYCAMAINID tableName:@"ds" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        [self dealWelfare:requestData];
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        
+    }];
+}
+
 - (void)getJobData {
     if ([self.jobId isEqualToString:@"0"]) {
         [self getTemplate];
         
-        [self.txtRegion setText:[self.companyData objectForKey:@"Region"]];
-        [self.dataParam setObject:[self.companyData objectForKey:@"dcRegionID"] forKey:@"RegionID"];
-        [self.dataParam setObject:[self.companyData objectForKey:@"Lat"] forKey:@"Lat"];
-        [self.dataParam setObject:[self.companyData objectForKey:@"Lng"] forKey:@"Lng"];
-        [self.dataParam setObject:[self.companyData objectForKey:@"Address"] forKey:@"Address"];
+        [self.txtRegion setText:[self.companyData objectForKey:@"Region"]];// 地区
+        [self.dataParam setObject:[self.companyData objectForKey:@"dcRegionID"] forKey:@"RegionID"];// 获取地区id
+        [self.dataParam setObject:[self.companyData objectForKey:@"Lat"] forKey:@"Lat"];// 经纬度 - 纬度
+        [self.dataParam setObject:[self.companyData objectForKey:@"Lng"] forKey:@"Lng"];//  经度
+        [self.dataParam setObject:[self.companyData objectForKey:@"Address"] forKey:@"Address"];// 地址
         
         return;
     }
@@ -115,6 +129,7 @@
     self.runningRequest = request;
 }
 
+#pragma mark -  获取所有的模板详情
 - (void)getTemplate {
     NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrlCp:@"getJobTemplateList" Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:CAMAINID, @"caMainID", CAMAINCODE, @"Code", nil] viewController:self];
     [request setTag:5];
@@ -180,7 +195,7 @@
             [self.dataParam setObject:[jobTypeData objectForKey:@"Demand"] forKey:@"Demand"];
         }
     }
-    else if (request.tag == 5) {
+    else if (request.tag == 5) {// 获取模板
         self.arrayTemplate = [Common getArrayFromXml:requestData tableName:@"Table"];
         if (self.arrayTemplate.count == 0) {
             [self.viewTemplate removeFromSuperview];
@@ -275,7 +290,7 @@
         [popView setDelegate:self];
         [popView showPopView:self];
     }
-    else if (textField == self.txtWelfare) {
+    else if (textField == self.txtWelfare) {// 福利待遇
         WelfareViewController *welfareCtrl = [[WelfareViewController alloc] init];
         welfareCtrl.selectedWelfareId = [self.dataParam objectForKey:@"Welfare"];
         [welfareCtrl setDelegate:self];
@@ -618,19 +633,34 @@
     return YES;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - 处理福利待遇数据
+- (void)dealWelfare:(NSArray *)requestData{
+    
+    if(requestData.count == 1){
+        
+        NSDictionary *dict = [requestData firstObject];
+        NSDictionary *welfareDict = [Common welfare:dict];
+        self.welfareDict = [NSDictionary dictionaryWithDictionary:welfareDict];
+    }else if(requestData.count == 2){
+        NSDictionary *dict1 = [requestData firstObject];
+        NSDictionary *dict2 = [requestData lastObject];
+        NSDictionary *welfareDict = [Common welfare:dict1 dict2:dict2];
+        self.welfareDict = [NSDictionary dictionaryWithDictionary:welfareDict];
+        [self fillWelfare];
+    }else if (requestData.count == 0){
+        // 没有设置福利待遇
+        self.welfareDict = nil;
+    }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - 自动填写福利待遇信息
+- (void)fillWelfare{
+    if (self.welfareDict) {
+        NSString *welfareStr = [Common getWelfareIdSelected:self.welfareDict];
+        [self.dataParam setObject:welfareStr forKey:@"Welfare"];
+        NSArray *welfareArr = [welfareStr componentsSeparatedByString:@","];
+        self.txtWelfare.text = [Common getWelfare:welfareArr];
+    }
 }
-*/
 
 @end

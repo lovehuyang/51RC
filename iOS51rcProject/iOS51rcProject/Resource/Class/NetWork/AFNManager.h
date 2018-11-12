@@ -51,4 +51,15 @@ typedef void(^FailureBlock) (NSInteger errCode , NSString *msg);
  */
 +(NSURLSessionDataTask *)requestWithMethod:(RequestMethod)method ParamDict:(NSDictionary *)paramDict url:(NSString *)url tableName:(NSString *)tableName successBlock:(SuccessBlock)successBlock failureBlock:(FailureBlock)failureBlock;
 
+/**
+ 公司用户网络请求统一接口
+ 
+ @param method 请求方式
+ @param paramDict 参数字典
+ @param url 请求地址
+ @param successBlock 成功回调
+ @param failureBlock 失败的回调
+ */
++(NSURLSessionDataTask *)requestCpWithMethod:(RequestMethod)method ParamDict:(NSDictionary *)paramDict url:(NSString *)url tableName:(NSString *)tableName successBlock:(SuccessBlock)successBlock failureBlock:(FailureBlock)failureBlock;
+
 @end

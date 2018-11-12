@@ -30,7 +30,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *txtDemand;
 @property (strong, nonatomic) IBOutlet UITextField *txtSalary;
 @property (strong, nonatomic) IBOutlet UITextField *txtNegotiable;
-@property (strong, nonatomic) IBOutlet UITextField *txtWelfare;
+@property (strong, nonatomic) IBOutlet UITextField *txtWelfare;// 福利待遇
 @property (strong, nonatomic) IBOutlet UITextField *txtTags;
 @property (strong, nonatomic) IBOutlet UITextField *txtPush;
 @end
