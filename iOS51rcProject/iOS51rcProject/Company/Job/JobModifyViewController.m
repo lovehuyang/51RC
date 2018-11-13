@@ -30,6 +30,10 @@
 @property (nonatomic, strong) NSDictionary *companyData;
 @property (nonatomic, strong) NSArray *arrayTemplate;
 @property (nonatomic , strong) NSDictionary *welfareDict;// 未使用模板时福利待遇默认选择以前选择过的
+@property (nonatomic , strong) UILabel *averageSalaryLab;// 平均月薪的提示
+@property (nonatomic , copy) NSString *salaryMax;// 最高月薪
+@property (nonatomic , copy) NSString *salaryMin;// 最低月薪
+@property (nonatomic , copy) NSString *salaryAverage;// 平均月薪
 @end
 
 @implementation JobModifyViewController
@@ -432,11 +436,14 @@
         if ([salaryId isEqualToString:@"16"]) {
             salaryIdMax = @"16";
             salary = [data objectForKey:@"value"];
+            self.salaryMax = salary;
         }
         else {
             NSDictionary *dataMax = [arraySelect objectAtIndex:2];
+            self.salaryMin = [data objectForKey:@"value"];
+            self.salaryMax = [dataMax objectForKey:@"value"];
             salaryIdMax = [dataMax objectForKey:@"id"];
-            salary = [NSString stringWithFormat:@"%@-%@", [data objectForKey:@"value"], [dataMax objectForKey:@"value"]];
+            salary = [NSString stringWithFormat:@"%@-%@", self.salaryMin, self.salaryMax];
         }
         NSDictionary *dataNegotiable = [arraySelect objectAtIndex:3];
         [self.dataParam setValue:salaryId forKey:@"dcSalaryID"];
@@ -667,19 +674,75 @@
     }
 }
 
-#pragma mark - 获取平均工资
+#pragma mark - 获取岗位平均工资
 - (void)genSalaryJobString{
     
     NSString *reginStr = self.dataParam[@"RegionID"];
     NSString *jobTypeIdStr = self.dataParam[@"JobTypeID"];
-    if (reginStr == nil || jobTypeIdStr == nil) {
+    if (reginStr == nil || jobTypeIdStr == nil || reginStr.length == 0 || jobTypeIdStr.length == 0) {
         return;
     }
     NSDictionary *paramDict = @{@"RegionID":reginStr,@"JobTypeID":jobTypeIdStr};
-    [AFNManager requestWithMethod:POST ParamDict:paramDict url:URL_GETSALARYJOBSTRING tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
-        DLog(@"");
+    [AFNManager requestCpWithMethod:POST ParamDict:paramDict url:URL_GETSALARYJOBSTRING tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        
+        self.salaryAverage = (NSString *)dataDict;
+        [self showSalaryTip];
+        
     } failureBlock:^(NSInteger errCode, NSString *msg) {
-        DLog(@"");
+        DLog(@"%@",msg);
     }];
+}
+
+#pragma mark - 显示平均月薪
+
+- (void)showSalaryTip{
+    self.salaryContraint.constant = +30;
+    UILabel *averageSalaryLab = [UILabel new];
+    [self.scrollView addSubview:averageSalaryLab];
+    averageSalaryLab.sd_layout
+    .leftEqualToView(self.scrollView)
+    .bottomSpaceToView(self.salaryView, 0)
+    .rightEqualToView(self.scrollView)
+    .heightIs(30);
+    averageSalaryLab.backgroundColor = SEPARATECOLOR;
+    averageSalaryLab.text = [NSString stringWithFormat:@"    该岗位的平均月薪为%@元",self.salaryAverage];
+    averageSalaryLab.textColor = GREENCOLOR;
+    averageSalaryLab.font = [UIFont systemFontOfSize:12];
+    self.averageSalaryLab = averageSalaryLab;
+    [self compareSalary];
+}
+
+#pragma mark - 对比平均工资和税前月薪
+
+- (void)compareSalary{
+    if(self.salaryAverage == nil || self.salaryAverage.length == 0){
+        return;
+    }
+    CGFloat salaryMaxF = 0.0;//最高月薪
+    CGFloat salaryMinF = 0.0;//最低月薪
+    
+    if (self.salaryMax.length) {
+        salaryMaxF = [[[self.salaryMax componentsSeparatedByString:@"K"] firstObject] floatValue];
+    }
+    
+    if (self.salaryMin.length) {
+        salaryMinF =  [[[self.salaryMin componentsSeparatedByString:@"K"] firstObject] floatValue];
+    }
+    
+    // 平均月薪
+    CGFloat salaryAverageFloat = [self.salaryAverage floatValue]/1000;
+   
+    if (self.salaryMax.length > 0 && (self.salaryMin.length == 0 || self.salaryMin == nil)) {
+        if (salaryMaxF < salaryAverageFloat ) {
+            self.averageSalaryLab.text = @"    老铁，这些工资有点低啊，很不利于招聘哦";
+        }
+    }else if (self.salaryMax.length > 0 && self.salaryMin.length > 0){
+        if (salaryMaxF < salaryAverageFloat) {
+            self.averageSalaryLab.text = @"    老铁，这些工资有点低啊，很不利于招聘哦";
+        }
+    }else if (self.salaryMax.length > 0 && self.salaryMin.length > 0){
+        self.averageSalaryLab.text = [NSString stringWithFormat:@"    该岗位的平均月薪为%@元",self.salaryAverage];
+    }
+    DLog(@"");
 }
 @end

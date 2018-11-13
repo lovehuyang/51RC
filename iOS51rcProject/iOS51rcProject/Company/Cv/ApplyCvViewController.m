@@ -18,9 +18,13 @@
 #import "UIImageView+WebCache.h"
 #import "WKPopView.h"
 #import "CvOperate.h"
+#import "PullDownMenu.h"
+
+static const CGFloat Menu_H =  35;// 菜单栏的高度
 
 @interface ApplyCvViewController ()<UITableViewDelegate, UITableViewDataSource, NetWebServiceRequestDelegate, WKPopViewDelegate, CvOperateDelegate>
 
+@property (nonatomic , strong) PullDownMenu *pulldownMenu;// 头部显示答复率的容器
 @property (nonatomic, strong) WKTableView *tableView;
 @property (nonatomic, strong) NetWebServiceRequest *runningRequest;
 @property (nonatomic, strong) NSMutableArray *arrData;
@@ -37,9 +41,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"应聘的简历";
+    
+    PullDownMenu *pulldownMenu = [[PullDownMenu alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, Menu_H) controller:self Title:@[@"",@""] replyRate:@""];
+    [self.view addSubview:pulldownMenu];
+    self.pulldownMenu = pulldownMenu;
+    
     if (self.jobId == nil) {
         self.jobId = @"0";
-        self.tableView = [[WKTableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - STATUS_BAR_HEIGHT - NAVIGATION_BAR_HEIGHT * 2 - TAB_BAR_HEIGHT) style:UITableViewStylePlain noDataMsg:@"呀！啥都没有\n当前没有应聘的简历！"];
+        self.tableView = [[WKTableView alloc] initWithFrame:CGRectMake(0, Menu_H, SCREEN_WIDTH, SCREEN_HEIGHT - STATUS_BAR_HEIGHT - NAVIGATION_BAR_HEIGHT * 2 - TAB_BAR_HEIGHT - Menu_H) style:UITableViewStylePlain noDataMsg:@"呀！啥都没有\n当前没有应聘的简历！"];
     }
     else {
         self.tableView = [[WKTableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain noDataMsg:@"呀！啥都没有\n当前没有应聘的简历！"];
@@ -107,6 +116,8 @@
         else {
             [self.tableView.mj_footer endRefreshing];
         }
+        // 回复率
+        self.pulldownMenu.replyRate = [self.cpData objectForKey:@"ReplyRate"];
         [self.tableView reloadData];
     }
     else if (request.tag == 2) {
@@ -117,26 +128,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return 40;
-    }
+    
     return 10;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        UIView *viewContent = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
-        [viewContent setBackgroundColor:[UIColor whiteColor]];
-        WKLabel *lbReplyPercent = [[WKLabel alloc] initWithFrame:CGRectMake(15, 0, 200, 30) content:@"" size:DEFAULTFONTSIZE color:nil];
-        NSMutableAttributedString *percentString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"答复率%.1f%%", ([[self.cpData objectForKey:@"ReplyRate"] floatValue] * 100)]];
-        [percentString addAttribute:NSForegroundColorAttributeName value:GREENCOLOR range:NSMakeRange(3, percentString.length - 3)];
-        [lbReplyPercent setAttributedText:percentString];
-        [viewContent addSubview:lbReplyPercent];
-        UIView *viewTitle = [[UIView alloc] initWithFrame:CGRectMake(0, VIEW_BY(lbReplyPercent), SCREEN_WIDTH, 10)];
-        [viewTitle setBackgroundColor:SEPARATECOLOR];
-        [viewContent addSubview:viewTitle];
-        return viewContent;
-    }
     UIView *viewTitle = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     [viewTitle setBackgroundColor:SEPARATECOLOR];
     return viewTitle;

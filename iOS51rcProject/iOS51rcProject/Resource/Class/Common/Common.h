@@ -59,4 +59,6 @@
 + (NSDictionary *)welfare:(NSDictionary *)dict;
 + (NSDictionary *)welfare:(NSDictionary *)dict1 dict2:(NSDictionary *)dict2;
 + (NSString *)getWelfareIdSelected:(NSDictionary *)welfareDict;
+
++ (CGSize)sizeWithText:(NSString *)text font:(UIFont *)font maxSize:(CGSize)maxSize;
 @end

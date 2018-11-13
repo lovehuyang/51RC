@@ -3409,7 +3409,7 @@
                                                 </constraints>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="9z8-c7-6Gt" firstAttribute="leading" secondItem="MBk-jU-SAp" secondAttribute="trailing" constant="15" id="0SS-Bw-goa"/>
                                             <constraint firstItem="QcT-Qr-P0L" firstAttribute="leading" secondItem="88a-Et-9lS" secondAttribute="leading" constant="15" id="27f-Xe-65L"/>
@@ -3517,6 +3517,9 @@
                     </view>
                     <connections>
                         <outlet property="constraintsJobTypeTop" destination="w5i-uK-jFd" id="opV-t4-LtK"/>
+                        <outlet property="salaryContraint" destination="Tpd-BJ-b2g" id="mqX-SO-Sll"/>
+                        <outlet property="salaryView" destination="88a-Et-9lS" id="kCG-gg-Jxi"/>
+                        <outlet property="scrollView" destination="TKu-G3-D97" id="rcZ-sF-n4f"/>
                         <outlet property="txtAge" destination="FNt-m2-u7W" id="v22-MB-Ix6"/>
                         <outlet property="txtDegree" destination="ryn-OF-SCb" id="ntB-Tv-1AT"/>
                         <outlet property="txtDemand" destination="iWD-Np-jRR" id="LAk-lv-FcN"/>

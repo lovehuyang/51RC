@@ -352,6 +352,8 @@
 		999070C71F03846E00B5E289 /* img_favorite2.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070C31F03846D00B5E289 /* img_favorite2.png */; };
 		999070C81F03846E00B5E289 /* img_mappoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070C41F03846D00B5E289 /* img_mappoint.png */; };
 		999070C91F03846E00B5E289 /* img_share.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070C51F03846D00B5E289 /* img_share.png */; };
+		9993798F219A9C250087D404 /* PullDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9993798E219A9C240087D404 /* PullDownMenu.m */; };
+		99937992219AAB730087D404 /* MenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 99937990219AAB730087D404 /* MenuButton.m */; };
 		9993A570218AAA180057B6FD /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9993A56F218AAA180057B6FD /* UserInfo.m */; };
 		9993A573218AB1060057B6FD /* OnlineLab.m in Sources */ = {isa = PBXBuildFile; fileRef = 9993A572218AB1060057B6FD /* OnlineLab.m */; };
 		9993A57B218AD0320057B6FD /* UIColor+ChangeColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9993A579218AD0310057B6FD /* UIColor+ChangeColor.m */; };
@@ -909,6 +911,10 @@
 		999070C31F03846D00B5E289 /* img_favorite2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_favorite2.png; sourceTree = "<group>"; };
 		999070C41F03846D00B5E289 /* img_mappoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_mappoint.png; sourceTree = "<group>"; };
 		999070C51F03846D00B5E289 /* img_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_share.png; sourceTree = "<group>"; };
+		9993798D219A9C240087D404 /* PullDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullDownMenu.h; sourceTree = "<group>"; };
+		9993798E219A9C240087D404 /* PullDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullDownMenu.m; sourceTree = "<group>"; };
+		99937990219AAB730087D404 /* MenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuButton.m; sourceTree = "<group>"; };
+		99937991219AAB730087D404 /* MenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuButton.h; sourceTree = "<group>"; };
 		9993A564218A93DE0057B6FD /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		9993A566218A940B0057B6FD /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		9993A56E218AAA180057B6FD /* UserInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
@@ -1574,6 +1580,7 @@
 				9957BB9B207F4148000EEAF1 /* InterviewSendViewController.m */,
 				99A816B0208729BA0026802B /* InterviewSendRemarkViewController.h */,
 				99A816B1208729BA0026802B /* InterviewSendRemarkViewController.m */,
+				9993798C219A9C240087D404 /* View */,
 			);
 			path = Cv;
 			sourceTree = "<group>";
@@ -2043,6 +2050,17 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		9993798C219A9C240087D404 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				99937991219AAB730087D404 /* MenuButton.h */,
+				99937990219AAB730087D404 /* MenuButton.m */,
+				9993798D219A9C240087D404 /* PullDownMenu.h */,
+				9993798E219A9C240087D404 /* PullDownMenu.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		9993A56D218AA9FA0057B6FD /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2492,6 +2510,7 @@
 				9939A603207A0AB1005D2146 /* AccountSafeViewController.m in Sources */,
 				9919FA411EDFC24400BE51F0 /* UIView+Toast.m in Sources */,
 				997B06A31F5500A000391289 /* JobViewController.m in Sources */,
+				99937992219AAB730087D404 /* MenuButton.m in Sources */,
 				997B067D1F5500A000391289 /* ForgetPasswordViewController.m in Sources */,
 				995231BD205919CB00C8836D /* WelfareViewController.m in Sources */,
 				997B067A1F5500A000391289 /* AccountManagerViewController.m in Sources */,
@@ -2622,6 +2641,7 @@
 				991C6F761FFE1262009FD82A /* ApplyInvitationCpViewController.m in Sources */,
 				99D7404B20273F71005B2CD3 /* CvRecruitmentConditionViewController.m in Sources */,
 				995C3D6F1EF7CD7100277468 /* SCNavTabBarController.m in Sources */,
+				9993798F219A9C250087D404 /* PullDownMenu.m in Sources */,
 				990431062094076900B4267D /* UIImage+Size.m in Sources */,
 				992985281F5539CB0021F863 /* WKPopView.m in Sources */,
 				99FAAC3B20623D4A00921308 /* JobPlaceViewController.m in Sources */,
