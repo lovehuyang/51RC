@@ -9,7 +9,7 @@
 #import "NSString+RCString.h"
 #import "Common.h"
 
-@implementation NSString (RCString)
+@implementation NSString (CutProvince)
 + (NSString *)cutProvince:(NSString *)regionStr{
     NSArray *provinceArr = [Common getProvince];
     NSString *provinceStr = nil;
@@ -23,5 +23,17 @@
     NSArray *seperateArr = [regionStr componentsSeparatedByString:provinceStr];
     
     return [seperateArr lastObject];
+}
+
++ (NSArray *)getHideConditions:(NSString *)hideConditions{
+    NSArray *separateArr = [hideConditions componentsSeparatedByString:@">"];
+    NSMutableArray *tempArr = [NSMutableArray array];
+    for (NSString *separateStr in separateArr) {
+        if(separateStr.length){
+            NSString *resultStr = [[separateStr componentsSeparatedByString:@"<"] lastObject];
+            [tempArr addObject:resultStr];
+        }
+    }
+    return [NSArray arrayWithArray:tempArr];
 }
 @end

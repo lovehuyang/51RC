@@ -23,7 +23,7 @@
 #import "NearSearchViewController.h"
 #import "UIView+Toast.h"
 #import "OnlineLab.h"
-#import "NSString+CutProvince.h"
+#import "NSString+RCString.h"
 
 @interface JobSearchViewController ()<BMKLocationServiceDelegate, BMKGeoCodeSearchDelegate, BMKGeneralDelegate, NetWebServiceRequestDelegate, UITableViewDelegate, UITableViewDataSource, WKFilterViewDelegate, UIScrollViewDelegate, UITextFieldDelegate, KeyWordViewDelegate, WKPopViewDelegate>
 

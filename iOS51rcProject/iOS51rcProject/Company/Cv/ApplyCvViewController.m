@@ -20,11 +20,14 @@
 #import "CvOperate.h"
 #import "PullDownMenu.h"
 
-static const CGFloat Menu_H =  35;// 菜单栏的高度
+static const CGFloat Menu_H =  0;// 菜单栏的高度//35
 
 @interface ApplyCvViewController ()<UITableViewDelegate, UITableViewDataSource, NetWebServiceRequestDelegate, WKPopViewDelegate, CvOperateDelegate>
-
+{
+    BOOL hideMenu;// 默认隐藏下拉菜单
+}
 @property (nonatomic , strong) PullDownMenu *pulldownMenu;// 头部显示答复率的容器
+@property (nonatomic , strong) UITableView *menuTableview;// 下拉菜单
 @property (nonatomic, strong) WKTableView *tableView;
 @property (nonatomic, strong) NetWebServiceRequest *runningRequest;
 @property (nonatomic, strong) NSMutableArray *arrData;
@@ -39,12 +42,17 @@ static const CGFloat Menu_H =  35;// 菜单栏的高度
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     self.title = @"应聘的简历";
-    
-    PullDownMenu *pulldownMenu = [[PullDownMenu alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, Menu_H) controller:self Title:@[@"",@""] replyRate:@""];
-    [self.view addSubview:pulldownMenu];
-    self.pulldownMenu = pulldownMenu;
+    hideMenu = YES;
+//    PullDownMenu *pulldownMenu = [[PullDownMenu alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, Menu_H) controller:self Title:@[@"",@""] replyRate:@""];
+//    [self.view addSubview:pulldownMenu];
+//    self.pulldownMenu = pulldownMenu;
+//    __weak typeof(self)weakself = self;
+//    self.pulldownMenu.menuClick = ^(NSString *title) {
+//        hideMenu = !hideMenu;
+//        [weakself setMenuTabViewStatus];
+//    };
     
     if (self.jobId == nil) {
         self.jobId = @"0";
@@ -61,9 +69,28 @@ static const CGFloat Menu_H =  35;// 菜单栏的高度
         self.page++;
         [self getData];
     }];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.page =1;
+        [self getData];
+    }];
     [self.view addSubview:self.tableView];
-    
+    [self.view addSubview:self.menuTableview];
     self.arrData = [[NSMutableArray alloc] init];
+}
+#pragma mark - 懒加载
+- (UITableView *)menuTableview{
+    if (!_menuTableview) {
+        _menuTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, VIEW_BY(self.pulldownMenu), SCREEN_WIDTH, VIEW_H(self.view) - VIEW_H(self.pulldownMenu)) style:UITableViewStylePlain];
+        _menuTableview.delegate = self;
+        _menuTableview.dataSource = self;
+        UIView *footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 500)];
+        _menuTableview.backgroundColor = UIColorWithRGBA(1, 1, 1, 0.5);
+        _menuTableview.tableFooterView = footView;
+        _menuTableview.hidden = hideMenu;
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(menuTapGesture)];
+        [footView addGestureRecognizer:tapGesture];
+    }
+    return _menuTableview;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -116,6 +143,8 @@ static const CGFloat Menu_H =  35;// 菜单栏的高度
         else {
             [self.tableView.mj_footer endRefreshing];
         }
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
         // 回复率
         self.pulldownMenu.replyRate = [self.cpData objectForKey:@"ReplyRate"];
         [self.tableView reloadData];
@@ -127,8 +156,15 @@ static const CGFloat Menu_H =  35;// 菜单栏的高度
     }
 }
 
+- (void)netRequestFailed:(NetWebServiceRequest *)request didRequestError:(int *)error{
+    [self.tableView.mj_header endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
+    if (section == 0) {
+        return 0;
+    }
     return 10;
 }
 
@@ -139,19 +175,40 @@ static const CGFloat Menu_H =  35;// 菜单栏的高度
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (tableView == self.menuTableview) {
+        return 4;
+    }
     return 1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if(tableView == self.menuTableview){
+        return 1;
+    }
     return self.arrData.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (tableView == self.menuTableview) {
+        return 35;
+    }
     UITableViewCell *cell = [self tableView:self.tableView cellForRowAtIndexPath:indexPath];
     return cell.frame.size.height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // 下拉菜单的cell
+    if (tableView == self.menuTableview) {
+        UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        cell.textLabel.text = @"123456";
+        cell.textLabel.font = DEFAULTFONT;
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }
+    
+    // 简历的cell
     NSDictionary *data = [self.arrData objectAtIndex:indexPath.section];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
@@ -277,6 +334,12 @@ static const CGFloat Menu_H =  35;// 菜单栏的高度
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == self.menuTableview) {
+        hideMenu = YES;
+        [self setMenuTabViewStatus];
+        return;
+    }
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSDictionary *data = [self.arrData objectAtIndex:indexPath.section];
@@ -359,20 +422,25 @@ static const CGFloat Menu_H =  35;// 菜单栏的高度
     [popView cancelClick];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)menuTapGesture{
+    hideMenu = YES;
+    [self setMenuTabViewStatus];
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
+#pragma mark - 设置下拉菜单的状态
+- (void)setMenuTabViewStatus{
+    
+    if (hideMenu) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.menuTableview.alpha = 0;
+        } completion:^(BOOL finished) {
+            self.menuTableview.hidden = hideMenu;
+        }];
+    }else{
+        self.menuTableview.alpha = 1;
+        self.menuTableview.hidden = hideMenu;
+    }
+    
+}
 @end
 

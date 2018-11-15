@@ -1,25 +1,23 @@
 //
-//  MenuButton.m
-//  BanTangShop
+//  TagViewBtn.m
+//  iOS51rcProject
 //
-//  Created by tzsoft on 2017/12/19.
-//  Copyright © 2017年 HLY. All rights reserved.
+//  Created by Lucifer on 2018/11/15.
+//  Copyright © 2018年 Jerry. All rights reserved.
 //
 
-#import "MenuButton.h"
-#define IMAGEW 15
-#define IMAGEH 15
+#import "TagViewBtn.h"
+#define IMAGEW 10
+#define IMAGEH 10
 
-@implementation MenuButton
+@implementation TagViewBtn
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         self.titleLabel.font = DEFAULTFONT;
         self.backgroundColor = [UIColor clearColor];
-        [self setTitleColor:GREENCOLOR forState:UIControlStateNormal];
-//        [self setTitleColor:Color_Theme forState:UIControlStateSelected];
-        [self setImage:[UIImage imageNamed:@"xialajiantou"] forState:UIControlStateNormal];
-//         [self setImage:[UIImage imageNamed:@"up_orange"] forState:UIControlStateSelected];
+        [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self setImage:[UIImage imageNamed:@"guanbi_orange"] forState:UIControlStateNormal];
     }
     return self;
 }
@@ -30,7 +28,7 @@
     CGFloat imageY = self.frame.size.height/2 - IMAGEW/2;
     CGFloat imageW = IMAGEW;
     CGFloat imageH = IMAGEH;
-    CGFloat imageX = contentRect.size.width - imageW;
+    CGFloat imageX = contentRect.size.width - imageW - 5;
     return CGRectMake(imageX, imageY, imageW, imageH);
 }
 
@@ -39,7 +37,7 @@
     CGFloat titleY = 0;
     CGFloat titleW = contentRect.size.width - IMAGEW;
     CGFloat titleH = contentRect.size.height;
-    CGFloat titleX = 0;
+    CGFloat titleX = 5;
     return CGRectMake(titleX, titleY, titleW, titleH);
 }
 

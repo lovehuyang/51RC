@@ -19,6 +19,8 @@
 #define URL_LOGINMOBILE @"LoginMobile"
 // 账户密码登录
 #define URL_LOGIN @"Login"
+// 屏蔽设置页面
+#define URL_HIDENCONDITIONS @"SelectPaMainByHideConditions"
 
 
 

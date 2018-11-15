@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (CutProvince)
+@interface NSString (RCString)
 + (NSString *)cutProvince:(NSString *)regionStr;
++ (NSArray *)getHideConditions:(NSString *)hideConditions;
 @end

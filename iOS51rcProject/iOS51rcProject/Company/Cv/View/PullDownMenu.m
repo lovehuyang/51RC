@@ -22,7 +22,7 @@
 - (instancetype)initWithFrame:(CGRect)frame controller:(UIViewController *)controller Title:(NSArray *)titleArr replyRate:(NSString *)replyRate{
     if (self = [super initWithFrame:frame]) {
         [self setupSubViewsController:controller Title:titleArr replyRate:replyRate];
-        self.backgroundColor = [UIColor greenColor];
+        self.backgroundColor = SEPARATECOLOR;
     }
     return self;
 }
@@ -35,7 +35,6 @@
     .topEqualToView(self)
     .rightEqualToView(self)
     .heightIs(35);
-    titleView.backgroundColor = [UIColor redColor];
     
     // 答复率
     UILabel *replyRateLab = [UILabel new];
@@ -45,15 +44,14 @@
     .widthIs(80)
     .topEqualToView(titleView)
     .heightRatioToView(titleView, 1);
-    replyRateLab.backgroundColor = [UIColor yellowColor];
     replyRateLab.textAlignment = NSTextAlignmentRight;
-    replyRateLab.font = SMALLERFONT;
+    replyRateLab.font = DEFAULTFONT;
     self.replyRateLab = replyRateLab;
 
     //
     MenuButton *button = [[MenuButton alloc]initWithFrame:CGRectMake(15, 0, self.frame.size.width, VIEW_H(titleView))];
     [button setTitle:@"菜单" forState:UIControlStateNormal];
-    CGSize btnSize = [Common sizeWithText:button.titleLabel.text font:SMALLERFONT maxSize:CGSizeMake(SCREEN_WIDTH, button.frame.size.height)];
+    CGSize btnSize = [Common sizeWithText:button.titleLabel.text font:DEFAULTFONT maxSize:CGSizeMake(SCREEN_WIDTH, button.frame.size.height)];
     button.frame = CGRectMake(20, 0, btnSize.width + 20, button.frame.size.height);
     [button addTarget:self action:@selector(menuBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [titleView addSubview:button];
@@ -73,13 +71,14 @@
 
 - (void)menuBtnClick{
     [self.menuBtn setTitle:@"菜单123" forState:UIControlStateNormal];
+    self.menuClick(self.menuBtn.titleLabel.text);
     [self updateMenuBtnStatus:self.menuBtn];
 }
 
 #pragma mark - 更新菜单栏按钮显示
 - (void)updateMenuBtnStatus:(MenuButton *)menuBtn{
 
-    CGSize btnSize = [Common sizeWithText:menuBtn.titleLabel.text font:SMALLERFONT maxSize:CGSizeMake(SCREEN_WIDTH, menuBtn.frame.size.height)];
+    CGSize btnSize = [Common sizeWithText:menuBtn.titleLabel.text font:DEFAULTFONT maxSize:CGSizeMake(SCREEN_WIDTH, menuBtn.frame.size.height)];
     menuBtn.frame = CGRectMake(VIEW_X(self.menuBtn), VIEW_Y(self.menuBtn), btnSize.width + 20, menuBtn.frame.size.height);
 
 }

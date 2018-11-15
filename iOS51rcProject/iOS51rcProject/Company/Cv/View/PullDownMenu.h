@@ -14,4 +14,6 @@
 @property (nonatomic , copy) NSArray *titleArr;
 @property (nonatomic , copy) NSString *replyRate;
 
+@property (nonatomic , copy) void (^menuClick)(NSString *title);
+
 @end
