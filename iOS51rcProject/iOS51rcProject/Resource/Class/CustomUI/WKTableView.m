@@ -15,7 +15,7 @@
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style noDataMsg:(NSString *)noDataMsg {
     if (self = [super initWithFrame:frame style:style]) {
         [self setBackgroundColor:SEPARATECOLOR];
-        UIView *viewNoData = [[UIView alloc] initWithFrame:frame];
+        UIView *viewNoData = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [viewNoData setBackgroundColor:[UIColor whiteColor]];
         [viewNoData setTag:NODATAVIEWTAG];
         [viewNoData setHidden:YES];
@@ -34,12 +34,5 @@
     }
     return self;
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

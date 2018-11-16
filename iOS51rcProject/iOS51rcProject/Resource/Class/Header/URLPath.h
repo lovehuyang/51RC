@@ -21,6 +21,12 @@
 #define URL_LOGIN @"Login"
 // 屏蔽设置页面
 #define URL_HIDENCONDITIONS @"SelectPaMainByHideConditions"
+// 添加屏蔽关键词
+#define URL_UPDATEHIDNCONDITION @"UpdatePaMainByHideConditions"
+// 删除关键词
+#define URL_DELETEHIDECONDITIONS @"DeletePaMainByHideConditions"
+// 删除申请的职位
+#define URL_DELETEJOBAPPLY @"DeleteJobApply"
 
 
 

@@ -49,10 +49,10 @@
 
 -(void)clickTo:(UIButton *)sender
 {
-    self.handleSelectTag(sender.titleLabel.text);
+    if(self.delegate && [self.delegate respondsToSelector:@selector(tagViewClick:)]){
+        [self.delegate tagViewClick:sender.titleLabel.text];
+    }
 }
-
-
 
 -(void)makeCornerRadius:(CGFloat)radius borderColor:(UIColor *)borderColor layer:(CALayer *)layer borderWidth:(CGFloat)borderWidth
 {

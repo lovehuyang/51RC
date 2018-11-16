@@ -387,6 +387,8 @@
 		99DA6BA72047D58800BBDA59 /* ApplyCvViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DA6BA62047D58800BBDA59 /* ApplyCvViewController.m */; };
 		99DA6BAA2047F62600BBDA59 /* DownloadCvViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DA6BA92047F62600BBDA59 /* DownloadCvViewController.m */; };
 		99DA6BAD2047F6EB00BBDA59 /* FavoriteCvViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DA6BAC2047F6EB00BBDA59 /* FavoriteCvViewController.m */; };
+		99ED2804219E499B00ED656A /* InputAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99ED2803219E499B00ED656A /* InputAlertView.m */; };
+		99ED2807219E90B000ED656A /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99ED2806219E90B000ED656A /* AlertView.m */; };
 		99EE84BE1F72028700B2AFF9 /* CpRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EE84BD1F72028700B2AFF9 /* CpRegisterViewController.m */; };
 		99EE84C11F7205B900B2AFF9 /* CpForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EE84C01F7205B900B2AFF9 /* CpForgetPasswordViewController.m */; };
 		99F7FC7E204034190060E9F1 /* CvSearchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F7FC7D204034190060E9F1 /* CvSearchListViewController.m */; };
@@ -990,6 +992,10 @@
 		99DA6BA92047F62600BBDA59 /* DownloadCvViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadCvViewController.m; sourceTree = "<group>"; };
 		99DA6BAB2047F6EB00BBDA59 /* FavoriteCvViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FavoriteCvViewController.h; sourceTree = "<group>"; };
 		99DA6BAC2047F6EB00BBDA59 /* FavoriteCvViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FavoriteCvViewController.m; sourceTree = "<group>"; };
+		99ED2802219E499B00ED656A /* InputAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputAlertView.h; sourceTree = "<group>"; };
+		99ED2803219E499B00ED656A /* InputAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputAlertView.m; sourceTree = "<group>"; };
+		99ED2805219E90B000ED656A /* AlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
+		99ED2806219E90B000ED656A /* AlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
 		99EE84BC1F72028700B2AFF9 /* CpRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpRegisterViewController.h; sourceTree = "<group>"; };
 		99EE84BD1F72028700B2AFF9 /* CpRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CpRegisterViewController.m; sourceTree = "<group>"; };
 		99EE84BF1F7205B900B2AFF9 /* CpForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpForgetPasswordViewController.h; sourceTree = "<group>"; };
@@ -1527,6 +1533,10 @@
 				991D7A92219D48F50019123A /* AddShieldBtn.m */,
 				99D18D82219D6E4B00FBEDD6 /* TagViewBtn.h */,
 				99D18D83219D6E4B00FBEDD6 /* TagViewBtn.m */,
+				99ED2802219E499B00ED656A /* InputAlertView.h */,
+				99ED2803219E499B00ED656A /* InputAlertView.m */,
+				99ED2805219E90B000ED656A /* AlertView.h */,
+				99ED2806219E90B000ED656A /* AlertView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2573,6 +2583,7 @@
 				99C5EEB32017293F00AC8FBD /* ChatCpViewController.m in Sources */,
 				992985271F5539CB0021F863 /* WKNavigationController.m in Sources */,
 				991C6F6D1FFB6402009FD82A /* ContactUsViewController.m in Sources */,
+				99ED2804219E499B00ED656A /* InputAlertView.m in Sources */,
 				997B068F1F5500A000391289 /* PaInfoModifyViewController.m in Sources */,
 				997B06921F5500A000391289 /* ApplyInvitationViewController.m in Sources */,
 				9957BB9C207F4148000EEAF1 /* InterviewSendViewController.m in Sources */,
@@ -2598,6 +2609,7 @@
 				995231BA2059105700C8836D /* DemandViewController.m in Sources */,
 				99A816B52088972F0026802B /* CpMobileVerifyViewController.m in Sources */,
 				997B06A41F5500A000391289 /* KeywordViewController.m in Sources */,
+				99ED2807219E90B000ED656A /* AlertView.m in Sources */,
 				9919F9471EDE445300BE51F0 /* AppDelegate.m in Sources */,
 				9929852B1F5539CB0021F863 /* WKTextView.m in Sources */,
 				99906F1B1EFB47CF00B5E289 /* AboutUsViewController.m in Sources */,

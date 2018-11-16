@@ -17,6 +17,7 @@
 #import "WKTableView.h"
 #import "JobViewController.h"
 #import "WKNavigationController.h"
+#import "AlertView.h"
 
 @interface JobApplyChildViewController ()<UITableViewDelegate, UITableViewDataSource, NetWebServiceRequestDelegate>
 
@@ -38,6 +39,10 @@
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         self.page++;
+        [self getData];
+    }];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.page = 1;
         [self getData];
     }];
     [self.view addSubview:self.tableView];
@@ -64,9 +69,15 @@
       finishedInfoToResult:(NSString *)result
               responseData:(GDataXMLDocument *)requestData {
     if (request.tag == 1) {
+        [SVProgressHUD dismiss];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        if (self.page == 1) {
+            [self.arrData removeAllObjects];
+        }
         NSArray *arrayData = [Common getArrayFromXml:requestData tableName:@"Table"];
         [self.arrData addObjectsFromArray:arrayData];
-        [self.tableView reloadData];
+        
         if (arrayData.count < 20) {
             if (self.page == 1) {
                 [self.tableView.mj_footer removeFromSuperview];
@@ -74,13 +85,9 @@
                     [[self.tableView viewWithTag:NODATAVIEWTAG] setHidden:NO];
                 }
             }
-            else {
-                [self.tableView.mj_footer endRefreshingWithNoMoreData];
-            }
         }
-        else {
-            [self.tableView.mj_footer endRefreshing];
-        }
+        [self.tableView reloadData];
+        
     }
     else {
         [self.activeButton setTag:1];
@@ -213,7 +220,32 @@
     [cell.contentView addSubview:viewSeparate];
     
     [cell setFrame:CGRectMake(0, 0, SCREEN_WIDTH, VIEW_BY(viewSeparate))];
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressEvent:)];
+    longPress.minimumPressDuration = 1;
+    [cell.contentView addGestureRecognizer:longPress];
     return cell;
+}
+
+#pragma mark - 长按手势
+
+- (void)longPressEvent:(UILongPressGestureRecognizer *)longPress{
+    if (longPress.state == UIGestureRecognizerStateBegan) {
+        
+        CGPoint point = [longPress locationInView:_tableView];
+        NSIndexPath *indexPath = [_tableView indexPathForRowAtPoint:point]; // 可以获取我们在哪个cell上长按
+        if (indexPath != nil) {
+            
+            AlertView *alertView = [[AlertView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+            __weak __typeof(alertView)WeakAlertView = alertView;
+            [WeakAlertView initWithTitle:@"提示" content:@"确定要删除此申请记录吗？" btnTitleArr:@[@"取消",@"确定"] canDismiss:YES];
+            WeakAlertView.clickButtonBlock = ^(UIButton *button) {
+                if (button.tag == 101) {
+                    [self deleteApply:indexPath];
+                }
+            };
+            [WeakAlertView show:self.view];
+        }
+    }
 }
 
 - (void)remindCompany:(UIButton *)button {
@@ -228,19 +260,31 @@
     self.runningRequest = request;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - 删除申请记录
+- (void)deleteApply:(NSIndexPath *)indexPath{
+    [SVProgressHUD show];
+    NSDictionary *data = [self.arrData objectAtIndex:indexPath.row];
+    NSDictionary *paramDict = @{@"applyID":data[@"ID"],
+                                @"paMainID":PAMAINID,
+                                @"code":[USER_DEFAULT objectForKey:@"paMainCode"]
+                                };
+    [AFNManager requestWithMethod:POST ParamDict:paramDict url:URL_DELETEJOBAPPLY tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        
+        BOOL result = [(NSString *)dataDict isEqualToString:@"1"];
+        if (result) {// 删除成功
+            [SVProgressHUD dismiss];
+            [self.arrData removeObjectAtIndex:indexPath.row];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
+            
+        }else{// 删除失败
+            [SVProgressHUD dismiss];
+        }
+        DLog(@"");
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        DLog(@"");
+        [SVProgressHUD dismiss];
+        [RCToast showMessage:msg];
+    }];
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

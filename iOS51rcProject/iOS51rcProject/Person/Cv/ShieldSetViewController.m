@@ -12,9 +12,10 @@
 #import "NSString+RCString.h"
 #import "TagView.h"
 #import "AddShieldBtn.h"
+#import "InputAlertView.h"
+#import "AlertView.h"
 
-
-@interface ShieldSetViewController ()
+@interface ShieldSetViewController ()<TagViewDelegate>
 @property (nonatomic , strong) TagView * tagView;
 @property (nonatomic , strong) ShieldSetEmptyDataView *emptyDataView;
 @property (nonatomic , strong) UILabel *tipLab;
@@ -31,10 +32,7 @@
     //
     [self setupEmptyDataUI];
     [self.view addSubview:self.tipLab];
-    [self.view addSubview:self.tagView];
-    self.tagView.handleSelectTag = ^(NSString *keyWord) {
-        DLog(@"%@",keyWord);
-    };
+    [self createTagView];
     
     AddShieldBtn *btn = [AddShieldBtn new];
     [self.view addSubview:btn];
@@ -47,15 +45,16 @@
     [btn addTarget:self action:@selector(addKeyWords) forControlEvents:UIControlEventTouchUpInside];
     self.btn = btn;
     [self getData];
+    
+    
 }
 
 #pragma mark - 懒加载
--(TagView *)tagView{
-    if (!_tagView) {
-        _tagView = [[TagView alloc]initWithFrame:CGRectMake(0, HEIGHT_STATUS_NAV + 30, SCREEN_WIDTH, 0)];
-        _tagView.hidden = YES;
-    }
-    return _tagView;
+-(void )createTagView{
+    self.tagView = [[TagView alloc]initWithFrame:CGRectMake(0, HEIGHT_STATUS_NAV + 30, SCREEN_WIDTH, 0)];
+    self.tagView.hidden = YES;
+    self.tagView.delegate = self;
+    [self.view addSubview:self.tagView];
 }
 - (UILabel *)tipLab{
     if (!_tipLab) {
@@ -68,6 +67,20 @@
     }
     return _tipLab;
 }
+#pragma mark - TagViewDelegate
+- (void)tagViewClick:(NSString *)title{
+
+    AlertView *alertView = [[AlertView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    __weak __typeof(alertView)WeakAlertView = alertView;
+    [WeakAlertView initWithTitle:@"提示" content:@"确定要删除此关键词么？" btnTitleArr:@[@"取消",@"确定"] canDismiss:YES];
+    WeakAlertView.clickButtonBlock = ^(UIButton *button) {
+        if (button.tag == 101) {
+            [self deletePaMainByHideConditions:title];
+        }
+    };
+    [WeakAlertView show:self.view];
+}
+
 #pragma mark - 数据为空的UI
 - (void)setupEmptyDataUI{
     ShieldSetEmptyDataView *emptyDataView = [ShieldSetEmptyDataView new];
@@ -85,26 +98,26 @@
     };
 }
 
-#pragma mark - 获取屏蔽关键词
+#pragma mark - 获取
 - (void)getData{
     [SVProgressHUD show];
     NSDictionary *paramDict = @{
                                 @"pamainID":PAMAINID,
                                 @"code":[USER_DEFAULT objectForKey:@"paMainCode"]
-                                
                                 };
     [AFNManager requestWithMethod:POST ParamDict:paramDict url:URL_HIDENCONDITIONS tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
         DLog(@"");
         [SVProgressHUD dismiss];
         NSString *resultStr = (NSString *)dataDict;
-        if (resultStr.length > 0) {
+        NSArray *dataArr = [NSString getHideConditions:resultStr];
+        if (dataArr.count > 0) {
+            [self.tagView removeFromSuperview];
+            [self createTagView];
             self.emptyDataView.hidden = YES;
             self.tagView.hidden = NO;
             self.tipLab.hidden = NO;
             self.btn.hidden = NO;
-            NSArray *dataArr = [NSString getHideConditions:resultStr];
             self.tagView.arr = dataArr;
-            DLog(@"");
         }else{
             self.emptyDataView.hidden = NO;
             self.tagView.hidden = YES;
@@ -112,13 +125,64 @@
             self.btn.hidden = YES;
         }
     } failureBlock:^(NSInteger errCode, NSString *msg) {
-        DLog(@"");
         [SVProgressHUD dismiss];
         [RCToast showMessage:msg];
     }];
 }
+
+#pragma mark - 新增
+- (void)updatePaMainByHideConditions:(NSString *)condition{
+    [SVProgressHUD show];
+    NSDictionary *paramDict = @{
+                                @"pamainID":PAMAINID,
+                                @"code":[USER_DEFAULT objectForKey:@"paMainCode"],
+                                @"txtKeyWord":condition
+                                };
+    [AFNManager requestWithMethod:POST ParamDict:paramDict url:URL_UPDATEHIDNCONDITION tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        BOOL resulr = [(NSString *)dataDict isEqualToString:@"1"];
+        if (resulr) {
+            [self getData];
+        }else{
+            [SVProgressHUD dismiss];
+        }
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        [SVProgressHUD dismiss];
+        [RCToast showMessage:msg];
+    }];
+}
+
+#pragma mark - 删除
+- (void)deletePaMainByHideConditions:(NSString *)condition{
+    [SVProgressHUD show];
+    NSDictionary *paramDict = @{
+                                @"pamainID":PAMAINID,
+                                @"code":[USER_DEFAULT objectForKey:@"paMainCode"],
+                                @"txtKeyWord":condition
+                                };
+    [AFNManager requestWithMethod:POST ParamDict:paramDict url:URL_DELETEHIDECONDITIONS tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        BOOL resulr = [(NSString *)dataDict isEqualToString:@"1"];
+        if (resulr) {
+            [self getData];
+        }else{
+            [SVProgressHUD dismiss];
+        }
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        [SVProgressHUD dismiss];
+        [RCToast showMessage:msg];
+    }];
+}
+
 - (void)addKeyWords{
-    
+    InputAlertView *inputView = [[InputAlertView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    __weak __typeof(inputView)WeakInputView = inputView;
+    [WeakInputView initWithTitle:@"屏蔽设置" content:@"输入您要屏蔽的关键词" btnTitleArr:@[@"取消",@"确定"] canDismiss:NO];
+    WeakInputView.clickButtonBlock = ^(UIButton *button, NSString *inputText) {
+        // 确定
+        if (button.tag == 101) {
+            [self updatePaMainByHideConditions:inputText];
+        }
+    };
+    [WeakInputView show:self.view];
 }
 
 @end

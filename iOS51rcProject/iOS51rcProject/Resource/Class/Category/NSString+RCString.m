@@ -34,6 +34,12 @@
             [tempArr addObject:resultStr];
         }
     }
+    for (NSString *str in tempArr) {
+        if (str == nil || str.length == 0) {
+            [tempArr removeObject:str];
+        }
+    }
     return [NSArray arrayWithArray:tempArr];
 }
+
 @end

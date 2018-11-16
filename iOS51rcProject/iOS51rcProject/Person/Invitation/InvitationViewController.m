@@ -4,7 +4,7 @@
 //
 //  Created by Lucifer on 2017/6/1.
 //  Copyright © 2017年 Lucifer. All rights reserved.
-//
+//  邀约页面
 
 #import "InvitationViewController.h"
 #import "CommonMacro.h"
@@ -190,7 +190,7 @@
     }
     else if (sender.tag == 1) {
         InterviewViewController *interviewCtrl = [[InterviewViewController alloc] init];
-        interviewCtrl.title = @"面试通知1";
+        interviewCtrl.title = @"面试通知";
         [self.navigationController pushViewController:interviewCtrl animated:YES];
     }
     else if (sender.tag == 2) {

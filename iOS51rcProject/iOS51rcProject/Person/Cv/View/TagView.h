@@ -9,9 +9,18 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol TagViewDelegate <NSObject>
+
+- (void)tagViewClick:(NSString *)title;
+
+@end
+
 @interface TagView : UIView
 @property (nonatomic ,strong)NSArray * arr;
 
-@property (nonatomic ,copy) void(^handleSelectTag)(NSString *keyWord);
+@property (nonatomic, assign) id<TagViewDelegate> delegate;
 
 @end
+
+
+
