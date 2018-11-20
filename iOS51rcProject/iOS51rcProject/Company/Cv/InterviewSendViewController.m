@@ -4,7 +4,7 @@
 //
 //  Created by Lucifer on 2018/4/12.
 //  Copyright © 2018年 Lucifer. All rights reserved.
-//
+//  面试通知页面
 
 #import "InterviewSendViewController.h"
 #import "Common.h"
@@ -28,7 +28,7 @@
     self.title = @"面试通知";
     [Common changeFontSize:self.view];
     
-    UIBarButtonItem *btnSave = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveClick)];
+    UIBarButtonItem *btnSave = [[UIBarButtonItem alloc] initWithTitle:@"发送" style:UIBarButtonItemStylePlain target:self action:@selector(sendClick)];
     [btnSave setTintColor:[UIColor whiteColor]];
     [btnSave setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:BIGGERFONT,NSFontAttributeName, nil] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = btnSave;
@@ -187,7 +187,7 @@
     }
 }
 
-- (void)saveClick {
+- (void)sendClick {
     if (self.txtJob.text.length == 0) {
         [self.view makeToast:@"请选择职位"];
         return;

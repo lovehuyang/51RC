@@ -66,6 +66,7 @@
 		990A3BEC1F42F387006CB3CF /* 9.gif in Resources */ = {isa = PBXBuildFile; fileRef = 990A3BBA1F42F387006CB3CF /* 9.gif */; };
 		990A3BED1F42F387006CB3CF /* ico_emoitem1.png in Resources */ = {isa = PBXBuildFile; fileRef = 990A3BBB1F42F387006CB3CF /* ico_emoitem1.png */; };
 		990A3BEE1F42F387006CB3CF /* ico_emoitem2.png in Resources */ = {isa = PBXBuildFile; fileRef = 990A3BBC1F42F387006CB3CF /* ico_emoitem2.png */; };
+		990EF79D21A3903A00C63AEB /* ReplyAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 990EF79C21A3903900C63AEB /* ReplyAlert.m */; };
 		99101B4820720E0200ED060B /* img_cpcheck2.png in Resources */ = {isa = PBXBuildFile; fileRef = 99101B4620720E0100ED060B /* img_cpcheck2.png */; };
 		99101B4920720E0200ED060B /* img_cpcheck1.png in Resources */ = {isa = PBXBuildFile; fileRef = 99101B4720720E0100ED060B /* img_cpcheck1.png */; };
 		99101B4D2073703400ED060B /* AccountInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99101B4C2073703300ED060B /* AccountInfoViewController.m */; };
@@ -485,6 +486,8 @@
 		990A3BBA1F42F387006CB3CF /* 9.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 9.gif; sourceTree = "<group>"; };
 		990A3BBB1F42F387006CB3CF /* ico_emoitem1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_emoitem1.png; sourceTree = "<group>"; };
 		990A3BBC1F42F387006CB3CF /* ico_emoitem2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_emoitem2.png; sourceTree = "<group>"; };
+		990EF79B21A3903900C63AEB /* ReplyAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReplyAlert.h; sourceTree = "<group>"; };
+		990EF79C21A3903900C63AEB /* ReplyAlert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReplyAlert.m; sourceTree = "<group>"; };
 		99101B4620720E0100ED060B /* img_cpcheck2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_cpcheck2.png; sourceTree = "<group>"; };
 		99101B4720720E0100ED060B /* img_cpcheck1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_cpcheck1.png; sourceTree = "<group>"; };
 		99101B4B2073703300ED060B /* AccountInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountInfoViewController.h; sourceTree = "<group>"; };
@@ -2113,6 +2116,8 @@
 				99937990219AAB730087D404 /* MenuButton.m */,
 				9993798D219A9C240087D404 /* PullDownMenu.h */,
 				9993798E219A9C240087D404 /* PullDownMenu.m */,
+				990EF79B21A3903900C63AEB /* ReplyAlert.h */,
+				990EF79C21A3903900C63AEB /* ReplyAlert.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2630,6 +2635,7 @@
 				9960E259218FCA95008E6DE5 /* CountdownBtn.m in Sources */,
 				991A24431EE6D7A9008CD8E9 /* Reachability.m in Sources */,
 				997B068E1F5500A000391289 /* MultiSelectViewController.m in Sources */,
+				990EF79D21A3903A00C63AEB /* ReplyAlert.m in Sources */,
 				998F8A7121913D3C003DBAB1 /* EmploymentNewsController.m in Sources */,
 				996F504E2188292900D2A7E9 /* OptionView.m in Sources */,
 				991C6FB3200E368D009FD82A /* CpBriefViewController.m in Sources */,

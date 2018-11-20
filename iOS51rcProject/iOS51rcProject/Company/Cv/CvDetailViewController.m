@@ -16,9 +16,12 @@
 #import "CvOperate.h"
 #import "UIView+Toast.h"
 #import "OrderApplyViewController.h"
+#import "ReplyAlert.h"
 
 @interface CvDetailViewController ()<NetWebServiceRequestDelegate, UIScrollViewDelegate, CvOperateDelegate>
-
+{
+    ReplyAlert *replyAlert;
+}
 @property (nonatomic, strong) NetWebServiceRequest *runningRequest;
 @property (nonatomic, strong) CvOperate *operate;
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -643,6 +646,7 @@
     [viewBottom setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:viewBottom];
     if (notReply) {
+        // 创建答复
         WKButton *btnReply = [[WKButton alloc] initWithFrame:CGRectMake(50, 7.5, (VIEW_W(viewBottom) - 150) / 2, 35) title:@"答复" fontSize:DEFAULTFONTSIZE color:[UIColor whiteColor] bgColor:CPNAVBARCOLOR];
         [btnReply addTarget:self action:@selector(replyScroll) forControlEvents:UIControlEventTouchUpInside];
         [viewBottom addSubview:btnReply];
@@ -878,8 +882,22 @@
 }
 
 - (void)replyScroll {
-    [self.scrollView setContentOffset:CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height) animated:YES];
+    replyAlert = [[ReplyAlert alloc]init];
+    replyAlert.name = self.operate.paName;
+    [self.view addSubview:replyAlert];
+    __weak typeof(self)weakSelf = self;
+    replyAlert.replyBlock = ^(NSInteger tag) {
+        UIButton *btn = [UIButton new];
+        if (tag == 100) {
+            btn.tag = 1;
+        }else{
+            btn.tag = 2;
+        }
+        [weakSelf replyClick:btn];
+    };
+//    [self.scrollView setContentOffset:CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height) animated:YES];
 }
+
 
 - (void)chatClick {
     [self.operate beginChat];
@@ -888,20 +906,5 @@
 - (void)invitationClick {
     [self.operate invitation];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

@@ -954,9 +954,9 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C0Y-LE-NCw">
-                                <rect key="frame" x="20" y="341" width="75" height="30"/>
+                                <rect key="frame" x="20" y="341" width="50" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="75" id="7LG-sH-4xF"/>
+                                    <constraint firstAttribute="width" constant="50" id="7LG-sH-4xF"/>
                                     <constraint firstAttribute="height" constant="30" id="s37-Q7-kox"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -964,7 +964,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号码" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VAC-iX-BhB">
-                                <rect key="frame" x="95" y="341" width="205" height="30"/>
+                                <rect key="frame" x="70" y="341" width="230" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="0v3-cR-d74"/>
                                 </constraints>
