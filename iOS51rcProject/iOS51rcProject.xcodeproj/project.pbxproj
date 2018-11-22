@@ -155,6 +155,9 @@
 		991D7A89219D37A20019123A /* BarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 991D7A88219D37A20019123A /* BarButtonItem.m */; };
 		991D7A90219D43230019123A /* ShieldSetEmptyDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 991D7A8E219D43230019123A /* ShieldSetEmptyDataView.m */; };
 		991D7A93219D48F50019123A /* AddShieldBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 991D7A92219D48F50019123A /* AddShieldBtn.m */; };
+		991DAA9721A4EA7A00586AA7 /* pa_cvitem6.png in Resources */ = {isa = PBXBuildFile; fileRef = 991DAA9621A4EA7A00586AA7 /* pa_cvitem6.png */; };
+		991DAA9B21A5528D00586AA7 /* AttachmentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 991DAA9A21A5528D00586AA7 /* AttachmentModel.m */; };
+		991DAA9E21A557DD00586AA7 /* AttachmentImgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 991DAA9D21A557DD00586AA7 /* AttachmentImgView.m */; };
 		992985211F5539CB0021F863 /* WKApplyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9929850A1F5539CB0021F863 /* WKApplyView.m */; };
 		992985221F5539CB0021F863 /* WKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9929850C1F5539CB0021F863 /* WKButton.m */; };
 		992985231F5539CB0021F863 /* WKFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9929850E1F5539CB0021F863 /* WKFilterView.m */; };
@@ -641,6 +644,11 @@
 		991D7A8F219D43230019123A /* ShieldSetEmptyDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShieldSetEmptyDataView.h; sourceTree = "<group>"; };
 		991D7A91219D48F50019123A /* AddShieldBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddShieldBtn.h; sourceTree = "<group>"; };
 		991D7A92219D48F50019123A /* AddShieldBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddShieldBtn.m; sourceTree = "<group>"; };
+		991DAA9621A4EA7A00586AA7 /* pa_cvitem6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pa_cvitem6.png; sourceTree = "<group>"; };
+		991DAA9921A5528D00586AA7 /* AttachmentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttachmentModel.h; sourceTree = "<group>"; };
+		991DAA9A21A5528D00586AA7 /* AttachmentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttachmentModel.m; sourceTree = "<group>"; };
+		991DAA9C21A557DD00586AA7 /* AttachmentImgView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttachmentImgView.h; sourceTree = "<group>"; };
+		991DAA9D21A557DD00586AA7 /* AttachmentImgView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttachmentImgView.m; sourceTree = "<group>"; };
 		992985091F5539CB0021F863 /* WKApplyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKApplyView.h; sourceTree = "<group>"; };
 		9929850A1F5539CB0021F863 /* WKApplyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKApplyView.m; sourceTree = "<group>"; };
 		9929850B1F5539CB0021F863 /* WKButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKButton.h; sourceTree = "<group>"; };
@@ -1540,6 +1548,8 @@
 				99ED2803219E499B00ED656A /* InputAlertView.m */,
 				99ED2805219E90B000ED656A /* AlertView.h */,
 				99ED2806219E90B000ED656A /* AlertView.m */,
+				991DAA9C21A557DD00586AA7 /* AttachmentImgView.h */,
+				991DAA9D21A557DD00586AA7 /* AttachmentImgView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1549,6 +1559,15 @@
 			children = (
 			);
 			path = Third;
+			sourceTree = "<group>";
+		};
+		991DAA9821A5525A00586AA7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				991DAA9921A5528D00586AA7 /* AttachmentModel.h */,
+				991DAA9A21A5528D00586AA7 /* AttachmentModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		992985021F550EB00021F863 /* Company */ = {
@@ -1830,6 +1849,7 @@
 				995A4A081F0B60570047EDBE /* pa_cvitem3.png */,
 				995A4A091F0B60570047EDBE /* pa_cvitem4.png */,
 				995A4A0A1F0B60570047EDBE /* pa_cvitem5.png */,
+				991DAA9621A4EA7A00586AA7 /* pa_cvitem6.png */,
 				995A4A021F0B3A3C0047EDBE /* pa_open1.png */,
 				995A4A031F0B3A3C0047EDBE /* pa_open2.png */,
 				995A49FC1F0A76DE0047EDBE /* pa_refresh.png */,
@@ -2036,6 +2056,7 @@
 				997B064D1F5500A000391289 /* SpecialityModifyViewController.m */,
 				991D7A84219D35FB0019123A /* ShieldSetViewController.h */,
 				991D7A85219D35FB0019123A /* ShieldSetViewController.m */,
+				991DAA9821A5525A00586AA7 /* Model */,
 				991D7A8D219D43230019123A /* View */,
 			);
 			path = Cv;
@@ -2316,6 +2337,7 @@
 				991970342091C53E003C31CB /* cp_jobreply.png in Resources */,
 				995C17171F3309AE004A50F2 /* job_applysuccess.png in Resources */,
 				99523196204FC5CD00C8836D /* cp_mobilecer.png in Resources */,
+				991DAA9721A4EA7A00586AA7 /* pa_cvitem6.png in Resources */,
 				990A3BEB1F42F387006CB3CF /* 8.gif in Resources */,
 				990A3BC41F42F387006CB3CF /* 16.gif in Resources */,
 				99101B5B20738B2D00ED060B /* cp_accountpause.png in Resources */,
@@ -2649,6 +2671,7 @@
 				991A243C1EE6D7A9008CD8E9 /* ASIDataCompressor.m in Sources */,
 				991C6F7C200C3B4E009FD82A /* SysViewController.m in Sources */,
 				996C9084218934B600C0EF66 /* ComplainViewController.m in Sources */,
+				991DAA9E21A557DD00586AA7 /* AttachmentImgView.m in Sources */,
 				9993A589218AD0C80057B6FD /* CvOperate.m in Sources */,
 				997B069F1F5500A000391289 /* CompanyInfoViewController.m in Sources */,
 				9929852C1F5539CB0021F863 /* WKViewController.m in Sources */,
@@ -2693,6 +2716,7 @@
 				991C6F82200C49B1009FD82A /* CpLogoViewController.m in Sources */,
 				997B06981F5500A000391289 /* InterviewViewController.m in Sources */,
 				991C6F7F200C4995009FD82A /* CpModifyViewController.m in Sources */,
+				991DAA9B21A5528D00586AA7 /* AttachmentModel.m in Sources */,
 				991C6F671FFB6277009FD82A /* OrderViewController.m in Sources */,
 				996EB7AB218BE824000B475E /* RCToast.m in Sources */,
 				99C5EEB22017293F00AC8FBD /* ChatListCpViewController.m in Sources */,

@@ -4,7 +4,7 @@
 //
 //  Created by Lucifer on 2018/11/8.
 //  Copyright © 2018年 Jerry. All rights reserved.
-//  自定义tabbar 防止页面model→push发生item的便宜
+//  自定义tabbar 防止页面model→push发生item的偏移
 
 #import "BaseTabbar.h"
 

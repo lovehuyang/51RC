@@ -27,6 +27,10 @@
 #define URL_DELETEHIDECONDITIONS @"DeletePaMainByHideConditions"
 // 删除申请的职位
 #define URL_DELETEJOBAPPLY @"DeleteJobApply"
+// 上传附件简历
+#define URL_UPLOADCVANNEX @"UploadCvAnnex"
+// 获取附件简历列表
+#define URL_GETCVATTACHMENTLIST @"GetCvAttachmentList"
 
 
 

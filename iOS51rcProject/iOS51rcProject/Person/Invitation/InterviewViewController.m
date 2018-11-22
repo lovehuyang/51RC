@@ -60,7 +60,8 @@
 }
 
 - (void)getData {
-    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetInterview" Params:[NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", [NSString stringWithFormat:@"%ld", self.page], @"page", nil] viewController:self];
+    NSDictionary *paramDict = [NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", [NSString stringWithFormat:@"%ld", self.page], @"page", nil];
+    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetInterview" Params:paramDict viewController:self];
     [request setTag:1];
     [request setDelegate:self];
     [request startAsynchronous];

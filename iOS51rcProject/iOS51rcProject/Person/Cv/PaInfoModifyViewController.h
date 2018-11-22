@@ -24,6 +24,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnLivePlace;
 @property (strong, nonatomic) IBOutlet UIButton *btnAccountPlace;
 @property (strong, nonatomic) IBOutlet UIButton *btnGrowPlace;
+@property (strong, nonatomic) IBOutlet UILabel *authenticationLab;
 @property (strong, nonatomic) IBOutlet UITextField *txtMobile;
+@property (strong, nonatomic) IBOutlet UILabel *userNameLab;
 @property (strong, nonatomic) IBOutlet UITextField *txtEmail;
 @end

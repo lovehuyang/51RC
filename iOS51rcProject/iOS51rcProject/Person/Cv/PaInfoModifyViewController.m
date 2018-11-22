@@ -31,7 +31,25 @@
     UIBarButtonItem *btnSave = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(savePaInfo)];
     [btnSave setTintColor:[UIColor whiteColor]];
     self.navigationItem.rightBarButtonItem = btnSave;
+    [self setupUIStatus];// 调整控件
     [self fillData];
+}
+
+- (void)setupUIStatus{
+    
+    self.authenticationLab.layer.cornerRadius = 8;
+    self.authenticationLab.layer.borderColor = GREENCOLOR.CGColor;
+    self.authenticationLab.layer.borderWidth = 1;
+    self.authenticationLab.layer.masksToBounds = YES;
+    self.authenticationLab.font = [UIFont systemFontOfSize:9];
+    
+    self.userNameLab.layer.cornerRadius = 8;
+    self.userNameLab.layer.borderColor = NAVBARCOLOR.CGColor;
+    self.userNameLab.layer.borderWidth = 1;
+    self.userNameLab.layer.masksToBounds = YES;
+    self.userNameLab.font = [UIFont systemFontOfSize:9];
+    
+    self.txtMobile.userInteractionEnabled = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -256,19 +274,28 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - 修改手机号
+- (IBAction)changeMobile:(id)sender {
+    [self.view endEditing:YES];
+    AccountManagerViewController *accountCtrl = [[AccountManagerViewController alloc] init];
+    accountCtrl.url = @"/personal/sys/mobilecer";
+    accountCtrl.title = @"修改手机号";
+    [self.navigationController pushViewController:accountCtrl animated:YES];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - 修改邮箱
+- (IBAction)changeEmail:(id)sender {
+    
+    [self.view endEditing:YES];
+    AccountManagerViewController *accountCtrl = [[AccountManagerViewController alloc] init];
+    accountCtrl.url = @"/personal/sys/username";
+    accountCtrl.title = @"修改用户名";
+    [self.navigationController pushViewController:accountCtrl animated:YES];
 }
-*/
+
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    
+}
 
 @end

@@ -74,8 +74,6 @@
                 NSString *value = [Common getValueFromXml:xmlDoc];
                 successBlock(arrayPaMain, value);
             }
-    
-            DLog(@"");
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             

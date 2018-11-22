@@ -25,6 +25,7 @@
     [config.userContentController addScriptMessageHandler:self name:@"popView"];
     WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, NAVIGATION_BAR_HEIGHT + STATUS_BAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT - STATUS_BAR_HEIGHT) configuration:config];
     [webView setNavigationDelegate:self];
+    
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@%@?paMainId=%@&code=%@", [USER_DEFAULT valueForKey:@"subsite"], self.url, PAMAINID, [USER_DEFAULT valueForKey:@"paMainCode"]]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];

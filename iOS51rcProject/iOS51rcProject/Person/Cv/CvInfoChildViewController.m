@@ -4,7 +4,7 @@
 //
 //  Created by Lucifer on 2017/7/3.
 //  Copyright © 2017年 Lucifer. All rights reserved.
-//
+//  简历页面
 
 #import "CvInfoChildViewController.h"
 #import "CommonMacro.h"
@@ -25,9 +25,13 @@
 #import "SpecialityModifyViewController.h"
 #import "PreviewViewController.h"
 #import "WKPopView.h"
+#import "AttachmentModel.h"// 简历附件模型
+#import "AttachmentImgView.h"
 
 @interface CvInfoChildViewController ()<NetWebServiceRequestDelegate, MLImageCropDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PaInfoModifyDelegate, IntentionModifyDelegate, WKPopViewDelegate, UITextFieldDelegate>
-
+{
+    BOOL isUpdateHead;// 默认更新头像
+}
 @property (nonatomic, strong) NetWebServiceRequest *runningRequest;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) GDataXMLDocument *xmlData;
@@ -35,6 +39,7 @@
 @property (nonatomic, strong) UITextField *txtMobile;
 @property (nonatomic, strong) UIButton *btnCareerStatus;
 @property (nonatomic, strong) WKPopView *refreshPop;
+@property (nonatomic , strong) NSMutableArray *attachmentData;// 附件简历模型
 @property float heightForScroll;
 @end
 
@@ -43,6 +48,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    isUpdateHead = YES;
+    
     if (!self.onlyOne) {
         UIView *viewSeparate = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
         [viewSeparate setBackgroundColor:SEPARATECOLOR];
@@ -55,6 +63,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self getData];
+    [self getCvAttachmentList];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -62,17 +71,26 @@
     [self.runningRequest cancel];
 }
 
+#pragma mark - 懒加载
+- (NSMutableArray *)attachmentData{
+    if (!_attachmentData) {
+        _attachmentData = [NSMutableArray array];
+    }
+    return _attachmentData;
+}
 - (void)getData {
     for (UIView *view in self.scrollView.subviews) {
         [view removeFromSuperview];
     }
-    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetCvInfo" Params:[NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", self.cvMainId, @"cvMainId", nil] viewController:self];
+    NSDictionary *paramDict = [NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", self.cvMainId, @"cvMainId", nil];
+    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetCvInfo" Params:paramDict viewController:self];
     [request setTag:1];
     [request setDelegate:self];
     [request startAsynchronous];
     self.runningRequest = request;
 }
 
+#pragma mark -
 - (void)fillData {
     NSDictionary *cvData = [[Common getArrayFromXml:self.xmlData tableName:@"CvMain"] objectAtIndex:0];
     WKLabel *lbScore = [[WKLabel alloc] initWithFrame:CGRectMake(25, 15, 50, 30) content:[NSString stringWithFormat:@"%@分", [cvData objectForKey:@"Score"]] size:25 color:([[cvData objectForKey:@"Valid"] isEqualToString:@"0"] ? NAVBARCOLOR : GREENCOLOR)];
@@ -167,6 +185,7 @@
     self.heightForScroll = VIEW_BY(viewSeparate3);
 }
 
+#pragma mark - 基本信息UI
 - (void)fillBasic {
     NSDictionary *paData = [[Common getArrayFromXml:self.xmlData tableName:@"PaMain"] objectAtIndex:0];
     NSString *gender, *birth;
@@ -281,6 +300,7 @@
     self.heightForScroll = VIEW_BY(viewSeparate);
 }
 
+#pragma mark - 求职意向UI
 - (void)fillJobIntention {
     NSDictionary *jobIntentionData = [[NSDictionary alloc] initWithObjectsAndKeys:@"", @"", nil];
     NSArray *arrayJobIntention = [Common getArrayFromXml:self.xmlData tableName:@"JobIntention"];
@@ -388,6 +408,7 @@
     self.heightForScroll = VIEW_BY(viewSeparate);
 }
 
+#pragma mark - 教育背景UI
 - (void)fillEducation {
     NSArray *arrayEducation = [Common getArrayFromXml:self.xmlData tableName:@"Education"];
     
@@ -506,6 +527,7 @@
     self.heightForScroll = VIEW_BY(viewSeparate);
 }
 
+#pragma mark - 工作经历UI
 - (void)fillExperience {
     NSArray *arrayExperience = [Common getArrayFromXml:self.xmlData tableName:@"Experience"];
     
@@ -637,6 +659,7 @@
     self.heightForScroll = VIEW_BY(viewSeparate);
 }
 
+#pragma mark - 工作能力UI
 - (void)fillSpeciality {
     NSDictionary *cvData = [[Common getArrayFromXml:self.xmlData tableName:@"CvMain"] objectAtIndex:0];
     
@@ -674,13 +697,38 @@
         self.heightForScroll = VIEW_BY(btnAdd);
     }
 }
+#pragma mark - 附件简历UI
+- (void)fillAttachment{
+    UIImageView *imgTitle = [[UIImageView alloc] initWithFrame:CGRectMake(15, self.heightForScroll + 15, 20, 20)];
+    [imgTitle setImage:[UIImage imageNamed:@"pa_cvitem6.png"]];
+    [self.scrollView addSubview:imgTitle];
+    
+    WKLabel *lbTitle = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_BX(imgTitle) + 5, VIEW_Y(imgTitle), SCREEN_WIDTH, 20) content:@"附件简历" size:BIGGERFONTSIZE color:nil];
+    [self.scrollView addSubview:lbTitle];
+    
+    UIButton *btnAdd = [[UIButton alloc] initWithFrame:CGRectMake(0, VIEW_BY(lbTitle) + 10, SCREEN_WIDTH, 60)];
+    [btnAdd setTitle:@"添加附件简历" forState:UIControlStateNormal];
+    [btnAdd setImage:[UIImage imageNamed:@"pa_add.png"] forState:UIControlStateNormal];
+    [btnAdd.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [btnAdd setImageEdgeInsets:UIEdgeInsetsMake(20, 15, 20, 0)];
+    [btnAdd setTitleColor:NAVBARCOLOR forState:UIControlStateNormal];
+    [btnAdd.titleLabel setFont:BIGGERFONT];
+    [btnAdd addTarget:self action:@selector(addAttachment) forControlEvents:UIControlEventTouchUpInside];
+    [self.scrollView addSubview:btnAdd];
+    
+    self.heightForScroll = VIEW_BY(btnAdd);
+    
+}
 
+#pragma mark - 点击头像
 - (void)photoClick {
     UIAlertController *alerPhoto = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     [alerPhoto addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        isUpdateHead = YES;
         [self getPhoto:UIImagePickerControllerSourceTypeCamera];
     }]];
     [alerPhoto addAction:[UIAlertAction actionWithTitle:@"从手机相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        isUpdateHead = YES;
         [self getPhoto:UIImagePickerControllerSourceTypePhotoLibrary];
     }]];
     [alerPhoto addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
@@ -688,6 +736,7 @@
     [self presentViewController:alerPhoto animated:YES completion:nil];
 }
 
+#pragma mark - 打开相册/相机
 - (void)getPhoto:(UIImagePickerControllerSourceType)sourceType {
     NSArray *mediatypes = [UIImagePickerController availableMediaTypesForSourceType:sourceType];
     if([UIImagePickerController isSourceTypeAvailable:sourceType] &&[mediatypes count]>0){
@@ -708,6 +757,8 @@
     }
 }
 
+#pragma mark - 选取图片
+#pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     if([[info objectForKey:UIImagePickerControllerMediaType] isEqual:(NSString *) kUTTypeImage]) {
         UIImage *imgSelect = [info objectForKey:UIImagePickerControllerOriginalImage];
@@ -725,18 +776,43 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark -
 - (void)cropImage:(UIImage*)cropImage forOriginalImage:(UIImage*)originalImage {
     [self.btnPhoto setImage:cropImage forState:UIControlStateNormal];
     NSData *dataPhoto = UIImageJPEGRepresentation(cropImage, 0.1);
-    [self uploadPhoto:[dataPhoto base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
+    
+    if(isUpdateHead){
+        [self uploadPhoto:[dataPhoto base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
+    }else{
+        [self addAttachment:[dataPhoto base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
+    }
+    
 }
 
+#pragma mark - 上传头像的网络请求
 - (void)uploadPhoto:(NSString *)dataPhoto {
     NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"UploadPhoto" Params:[NSDictionary dictionaryWithObjectsAndKeys:dataPhoto, @"stream", PAMAINID, @"paMainID", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", nil] viewController:self];
     [request setTag:2];
     [request setDelegate:self];
     [request startAsynchronous];
     self.runningRequest = request;
+}
+
+#pragma mark - 上传附件的网络请求
+- (void)addAttachment:(NSString *)dataPhoto {
+    
+    [SVProgressHUD show];
+    NSDictionary *paramDic = [NSDictionary dictionaryWithObjectsAndKeys:dataPhoto, @"stream", PAMAINID, @"paMainID", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", self.cvMainId ,@"cvMainID",nil];
+    [AFNManager requestWithMethod:POST ParamDict:paramDic url:URL_UPLOADCVANNEX tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        [SVProgressHUD dismiss];
+        BOOL result = [(NSString *)dataDict isEqualToString:@"1"];
+        if (!result) {
+            [RCToast showMessage:@"上传失败，请稍后重试"];
+        }
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        [SVProgressHUD dismiss];
+        [RCToast showMessage:msg];
+    }];
 }
 
 - (void)nameOpenClick:(UIButton *)button {
@@ -818,6 +894,7 @@
         [self fillEducation];
         [self fillExperience];
         [self fillSpeciality];
+        [self fillAttachment];// 附件简历
         
         WKButton *btnDelete = [[WKButton alloc] initWithFrame:CGRectMake(30, self.heightForScroll + 20, SCREEN_WIDTH - 60, 40)];
         [btnDelete setBackgroundColor:UIColorWithRGBA(182, 182, 182, 1)];
@@ -919,6 +996,22 @@
     specialityCtrl.cvMainId = [cvData objectForKey:@"ID"];
     specialityCtrl.speciality = [cvData objectForKey:@"Speciality"];
     [self.navigationController pushViewController:specialityCtrl animated:YES];
+}
+
+#pragma mark - 添加附件简历
+- (void)addAttachment{
+    UIAlertController *alerPhoto = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [alerPhoto addAction:[UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        isUpdateHead = NO;// 上传附件
+        [self getPhoto:UIImagePickerControllerSourceTypeCamera];
+    }]];
+    [alerPhoto addAction:[UIAlertAction actionWithTitle:@"从手机相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        isUpdateHead = NO;// 上传附件
+        [self getPhoto:UIImagePickerControllerSourceTypePhotoLibrary];
+    }]];
+    [alerPhoto addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    
+    [self presentViewController:alerPhoto animated:YES completion:nil];
 }
 
 - (void)refresh {
@@ -1029,19 +1122,34 @@
     [self.navigationController pushViewController:previewCtrl animated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - 获取附件简历
+- (void)getCvAttachmentList{
+    [AFNManager requestWithMethod:POST ParamDict:@{@"cvMainID":self.cvMainId} url:URL_GETCVATTACHMENTLIST tableName:@"ds" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        
+        for (NSDictionary *data in requestData) {
+            AttachmentModel *model = [AttachmentModel buildModelWithDic:data];
+            [self.attachmentData addObject:model];
+        }
+        
+        [self fillAttachmentData];
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        DLog(@"");
+        [RCToast showMessage:@"附件简历获取失败"];
+    }];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - 加载附件简历数据
+- (void)fillAttachmentData{
+    DLog(@"");
+    
+    AttachmentImgView *imgview = [AttachmentImgView new];
+    [self.view addSubview:imgview];
+    imgview.sd_layout
+    .leftEqualToView(self.view)
+    .bottomSpaceToView(self.view, 100)
+    .heightIs(200)
+    .widthEqualToHeight();
+    
+    imgview.backgroundColor = [UIColor redColor];
 }
-*/
-
 @end
