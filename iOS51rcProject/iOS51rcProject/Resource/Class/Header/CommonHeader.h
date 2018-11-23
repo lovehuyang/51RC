@@ -14,4 +14,5 @@
 
 #define PROPERTY_COPY(str) @property (nonatomic , copy)NSString *str
 
+#define NOTIFICATION_GETCVLIST @"GetCvList"// 个人用户 - 点击“简历”tabbar刷新页面数据
 #endif /* CommonHeader_h */

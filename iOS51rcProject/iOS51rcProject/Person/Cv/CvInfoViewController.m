@@ -30,12 +30,25 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"简历";
-    //[self getData];
+    [self getData];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getData) name:NOTIFICATION_GETCVLIST object:nil];
 }
-
+- (void)setupAddCVBtn{
+    UIButton *addCvBtn = [UIButton new];
+    [self.view addSubview:addCvBtn];
+    addCvBtn.sd_layout
+    .rightSpaceToView(self.view, 20)
+    .bottomSpaceToView(self.view, 50)
+    .widthIs(50)
+    .heightEqualToWidth();
+    [addCvBtn setImage:[UIImage imageNamed:@"addCV"] forState:UIControlStateNormal];
+    [addCvBtn addTarget:self action:@selector(create) forControlEvents:UIControlEventTouchUpInside];
+    [self.view bringSubviewToFront:addCvBtn];
+}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self getData];
+//    [self getData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -124,9 +137,8 @@
             [navTabCtrl addParentController:self];
         }
         if (arrayCv.count < 3) {
-            UIBarButtonItem *btnCreate = [[UIBarButtonItem alloc] initWithTitle:@"+新增简历" style:UIBarButtonItemStylePlain target:self action:@selector(create)];
-            [btnCreate setTintColor:[UIColor whiteColor]];
-            self.navigationItem.rightBarButtonItem = btnCreate;
+
+            [self setupAddCVBtn];
         }
         else {
             self.navigationItem.rightBarButtonItem = NULL;
@@ -154,5 +166,9 @@
     [super viewWillLayoutSubviews];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"屏蔽设置" style:UIBarButtonItemStylePlain target:self action:@selector(shieldSet)];
     [self.navigationItem.rightBarButtonItem setTintColor:[UIColor whiteColor]];
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:NOTIFICATION_GETCVLIST object:nil];
 }
 @end

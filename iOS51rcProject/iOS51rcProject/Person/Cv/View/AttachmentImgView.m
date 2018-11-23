@@ -7,6 +7,7 @@
 //
 
 #import "AttachmentImgView.h"
+#import "AttachmentModel.h"
 
 @implementation AttachmentImgView
 
@@ -21,6 +22,12 @@
         .widthEqualToHeight();
         [deleteBtn setImage:[UIImage imageNamed:@"attachment_delete"] forState:UIControlStateNormal];
         [deleteBtn addTarget:self action:@selector(deleteEvent) forControlEvents:UIControlEventTouchUpInside];
+        
+        self.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        self.layer.borderWidth = 1;
+        self.contentMode = UIViewContentModeScaleAspectFit;
+        self.backgroundColor = [UIColor whiteColor];
+        self.userInteractionEnabled = YES;
     }
     return self;
 }
@@ -32,9 +39,11 @@
 
 - (void)setModel:(AttachmentModel *)model{
     _model = model;
+    _model.FilePath = @"http://down.51rc.com/imagefolder/Photo/L026400000/Processed/26395818_20181122082729.jpg";
+    [self sd_setImageWithURL:[NSURL URLWithString:self.model.FilePath] placeholderImage:nil];
 }
 - (void)deleteEvent{
-    
+    self.deleteAttachment(self.model);
 }
 
 

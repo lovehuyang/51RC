@@ -243,7 +243,7 @@
                     [self deleteApply:indexPath];
                 }
             };
-            [WeakAlertView show:self.view];
+            [WeakAlertView show];
         }
     }
 }

@@ -12,7 +12,7 @@
 #import "NetWebServiceRequest.h"
 #import "BaseTabbar.h"// 自定义的tabbar
 
-@interface WKTabBarController ()<UITabBarControllerDelegate, NetWebServiceRequestDelegate>
+@interface WKTabBarController ()<UITabBarControllerDelegate, NetWebServiceRequestDelegate,UITabBarDelegate>
 
 @property (nonatomic, strong) NetWebServiceRequest *runningRequest;
 @property (nonatomic, strong) NSString *userType;
@@ -24,6 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     BaseTabbar *baseTabbar = [[BaseTabbar alloc]init];
+    baseTabbar.delegate = self;
     [self setValue:baseTabbar forKey:@"tabBar"];
     
     self.userType = [USER_DEFAULT objectForKey:@"userType"];
@@ -57,11 +58,20 @@
     self.runningRequest = request;
 }
 
+#pragma mark - UITabBarDelegate
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
+    // 个人用户点击“简历”tabbar刷新数据
+    if ([item.title isEqualToString:@"简历"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GETCVLIST object:nil];
+    }
+}
+
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     NSInteger index = tabBarController.selectedIndex;
     if (index == 4) {
         return;
     }
+    
     [[self.tabBar.items objectAtIndex:tabBarController.selectedIndex] setBadgeValue:nil];
 }
 

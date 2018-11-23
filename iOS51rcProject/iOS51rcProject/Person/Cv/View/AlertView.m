@@ -7,6 +7,7 @@
 //
 
 #import "AlertView.h"
+#import "Common.h"
 
 @interface AlertView()<UITextViewDelegate>
 /**
@@ -53,7 +54,7 @@
         [self addSubview:self.backgroundView];
         
         //创建alertView
-        CGFloat alertviewW = 280 ;
+        CGFloat alertviewW = 250 ;
         CGFloat alertviewH = 200;
         _alertview = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH *0.5 - alertviewW *0.5, (SCREEN_HEIGHT - 44 - HEIGHT_STATUS) *0.5 - alertviewH *0.5, alertviewW, alertviewH)];
         self.alertview.center = CGPointMake(self.center.x, self.center.y);
@@ -70,7 +71,7 @@
     
     [super layoutSubviews];
     //添加标题
-    _titleLable = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, self.alertview.frame.size.width, 25)];
+    _titleLable = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, self.alertview.frame.size.width, 30)];
     _titleLable.textAlignment = NSTextAlignmentCenter;
     //    [_titleLable setBackgroundColor:[UIColor yellowColor]];
     _titleLable.text = self.titleStr;
@@ -78,19 +79,26 @@
     [_titleLable setTextColor:[UIColor blackColor]];
     [self.alertview addSubview:self.titleLable];
     
-    UILabel *contentLab = [[UILabel alloc]initWithFrame:CGRectMake(0, VIEW_BY(_titleLable), VIEW_W(_titleLable), 25)];
-    contentLab.text = self.contentStr;
-    contentLab.textAlignment = NSTextAlignmentCenter;
+    UILabel *contentLab = [[UILabel alloc]initWithFrame:CGRectMake(10, VIEW_BY(_titleLable), VIEW_W(_titleLable) - 20, 25)];
     contentLab.font = DEFAULTFONT;
+    contentLab.text = self.contentStr;
+    contentLab.numberOfLines = 0;
+    CGSize size = [Common sizeWithText:contentLab.text font:contentLab.font maxSize:CGSizeMake(VIEW_W(_titleLable) - 20, 200)];
+    if (size.width < VIEW_W(_titleLable) - 20) {
+        size.width = VIEW_W(_titleLable) - 20;
+    }
+    contentLab.frame = CGRectMake(VIEW_X(contentLab), VIEW_Y(contentLab), size.width, size.height);
+    contentLab.textAlignment = NSTextAlignmentCenter;
+    
     [self.alertview addSubview:contentLab];
     
-    [self.alertview setFrame:CGRectMake(self.alertview.frame.origin.x, self.alertview.frame.origin.y, self.alertview.frame.size.width, CGRectGetMaxY(contentLab.frame) + 55)];
+    [self.alertview setFrame:CGRectMake(self.alertview.frame.origin.x, self.alertview.frame.origin.y, self.alertview.frame.size.width, CGRectGetMaxY(contentLab.frame) + 60)];
     self.alertview.center = CGPointMake(self.center.x, self.center.y);
     
     CGFloat width = (CGRectGetWidth(self.alertview.frame) - 15 *(self.btnTitleArr.count + 1))/self.btnTitleArr.count ;
     for (int i = 0; i <self.btnTitleArr.count; i ++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(15*(i + 1) + width *i, VIEW_BY(contentLab) + 10, width, 35);
+        btn.frame = CGRectMake(15*(i + 1) + width *i, VIEW_BY(contentLab) + 15, width, 35);
         [btn setTitle:self.btnTitleArr[i] forState:UIControlStateNormal];
         btn.layer.cornerRadius = 3;
         
@@ -137,7 +145,7 @@
     self.contentStr = [NSString stringWithString:contentStr];
 }
 
-- (void)show:(UIView *)view {
+- (void)show{
 //    [view addSubview:self];
     [[[UIApplication sharedApplication] keyWindow]addSubview:self];
     self.alertview.transform = CGAffineTransformMakeScale(1.21f, 1.21f);

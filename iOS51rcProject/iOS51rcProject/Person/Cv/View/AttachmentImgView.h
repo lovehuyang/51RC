@@ -11,5 +11,5 @@
 
 @interface AttachmentImgView : UIImageView
 @property (nonatomic , strong) AttachmentModel *model;
-@property (nonatomic , copy) void (^deleteAttachment)();
+@property (nonatomic , copy) void (^deleteAttachment)(AttachmentModel *attach);
 @end

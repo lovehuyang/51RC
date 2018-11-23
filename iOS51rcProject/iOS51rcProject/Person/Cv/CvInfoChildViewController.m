@@ -26,7 +26,8 @@
 #import "PreviewViewController.h"
 #import "WKPopView.h"
 #import "AttachmentModel.h"// 简历附件模型
-#import "AttachmentImgView.h"
+#import "AttachMentView.h"
+#import "AlertView.h"
 
 @interface CvInfoChildViewController ()<NetWebServiceRequestDelegate, MLImageCropDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PaInfoModifyDelegate, IntentionModifyDelegate, WKPopViewDelegate, UITextFieldDelegate>
 {
@@ -39,6 +40,8 @@
 @property (nonatomic, strong) UITextField *txtMobile;
 @property (nonatomic, strong) UIButton *btnCareerStatus;
 @property (nonatomic, strong) WKPopView *refreshPop;
+@property (nonatomic, strong) UIButton *btnAddAttachment;// 添加附件简历按钮
+@property (nonatomic, strong) WKButton *btnDelete;// 删除简历按钮
 @property (nonatomic , strong) NSMutableArray *attachmentData;// 附件简历模型
 @property float heightForScroll;
 @end
@@ -63,7 +66,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self getData];
-    [self getCvAttachmentList];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -698,7 +700,7 @@
     }
 }
 #pragma mark - 附件简历UI
-- (void)fillAttachment{
+- (void)setupAttachment{
     UIImageView *imgTitle = [[UIImageView alloc] initWithFrame:CGRectMake(15, self.heightForScroll + 15, 20, 20)];
     [imgTitle setImage:[UIImage imageNamed:@"pa_cvitem6.png"]];
     [self.scrollView addSubview:imgTitle];
@@ -706,18 +708,18 @@
     WKLabel *lbTitle = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_BX(imgTitle) + 5, VIEW_Y(imgTitle), SCREEN_WIDTH, 20) content:@"附件简历" size:BIGGERFONTSIZE color:nil];
     [self.scrollView addSubview:lbTitle];
     
-    UIButton *btnAdd = [[UIButton alloc] initWithFrame:CGRectMake(0, VIEW_BY(lbTitle) + 10, SCREEN_WIDTH, 60)];
-    [btnAdd setTitle:@"添加附件简历" forState:UIControlStateNormal];
-    [btnAdd setImage:[UIImage imageNamed:@"pa_add.png"] forState:UIControlStateNormal];
-    [btnAdd.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [btnAdd setImageEdgeInsets:UIEdgeInsetsMake(20, 15, 20, 0)];
-    [btnAdd setTitleColor:NAVBARCOLOR forState:UIControlStateNormal];
-    [btnAdd.titleLabel setFont:BIGGERFONT];
-    [btnAdd addTarget:self action:@selector(addAttachment) forControlEvents:UIControlEventTouchUpInside];
-    [self.scrollView addSubview:btnAdd];
+    UIButton *btnAddAttachment = [[UIButton alloc] initWithFrame:CGRectMake(0, VIEW_BY(lbTitle) + 10, SCREEN_WIDTH, 60)];
+    [btnAddAttachment setTitle:@"添加附件简历" forState:UIControlStateNormal];
+    [btnAddAttachment setImage:[UIImage imageNamed:@"pa_add.png"] forState:UIControlStateNormal];
+    [btnAddAttachment.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [btnAddAttachment setImageEdgeInsets:UIEdgeInsetsMake(20, 15, 20, 0)];
+    [btnAddAttachment setTitleColor:NAVBARCOLOR forState:UIControlStateNormal];
+    [btnAddAttachment.titleLabel setFont:BIGGERFONT];
+    [btnAddAttachment addTarget:self action:@selector(addAttachment) forControlEvents:UIControlEventTouchUpInside];
+    self.btnAddAttachment = btnAddAttachment;
+    [self.scrollView addSubview:self.btnAddAttachment];
     
-    self.heightForScroll = VIEW_BY(btnAdd);
-    
+    self.heightForScroll = VIEW_BY(self.btnAddAttachment);
 }
 
 #pragma mark - 点击头像
@@ -734,6 +736,20 @@
     [alerPhoto addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     
     [self presentViewController:alerPhoto animated:YES completion:nil];
+}
+
+#pragma mark - 删除按钮
+- (void)setupDeleteBtn{
+    [self.btnDelete removeFromSuperview];
+    WKButton *btnDelete = [[WKButton alloc] initWithFrame:CGRectMake(30, self.heightForScroll + 20, SCREEN_WIDTH - 60, 40)];
+    [btnDelete setBackgroundColor:UIColorWithRGBA(182, 182, 182, 1)];
+    [btnDelete setTitle:@"删除简历" forState:UIControlStateNormal];
+    [btnDelete.titleLabel setFont:BIGGERFONT];
+    [btnDelete addTarget:self action:@selector(delete) forControlEvents:UIControlEventTouchUpInside];
+    self.btnDelete = btnDelete;
+    [self.scrollView addSubview:self.btnDelete];
+    
+    [self.scrollView setContentSize:CGSizeMake(SCREEN_WIDTH, VIEW_BY(btnDelete) + 20)];
 }
 
 #pragma mark - 打开相册/相机
@@ -808,6 +824,8 @@
         BOOL result = [(NSString *)dataDict isEqualToString:@"1"];
         if (!result) {
             [RCToast showMessage:@"上传失败，请稍后重试"];
+        }else{
+            [self getCvAttachmentList];
         }
     } failureBlock:^(NSInteger errCode, NSString *msg) {
         [SVProgressHUD dismiss];
@@ -815,6 +833,25 @@
     }];
 }
 
+#pragma mark - 删除附件简历
+- (void)deleteCVAttachment:(AttachmentModel *)attach{
+    [SVProgressHUD show];
+    NSDictionary *paramDict = @{@"attachmentID":attach.Id};
+    [AFNManager requestWithMethod:POST ParamDict:paramDict url:URL_DELETECVATTACHMENT tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        [SVProgressHUD dismiss];
+        BOOL result = [(NSString *)dataDict isEqualToString:@"1"];
+        if (result) {
+            [self getCvAttachmentList];
+        }else{
+            [RCToast showMessage:@"附件简历删除失败，请稍后再试"];
+        }
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        [SVProgressHUD dismiss];
+        [RCToast showMessage:@"附件简历删除失败，请稍后再试"];
+    }];
+}
+
+#pragma mark - 姓名状态点击事件
 - (void)nameOpenClick:(UIButton *)button {
     [self setOpen:@"" nameHidden:(button.tag == 0 ? @"0" : @"1")];
     UIImageView *imgOpen;
@@ -833,6 +870,7 @@
     }
 }
 
+#pragma mark - 简历状态点击事件
 - (void)cvOpenClick:(UIButton *)button {
     [self setOpen:(button.tag == 0 ? @"0" : @"1") nameHidden:@""];
     UIImageView *imgOpen;
@@ -851,6 +889,7 @@
     }
 }
 
+#pragma mark - 姓名状态/简历状态网络请求
 - (void)setOpen:(NSString *)cvHidden nameHidden:(NSString *)nameHidden {
     NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"OpenSet" Params:[NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", self.cvMainId, @"cvMainId", cvHidden, @"cvHidden", nameHidden, @"nameHidden", nil] viewController:nil];
     [request setTag:6];
@@ -894,29 +933,28 @@
         [self fillEducation];
         [self fillExperience];
         [self fillSpeciality];
-        [self fillAttachment];// 附件简历
+        [self setupAttachment];// 创建附件简历UI
+        [self getCvAttachmentList];// 获取附件简历数据
         
-        WKButton *btnDelete = [[WKButton alloc] initWithFrame:CGRectMake(30, self.heightForScroll + 20, SCREEN_WIDTH - 60, 40)];
-        [btnDelete setBackgroundColor:UIColorWithRGBA(182, 182, 182, 1)];
-        [btnDelete setTitle:@"删除简历" forState:UIControlStateNormal];
-        [btnDelete.titleLabel setFont:BIGGERFONT];
-        [btnDelete addTarget:self action:@selector(delete) forControlEvents:UIControlEventTouchUpInside];
-        [self.scrollView addSubview:btnDelete];
+    }else if (request.tag == 4){// 删除简历
+        [self.delegate cvInfoReload];
         
-        [self.scrollView setContentSize:CGSizeMake(SCREEN_WIDTH, VIEW_BY(btnDelete) + 20)];
+    }else{
+        [self getData];
     }
-    else if (request.tag == 2) {
-        [self.delegate cvInfoReload];
-    }
-    else if (request.tag == 3) {
-        [self.delegate cvInfoReload];
-    }
-    else if (request.tag == 4) {
-        [self.delegate cvInfoReload];
-    }
-    else if (request.tag == 5) {
-        [self.delegate cvInfoReload];
-    }
+    
+//    else if (request.tag == 2) {
+//        [self.delegate cvInfoReload];
+//    }
+//    else if (request.tag == 3) {
+//        [self.delegate cvInfoReload];
+//    }
+//    else if (request.tag == 4) {
+//        [self.delegate cvInfoReload];
+//    }
+//    else if (request.tag == 5) {
+//        [self.delegate cvInfoReload];
+//    }
 }
 
 - (void)delete {
@@ -1125,13 +1163,13 @@
 #pragma mark - 获取附件简历
 - (void)getCvAttachmentList{
     [AFNManager requestWithMethod:POST ParamDict:@{@"cvMainID":self.cvMainId} url:URL_GETCVATTACHMENTLIST tableName:@"ds" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
-        
+        [self.attachmentData removeAllObjects];
         for (NSDictionary *data in requestData) {
             AttachmentModel *model = [AttachmentModel buildModelWithDic:data];
             [self.attachmentData addObject:model];
         }
-        
         [self fillAttachmentData];
+        [self setupDeleteBtn];// 创建删除简历
     } failureBlock:^(NSInteger errCode, NSString *msg) {
         DLog(@"");
         [RCToast showMessage:@"附件简历获取失败"];
@@ -1140,16 +1178,41 @@
 
 #pragma mark - 加载附件简历数据
 - (void)fillAttachmentData{
-    DLog(@"");
     
-    AttachmentImgView *imgview = [AttachmentImgView new];
-    [self.view addSubview:imgview];
-    imgview.sd_layout
-    .leftEqualToView(self.view)
-    .bottomSpaceToView(self.view, 100)
-    .heightIs(200)
-    .widthEqualToHeight();
+    UIView *temView = [self.scrollView  viewWithTag:101];
+    [temView removeFromSuperview];
     
-    imgview.backgroundColor = [UIColor redColor];
+    if (!self.attachmentData.count) {
+        self.heightForScroll = VIEW_BY(self.btnAddAttachment);
+        return;
+    }
+    
+    AttachMentView *attachmentView = [[AttachMentView alloc]initWithFrame:CGRectMake(0, VIEW_BY(self.btnAddAttachment) + 10, SCREEN_WIDTH, 150) data:self.attachmentData];
+    attachmentView.tag = 101;
+    attachmentView.deleteAttachMent = ^(AttachmentModel *attach) {
+        
+        AlertView *alertView = [[AlertView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        __weak __typeof(alertView)WeakAlertView = alertView;
+        [WeakAlertView initWithTitle:@"提示" content:@"确定要删除此附件简历吗？" btnTitleArr:@[@"取消",@"确定"] canDismiss:YES];
+        WeakAlertView.clickButtonBlock = ^(UIButton *button) {
+            if (button.tag == 101) {
+                [self deleteCVAttachment:attach];
+            }
+        };
+        [WeakAlertView show];
+    };
+    [self.scrollView addSubview:attachmentView];
+    
+    if (self.attachmentData.count == 3){
+        self.btnAddAttachment.hidden = YES;
+        CGRect frame = attachmentView.frame;
+        frame.origin.y = frame.origin.y - 30;
+        attachmentView.frame = frame;
+    }else{
+        self.btnAddAttachment.hidden = NO;
+    }
+    
+    self.heightForScroll = VIEW_BY(attachmentView);
 }
+
 @end

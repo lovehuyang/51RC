@@ -12,7 +12,7 @@
 @property (nonatomic,copy) void(^clickButtonBlock)(UIButton * button);
 
 - (void)initWithTitle:(NSString *)title content:(NSString *)contentStr btnTitleArr :(NSArray *)btnTitleArr canDismiss:(BOOL )canDismiss;
-- (void)show:(UIView *)view;
+- (void)show;
 - (void)dissmiss;
 
 @end

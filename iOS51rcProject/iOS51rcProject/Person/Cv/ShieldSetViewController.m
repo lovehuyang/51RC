@@ -78,7 +78,7 @@
             [self deletePaMainByHideConditions:title];
         }
     };
-    [WeakAlertView show:self.view];
+    [WeakAlertView show];
 }
 
 #pragma mark - 数据为空的UI

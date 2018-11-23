@@ -360,6 +360,7 @@
 		999070C71F03846E00B5E289 /* img_favorite2.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070C31F03846D00B5E289 /* img_favorite2.png */; };
 		999070C81F03846E00B5E289 /* img_mappoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070C41F03846D00B5E289 /* img_mappoint.png */; };
 		999070C91F03846E00B5E289 /* img_share.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070C51F03846D00B5E289 /* img_share.png */; };
+		9990A70521A6490200A320FD /* AttachMentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990A70421A6490200A320FD /* AttachMentView.m */; };
 		9993798F219A9C250087D404 /* PullDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9993798E219A9C240087D404 /* PullDownMenu.m */; };
 		99937992219AAB730087D404 /* MenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 99937990219AAB730087D404 /* MenuButton.m */; };
 		9993A570218AAA180057B6FD /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9993A56F218AAA180057B6FD /* UserInfo.m */; };
@@ -938,6 +939,8 @@
 		999070C31F03846D00B5E289 /* img_favorite2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_favorite2.png; sourceTree = "<group>"; };
 		999070C41F03846D00B5E289 /* img_mappoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_mappoint.png; sourceTree = "<group>"; };
 		999070C51F03846D00B5E289 /* img_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_share.png; sourceTree = "<group>"; };
+		9990A70321A6490200A320FD /* AttachMentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttachMentView.h; sourceTree = "<group>"; };
+		9990A70421A6490200A320FD /* AttachMentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttachMentView.m; sourceTree = "<group>"; };
 		9993798D219A9C240087D404 /* PullDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullDownMenu.h; sourceTree = "<group>"; };
 		9993798E219A9C240087D404 /* PullDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullDownMenu.m; sourceTree = "<group>"; };
 		99937990219AAB730087D404 /* MenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuButton.m; sourceTree = "<group>"; };
@@ -1550,6 +1553,8 @@
 				99ED2806219E90B000ED656A /* AlertView.m */,
 				991DAA9C21A557DD00586AA7 /* AttachmentImgView.h */,
 				991DAA9D21A557DD00586AA7 /* AttachmentImgView.m */,
+				9990A70321A6490200A320FD /* AttachMentView.h */,
+				9990A70421A6490200A320FD /* AttachMentView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2671,6 +2676,7 @@
 				991A243C1EE6D7A9008CD8E9 /* ASIDataCompressor.m in Sources */,
 				991C6F7C200C3B4E009FD82A /* SysViewController.m in Sources */,
 				996C9084218934B600C0EF66 /* ComplainViewController.m in Sources */,
+				9990A70521A6490200A320FD /* AttachMentView.m in Sources */,
 				991DAA9E21A557DD00586AA7 /* AttachmentImgView.m in Sources */,
 				9993A589218AD0C80057B6FD /* CvOperate.m in Sources */,
 				997B069F1F5500A000391289 /* CompanyInfoViewController.m in Sources */,

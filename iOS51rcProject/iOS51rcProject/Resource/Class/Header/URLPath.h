@@ -31,7 +31,8 @@
 #define URL_UPLOADCVANNEX @"UploadCvAnnex"
 // 获取附件简历列表
 #define URL_GETCVATTACHMENTLIST @"GetCvAttachmentList"
-
+// 删除附件简历
+#define URL_DELETECVATTACHMENT @"deleteCvAttachment"
 
 
 #pragma mark - 公司用户
