@@ -39,11 +39,20 @@
 
 - (void)setModel:(AttachmentModel *)model{
     _model = model;
-    _model.FilePath = @"http://down.51rc.com/imagefolder/Photo/L026400000/Processed/26395818_20181122082729.jpg";
+    _model.FilePath = [NSString stringWithFormat:@"http://down.51rc.com/imagefolder/attachment/%@/%@",[self randomString],_model.FilePath];
+//    _model.FilePath = @"http://down.51rc.com/imagefolder/Photo/L026400000/Processed/26395818_20181122082729.jpg";
+//http://down.51rc.com/imagefolder/attachment/L028670000/28663401_20181126093741.jp
     [self sd_setImageWithURL:[NSURL URLWithString:self.model.FilePath] placeholderImage:nil];
 }
 - (void)deleteEvent{
     self.deleteAttachment(self.model);
+}
+
+#pragma mark - 简历附件生成路径
+- (NSString *)randomString{
+    NSInteger photoPathTemp = ([self.model.cvMainID integerValue]/100000 + 1)  * 100000;
+    NSString *randomStr = [NSString stringWithFormat:@"L0%ld",(long)photoPathTemp];
+    return  randomStr;
 }
 
 

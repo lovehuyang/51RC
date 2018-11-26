@@ -24,7 +24,6 @@
 - (void)setupSubviews:(NSArray *)data{
     
 
-    
     CGFloat IMG_W = 100;
     if (data.count == 1) {
         AttachmentImgView *imgview = [AttachmentImgView new];
@@ -114,4 +113,5 @@
         };
     }
 }
+
 @end

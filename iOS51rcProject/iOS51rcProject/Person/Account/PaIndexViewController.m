@@ -4,7 +4,7 @@
 //
 //  Created by Lucifer on 2017/6/1.
 //  Copyright © 2017年 Lucifer. All rights reserved.
-//
+//  我的页面
 
 #import "PaIndexViewController.h"
 #import "CommonMacro.h"
@@ -556,19 +556,14 @@
     self.runningRequest = request;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    // CheckIsPaMobileVerify
+    NSDictionary *paramDict = @{@"mobile":@"15665889905"};
+    [AFNManager requestWithMethod:POST ParamDict:paramDict url:@"CheckIsPaMobileVerify" tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        DLog(@"");
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        DLog(@"");
+    }];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

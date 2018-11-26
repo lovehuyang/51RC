@@ -2009,7 +2009,7 @@
                                             <constraint firstAttribute="width" constant="280" id="msv-Nn-SOd"/>
                                         </constraints>
                                         <attributedString key="attributedText">
-                                            <fragment content="填写以下信息即可生成一份简历，一步注册，起航你的成功之梦">
+                                            <fragment content="简历是求职第一步，快速填写简历，给你一个满意工作。">
                                                 <attributes>
                                                     <font key="NSFont" size="12" name=".PingFangSC-Regular"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" tighteningFactorForTruncation="0.0"/>

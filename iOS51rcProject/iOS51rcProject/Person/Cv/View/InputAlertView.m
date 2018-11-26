@@ -59,7 +59,7 @@
         [self addSubview:self.backgroundView];
         
         //创建alertView
-        CGFloat alertviewW = 280 ;
+        CGFloat alertviewW = 270 ;
         CGFloat alertviewH = 200;
         _alertview = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH *0.5 - alertviewW *0.5, (SCREEN_HEIGHT - 44 - HEIGHT_STATUS) *0.5 - alertviewH *0.5, alertviewW, alertviewH)];
         self.alertview.center = CGPointMake(self.center.x, self.center.y);

@@ -4,7 +4,7 @@
 //
 //  Created by Lucifer on 2017/8/23.
 //  Copyright © 2017年 Lucifer. All rights reserved.
-//
+//  一分钟填填写简历页面
 
 #import "OneMinuteViewController.h"
 #import "Common.h"

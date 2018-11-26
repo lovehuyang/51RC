@@ -1171,7 +1171,6 @@
         [self fillAttachmentData];
         [self setupDeleteBtn];// 创建删除简历
     } failureBlock:^(NSInteger errCode, NSString *msg) {
-        DLog(@"");
         [RCToast showMessage:@"附件简历获取失败"];
     }];
 }
