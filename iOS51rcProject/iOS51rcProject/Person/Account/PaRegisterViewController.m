@@ -76,7 +76,7 @@
     if (![Common checkMobile:self.txtUsername.text]) {
         return;
     }
-    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetPaMobileVerifyCode" Params:[NSDictionary dictionaryWithObjectsAndKeys:[Common enMobile:self.txtUsername.text], @"mobile", [USER_DEFAULT valueForKey:@"subsitename"], @"subsitename", nil] viewController:self];
+    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:URL_GETPAMOBILEVERIFYCODE Params:[NSDictionary dictionaryWithObjectsAndKeys:[Common enMobile:self.txtUsername.text], @"mobile", [USER_DEFAULT valueForKey:@"subsitename"], @"subsitename", nil] viewController:self];
     [request setTag:1];
     [request setDelegate:self];
     [request startAsynchronous];

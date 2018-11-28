@@ -197,6 +197,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     UIWindow * window = [[[UIApplication sharedApplication] delegate] window];
     CGRect rect = [textField convertRect:textField.bounds toView:window];
@@ -307,6 +308,7 @@
     return YES;
 }
 
+#pragma mark - WKPopViewDelegate
 - (void)WKPickerViewConfirm:(WKPopView *)popView arraySelect:(NSArray *)arraySelect {
     switch (popView.tag) {
         case 1: //性别

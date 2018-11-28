@@ -155,7 +155,7 @@
 
 - (void)getPaInfo {
     [self.btnLogout setHidden:NO];
-    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetPaMain" Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", nil] viewController:self];
+    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:URL_GETPAMAIN Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", nil] viewController:self];
     [request setTag:1];
     [request setDelegate:self];
     [request startAsynchronous];

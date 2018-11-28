@@ -15,4 +15,5 @@
 #define PROPERTY_COPY(str) @property (nonatomic , copy)NSString *str
 
 #define NOTIFICATION_GETCVLIST @"GetCvList"// 个人用户 - 点击“简历”tabbar刷新页面数据
+#define NOTIFICATION_ONEMINUTEGETVERIFYCODE @"OneMinuteGetVerifyCode"// 一分钟填写简历页面获取验证码
 #endif /* CommonHeader_h */

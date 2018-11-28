@@ -24,6 +24,7 @@
 #import "ChatListCpViewController.h"
 #import "CvRecommendViewController.h"
 #import "InterviewCpViewController.h"
+#import "IQKeyboardManager.h"
 
 @interface AppDelegate ()<JPUSHRegisterDelegate, UIAlertViewDelegate>
 
@@ -33,7 +34,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+    // 打开键盘事件响应
+    [IQKeyboardManager sharedManager].enable = YES;
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
 //    //将字典存入到document内
 //    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
 //    NSString *documentsDirectory = [paths objectAtIndex:0];

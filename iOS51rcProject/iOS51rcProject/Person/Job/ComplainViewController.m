@@ -67,7 +67,7 @@ const NSInteger tag2 = 2;// 提交投诉信息
     [self.view addSubview:self.reasonView];
 }
 - (void)getData{
-    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetPaMain" Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", nil] viewController:self];
+    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:URL_GETPAMAIN Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", nil] viewController:self];
     [request setTag:tag1];
     [request setDelegate:self];
     [request startAsynchronous];

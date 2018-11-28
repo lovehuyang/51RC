@@ -16,6 +16,11 @@
 #import "WKLoginView.h"
 #import "WKButton.h"
 #import "ShieldSetViewController.h"
+#import "CVListModel.h"
+#import "OneMinuteViewController.h"
+#import "WKNavigationController.h"
+#import "OneMinuteCVViewController.h"
+
 
 @interface CvInfoViewController ()<NetWebServiceRequestDelegate, CvInfoChildDelegate>
 
@@ -88,31 +93,50 @@
               responseData:(GDataXMLDocument *)requestData {
     if (request.tag == 1) {
         NSArray *arrayCv = [Common getArrayFromXml:requestData tableName:@"Table"];
-        if (arrayCv.count == 0) {
-            UIView *viewNoData = [[UIView alloc] init];
-            [viewNoData setBackgroundColor:[UIColor whiteColor]];
-            [viewNoData setTag:NODATAVIEWTAG];
-            [self.view addSubview:viewNoData];
+        
+        if(arrayCv.count == 0){// 一分钟填写简历
+            [self createOneMinuteController];
+            return;
             
-            WKLabel *lbNoData = [[WKLabel alloc] initWithFixedSpacing:CGRectMake(0, 0, SCREEN_WIDTH, 20) content:@"不要质疑此刻的付出\n创建一份代表自己能力的简历\n让HR知道你多牛" size:BIGGERFONTSIZE color:TEXTGRAYCOLOR spacing:7];
-            [lbNoData setTextAlignment:NSTextAlignmentCenter];
-            [lbNoData setCenter:CGPointMake(SCREEN_WIDTH / 2, lbNoData.center.y)];
-            [viewNoData addSubview:lbNoData];
-            
-            UIImageView *imgNoData = [[UIImageView alloc] initWithFrame:CGRectMake(0, VIEW_BY(lbNoData) + 20, SCREEN_WIDTH * 0.7, SCREEN_WIDTH * 0.7 * 0.44)];
-            [imgNoData setCenter:CGPointMake(SCREEN_WIDTH / 2, imgNoData.center.y)];
-            [imgNoData setImage:[UIImage imageNamed:@"img_frog.png"]];
-            [imgNoData setContentMode:UIViewContentModeScaleAspectFit];
-            [viewNoData addSubview:imgNoData];
-            
-            WKButton *btnAdd = [[WKButton alloc] initWithFrame:CGRectMake(15, VIEW_BY(imgNoData) + 20, SCREEN_WIDTH - 30, 40)];
-            [btnAdd setTitle:@"创建简历，证明自己" forState:UIControlStateNormal];
-            [btnAdd addTarget:self action:@selector(create) forControlEvents:UIControlEventTouchUpInside];
-            [viewNoData addSubview:btnAdd];
-            
-            [viewNoData setFrame:CGRectMake(0, (SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT - STATUS_BAR_HEIGHT - TAB_BAR_HEIGHT - VIEW_BY(btnAdd)) / 2, SCREEN_WIDTH, VIEW_BY(btnAdd))];
+        }else{
+            BOOL isValid = NO;
+            for (NSDictionary *dict in arrayCv) {
+                BOOL validBool = [dict[@"Valid"] boolValue];
+                isValid = isValid || validBool;
+            }
+            if (!isValid) {
+                //一分钟填写简历
+                [self createOneMinuteController];
+                return;
+            }
         }
-        else if (arrayCv.count == 1) {
+        
+//        if (arrayCv.count == 0) {// 创建“一分钟填写简历”页面
+//            UIView *viewNoData = [[UIView alloc] init];
+//            [viewNoData setBackgroundColor:[UIColor whiteColor]];
+//            [viewNoData setTag:NODATAVIEWTAG];
+//            [self.view addSubview:viewNoData];
+//
+//            WKLabel *lbNoData = [[WKLabel alloc] initWithFixedSpacing:CGRectMake(0, 0, SCREEN_WIDTH, 20) content:@"不要质疑此刻的付出\n创建一份代表自己能力的简历\n让HR知道你多牛" size:BIGGERFONTSIZE color:TEXTGRAYCOLOR spacing:7];
+//            [lbNoData setTextAlignment:NSTextAlignmentCenter];
+//            [lbNoData setCenter:CGPointMake(SCREEN_WIDTH / 2, lbNoData.center.y)];
+//            [viewNoData addSubview:lbNoData];
+//
+//            UIImageView *imgNoData = [[UIImageView alloc] initWithFrame:CGRectMake(0, VIEW_BY(lbNoData) + 20, SCREEN_WIDTH * 0.7, SCREEN_WIDTH * 0.7 * 0.44)];
+//            [imgNoData setCenter:CGPointMake(SCREEN_WIDTH / 2, imgNoData.center.y)];
+//            [imgNoData setImage:[UIImage imageNamed:@"img_frog.png"]];
+//            [imgNoData setContentMode:UIViewContentModeScaleAspectFit];
+//            [viewNoData addSubview:imgNoData];
+//
+//            WKButton *btnAdd = [[WKButton alloc] initWithFrame:CGRectMake(15, VIEW_BY(imgNoData) + 20, SCREEN_WIDTH - 30, 40)];
+//            [btnAdd setTitle:@"创建简历，证明自己" forState:UIControlStateNormal];
+//            [btnAdd addTarget:self action:@selector(create) forControlEvents:UIControlEventTouchUpInside];
+//            [viewNoData addSubview:btnAdd];
+//
+//            [viewNoData setFrame:CGRectMake(0, (SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT - STATUS_BAR_HEIGHT - TAB_BAR_HEIGHT - VIEW_BY(btnAdd)) / 2, SCREEN_WIDTH, VIEW_BY(btnAdd))];
+//        }else
+        
+        if (arrayCv.count == 1) {
             NSDictionary *data = [arrayCv objectAtIndex:0];
             CvInfoChildViewController *childCtrl = [[CvInfoChildViewController alloc] init];
             [childCtrl setDelegate:self];
@@ -149,6 +173,7 @@
     }
 }
 
+#pragma mark - 新建简历
 - (void)create {
     NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"CreateResume" Params:[NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", nil] viewController:self];
     [request setTag:2];
@@ -157,10 +182,21 @@
     self.runningRequest = request;
 }
 
+#pragma mark - 一分钟填写简历
+- (void)createOneMinuteController{
+    
+    OneMinuteCVViewController *oneVC = [[OneMinuteCVViewController alloc]init];
+    [self.navigationController pushViewController:oneVC animated:YES];
+}
+
 #pragma mark - 屏蔽设置
 - (void)shieldSet{
-    ShieldSetViewController *svc = [ShieldSetViewController new];
-    [self.navigationController pushViewController:svc animated:YES];
+    UIViewController *oneMinuteCV = [[UIStoryboard storyboardWithName:@"Person" bundle:nil] instantiateViewControllerWithIdentifier:@"oneMinuteView"];
+    
+    [self.navigationController pushViewController:oneMinuteCV animated:YES];
+    
+//    ShieldSetViewController *svc = [ShieldSetViewController new];
+//    [self.navigationController pushViewController:svc animated:YES];
 }
 - (void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
@@ -170,5 +206,9 @@
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:NOTIFICATION_GETCVLIST object:nil];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self createOneMinuteController];
 }
 @end

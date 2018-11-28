@@ -11,10 +11,16 @@
 
 #pragma mark - 个人用户
 
+// 获取用户基本信息
+#define URL_GETPAMAIN @"GetPaMain"
 // 投诉
 #define URL_SAVECOMPLAIN @"SaveComplaints"
 // 验证码登录方式获取验证码
 #define URL_GETPAMOBILEVERIFYCODELOGIN @"GetPaMobileVerifyCodeLogin"
+// 获取验证码
+#define URL_GETPAMOBILEVERIFYCODE @"GetPaMobileVerifyCode"
+// 一分钟完成简历页面获取验证码
+#define URL_GETMOBILECERCODE @"GetMobileCerCode"
 // 验证码登录
 #define URL_LOGINMOBILE @"LoginMobile"
 // 账户密码登录
@@ -33,6 +39,8 @@
 #define URL_GETCVATTACHMENTLIST @"GetCvAttachmentList"
 // 删除附件简历
 #define URL_DELETECVATTACHMENT @"deleteCvAttachment"
+// 一分钟填写简历
+#define URL_SAVEONEMINUTE20180613NEW @"SaveOneMinute20180613New"
 
 
 #pragma mark - 公司用户

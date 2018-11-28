@@ -52,6 +52,7 @@
 
 + (NSString *)verifyCodeGetResult:(NSInteger)result;
 + (NSString *)verifyCodeLoginResult:(NSInteger)result;
++ (NSString *)oneminuteMobileCerCodeResult:(NSInteger)result;
 + (NSString *)loginResult:(NSInteger)result;
 
 + (NSArray *)getProvince;
@@ -61,4 +62,6 @@
 + (NSString *)getWelfareIdSelected:(NSDictionary *)welfareDict;
 
 + (CGSize)sizeWithText:(NSString *)text font:(UIFont *)font maxSize:(CGSize)maxSize;
+
+
 @end

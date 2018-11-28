@@ -618,6 +618,49 @@
     }
 }
 
+/**
+ 一分钟填写简历验证码接口返回的错误码信息
+ 
+ @param result 返回值
+ @return 处理结果
+ */
++ (NSString *)oneminuteMobileCerCodeResult:(NSInteger)result{
+    switch (result) {
+        case 0:
+            return @"短信发送失败，请稍后重试！";
+            break;
+        case -1:
+            return @"该手机号已经认证过，无需重复认证！";
+            break;
+        case -2:
+            return @"该手机号当天认证次数过多！";
+            break;
+        case -3:
+            return @"短信发送失败，请稍后重试！";
+            break;
+        case -4:
+            return @"您输入手机号已经存在，请重新输入！";
+            break;
+        case -5:
+            return @"您在180s内获取过验证码，请稍候重试！";
+            break;
+        case -11:
+            return @"网络链接错误，请稍候重试！";
+            break;
+        case -100:
+            return @"数据异常，请返回并重试！";
+            break;
+        case -102:
+            return @"手机号格式错误！";
+            break;
+        case -103:
+            return @"该手机号60天之内认证过其他账号，建议您用该手机号取回密码！";
+            break;
+        default:
+            return @"未知错误";
+            break;
+    }
+}
 
 /**
  账号密码登录接口返回的错误码信息
