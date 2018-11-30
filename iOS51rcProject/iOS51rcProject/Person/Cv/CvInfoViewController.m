@@ -36,7 +36,7 @@
     // Do any additional setup after loading the view.
     self.title = @"简历";
     [self getData];
-    
+    [self configChildControllers];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getData) name:NOTIFICATION_GETCVLIST object:nil];
 }
 - (void)setupAddCVBtn{
@@ -50,10 +50,6 @@
     [addCvBtn setImage:[UIImage imageNamed:@"addCV"] forState:UIControlStateNormal];
     [addCvBtn addTarget:self action:@selector(create) forControlEvents:UIControlEventTouchUpInside];
     [self.view bringSubviewToFront:addCvBtn];
-}
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-//    [self getData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -77,7 +73,8 @@
             [view removeFromSuperview];
         }
     }
-    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetCvList" Params:[NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", nil] viewController:self];
+    NSDictionary *paramDict = [NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", nil];
+    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetCvList" Params:paramDict viewController:self];
     [request setTag:1];
     [request setDelegate:self];
     [request startSynchronous];
@@ -110,32 +107,9 @@
                 return;
             }
         }
-        
-//        if (arrayCv.count == 0) {// 创建“一分钟填写简历”页面
-//            UIView *viewNoData = [[UIView alloc] init];
-//            [viewNoData setBackgroundColor:[UIColor whiteColor]];
-//            [viewNoData setTag:NODATAVIEWTAG];
-//            [self.view addSubview:viewNoData];
-//
-//            WKLabel *lbNoData = [[WKLabel alloc] initWithFixedSpacing:CGRectMake(0, 0, SCREEN_WIDTH, 20) content:@"不要质疑此刻的付出\n创建一份代表自己能力的简历\n让HR知道你多牛" size:BIGGERFONTSIZE color:TEXTGRAYCOLOR spacing:7];
-//            [lbNoData setTextAlignment:NSTextAlignmentCenter];
-//            [lbNoData setCenter:CGPointMake(SCREEN_WIDTH / 2, lbNoData.center.y)];
-//            [viewNoData addSubview:lbNoData];
-//
-//            UIImageView *imgNoData = [[UIImageView alloc] initWithFrame:CGRectMake(0, VIEW_BY(lbNoData) + 20, SCREEN_WIDTH * 0.7, SCREEN_WIDTH * 0.7 * 0.44)];
-//            [imgNoData setCenter:CGPointMake(SCREEN_WIDTH / 2, imgNoData.center.y)];
-//            [imgNoData setImage:[UIImage imageNamed:@"img_frog.png"]];
-//            [imgNoData setContentMode:UIViewContentModeScaleAspectFit];
-//            [viewNoData addSubview:imgNoData];
-//
-//            WKButton *btnAdd = [[WKButton alloc] initWithFrame:CGRectMake(15, VIEW_BY(imgNoData) + 20, SCREEN_WIDTH - 30, 40)];
-//            [btnAdd setTitle:@"创建简历，证明自己" forState:UIControlStateNormal];
-//            [btnAdd addTarget:self action:@selector(create) forControlEvents:UIControlEventTouchUpInside];
-//            [viewNoData addSubview:btnAdd];
-//
-//            [viewNoData setFrame:CGRectMake(0, (SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT - STATUS_BAR_HEIGHT - TAB_BAR_HEIGHT - VIEW_BY(btnAdd)) / 2, SCREEN_WIDTH, VIEW_BY(btnAdd))];
-//        }else
-        
+    
+        self.navigationItem.title = @"简历";
+        [self setupBarItem];
         if (arrayCv.count == 1) {
             NSDictionary *data = [arrayCv objectAtIndex:0];
             CvInfoChildViewController *childCtrl = [[CvInfoChildViewController alloc] init];
@@ -184,31 +158,45 @@
 
 #pragma mark - 一分钟填写简历
 - (void)createOneMinuteController{
-    
-    OneMinuteCVViewController *oneVC = [[OneMinuteCVViewController alloc]init];
-    [self.navigationController pushViewController:oneVC animated:YES];
+    self.navigationItem.title = @"一分钟填写简历";
+    [self.navigationItem setRightBarButtonItem:nil];
+    OneMinuteCVViewController *oneMinuteCV = [[OneMinuteCVViewController alloc] init];
+    oneMinuteCV.pageType = PageType_CV;
+    [oneMinuteCV.view setFrame:CGRectMake(0, 0, SCREEN_WIDTH, VIEW_H(oneMinuteCV.view))];
+    [self addChildViewController:oneMinuteCV];
+    [self.view addSubview:oneMinuteCV.view];
 }
 
 #pragma mark - 屏蔽设置
 - (void)shieldSet{
-    UIViewController *oneMinuteCV = [[UIStoryboard storyboardWithName:@"Person" bundle:nil] instantiateViewControllerWithIdentifier:@"oneMinuteView"];
     
-    [self.navigationController pushViewController:oneMinuteCV animated:YES];
+//    UIViewController *oneMinuteCV = [[UIStoryboard storyboardWithName:@"Person" bundle:nil] instantiateViewControllerWithIdentifier:@"oneMinuteView"];
+//    [self.navigationController pushViewController:oneMinuteCV animated:YES];
     
-//    ShieldSetViewController *svc = [ShieldSetViewController new];
-//    [self.navigationController pushViewController:svc animated:YES];
+    ShieldSetViewController *svc = [ShieldSetViewController new];
+    [self.navigationController pushViewController:svc animated:YES];
 }
-- (void)viewWillLayoutSubviews{
-    [super viewWillLayoutSubviews];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"屏蔽设置" style:UIBarButtonItemStylePlain target:self action:@selector(shieldSet)];
-    [self.navigationItem.rightBarButtonItem setTintColor:[UIColor whiteColor]];
+
+#pragma mark - 屏蔽设置
+- (void)setupBarItem{
+    self.navigationItem.rightBarButtonItem = [[BarButtonItem alloc]initWithTitle:@"屏蔽设置" style:UIBarButtonItemStylePlain target:self action:@selector(shieldSet)];
 }
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:NOTIFICATION_GETCVLIST object:nil];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self createOneMinuteController];
+- (void)configChildControllers {
+    NSArray *arr1 = @[@"OneMinuteCVViewController"];
+    
+    for (NSInteger index = 0; index <arr1.count; index ++) {
+        
+        Class VcClass = NSClassFromString(arr1[index]);
+        
+        UIViewController *viewController = [[VcClass alloc]init];
+        
+        [self addChildViewController:viewController];
+    }
 }
+
 @end

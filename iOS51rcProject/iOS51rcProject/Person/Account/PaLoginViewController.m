@@ -283,6 +283,15 @@
 #pragma mark - 处理登录成功的返回值信息
 - (void)loginResult:(NSString *)result{
     
+    UITabBarController *personCtrl = [[UIStoryboard storyboardWithName:@"Person" bundle:nil] instantiateViewControllerWithIdentifier:@"personView"];
+    [personCtrl setSelectedIndex:4];
+    [self presentViewController:personCtrl animated:YES completion:^{
+        [USER_DEFAULT setObject:@"1" forKey:@"positioned"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PALOGINSUCCESS object:self];
+    }];
+    
+    // 这里需要打开 11.30
+    /*
     if ([result rangeOfString:@"|"].location != NSNotFound) {
         NSArray *arrayResult = [result componentsSeparatedByString:@"|"];
         NSString *paMainId = [arrayResult objectAtIndex:0];
@@ -303,7 +312,7 @@
         [personCtrl setSelectedIndex:4];
         [self presentViewController:personCtrl animated:YES completion:^{
             [USER_DEFAULT setObject:@"1" forKey:@"positioned"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"paLoginSuccess" object:self];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PALOGINSUCCESS object:self];
         }];
         
     }else if (isPasswordLogin){
@@ -314,6 +323,7 @@
         NSInteger resultCode = [result integerValue];
         [RCToast showMessage:[Common verifyCodeLoginResult:resultCode]];
     }
+     */
 }
 
 #pragma mark -  发送验证码的倒计时操作

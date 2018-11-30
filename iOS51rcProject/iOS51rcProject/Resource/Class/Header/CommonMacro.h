@@ -122,6 +122,9 @@
 #define COMPANYLOGIN                    ![CAMAINID isEqualToString:@"0"]
 #endif
 
+#define WeakSelfRC(type)  __weak typeof(type) weak##type = type;// 弱引用
+#define StrongSelfRC(type)  __strong typeof(type) type = weak##type;// 强引用
+
 // 版权属于原作者
 // http://code4app.com (cn) http://code4app.net (en)
 // 发布代码于最专业的源码分享网站: Code4App.com 

@@ -198,7 +198,7 @@
             [personCtrl setSelectedIndex:4];
             [self presentViewController:personCtrl animated:YES completion:^{
                 [USER_DEFAULT setObject:@"1" forKey:@"positioned"];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"paLoginSuccess" object:self];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PALOGINSUCCESS object:self];
             }];
         }
         else if ([result isEqualToString:@"-3"]) {

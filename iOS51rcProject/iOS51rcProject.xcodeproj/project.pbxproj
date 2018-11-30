@@ -397,6 +397,7 @@
 		99DA6BAD2047F6EB00BBDA59 /* FavoriteCvViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DA6BAC2047F6EB00BBDA59 /* FavoriteCvViewController.m */; };
 		99E031E921ABE13400FB5530 /* CVListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E031E821ABE13400FB5530 /* CVListModel.m */; };
 		99E031EC21ABE9F000FB5530 /* OneMinuteCVViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E031EB21ABE9F000FB5530 /* OneMinuteCVViewController.m */; };
+		99EC66E621B0D79F00756113 /* RCRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EC66E521B0D79F00756113 /* RCRootViewController.m */; };
 		99ED2804219E499B00ED656A /* InputAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99ED2803219E499B00ED656A /* InputAlertView.m */; };
 		99ED2807219E90B000ED656A /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99ED2806219E90B000ED656A /* AlertView.m */; };
 		99EE84BE1F72028700B2AFF9 /* CpRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EE84BD1F72028700B2AFF9 /* CpRegisterViewController.m */; };
@@ -1021,6 +1022,8 @@
 		99E031E821ABE13400FB5530 /* CVListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CVListModel.m; sourceTree = "<group>"; };
 		99E031EA21ABE9F000FB5530 /* OneMinuteCVViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneMinuteCVViewController.h; sourceTree = "<group>"; };
 		99E031EB21ABE9F000FB5530 /* OneMinuteCVViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneMinuteCVViewController.m; sourceTree = "<group>"; };
+		99EC66E421B0D79F00756113 /* RCRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCRootViewController.h; sourceTree = "<group>"; };
+		99EC66E521B0D79F00756113 /* RCRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCRootViewController.m; sourceTree = "<group>"; };
 		99ED2802219E499B00ED656A /* InputAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputAlertView.h; sourceTree = "<group>"; };
 		99ED2803219E499B00ED656A /* InputAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputAlertView.m; sourceTree = "<group>"; };
 		99ED2805219E90B000ED656A /* AlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
@@ -1733,6 +1736,8 @@
 				99F7FC832041427D0060E9F1 /* WKCvTableViewCell.m */,
 				991D7A87219D37A20019123A /* BarButtonItem.h */,
 				991D7A88219D37A20019123A /* BarButtonItem.m */,
+				99EC66E421B0D79F00756113 /* RCRootViewController.h */,
+				99EC66E521B0D79F00756113 /* RCRootViewController.m */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -2738,6 +2743,7 @@
 				992985211F5539CB0021F863 /* WKApplyView.m in Sources */,
 				9993A587218AD0C80057B6FD /* Common.m in Sources */,
 				991C6F631FFB5A5F009FD82A /* CvManagerViewController.m in Sources */,
+				99EC66E621B0D79F00756113 /* RCRootViewController.m in Sources */,
 				99F7FC8B2043B7170060E9F1 /* CvRecruitmentListViewController.m in Sources */,
 				99F7FC842041427D0060E9F1 /* WKCvTableViewCell.m in Sources */,
 				992985221F5539CB0021F863 /* WKButton.m in Sources */,

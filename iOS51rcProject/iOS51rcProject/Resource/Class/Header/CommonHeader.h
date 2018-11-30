@@ -16,4 +16,5 @@
 
 #define NOTIFICATION_GETCVLIST @"GetCvList"// 个人用户 - 点击“简历”tabbar刷新页面数据
 #define NOTIFICATION_ONEMINUTEGETVERIFYCODE @"OneMinuteGetVerifyCode"// 一分钟填写简历页面获取验证码
+#define NOTIFICATION_PALOGINSUCCESS @"paLoginSuccess"// 个人用户登陆成功
 #endif /* CommonHeader_h */

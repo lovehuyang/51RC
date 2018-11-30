@@ -10,7 +10,7 @@
 @class OneMinuteModel;
 
 @interface OnMinuteSingleCell : UITableViewCell
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(id)data indexPath:(NSIndexPath *)indexPath viewController:(UIViewController *)vc;
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(id)data viewController:(UIViewController *)vc;
 
 // 点击cell的事件
 @property (nonatomic , copy) void (^cellDidSelect)(UITextField *textField);

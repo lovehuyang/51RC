@@ -799,4 +799,43 @@
     }
 }
 
+
+/**
+ 根据学历计算工作年限应该减的年数
+
+ @param EducationId 学历ID
+ @return 应该减的年数
+ */
++ (NSInteger )calulateRelatedWorkYearsWithEducation:(NSInteger)EducationId{
+    NSInteger minusNum = 0;
+    switch (EducationId) {
+        case 1:// 初中
+            minusNum = -15;
+            break;
+        case 2:// 高中
+            minusNum = -18;
+            break;
+        case 3:// 中专
+            minusNum = -21;
+            break;
+        case 4:// 中技
+            minusNum = -21;
+            break;
+        case 5:// 大专
+            minusNum = -21;
+            break;
+        case 6:// 本科
+            minusNum = -22;
+            break;
+        case 7:// 硕士
+            minusNum = -25;
+            break;
+        case 8:// 博士
+            minusNum = -28;
+            break;
+        default:
+            break;
+    }
+    return minusNum;
+}
 @end

@@ -12,18 +12,14 @@
 
 @interface OnMinuteSingleCell()<UITextFieldDelegate>
 @property (nonatomic , strong) UIButton *getSecurityBtn;// 获取验证码的button
-@property (nonatomic , strong) NSIndexPath *indexPath;
-@property (nonatomic , strong) id data;// 数据源
 @property (nonatomic , strong) UIViewController *vc;
 @end
 
 @implementation OnMinuteSingleCell
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(id)data indexPath:(NSIndexPath *)indexPath viewController:(UIViewController *)vc{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(id)data viewController:(UIViewController *)vc{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        self.indexPath = indexPath;
-        self.data = data;
         self.vc = vc;
         if ([data isKindOfClass:[OneMinuteModel class]]) {
             [self setupSubViews:data];
@@ -126,16 +122,6 @@
 
 #pragma mark - 监测文本框内容发生改变
 -(void)textFieldDidChange :(UITextField *)theTextField{
-    
-    if ([self.data isKindOfClass:[OneMinuteModel class]]) {
-        OneMinuteModel *model = (OneMinuteModel *)self.data;
-        model.contentStr = theTextField.text;
-    
-    }else{
-        OneMinuteModel *model = [(NSArray *)self.data objectAtIndex:theTextField.tag - 100];
-        model.contentStr = theTextField.text;
-    }
-    
     self.cellDidSelect(theTextField);
 }
 

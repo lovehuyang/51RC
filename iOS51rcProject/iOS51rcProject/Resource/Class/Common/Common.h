@@ -63,5 +63,6 @@
 
 + (CGSize)sizeWithText:(NSString *)text font:(UIFont *)font maxSize:(CGSize)maxSize;
 
++ (NSInteger )calulateRelatedWorkYearsWithEducation:(NSInteger)EducationId;
 
 @end

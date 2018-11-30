@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RCRootViewController.h"
 
-@interface OneMinuteCVViewController : UIViewController
+// 页面类型
+typedef enum _PageType {
+    PageType_Login = 0,// 登录成功跳转
+    PageType_CV = 1// “简历”页面跳转
+} PageType;
+
+@interface OneMinuteCVViewController : RCRootViewController
+
+@property (nonatomic , assign) PageType  pageType;
+@property (nonatomic , copy) void (^completeOneCV)(NSString * tempStr);// 完成一分钟简历
 
 @end

@@ -26,6 +26,9 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 @interface OneMinuteCVViewController ()<UITableViewDelegate, UITableViewDataSource,WKPopViewDelegate,MajorViewDelete,MultiSelectDelegate>
 {
     BOOL mobileVerify;// 手机号是否认证通过
+    NSInteger birthMonth;// 出生月份
+    NSInteger birthYear;// 出生年份
+    NSString *moblieNumber;// 手机号
 }
 @property (nonatomic , strong) UILabel *tipLab;//
 @property (nonatomic , strong) UITableView *tableview;
@@ -45,6 +48,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // 接口参数
     self.dataParam = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                       @"", @"strVerifyCode",
@@ -57,18 +61,16 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
                       @"", @"Salary", // 期望月薪
                       @"", @"JobType",// 期望职位类别
                       @"", @"Negotiable",// 是否可以面议
-                      @"", @"Education",// 学历
+                      @"", @"Education",// 学历id
                       @"", @"College",// 毕业院校
                       @"", @"MajorID",// 专业类别
                       @"", @"MajorName",// 专业名称
-                      
-                      
                       @"", @"intCareerStatus",//求职状态
                       PAMAINID, @"paMainID",
                       [USER_DEFAULT objectForKey:@"paMainCode"], @"strCode",
                       @"0", @"intCvMainID",
-                      @"", @"EducationID",
-                      @"", @"RelatedWorkYears",
+                      @"0", @"EducationID",// 教育背景id
+                      @"", @"RelatedWorkYears",// 工作经验
                       nil];
     
     [self getPaMain];
@@ -83,6 +85,8 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
         if (mobileVerifyDate.length > 0) {
             DLog(@"手机号已经通过认证");
             mobileVerify = YES;
+            [self.dataParam setValue:dataDict[@"Mobile"] forKey:@"Mobile"];
+            [self.dataParam setValue:dataDict[@"Name"] forKey:@"Name"];
         }else{
             mobileVerify = NO;
         }
@@ -109,7 +113,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 
 - (UILabel *)tipLab{
     if (!_tipLab) {
-        _tipLab= [[UILabel alloc]initWithFrame:CGRectMake(0, HEIGHT_STATUS_NAV, SCREEN_WIDTH, 35)];
+        _tipLab= [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35)];
         _tipLab.backgroundColor = SEPARATECOLOR;
         _tipLab.text = @"   简历求职第一步，快速填写简历，给你一个满意的工作。";
         _tipLab.font = DEFAULTFONT;
@@ -142,13 +146,14 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
     }
     return _footView;
 }
+
 #pragma mark - UITableViewDelegate, UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    OnMinuteSingleCell *cell = [[OnMinuteSingleCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil data:self.dataArr[indexPath.row] indexPath:indexPath viewController:self];
+    OnMinuteSingleCell *cell = [[OnMinuteSingleCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil data:self.dataArr[indexPath.row] viewController:self];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     __weak typeof(self)weakSelf = self;
     cell.cellDidSelect = ^(UITextField *textField) {
@@ -247,14 +252,19 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
     }else if (popView.tag == WKPopViewTag_Birthday){// 出生年月
         NSDictionary *dataYear = [arraySelect objectAtIndex:0];
         NSDictionary *dataMonth = [arraySelect objectAtIndex:1];
+        birthMonth = [dataMonth[@"id"] integerValue];// 赋值给出生月份变量
+        birthYear = [dataYear[@"id"] integerValue];// 赋值给年份变量
         [self.dataParam setValue:[NSString stringWithFormat:@"%@%@%@", [dataYear objectForKey:@"id"], ([[dataMonth objectForKey:@"id"] length] == 1 ? @"0": @""), [dataMonth objectForKey:@"id"]] forKey:@"Birthday"];
         [self resetDataValue:[NSString stringWithFormat:@"%@%@",dataYear[@"value"],dataMonth[@"value"]] key:@"出生年月"];
         
     }else if(popView.tag == WKPopViewTag_Education){// 学历
        
         NSDictionary *data = [arraySelect objectAtIndex:0];
+//        [self.dataParam setValue:[data objectForKey:@"id"] forKey:@"EducationID"];
         [self.dataParam setValue:[data objectForKey:@"id"] forKey:@"Education"];
         [self resetDataValue:[data objectForKey:@"value"] key:@"学历"];
+        
+//        DLog(@"%@-%@",self.dataParam[@"EducationID"],self.dataParam[@"Education"]);
         
         if ([[data objectForKey:@"id"] isEqualToString:@"1"] || [[data objectForKey:@"id"] isEqualToString:@"2"]) {
             
@@ -311,25 +321,60 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 }
 
 #pragma mark - 取数据源的值
-- (NSString *)getDataWithKey:(NSString *)key {
-    NSString *value = nil;
+- (OneMinuteModel *)getDataWithKey:(NSString *)key {
+    OneMinuteModel *returnModel;
     for (id object in self.dataArr) {
         if ([object isKindOfClass:[OneMinuteModel class]]) {
             OneMinuteModel *model = (OneMinuteModel *)object;
             if ([model.placeholderStr containsString:key]) {
-                value = model.contentStr;;
+                returnModel = model;
             }
         }else if([object isKindOfClass:[NSArray class]]){
             NSArray *dataArr = (NSArray *)object;
             for (id object2 in dataArr) {
                 OneMinuteModel *model2 = (OneMinuteModel *)object2;
                 if ([model2.placeholderStr containsString:key]) {
-                    value = model2.contentStr;
+                    returnModel = model2;
                 }
             }
         }
     }
-    return value;
+    return returnModel;
+}
+
+#pragma mark - 判断有无空信息
+- (BOOL)dataIsEmpty{
+    BOOL haveEmpty = NO;
+    for (id object in self.dataArr) {
+        if ([object isKindOfClass:[OneMinuteModel class]]) {
+            OneMinuteModel *model = (OneMinuteModel *)object;
+            // 如果手机号通过了验证
+            if(mobileVerify && !([model.placeholderStr containsString:@"手机号码"] || [model.placeholderStr containsString:@"短信确认码"])){
+                if (model.contentStr.length == 0 ||model.contentStr == nil) {
+                    [RCToast showMessage:[NSString stringWithFormat:@"请完善%@信息",model.placeholderStr]];
+                    haveEmpty = YES;
+                    return haveEmpty;
+                }
+            }else{// 如果手机号没通过验证
+                if (model.contentStr.length == 0 ||model.contentStr == nil) {
+                    [RCToast showMessage:[NSString stringWithFormat:@"请完善%@信息",model.placeholderStr]];
+                    haveEmpty = YES;
+                    return haveEmpty;
+                }
+            }
+        }else if([object isKindOfClass:[NSArray class]]){
+            NSArray *dataArr = (NSArray *)object;
+            for (id object2 in dataArr) {
+                OneMinuteModel *model2 = (OneMinuteModel *)object2;
+                if ([model2.contentStr length] == 0 || model2.contentStr == nil) {
+                    [RCToast showMessage:[NSString stringWithFormat:@"请完善%@信息",model2.placeholderStr]];
+                    haveEmpty = YES;
+                    return haveEmpty;
+                }
+            }
+        }
+    }
+    return haveEmpty;
 }
 
 #pragma mark - MajorViewDelete - 专业名称
@@ -356,10 +401,11 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 #pragma mark - 获取验证码
 - (void)getMobileVerifyCode{
     
-    if ([[self getDataWithKey:@"手机号码"] length]) {
+    OneMinuteModel *model = [self getDataWithKey:@"手机号码"];
+    if ([model.contentStr length]) {
         NSDictionary *paramDict = @{@"paMainID":PAMAINID,
                                     @"strCode":[USER_DEFAULT valueForKey:@"paMainCode"],
-                                    @"strMobile":[self getDataWithKey:@"手机号码"],
+                                    @"strMobile":model.contentStr,
                                     @"strWebSiteName":[USER_DEFAULT valueForKey:@"subsitename"]
                                     };
         [SVProgressHUD show];
@@ -382,9 +428,61 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
     }
 }
 
+#pragma mark - 计算工作经验
+- (void)calulateRelatedWorkYears{
+    // 获取现在年份
+    NSDate *date = [NSDate date];
+    NSDateFormatter *forMatter = [[NSDateFormatter alloc] init];
+    [forMatter setDateFormat:@"yyyy"];
+    // 当前年份
+    NSInteger nowYear = [[forMatter stringFromDate:date] integerValue];
+    // 学历应该减的年数
+    NSInteger educationNum = [Common calulateRelatedWorkYearsWithEducation:[self.dataParam[@"EducationID"] integerValue]];
+    // 出生月份应该减的数
+    NSInteger birthMonthNum = (birthMonth <=8 && birthMonth >=1)?0:1;
+    // 计算工作经验
+    NSInteger relatedWorkYears = nowYear + educationNum - birthMonthNum - birthYear;
+    [self.dataParam setValue:[NSString stringWithFormat:@"%ld",(long)relatedWorkYears] forKey:@"RelatedWorkYears"];
+}
+
 #pragma mark - 保存
 - (void)saveEvent{
     
+    BOOL haveEmpty = [self dataIsEmpty];
+    
+    if(haveEmpty){
+        return;
+    }
+    [self calulateRelatedWorkYears];
+    [SVProgressHUD dismiss];
+    [AFNManager requestWithMethod:POST ParamDict:self.dataParam url:URL_SAVEONEMINUTE20180613NEW tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        [SVProgressHUD dismiss];
+        // -100：code验证不通过  -101：手机号认证失败    1：成功
+        NSInteger result = [(NSString *)dataDict integerValue];
+        if (result == 1) {
+            [RCToast showMessage:@"一分钟简历创建成功！"];
+        
+            // GCD延时执行
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                if (self.pageType == PageType_Login) {
+                    self.completeOneCV();
+                    [self.navigationController popViewControllerAnimated:NO];
+                }else{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GETCVLIST object:nil];
+                }
+            });
+
+        }else if (result == -100){
+            [RCToast showMessage:@"code验证不通过"];
+        }else if (result == -101){
+            [RCToast showMessage:@"手机号认证失败"];
+        }
+        
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        [SVProgressHUD dismiss];
+        [RCToast showMessage:msg];
+    }];
 }
 
 @end

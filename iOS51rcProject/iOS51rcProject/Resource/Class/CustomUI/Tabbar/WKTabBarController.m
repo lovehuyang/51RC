@@ -23,9 +23,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    BaseTabbar *baseTabbar = [[BaseTabbar alloc]init];
-    baseTabbar.delegate = self;
-    [self setValue:baseTabbar forKey:@"tabBar"];
+//    BaseTabbar *baseTabbar = [[BaseTabbar alloc]init];
+//    baseTabbar.delegate = self;
+//    [self setValue:baseTabbar forKey:@"tabBar"];
     
     self.userType = [USER_DEFAULT objectForKey:@"userType"];
     if ([self.userType isEqualToString:@"1"]) {

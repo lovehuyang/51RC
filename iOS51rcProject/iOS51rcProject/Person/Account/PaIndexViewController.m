@@ -27,6 +27,7 @@
 #import "UIImage+Size.h"
 #import "OptionView.h"
 #import "AFNManager.h"
+#import "OneMinuteCVViewController.h"
 
 @interface PaIndexViewController ()<UIScrollViewDelegate, NetWebServiceRequestDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MLImageCropDelegate, WKPopViewDelegate>
 
@@ -43,6 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:NOTIFICATION_PALOGINSUCCESS object:nil];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     UIView *viewStatusBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, STATUS_BAR_HEIGHT)];
     [viewStatusBar setBackgroundColor:NAVBARCOLOR];
@@ -273,14 +275,17 @@
     }
     UIAlertController *alertLogout = [UIAlertController alertControllerWithTitle:@"确定要退出登录吗？" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     [alertLogout addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        // 这里需要打开 11.30
+        /*
         NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"DeletePaIOSBind" Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", [JPUSHService registrationID], @"uniqueID", nil] viewController:nil];
         [request setTag:4];
         [request setDelegate:self];
         [request startAsynchronous];
         self.runningRequest = request;
-        
+
         [USER_DEFAULT removeObjectForKey:@"paMainId"];
         [USER_DEFAULT removeObjectForKey:@"paMainCode"];
+         */
         [self loginClick];
     }]];
     [alertLogout addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
@@ -556,14 +561,41 @@
     self.runningRequest = request;
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    // CheckIsPaMobileVerify
-    NSDictionary *paramDict = @{@"mobile":@"15665889905"};
-    [AFNManager requestWithMethod:POST ParamDict:paramDict url:@"CheckIsPaMobileVerify" tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+#pragma mark - 登陆成功
+- (void)loginSuccess{
+    
+    NSDictionary *paramDict = [NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", nil];
+
+    [AFNManager requestWithMethod:POST ParamDict:paramDict url:@"GetCvList" tableName:@"Table" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
         DLog(@"");
+        if(requestData.count == 0){// 一分钟填写简历
+            OneMinuteCVViewController *oneCV = [[OneMinuteCVViewController alloc]init];
+            oneCV.pageType = PageType_Login;
+            [self.navigationController pushViewController:oneCV animated:NO];
+            return;
+            
+        }else{
+            BOOL isValid = NO;
+            for (NSDictionary *dict in requestData) {
+                BOOL validBool = [dict[@"Valid"] boolValue];
+                isValid = isValid || validBool;
+            }
+            if (!isValid) {
+                //一分钟填写简历
+                OneMinuteCVViewController *oneCV = [[OneMinuteCVViewController alloc]init];
+                oneCV.completeOneCV = ^(NSString *tempStr) {
+                   self.tabBarController.selectedIndex = 0;
+                };
+                
+                [self.navigationController pushViewController:oneCV animated:NO];
+                
+                return;
+            }
+        }
+    
     } failureBlock:^(NSInteger errCode, NSString *msg) {
         DLog(@"");
     }];
+    
 }
-
 @end
