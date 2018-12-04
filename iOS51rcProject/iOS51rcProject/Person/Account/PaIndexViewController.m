@@ -275,8 +275,6 @@
     }
     UIAlertController *alertLogout = [UIAlertController alertControllerWithTitle:@"确定要退出登录吗？" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     [alertLogout addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        // 这里需要打开 11.30
-        /*
         NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"DeletePaIOSBind" Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", [JPUSHService registrationID], @"uniqueID", nil] viewController:nil];
         [request setTag:4];
         [request setDelegate:self];
@@ -285,7 +283,6 @@
 
         [USER_DEFAULT removeObjectForKey:@"paMainId"];
         [USER_DEFAULT removeObjectForKey:@"paMainCode"];
-         */
         [self loginClick];
     }]];
     [alertLogout addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
@@ -571,6 +568,11 @@
         if(requestData.count == 0){// 一分钟填写简历
             OneMinuteCVViewController *oneCV = [[OneMinuteCVViewController alloc]init];
             oneCV.pageType = PageType_Login;
+            oneCV.completeOneCV = ^(NSString *tempStr) {
+                DLog(@"%@",tempStr);
+                //
+                [self.tabBarController setSelectedIndex:0];
+            };
             [self.navigationController pushViewController:oneCV animated:NO];
             return;
             

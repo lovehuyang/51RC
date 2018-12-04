@@ -173,6 +173,22 @@
 		992985321F553BCE0021F863 /* CpLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992985311F553BCE0021F863 /* CpLoginViewController.m */; };
 		992DC19F206B7A2C00563456 /* ico_mapcenter.png in Resources */ = {isa = PBXBuildFile; fileRef = 992DC19E206B7A2C00563456 /* ico_mapcenter.png */; };
 		9939A603207A0AB1005D2146 /* AccountSafeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9939A602207A0AB1005D2146 /* AccountSafeViewController.m */; };
+		993ED84121B510F700A988FF /* SpeechButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 993ED84021B510F700A988FF /* SpeechButton.m */; };
+		993ED84421B51E4100A988FF /* SpeechViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 993ED84321B51E4100A988FF /* SpeechViewController.m */; };
+		993ED85321B528AB00A988FF /* “013”副本.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 993ED84621B528AA00A988FF /* “013”副本.mp3 */; };
+		993ED85421B528AB00A988FF /* voicejobtype.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 993ED84721B528AA00A988FF /* voicejobtype.mp3 */; };
+		993ED85521B528AB00A988FF /* voicemobile.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 993ED84821B528AA00A988FF /* voicemobile.mp3 */; };
+		993ED85621B528AB00A988FF /* voicemajorname.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 993ED84921B528AA00A988FF /* voicemajorname.mp3 */; };
+		993ED85721B528AB00A988FF /* voicename.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 993ED84A21B528AA00A988FF /* voicename.mp3 */; };
+		993ED85821B528AB00A988FF /* voiceschool.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 993ED84B21B528AA00A988FF /* voiceschool.mp3 */; };
+		993ED85921B528AB00A988FF /* voicedegree.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 993ED84C21B528AA00A988FF /* voicedegree.mp3 */; };
+		993ED85A21B528AB00A988FF /* “014”副本.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 993ED84D21B528AA00A988FF /* “014”副本.mp3 */; };
+		993ED85B21B528AB00A988FF /* voicejobplace.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 993ED84E21B528AA00A988FF /* voicejobplace.mp3 */; };
+		993ED85C21B528AB00A988FF /* voiceage.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 993ED84F21B528AA00A988FF /* voiceage.mp3 */; };
+		993ED85D21B528AB00A988FF /* voicebirth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 993ED85021B528AA00A988FF /* voicebirth.mp3 */; };
+		993ED85E21B528AB00A988FF /* voicesalary.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 993ED85121B528AA00A988FF /* voicesalary.mp3 */; };
+		993ED85F21B528AB00A988FF /* voicepardon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 993ED85221B528AA00A988FF /* voicepardon.mp3 */; };
+		993ED86121B52AC500A988FF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 993ED86021B52AC200A988FF /* AVFoundation.framework */; };
 		9947F2B22193ED25002C97F2 /* BaseTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 9947F2B02193ED25002C97F2 /* BaseTabbar.m */; };
 		9947F2B32193ED25002C97F2 /* WKTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9947F2B12193ED25002C97F2 /* WKTabBarController.m */; };
 		994A85031F4FF9F100097B44 /* job_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 994A85021F4FF9F100097B44 /* job_top.png */; };
@@ -285,6 +301,19 @@
 		996C9084218934B600C0EF66 /* ComplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 996C9083218934B600C0EF66 /* ComplainViewController.m */; };
 		996C90882189368D00C0EF66 /* ComplainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 996C90872189368D00C0EF66 /* ComplainView.m */; };
 		996C908C21894F8500C0EF66 /* AFNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 996C908B21894F8500C0EF66 /* AFNManager.m */; };
+		996D649D21B60D170095EA95 /* voice_loading_9.png in Resources */ = {isa = PBXBuildFile; fileRef = 996D649321B60D170095EA95 /* voice_loading_9.png */; };
+		996D649E21B60D170095EA95 /* voice_loading_8.png in Resources */ = {isa = PBXBuildFile; fileRef = 996D649421B60D170095EA95 /* voice_loading_8.png */; };
+		996D649F21B60D170095EA95 /* voice_loading_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 996D649521B60D170095EA95 /* voice_loading_6.png */; };
+		996D64A021B60D170095EA95 /* voice_loading_7.png in Resources */ = {isa = PBXBuildFile; fileRef = 996D649621B60D170095EA95 /* voice_loading_7.png */; };
+		996D64A121B60D170095EA95 /* voice_loading_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 996D649721B60D170095EA95 /* voice_loading_5.png */; };
+		996D64A221B60D170095EA95 /* voice_loading_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 996D649821B60D170095EA95 /* voice_loading_4.png */; };
+		996D64A321B60D170095EA95 /* voice_loading_10.png in Resources */ = {isa = PBXBuildFile; fileRef = 996D649921B60D170095EA95 /* voice_loading_10.png */; };
+		996D64A421B60D170095EA95 /* voice_loading_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 996D649A21B60D170095EA95 /* voice_loading_1.png */; };
+		996D64A521B60D170095EA95 /* voice_loading_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 996D649B21B60D170095EA95 /* voice_loading_3.png */; };
+		996D64A621B60D170095EA95 /* voice_loading_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 996D649C21B60D170095EA95 /* voice_loading_2.png */; };
+		996D64A921B60DB80095EA95 /* VoiceWaveImgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 996D64A821B60DB80095EA95 /* VoiceWaveImgView.m */; };
+		996D64AC21B626B30095EA95 /* VoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 996D64AB21B626B30095EA95 /* VoiceModel.m */; };
+		996D64AF21B643BA0095EA95 /* SpeakBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 996D64AE21B643BA0095EA95 /* SpeakBtn.m */; };
 		996EB7AB218BE824000B475E /* RCToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 996EB7AA218BE824000B475E /* RCToast.m */; };
 		996EB7AD218C21AF000B475E /* p_registerClose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 996EB7AC218C21AE000B475E /* p_registerClose@2x.png */; };
 		996EB7B0218C3687000B475E /* NavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 996EB7AF218C3687000B475E /* NavBar.m */; };
@@ -685,6 +714,25 @@
 		992DC19E206B7A2C00563456 /* ico_mapcenter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_mapcenter.png; sourceTree = "<group>"; };
 		9939A601207A0AB1005D2146 /* AccountSafeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountSafeViewController.h; sourceTree = "<group>"; };
 		9939A602207A0AB1005D2146 /* AccountSafeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountSafeViewController.m; sourceTree = "<group>"; };
+		993ED83F21B510F600A988FF /* SpeechButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeechButton.h; sourceTree = "<group>"; };
+		993ED84021B510F700A988FF /* SpeechButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpeechButton.m; sourceTree = "<group>"; };
+		993ED84221B51E4100A988FF /* SpeechViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeechViewController.h; sourceTree = "<group>"; };
+		993ED84321B51E4100A988FF /* SpeechViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpeechViewController.m; sourceTree = "<group>"; };
+		993ED84621B528AA00A988FF /* “013”副本.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "“013”副本.mp3"; sourceTree = "<group>"; };
+		993ED84721B528AA00A988FF /* voicejobtype.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = voicejobtype.mp3; sourceTree = "<group>"; };
+		993ED84821B528AA00A988FF /* voicemobile.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = voicemobile.mp3; sourceTree = "<group>"; };
+		993ED84921B528AA00A988FF /* voicemajorname.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = voicemajorname.mp3; sourceTree = "<group>"; };
+		993ED84A21B528AA00A988FF /* voicename.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = voicename.mp3; sourceTree = "<group>"; };
+		993ED84B21B528AA00A988FF /* voiceschool.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = voiceschool.mp3; sourceTree = "<group>"; };
+		993ED84C21B528AA00A988FF /* voicedegree.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = voicedegree.mp3; sourceTree = "<group>"; };
+		993ED84D21B528AA00A988FF /* “014”副本.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "“014”副本.mp3"; sourceTree = "<group>"; };
+		993ED84E21B528AA00A988FF /* voicejobplace.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = voicejobplace.mp3; sourceTree = "<group>"; };
+		993ED84F21B528AA00A988FF /* voiceage.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = voiceage.mp3; sourceTree = "<group>"; };
+		993ED85021B528AA00A988FF /* voicebirth.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = voicebirth.mp3; sourceTree = "<group>"; };
+		993ED85121B528AA00A988FF /* voicesalary.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = voicesalary.mp3; sourceTree = "<group>"; };
+		993ED85221B528AA00A988FF /* voicepardon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = voicepardon.mp3; sourceTree = "<group>"; };
+		993ED86021B52AC200A988FF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		993ED86621B530D800A988FF /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
 		9947F2AE2193ED25002C97F2 /* BaseTabbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabbar.h; sourceTree = "<group>"; };
 		9947F2AF2193ED25002C97F2 /* WKTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKTabBarController.h; sourceTree = "<group>"; };
 		9947F2B02193ED25002C97F2 /* BaseTabbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabbar.m; sourceTree = "<group>"; };
@@ -816,6 +864,22 @@
 		996C90872189368D00C0EF66 /* ComplainView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComplainView.m; sourceTree = "<group>"; };
 		996C908A21894F8500C0EF66 /* AFNManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNManager.h; sourceTree = "<group>"; };
 		996C908B21894F8500C0EF66 /* AFNManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFNManager.m; sourceTree = "<group>"; };
+		996D649321B60D170095EA95 /* voice_loading_9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loading_9.png; sourceTree = "<group>"; };
+		996D649421B60D170095EA95 /* voice_loading_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loading_8.png; sourceTree = "<group>"; };
+		996D649521B60D170095EA95 /* voice_loading_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loading_6.png; sourceTree = "<group>"; };
+		996D649621B60D170095EA95 /* voice_loading_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loading_7.png; sourceTree = "<group>"; };
+		996D649721B60D170095EA95 /* voice_loading_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loading_5.png; sourceTree = "<group>"; };
+		996D649821B60D170095EA95 /* voice_loading_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loading_4.png; sourceTree = "<group>"; };
+		996D649921B60D170095EA95 /* voice_loading_10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loading_10.png; sourceTree = "<group>"; };
+		996D649A21B60D170095EA95 /* voice_loading_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loading_1.png; sourceTree = "<group>"; };
+		996D649B21B60D170095EA95 /* voice_loading_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loading_3.png; sourceTree = "<group>"; };
+		996D649C21B60D170095EA95 /* voice_loading_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loading_2.png; sourceTree = "<group>"; };
+		996D64A721B60DB80095EA95 /* VoiceWaveImgView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoiceWaveImgView.h; sourceTree = "<group>"; };
+		996D64A821B60DB80095EA95 /* VoiceWaveImgView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoiceWaveImgView.m; sourceTree = "<group>"; };
+		996D64AA21B626B30095EA95 /* VoiceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoiceModel.h; sourceTree = "<group>"; };
+		996D64AB21B626B30095EA95 /* VoiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoiceModel.m; sourceTree = "<group>"; };
+		996D64AD21B643BA0095EA95 /* SpeakBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeakBtn.h; sourceTree = "<group>"; };
+		996D64AE21B643BA0095EA95 /* SpeakBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpeakBtn.m; sourceTree = "<group>"; };
 		996EB7A9218BE824000B475E /* RCToast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCToast.h; sourceTree = "<group>"; };
 		996EB7AA218BE824000B475E /* RCToast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCToast.m; sourceTree = "<group>"; };
 		996EB7AC218C21AE000B475E /* p_registerClose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "p_registerClose@2x.png"; sourceTree = "<group>"; };
@@ -1056,6 +1120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				993ED86121B52AC500A988FF /* AVFoundation.framework in Frameworks */,
 				9919F9C61EDE508F00BE51F0 /* MessageUI.framework in Frameworks */,
 				9919F9C41EDE508800BE51F0 /* libsqlite3.tbd in Frameworks */,
 				9919F9C21EDE507C00BE51F0 /* JavaScriptCore.framework in Frameworks */,
@@ -1240,6 +1305,7 @@
 			children = (
 				991970362092F4ED003C31CB /* dictionary.db */,
 				991A24041EE64D5F008CD8E9 /* Media.xcassets */,
+				993ED84521B528AA00A988FF /* AudioFile */,
 				9919F9791EDE467600BE51F0 /* Class */,
 				995C3D721EF7D02000277468 /* Images */,
 			);
@@ -1279,6 +1345,8 @@
 		9919F9801EDE46A900BE51F0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				993ED86621B530D800A988FF /* libc++abi.tbd */,
+				993ED86021B52AC200A988FF /* AVFoundation.framework */,
 				9993A566218A940B0057B6FD /* libxml2.tbd */,
 				9993A564218A93DE0057B6FD /* libxml2.2.tbd */,
 				9919F9C71EDE515800BE51F0 /* ShareSDK */,
@@ -1575,6 +1643,12 @@
 				9990A70421A6490200A320FD /* AttachMentView.m */,
 				9997438A21AD11DD00B076A2 /* OnMinuteSingleCell.h */,
 				9997438B21AD11DD00B076A2 /* OnMinuteSingleCell.m */,
+				993ED83F21B510F600A988FF /* SpeechButton.h */,
+				993ED84021B510F700A988FF /* SpeechButton.m */,
+				996D64A721B60DB80095EA95 /* VoiceWaveImgView.h */,
+				996D64A821B60DB80095EA95 /* VoiceWaveImgView.m */,
+				996D64AD21B643BA0095EA95 /* SpeakBtn.h */,
+				996D64AE21B643BA0095EA95 /* SpeakBtn.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1595,6 +1669,8 @@
 				99E031E821ABE13400FB5530 /* CVListModel.m */,
 				9997439021AD1AEF00B076A2 /* OneMinuteModel.h */,
 				9997439121AD1AEF00B076A2 /* OneMinuteModel.m */,
+				996D64AA21B626B30095EA95 /* VoiceModel.h */,
+				996D64AB21B626B30095EA95 /* VoiceModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1742,6 +1818,26 @@
 			path = CustomUI;
 			sourceTree = "<group>";
 		};
+		993ED84521B528AA00A988FF /* AudioFile */ = {
+			isa = PBXGroup;
+			children = (
+				993ED84621B528AA00A988FF /* “013”副本.mp3 */,
+				993ED84721B528AA00A988FF /* voicejobtype.mp3 */,
+				993ED84821B528AA00A988FF /* voicemobile.mp3 */,
+				993ED84921B528AA00A988FF /* voicemajorname.mp3 */,
+				993ED84A21B528AA00A988FF /* voicename.mp3 */,
+				993ED84B21B528AA00A988FF /* voiceschool.mp3 */,
+				993ED84C21B528AA00A988FF /* voicedegree.mp3 */,
+				993ED84D21B528AA00A988FF /* “014”副本.mp3 */,
+				993ED84E21B528AA00A988FF /* voicejobplace.mp3 */,
+				993ED84F21B528AA00A988FF /* voiceage.mp3 */,
+				993ED85021B528AA00A988FF /* voicebirth.mp3 */,
+				993ED85121B528AA00A988FF /* voicesalary.mp3 */,
+				993ED85221B528AA00A988FF /* voicepardon.mp3 */,
+			);
+			path = AudioFile;
+			sourceTree = "<group>";
+		};
 		9947F2AD2193ED25002C97F2 /* Tabbar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1810,6 +1906,7 @@
 		995C3D721EF7D02000277468 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				996D649221B60D170095EA95 /* VoiceWave */,
 				998F8A7921916DE5003DBAB1 /* img_check1.png */,
 				998F8A7A21916DE5003DBAB1 /* img_check2.png */,
 				990A3B8A1F42F387006CB3CF /* Emotion */,
@@ -1988,6 +2085,23 @@
 			path = NetWork;
 			sourceTree = "<group>";
 		};
+		996D649221B60D170095EA95 /* VoiceWave */ = {
+			isa = PBXGroup;
+			children = (
+				996D649321B60D170095EA95 /* voice_loading_9.png */,
+				996D649421B60D170095EA95 /* voice_loading_8.png */,
+				996D649521B60D170095EA95 /* voice_loading_6.png */,
+				996D649621B60D170095EA95 /* voice_loading_7.png */,
+				996D649721B60D170095EA95 /* voice_loading_5.png */,
+				996D649821B60D170095EA95 /* voice_loading_4.png */,
+				996D649921B60D170095EA95 /* voice_loading_10.png */,
+				996D649A21B60D170095EA95 /* voice_loading_1.png */,
+				996D649B21B60D170095EA95 /* voice_loading_3.png */,
+				996D649C21B60D170095EA95 /* voice_loading_2.png */,
+			);
+			path = VoiceWave;
+			sourceTree = "<group>";
+		};
 		996F504B2188292900D2A7E9 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2089,6 +2203,8 @@
 				991D7A85219D35FB0019123A /* ShieldSetViewController.m */,
 				99E031EA21ABE9F000FB5530 /* OneMinuteCVViewController.h */,
 				99E031EB21ABE9F000FB5530 /* OneMinuteCVViewController.m */,
+				993ED84221B51E4100A988FF /* SpeechViewController.h */,
+				993ED84321B51E4100A988FF /* SpeechViewController.m */,
 				9997439521AD201B00B076A2 /* Other */,
 				991DAA9821A5525A00586AA7 /* Model */,
 				991D7A8D219D43230019123A /* View */,
@@ -2370,6 +2486,7 @@
 				990A3BD91F42F387006CB3CF /* 35.gif in Resources */,
 				990A3BC31F42F387006CB3CF /* 15.gif in Resources */,
 				999070BB1F025EC500B5E289 /* job_item1.png in Resources */,
+				993ED85C21B528AB00A988FF /* voiceage.mp3 in Resources */,
 				996EB7AD218C21AF000B475E /* p_registerClose@2x.png in Resources */,
 				995A49FB1F0A735B0047EDBE /* pa_edit.png in Resources */,
 				995C3DCD1EF7D02100277468 /* pa_remind1.png in Resources */,
@@ -2384,6 +2501,7 @@
 				990A3BEB1F42F387006CB3CF /* 8.gif in Resources */,
 				990A3BC41F42F387006CB3CF /* 16.gif in Resources */,
 				99101B5B20738B2D00ED060B /* cp_accountpause.png in Resources */,
+				993ED85621B528AB00A988FF /* voicemajorname.mp3 in Resources */,
 				995C3DBA1EF7D02100277468 /* pa_guidepic2.png in Resources */,
 				994C83161F1E069C00414E98 /* pa_cvpreitem4.png in Resources */,
 				9919F9F61EDE519900BE51F0 /* ShareSDKConfigFile.bundle in Resources */,
@@ -2392,8 +2510,10 @@
 				990A3BDF1F42F387006CB3CF /* 40.gif in Resources */,
 				999070A91F0252C300B5E289 /* img_licence.png in Resources */,
 				996131A51FDFC5A700194271 /* cp_account8.png in Resources */,
+				993ED85521B528AB00A988FF /* voicemobile.mp3 in Resources */,
 				995C3DBC1EF7D02100277468 /* pa_guidepic4.png in Resources */,
 				990A3BE61F42F387006CB3CF /* 47.gif in Resources */,
+				993ED85321B528AB00A988FF /* “013”副本.mp3 in Resources */,
 				995A49F91F0A455A0047EDBE /* img_frog.png in Resources */,
 				99144F1E1F208B8D0091478D /* img_arrowdown.png in Resources */,
 				995C3DC21EF7D02100277468 /* pa_invitation4.png in Resources */,
@@ -2414,6 +2534,7 @@
 				990431012093284D00B4267D /* cp_infotips.png in Resources */,
 				990A3BC61F42F387006CB3CF /* 18.gif in Resources */,
 				995231AB20560FA500C8836D /* cp_jobrefresh.png in Resources */,
+				993ED85721B528AB00A988FF /* voicename.mp3 in Resources */,
 				991A24051EE64D5F008CD8E9 /* Media.xcassets in Resources */,
 				995C3DB61EF7D02100277468 /* pa_account4.png in Resources */,
 				995C3DB81EF7D02100277468 /* pa_guidebg.png in Resources */,
@@ -2423,10 +2544,12 @@
 				996131A71FDFC5A700194271 /* cp_account7.png in Resources */,
 				99101B542073850100ED060B /* cp_accountmodify.png in Resources */,
 				999070C81F03846E00B5E289 /* img_mappoint.png in Resources */,
+				993ED85D21B528AB00A988FF /* voicebirth.mp3 in Resources */,
 				990A3BD71F42F387006CB3CF /* 33.gif in Resources */,
 				995A4A041F0B3A3C0047EDBE /* pa_open1.png in Resources */,
 				990A3BCC1F42F387006CB3CF /* 23.gif in Resources */,
 				9919F9551EDE445300BE51F0 /* LaunchScreen.storyboard in Resources */,
+				996D64A221B60D170095EA95 /* voice_loading_4.png in Resources */,
 				994C83151F1E069C00414E98 /* pa_cvpreitem3.png in Resources */,
 				9957BB96207F395E000EEAF1 /* pa_cvpreitem7.png in Resources */,
 				99101B532073850100ED060B /* cp_accountsafe.png in Resources */,
@@ -2446,6 +2569,7 @@
 				994DD94F2029839900BBEFF2 /* cp_searchjob.png in Resources */,
 				995C3DC61EF7D02100277468 /* pa_logincer.png in Resources */,
 				994A85031F4FF9F100097B44 /* job_top.png in Resources */,
+				993ED85E21B528AB00A988FF /* voicesalary.mp3 in Resources */,
 				990A3BBE1F42F387006CB3CF /* 10.gif in Resources */,
 				995A4A0F1F0B60570047EDBE /* pa_cvitem5.png in Resources */,
 				990A3BD21F42F387006CB3CF /* 29.gif in Resources */,
@@ -2454,10 +2578,12 @@
 				999070C61F03846D00B5E289 /* img_favorite1.png in Resources */,
 				990A3BC81F42F387006CB3CF /* 2.gif in Resources */,
 				995C3DAE1EF7D02100277468 /* img_rolebg.png in Resources */,
+				996D64A421B60D170095EA95 /* voice_loading_1.png in Resources */,
 				9990707D1EFC97D500B5E289 /* img_nodata.png in Resources */,
 				9919FA011EDE519900BE51F0 /* ShareSDK.bundle in Resources */,
 				990108301F594ED90002CECE /* job_history.png in Resources */,
 				990A3BD61F42F387006CB3CF /* 32.gif in Resources */,
+				993ED85B21B528AB00A988FF /* voicejobplace.mp3 in Resources */,
 				9919907C2089E15C00E2B0D2 /* cp_jobrefreshall.png in Resources */,
 				994C83181F1E069C00414E98 /* pa_cvpreitem6.png in Resources */,
 				999070BE1F025EC500B5E289 /* job_item4.png in Resources */,
@@ -2469,7 +2595,10 @@
 				999070C11F03562D00B5E289 /* img_dial.png in Resources */,
 				990A3BE81F42F387006CB3CF /* 5.gif in Resources */,
 				996131A21FDFC5A700194271 /* cp_account6.png in Resources */,
+				996D649E21B60D170095EA95 /* voice_loading_8.png in Resources */,
 				999BA6B21F0E14FB003F85D1 /* pa_add.png in Resources */,
+				993ED85421B528AB00A988FF /* voicejobtype.mp3 in Resources */,
+				996D64A521B60D170095EA95 /* voice_loading_3.png in Resources */,
 				995A4A0E1F0B60570047EDBE /* pa_cvitem4.png in Resources */,
 				994C831C1F1F46F800414E98 /* job_search.png in Resources */,
 				990A3BCD1F42F387006CB3CF /* 24.gif in Resources */,
@@ -2479,12 +2608,14 @@
 				990A3BC21F42F387006CB3CF /* 14.gif in Resources */,
 				990A3BE71F42F387006CB3CF /* 48.gif in Resources */,
 				994C83171F1E069C00414E98 /* pa_cvpreitem5.png in Resources */,
+				996D649D21B60D170095EA95 /* voice_loading_9.png in Resources */,
 				990A3BCF1F42F387006CB3CF /* 26.gif in Resources */,
 				995C3DBB1EF7D02100277468 /* pa_guidepic3.png in Resources */,
 				990A3BE11F42F387006CB3CF /* 42.gif in Resources */,
 				996131A61FDFC5A700194271 /* cp_account1.png in Resources */,
 				995C3DB71EF7D02100277468 /* pa_defaultphoto.png in Resources */,
 				990108331F60EEA70002CECE /* img_defaultlogo.png in Resources */,
+				993ED85A21B528AB00A988FF /* “014”副本.mp3 in Resources */,
 				995A4ABA1F0B7B270047EDBE /* pa_photo.png in Resources */,
 				995C3DA51EF7D02100277468 /* img_arrowright.png in Resources */,
 				990108311F594ED90002CECE /* job_trash.png in Resources */,
@@ -2500,6 +2631,7 @@
 				990A3BC01F42F387006CB3CF /* 12.gif in Resources */,
 				990A3BCA1F42F387006CB3CF /* 21.gif in Resources */,
 				990A3B891F3C559A006CB3CF /* chat_emotion.png in Resources */,
+				993ED85821B528AB00A988FF /* voiceschool.mp3 in Resources */,
 				990A3BEC1F42F387006CB3CF /* 9.gif in Resources */,
 				990A3BE21F42F387006CB3CF /* 43.gif in Resources */,
 				991970372092F4ED003C31CB /* dictionary.db in Resources */,
@@ -2519,8 +2651,10 @@
 				995A4AB91F0B7B270047EDBE /* pa_camera.png in Resources */,
 				996131A81FDFC5A700194271 /* cp_account3.png in Resources */,
 				995C3DC01EF7D02100277468 /* pa_invitation2.png in Resources */,
+				996D64A621B60D170095EA95 /* voice_loading_2.png in Resources */,
 				99101B5A20738B2D00ED060B /* cp_accountstart.png in Resources */,
 				990A3BC11F42F387006CB3CF /* 13.gif in Resources */,
+				996D64A121B60D170095EA95 /* voice_loading_5.png in Resources */,
 				995A4A0C1F0B60570047EDBE /* pa_cvitem2.png in Resources */,
 				995A49FD1F0A76DE0047EDBE /* pa_refresh.png in Resources */,
 				990A3BBD1F42F387006CB3CF /* 1.gif in Resources */,
@@ -2532,8 +2666,10 @@
 				995A4A051F0B3A3C0047EDBE /* pa_open2.png in Resources */,
 				990A3BDA1F42F387006CB3CF /* 36.gif in Resources */,
 				995C3DD01EF7D24E00277468 /* pa_chat.png in Resources */,
+				996D649F21B60D170095EA95 /* voice_loading_6.png in Resources */,
 				995C3DB11EF7D02100277468 /* img_rolepa1.png in Resources */,
 				990A3B861F3C550A006CB3CF /* chat_photo.png in Resources */,
+				993ED85921B528AB00A988FF /* voicedegree.mp3 in Resources */,
 				995C3DCA1EF7D02100277468 /* pa_loginuser.png in Resources */,
 				990A3BEE1F42F387006CB3CF /* ico_emoitem2.png in Resources */,
 				995231AC20560FA500C8836D /* cp_jobmodify.png in Resources */,
@@ -2542,12 +2678,14 @@
 				995C3DC11EF7D02100277468 /* pa_invitation3.png in Resources */,
 				9919907E2089E1E100E2B0D2 /* cp_jobadd.png in Resources */,
 				995C3DC71EF7D02100277468 /* pa_loginforget.png in Resources */,
+				993ED85F21B528AB00A988FF /* voicepardon.mp3 in Resources */,
 				99FCF1FA2011BECE008B5A69 /* cp_imgclose.png in Resources */,
 				9990709C1F01FCAE00B5E289 /* job_contact.png in Resources */,
 				990A3BCB1F42F387006CB3CF /* 22.gif in Resources */,
 				999070A01F023AC000B5E289 /* job_hasapply.png in Resources */,
 				995C3DA11EF7D02100277468 /* cp_guidebg.png in Resources */,
 				999070A71F024FF000B5E289 /* img_realname.png in Resources */,
+				996D64A021B60D170095EA95 /* voice_loading_7.png in Resources */,
 				994C83141F1E069C00414E98 /* pa_cvpreitem2.png in Resources */,
 				9919F9FF1EDE519900BE51F0 /* README.txt in Resources */,
 				995C3DB21EF7D02100277468 /* img_rolepa2.png in Resources */,
@@ -2558,6 +2696,7 @@
 				990A3BD31F42F387006CB3CF /* 3.gif in Resources */,
 				990A3BDE1F42F387006CB3CF /* 4.gif in Resources */,
 				995A4A0B1F0B60570047EDBE /* pa_cvitem1.png in Resources */,
+				996D64A321B60D170095EA95 /* voice_loading_10.png in Resources */,
 				995C3DD21EF8BDFA00277468 /* loading.gif in Resources */,
 				99101B4820720E0200ED060B /* img_cpcheck2.png in Resources */,
 				995C3DA41EF7D02100277468 /* img_arrowdownclear.png in Resources */,
@@ -2648,6 +2787,7 @@
 				995231B72059104600C8836D /* ResponsibilityViewController.m in Sources */,
 				9947F2B32193ED25002C97F2 /* WKTabBarController.m in Sources */,
 				995231A02052AB0400C8836D /* ExpiredJobListViewController.m in Sources */,
+				996D64AF21B643BA0095EA95 /* SpeakBtn.m in Sources */,
 				9960E25D219019CC008E6DE5 /* MBProgressHUD+Gif.m in Sources */,
 				991A24421EE6D7A9008CD8E9 /* ASINetworkQueue.m in Sources */,
 				9952319D2052AAE200C8836D /* IssueJobListViewController.m in Sources */,
@@ -2665,6 +2805,7 @@
 				991A24441EE6D7A9008CD8E9 /* GDataXMLNode.m in Sources */,
 				99D740422023FF7F005B2CD3 /* CvSearchViewController.m in Sources */,
 				997B068A1F5500A000391289 /* ExperienceModifyViewController.m in Sources */,
+				993ED84421B51E4100A988FF /* SpeechViewController.m in Sources */,
 				997B067C1F5500A000391289 /* FeedbackViewController.m in Sources */,
 				995231A62052ACCA00C8836D /* JobModifyViewController.m in Sources */,
 				99FCF1FD2011D320008B5A69 /* AccountListViewController.m in Sources */,
@@ -2686,6 +2827,7 @@
 				9919F9471EDE445300BE51F0 /* AppDelegate.m in Sources */,
 				9929852B1F5539CB0021F863 /* WKTextView.m in Sources */,
 				99906F1B1EFB47CF00B5E289 /* AboutUsViewController.m in Sources */,
+				996D64AC21B626B30095EA95 /* VoiceModel.m in Sources */,
 				99DA6BAD2047F6EB00BBDA59 /* FavoriteCvViewController.m in Sources */,
 				991C6F6A1FFB636E009FD82A /* AccountViewController.m in Sources */,
 				99E031EC21ABE9F000FB5530 /* OneMinuteCVViewController.m in Sources */,
@@ -2702,6 +2844,7 @@
 				9993A573218AB1060057B6FD /* OnlineLab.m in Sources */,
 				996EB7B0218C3687000B475E /* NavBar.m in Sources */,
 				9960E259218FCA95008E6DE5 /* CountdownBtn.m in Sources */,
+				993ED84121B510F700A988FF /* SpeechButton.m in Sources */,
 				991A24431EE6D7A9008CD8E9 /* Reachability.m in Sources */,
 				997B068E1F5500A000391289 /* MultiSelectViewController.m in Sources */,
 				990EF79D21A3903A00C63AEB /* ReplyAlert.m in Sources */,
@@ -2759,6 +2902,7 @@
 				997B069B1F5500A000391289 /* JobApplyViewController.m in Sources */,
 				99F7FC8120404D490060E9F1 /* InvitationManagerViewController.m in Sources */,
 				997B06961F5500A000391289 /* CpViewChildViewController.m in Sources */,
+				996D64A921B60DB80095EA95 /* VoiceWaveImgView.m in Sources */,
 				99A826611EEA329800609D94 /* MLImageCrop.m in Sources */,
 				997B06861F5500A000391289 /* CvInfoChildViewController.m in Sources */,
 				997B067E1F5500A000391289 /* OneMinuteViewController.m in Sources */,

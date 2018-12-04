@@ -14,6 +14,9 @@
 #import "Common.h"
 #import "MajorViewController.h"// 专业名称
 #import "MultiSelectViewController.h"// 期望职位类别
+#import "SpeechButton.h"
+#import "SpeechViewController.h"
+#import "WKNavigationController.h"
 
 NSInteger const WKPopViewTag_Gender = 1;//性别
 NSInteger const WKPopViewTag_Birthday = 2;//出生年月
@@ -93,12 +96,31 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
         
         [self.view addSubview:self.tipLab];
         [self.view addSubview:self.tableview];
+        [self setupAddHuaTongButton];// 语音输入按钮
         
     } failureBlock:^(NSInteger errCode, NSString *msg) {
         [SVProgressHUD dismiss];
     }];
 }
 
+#pragma mark - 话筒Button
+- (void)setupAddHuaTongButton{
+    SpeechButton *speechBtn = [SpeechButton new];
+    [self.view addSubview:speechBtn];
+    speechBtn.sd_layout
+    .rightSpaceToView(self.view, 20)
+    .bottomSpaceToView(self.tableview.tableFooterView, 0)
+    .widthIs(200)
+    .heightIs(50);
+    speechBtn.speechInput = ^{
+        DLog(@"");
+        SpeechViewController *svc = [SpeechViewController new];
+        WKNavigationController *nav = [[WKNavigationController alloc]initWithRootViewController:svc];
+        [self presentViewController:nav animated:YES completion:^{
+            
+        }];
+    };
+}
 #pragma mark - 懒加载
 - (UITableView *)tableview{
     if (!_tableview) {
@@ -466,7 +488,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 
                 if (self.pageType == PageType_Login) {
-                    self.completeOneCV();
+                    self.completeOneCV(@"一分钟简历创建成功");
                     [self.navigationController popViewControllerAnimated:NO];
                 }else{
                     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GETCVLIST object:nil];
