@@ -10,7 +10,7 @@
 
 @implementation VoiceModel
 
-+ (NSArray *)createVoiceModel:(NSInteger)type{
++ (NSMutableArray *)createVoiceModel:(NSInteger)type{
     
     NSMutableArray *dataArr = [NSMutableArray array];
     // 认证通过
@@ -36,15 +36,14 @@
         
         for (int i = 0; i < titleArr.count; i ++) {
             NSString *path = [[NSBundle mainBundle] pathForResource:voiceNameArr[i] ofType:@"mp3"];
-            
             VoiceModel *model = [[VoiceModel alloc]init];
             model.titleStr = titleArr[i];
             model.voicePath = path;
+            model.recognationStr = @"";
             [dataArr addObject:model];
         }
-    
-    }else{// 未认证
         
+    }else{// 未认证
         NSArray *voiceNameArr = @[@"voicemobile",
                                   @"voiceage",
                                   @"voicebirth",
@@ -69,10 +68,11 @@
             VoiceModel *model = [[VoiceModel alloc]init];
             model.titleStr = titleArr[i];
             model.voicePath = path;
+            model.recognationStr = @"";
             [dataArr addObject:model];
         }
     }
-    return [NSArray arrayWithArray:dataArr];
+    return dataArr;
 }
 
 @end

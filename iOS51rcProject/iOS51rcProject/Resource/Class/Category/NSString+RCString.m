@@ -42,4 +42,13 @@
     return [NSArray arrayWithArray:tempArr];
 }
 
++ (NSString *)juedeString:(NSString *)judeStr{
+    NSString *tempStr = @"";
+    if (judeStr == nil) {
+        tempStr = @"";
+    }else if(judeStr != nil){
+        tempStr = judeStr;
+    }
+    return tempStr;
+}
 @end

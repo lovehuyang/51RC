@@ -700,6 +700,19 @@
     return arr;
 }
 
+
+/**
+ 读取本地数据库求职状态
+
+ @return 数组
+ */
++ (NSArray *)getCareerStatus{
+    FMDatabase *dataBase;
+    NSString *sqlString = @"SELECT * FROM dcCareerStatus";
+    NSArray *array = [Common querySql:sqlString dataBase:dataBase];
+    return array;
+}
+
 + (NSDictionary *)welfare:(NSDictionary *)dict{
     NSDictionary *welfareDict = @{
                                   @"Welfare1":dict[@"Welfare1"],

@@ -11,4 +11,5 @@
 @interface NSString (RCString)
 + (NSString *)cutProvince:(NSString *)regionStr;
 + (NSArray *)getHideConditions:(NSString *)hideConditions;
++ (NSString *)juedeString:(NSString *)judeStr;
 @end

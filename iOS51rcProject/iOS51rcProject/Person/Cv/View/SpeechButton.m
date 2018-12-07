@@ -23,7 +23,7 @@
     huaTongBtn.sd_layout
     .rightSpaceToView(self, 0)
     .centerYEqualToView(self)
-    .widthIs(50)
+    .widthIs(45)
     .heightEqualToWidth();
     [huaTongBtn setImage:[UIImage imageNamed:@"ico_pasearch_startvoice"] forState:UIControlStateNormal];
     [huaTongBtn addTarget:self action:@selector(huaTongBtnClick) forControlEvents:UIControlEventTouchUpInside];

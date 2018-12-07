@@ -41,6 +41,8 @@
 #define URL_DELETECVATTACHMENT @"deleteCvAttachment"
 // 一分钟填写简历
 #define URL_SAVEONEMINUTE20180613NEW @"SaveOneMinute20180613New"
+// 获取手机号码归属地
+#define URL_GETIPMOBILEPLACE @"GetIpMobilePlace"
 
 
 #pragma mark - 公司用户

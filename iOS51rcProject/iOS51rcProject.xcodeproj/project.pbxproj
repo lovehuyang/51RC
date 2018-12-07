@@ -314,6 +314,45 @@
 		996D64A921B60DB80095EA95 /* VoiceWaveImgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 996D64A821B60DB80095EA95 /* VoiceWaveImgView.m */; };
 		996D64AC21B626B30095EA95 /* VoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 996D64AB21B626B30095EA95 /* VoiceModel.m */; };
 		996D64AF21B643BA0095EA95 /* SpeakBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 996D64AE21B643BA0095EA95 /* SpeakBtn.m */; };
+		996D64BC21B66D360095EA95 /* libBaiduSpeechSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 996D64BB21B66D360095EA95 /* libBaiduSpeechSDK.a */; };
+		996D64BE21B66DFC0095EA95 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 996D64BD21B66DFC0095EA95 /* libc++.tbd */; };
+		996D64C021B66E1D0095EA95 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 996D64BF21B66E1D0095EA95 /* libz.1.2.5.tbd */; };
+		996D64C221B66E290095EA95 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 996D64C121B66E290095EA95 /* AudioToolbox.framework */; };
+		996D64C421B66E550095EA95 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 996D64C321B66E550095EA95 /* CoreLocation.framework */; };
+		996D64C621B66E790095EA95 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 996D64C521B66E780095EA95 /* GLKit.framework */; };
+		996D650721B671090095EA95 /* .gitIgnore in Resources */ = {isa = PBXBuildFile; fileRef = 996D64CC21B671080095EA95 /* .gitIgnore */; };
+		996D650821B671090095EA95 /* bds_license.dat in Resources */ = {isa = PBXBuildFile; fileRef = 996D64E321B671090095EA95 /* bds_license.dat */; };
+		996D650921B671090095EA95 /* bds_easr_basic_model.dat in Resources */ = {isa = PBXBuildFile; fileRef = 996D64E421B671090095EA95 /* bds_easr_basic_model.dat */; };
+		996D650A21B671090095EA95 /* bds_easr_mfe_cmvn.dat in Resources */ = {isa = PBXBuildFile; fileRef = 996D64E521B671090095EA95 /* bds_easr_mfe_cmvn.dat */; };
+		996D650B21B671090095EA95 /* temp_license_2018-02-24.dat in Resources */ = {isa = PBXBuildFile; fileRef = 996D64E621B671090095EA95 /* temp_license_2018-02-24.dat */; };
+		996D650C21B671090095EA95 /* bds_easr_input_model.dat in Resources */ = {isa = PBXBuildFile; fileRef = 996D64E721B671090095EA95 /* bds_easr_input_model.dat */; };
+		996D650D21B671090095EA95 /* bds_easr_mfe_dnn.dat in Resources */ = {isa = PBXBuildFile; fileRef = 996D64E821B671090095EA95 /* bds_easr_mfe_dnn.dat */; };
+		996D650E21B671090095EA95 /* bds_easr_gramm.dat in Resources */ = {isa = PBXBuildFile; fileRef = 996D64E921B671090095EA95 /* bds_easr_gramm.dat */; };
+		996D650F21B671090095EA95 /* bds_easr_wakeup_words.dat in Resources */ = {isa = PBXBuildFile; fileRef = 996D64EA21B671090095EA95 /* bds_easr_wakeup_words.dat */; };
+		996D651021B671090095EA95 /* bds_easr_dnn_wakeup_model.dat in Resources */ = {isa = PBXBuildFile; fileRef = 996D64EB21B671090095EA95 /* bds_easr_dnn_wakeup_model.dat */; };
+		996D651121B671090095EA95 /* record_end.caf in Resources */ = {isa = PBXBuildFile; fileRef = 996D64EE21B671090095EA95 /* record_end.caf */; };
+		996D651221B671090095EA95 /* record_start.caf in Resources */ = {isa = PBXBuildFile; fileRef = 996D64EF21B671090095EA95 /* record_start.caf */; };
+		996D651321B671090095EA95 /* record_cancel.caf in Resources */ = {isa = PBXBuildFile; fileRef = 996D64F021B671090095EA95 /* record_cancel.caf */; };
+		996D651421B671090095EA95 /* record_success.caf in Resources */ = {isa = PBXBuildFile; fileRef = 996D64F121B671090095EA95 /* record_success.caf */; };
+		996D651521B671090095EA95 /* record_fail.caf in Resources */ = {isa = PBXBuildFile; fileRef = 996D64F221B671090095EA95 /* record_fail.caf */; };
+		996D651621B671090095EA95 /* lightBlue.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 996D64F421B671090095EA95 /* lightBlue.bundle */; };
+		996D651721B671090095EA95 /* lightOrange.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 996D64F521B671090095EA95 /* lightOrange.bundle */; };
+		996D651821B671090095EA95 /* darkRed.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 996D64F621B671090095EA95 /* darkRed.bundle */; };
+		996D651921B671090095EA95 /* defaultTheme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 996D64F721B671090095EA95 /* defaultTheme.bundle */; };
+		996D651A21B671090095EA95 /* lightGreen.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 996D64F821B671090095EA95 /* lightGreen.bundle */; };
+		996D651B21B671090095EA95 /* darkOrange.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 996D64F921B671090095EA95 /* darkOrange.bundle */; };
+		996D651C21B671090095EA95 /* defaultFullScreenTheme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 996D64FA21B671090095EA95 /* defaultFullScreenTheme.bundle */; };
+		996D651D21B671090095EA95 /* darkGreen.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 996D64FB21B671090095EA95 /* darkGreen.bundle */; };
+		996D651E21B671090095EA95 /* lightRed.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 996D64FC21B671090095EA95 /* lightRed.bundle */; };
+		996D651F21B671090095EA95 /* darkBlue.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 996D64FD21B671090095EA95 /* darkBlue.bundle */; };
+		996D652021B671090095EA95 /* English_Speech_Female.dat in Resources */ = {isa = PBXBuildFile; fileRef = 996D64FF21B671090095EA95 /* English_Speech_Female.dat */; };
+		996D652121B671090095EA95 /* offline_engine_tmp_license.dat in Resources */ = {isa = PBXBuildFile; fileRef = 996D650021B671090095EA95 /* offline_engine_tmp_license.dat */; };
+		996D652221B671090095EA95 /* English_Text.dat in Resources */ = {isa = PBXBuildFile; fileRef = 996D650121B671090095EA95 /* English_Text.dat */; };
+		996D652321B671090095EA95 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 996D650221B671090095EA95 /* .gitignore */; };
+		996D652421B671090095EA95 /* English_Speech_Male.dat in Resources */ = {isa = PBXBuildFile; fileRef = 996D650321B671090095EA95 /* English_Speech_Male.dat */; };
+		996D652521B671090095EA95 /* Chinese_Speech_Male.dat in Resources */ = {isa = PBXBuildFile; fileRef = 996D650421B671090095EA95 /* Chinese_Speech_Male.dat */; };
+		996D652621B671090095EA95 /* Chinese_Text.dat in Resources */ = {isa = PBXBuildFile; fileRef = 996D650521B671090095EA95 /* Chinese_Text.dat */; };
+		996D652721B671090095EA95 /* Chinese_Speech_Female.dat in Resources */ = {isa = PBXBuildFile; fileRef = 996D650621B671090095EA95 /* Chinese_Speech_Female.dat */; };
 		996EB7AB218BE824000B475E /* RCToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 996EB7AA218BE824000B475E /* RCToast.m */; };
 		996EB7AD218C21AF000B475E /* p_registerClose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 996EB7AC218C21AE000B475E /* p_registerClose@2x.png */; };
 		996EB7B0218C3687000B475E /* NavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 996EB7AF218C3687000B475E /* NavBar.m */; };
@@ -880,6 +919,65 @@
 		996D64AB21B626B30095EA95 /* VoiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoiceModel.m; sourceTree = "<group>"; };
 		996D64AD21B643BA0095EA95 /* SpeakBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeakBtn.h; sourceTree = "<group>"; };
 		996D64AE21B643BA0095EA95 /* SpeakBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpeakBtn.m; sourceTree = "<group>"; };
+		996D64BB21B66D360095EA95 /* libBaiduSpeechSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBaiduSpeechSDK.a; path = iOS51rcProject/Resource/Class/Third/BDSClientLib/libBaiduSpeechSDK.a; sourceTree = SOURCE_ROOT; };
+		996D64BD21B66DFC0095EA95 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		996D64BF21B66E1D0095EA95 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		996D64C121B66E290095EA95 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		996D64C321B66E550095EA95 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		996D64C521B66E780095EA95 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		996D64C921B671080095EA95 /* BDSWakeupParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSWakeupParameters.h; sourceTree = "<group>"; };
+		996D64CA21B671080095EA95 /* BDSASRParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSASRParameters.h; sourceTree = "<group>"; };
+		996D64CB21B671080095EA95 /* BDSEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSEventManager.h; sourceTree = "<group>"; };
+		996D64CC21B671080095EA95 /* .gitIgnore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitIgnore; sourceTree = "<group>"; };
+		996D64CD21B671080095EA95 /* BDSUploaderDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSUploaderDefines.h; sourceTree = "<group>"; };
+		996D64CE21B671080095EA95 /* BDSASRDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSASRDefines.h; sourceTree = "<group>"; };
+		996D64CF21B671080095EA95 /* BDSUploaderParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSUploaderParameters.h; sourceTree = "<group>"; };
+		996D64D021B671080095EA95 /* BDSWakeupDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSWakeupDefines.h; sourceTree = "<group>"; };
+		996D64D221B671080095EA95 /* BDRecognizerViewParamsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDRecognizerViewParamsObject.h; sourceTree = "<group>"; };
+		996D64D321B671080095EA95 /* BDRecognizerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDRecognizerViewController.h; sourceTree = "<group>"; };
+		996D64D421B671080095EA95 /* BDTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDTheme.h; sourceTree = "<group>"; };
+		996D64D521B671080095EA95 /* BDRecognizerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDRecognizerViewDelegate.h; sourceTree = "<group>"; };
+		996D64D721B671080095EA95 /* BDSSpeechSynthesizerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizerDelegate.h; sourceTree = "<group>"; };
+		996D64D821B671080095EA95 /* BDS_EttsModelManagerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDS_EttsModelManagerInterface.h; sourceTree = "<group>"; };
+		996D64D921B671080095EA95 /* BDSBuiltInPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSBuiltInPlayer.h; sourceTree = "<group>"; };
+		996D64DA21B671080095EA95 /* BDSMixedModeSynthesizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSMixedModeSynthesizer.h; sourceTree = "<group>"; };
+		996D64DB21B671080095EA95 /* BDSSpeechSynthesizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizer.h; sourceTree = "<group>"; };
+		996D64DC21B671080095EA95 /* BDSSpeechSynthesizerParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizerParams.h; sourceTree = "<group>"; };
+		996D64DD21B671080095EA95 /* BDSSynthesizerLogLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSynthesizerLogLevel.h; sourceTree = "<group>"; };
+		996D64DE21B671080095EA95 /* BDSTTSEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSTTSEventManager.h; sourceTree = "<group>"; };
+		996D64DF21B671080095EA95 /* BDSSpeechSynthesizerErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizerErrors.h; sourceTree = "<group>"; };
+		996D64E321B671090095EA95 /* bds_license.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bds_license.dat; sourceTree = "<group>"; };
+		996D64E421B671090095EA95 /* bds_easr_basic_model.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_basic_model.dat; sourceTree = "<group>"; };
+		996D64E521B671090095EA95 /* bds_easr_mfe_cmvn.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bds_easr_mfe_cmvn.dat; sourceTree = "<group>"; };
+		996D64E621B671090095EA95 /* temp_license_2018-02-24.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "temp_license_2018-02-24.dat"; sourceTree = "<group>"; };
+		996D64E721B671090095EA95 /* bds_easr_input_model.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_input_model.dat; sourceTree = "<group>"; };
+		996D64E821B671090095EA95 /* bds_easr_mfe_dnn.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_mfe_dnn.dat; sourceTree = "<group>"; };
+		996D64E921B671090095EA95 /* bds_easr_gramm.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bds_easr_gramm.dat; sourceTree = "<group>"; };
+		996D64EA21B671090095EA95 /* bds_easr_wakeup_words.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_wakeup_words.dat; sourceTree = "<group>"; };
+		996D64EB21B671090095EA95 /* bds_easr_dnn_wakeup_model.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_dnn_wakeup_model.dat; sourceTree = "<group>"; };
+		996D64EE21B671090095EA95 /* record_end.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = record_end.caf; sourceTree = "<group>"; };
+		996D64EF21B671090095EA95 /* record_start.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = record_start.caf; sourceTree = "<group>"; };
+		996D64F021B671090095EA95 /* record_cancel.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = record_cancel.caf; sourceTree = "<group>"; };
+		996D64F121B671090095EA95 /* record_success.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = record_success.caf; sourceTree = "<group>"; };
+		996D64F221B671090095EA95 /* record_fail.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = record_fail.caf; sourceTree = "<group>"; };
+		996D64F421B671090095EA95 /* lightBlue.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = lightBlue.bundle; sourceTree = "<group>"; };
+		996D64F521B671090095EA95 /* lightOrange.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = lightOrange.bundle; sourceTree = "<group>"; };
+		996D64F621B671090095EA95 /* darkRed.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = darkRed.bundle; sourceTree = "<group>"; };
+		996D64F721B671090095EA95 /* defaultTheme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = defaultTheme.bundle; sourceTree = "<group>"; };
+		996D64F821B671090095EA95 /* lightGreen.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = lightGreen.bundle; sourceTree = "<group>"; };
+		996D64F921B671090095EA95 /* darkOrange.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = darkOrange.bundle; sourceTree = "<group>"; };
+		996D64FA21B671090095EA95 /* defaultFullScreenTheme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = defaultFullScreenTheme.bundle; sourceTree = "<group>"; };
+		996D64FB21B671090095EA95 /* darkGreen.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = darkGreen.bundle; sourceTree = "<group>"; };
+		996D64FC21B671090095EA95 /* lightRed.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = lightRed.bundle; sourceTree = "<group>"; };
+		996D64FD21B671090095EA95 /* darkBlue.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = darkBlue.bundle; sourceTree = "<group>"; };
+		996D64FF21B671090095EA95 /* English_Speech_Female.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = English_Speech_Female.dat; sourceTree = "<group>"; };
+		996D650021B671090095EA95 /* offline_engine_tmp_license.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = offline_engine_tmp_license.dat; sourceTree = "<group>"; };
+		996D650121B671090095EA95 /* English_Text.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = English_Text.dat; sourceTree = "<group>"; };
+		996D650221B671090095EA95 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		996D650321B671090095EA95 /* English_Speech_Male.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = English_Speech_Male.dat; sourceTree = "<group>"; };
+		996D650421B671090095EA95 /* Chinese_Speech_Male.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chinese_Speech_Male.dat; sourceTree = "<group>"; };
+		996D650521B671090095EA95 /* Chinese_Text.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chinese_Text.dat; sourceTree = "<group>"; };
+		996D650621B671090095EA95 /* Chinese_Speech_Female.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chinese_Speech_Female.dat; sourceTree = "<group>"; };
 		996EB7A9218BE824000B475E /* RCToast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCToast.h; sourceTree = "<group>"; };
 		996EB7AA218BE824000B475E /* RCToast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCToast.m; sourceTree = "<group>"; };
 		996EB7AC218C21AE000B475E /* p_registerClose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "p_registerClose@2x.png"; sourceTree = "<group>"; };
@@ -1120,6 +1218,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				996D64C621B66E790095EA95 /* GLKit.framework in Frameworks */,
+				996D64C421B66E550095EA95 /* CoreLocation.framework in Frameworks */,
+				996D64C221B66E290095EA95 /* AudioToolbox.framework in Frameworks */,
+				996D64C021B66E1D0095EA95 /* libz.1.2.5.tbd in Frameworks */,
+				996D64BE21B66DFC0095EA95 /* libc++.tbd in Frameworks */,
 				993ED86121B52AC500A988FF /* AVFoundation.framework in Frameworks */,
 				9919F9C61EDE508F00BE51F0 /* MessageUI.framework in Frameworks */,
 				9919F9C41EDE508800BE51F0 /* libsqlite3.tbd in Frameworks */,
@@ -1144,6 +1247,7 @@
 				9919F9861EDE46C200BE51F0 /* CoreTelephony.framework in Frameworks */,
 				9919FA001EDE519900BE51F0 /* MOBFoundation.framework in Frameworks */,
 				9919F9FE1EDE519900BE51F0 /* libWeChatSDK.a in Frameworks */,
+				996D64BC21B66D360095EA95 /* libBaiduSpeechSDK.a in Frameworks */,
 				9919F9FD1EDE519900BE51F0 /* WechatConnector.framework in Frameworks */,
 				9919F9841EDE46B600BE51F0 /* CoreFoundation.framework in Frameworks */,
 				9919F9821EDE46AA00BE51F0 /* CFNetwork.framework in Frameworks */,
@@ -1345,6 +1449,11 @@
 		9919F9801EDE46A900BE51F0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				996D64C521B66E780095EA95 /* GLKit.framework */,
+				996D64C321B66E550095EA95 /* CoreLocation.framework */,
+				996D64C121B66E290095EA95 /* AudioToolbox.framework */,
+				996D64BF21B66E1D0095EA95 /* libz.1.2.5.tbd */,
+				996D64BD21B66DFC0095EA95 /* libc++.tbd */,
 				993ED86621B530D800A988FF /* libc++abi.tbd */,
 				993ED86021B52AC200A988FF /* AVFoundation.framework */,
 				9993A566218A940B0057B6FD /* libxml2.tbd */,
@@ -1656,6 +1765,9 @@
 		991D7A94219D5E340019123A /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				996D64C721B671080095EA95 /* BDSClientHeaders */,
+				996D64E021B671090095EA95 /* BDSClientResource */,
+				996D64B621B66CE60095EA95 /* BDSClientLib */,
 			);
 			path = Third;
 			sourceTree = "<group>";
@@ -2102,6 +2214,154 @@
 			path = VoiceWave;
 			sourceTree = "<group>";
 		};
+		996D64B621B66CE60095EA95 /* BDSClientLib */ = {
+			isa = PBXGroup;
+			children = (
+				996D64BB21B66D360095EA95 /* libBaiduSpeechSDK.a */,
+			);
+			name = BDSClientLib;
+			path = iOS51rcProject/ThirdLib/BDSClientLib;
+			sourceTree = SOURCE_ROOT;
+		};
+		996D64C721B671080095EA95 /* BDSClientHeaders */ = {
+			isa = PBXGroup;
+			children = (
+				996D64C821B671080095EA95 /* ASR */,
+				996D64D621B671080095EA95 /* TTS */,
+			);
+			path = BDSClientHeaders;
+			sourceTree = "<group>";
+		};
+		996D64C821B671080095EA95 /* ASR */ = {
+			isa = PBXGroup;
+			children = (
+				996D64C921B671080095EA95 /* BDSWakeupParameters.h */,
+				996D64CA21B671080095EA95 /* BDSASRParameters.h */,
+				996D64CB21B671080095EA95 /* BDSEventManager.h */,
+				996D64CC21B671080095EA95 /* .gitIgnore */,
+				996D64CD21B671080095EA95 /* BDSUploaderDefines.h */,
+				996D64CE21B671080095EA95 /* BDSASRDefines.h */,
+				996D64CF21B671080095EA95 /* BDSUploaderParameters.h */,
+				996D64D021B671080095EA95 /* BDSWakeupDefines.h */,
+				996D64D121B671080095EA95 /* UIHeaders */,
+			);
+			path = ASR;
+			sourceTree = "<group>";
+		};
+		996D64D121B671080095EA95 /* UIHeaders */ = {
+			isa = PBXGroup;
+			children = (
+				996D64D221B671080095EA95 /* BDRecognizerViewParamsObject.h */,
+				996D64D321B671080095EA95 /* BDRecognizerViewController.h */,
+				996D64D421B671080095EA95 /* BDTheme.h */,
+				996D64D521B671080095EA95 /* BDRecognizerViewDelegate.h */,
+			);
+			path = UIHeaders;
+			sourceTree = "<group>";
+		};
+		996D64D621B671080095EA95 /* TTS */ = {
+			isa = PBXGroup;
+			children = (
+				996D64D721B671080095EA95 /* BDSSpeechSynthesizerDelegate.h */,
+				996D64D821B671080095EA95 /* BDS_EttsModelManagerInterface.h */,
+				996D64D921B671080095EA95 /* BDSBuiltInPlayer.h */,
+				996D64DA21B671080095EA95 /* BDSMixedModeSynthesizer.h */,
+				996D64DB21B671080095EA95 /* BDSSpeechSynthesizer.h */,
+				996D64DC21B671080095EA95 /* BDSSpeechSynthesizerParams.h */,
+				996D64DD21B671080095EA95 /* BDSSynthesizerLogLevel.h */,
+				996D64DE21B671080095EA95 /* BDSTTSEventManager.h */,
+				996D64DF21B671080095EA95 /* BDSSpeechSynthesizerErrors.h */,
+			);
+			path = TTS;
+			sourceTree = "<group>";
+		};
+		996D64E021B671090095EA95 /* BDSClientResource */ = {
+			isa = PBXGroup;
+			children = (
+				996D64E121B671090095EA95 /* ASR */,
+				996D64FE21B671090095EA95 /* TTS */,
+			);
+			path = BDSClientResource;
+			sourceTree = "<group>";
+		};
+		996D64E121B671090095EA95 /* ASR */ = {
+			isa = PBXGroup;
+			children = (
+				996D64E221B671090095EA95 /* BDSClientEASRResources */,
+				996D64EC21B671090095EA95 /* BDSClientResources */,
+			);
+			path = ASR;
+			sourceTree = "<group>";
+		};
+		996D64E221B671090095EA95 /* BDSClientEASRResources */ = {
+			isa = PBXGroup;
+			children = (
+				996D64E321B671090095EA95 /* bds_license.dat */,
+				996D64E421B671090095EA95 /* bds_easr_basic_model.dat */,
+				996D64E521B671090095EA95 /* bds_easr_mfe_cmvn.dat */,
+				996D64E621B671090095EA95 /* temp_license_2018-02-24.dat */,
+				996D64E721B671090095EA95 /* bds_easr_input_model.dat */,
+				996D64E821B671090095EA95 /* bds_easr_mfe_dnn.dat */,
+				996D64E921B671090095EA95 /* bds_easr_gramm.dat */,
+				996D64EA21B671090095EA95 /* bds_easr_wakeup_words.dat */,
+				996D64EB21B671090095EA95 /* bds_easr_dnn_wakeup_model.dat */,
+			);
+			path = BDSClientEASRResources;
+			sourceTree = "<group>";
+		};
+		996D64EC21B671090095EA95 /* BDSClientResources */ = {
+			isa = PBXGroup;
+			children = (
+				996D64ED21B671090095EA95 /* Tone */,
+				996D64F321B671090095EA95 /* Theme */,
+			);
+			path = BDSClientResources;
+			sourceTree = "<group>";
+		};
+		996D64ED21B671090095EA95 /* Tone */ = {
+			isa = PBXGroup;
+			children = (
+				996D64EE21B671090095EA95 /* record_end.caf */,
+				996D64EF21B671090095EA95 /* record_start.caf */,
+				996D64F021B671090095EA95 /* record_cancel.caf */,
+				996D64F121B671090095EA95 /* record_success.caf */,
+				996D64F221B671090095EA95 /* record_fail.caf */,
+			);
+			path = Tone;
+			sourceTree = "<group>";
+		};
+		996D64F321B671090095EA95 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				996D64F421B671090095EA95 /* lightBlue.bundle */,
+				996D64F521B671090095EA95 /* lightOrange.bundle */,
+				996D64F621B671090095EA95 /* darkRed.bundle */,
+				996D64F721B671090095EA95 /* defaultTheme.bundle */,
+				996D64F821B671090095EA95 /* lightGreen.bundle */,
+				996D64F921B671090095EA95 /* darkOrange.bundle */,
+				996D64FA21B671090095EA95 /* defaultFullScreenTheme.bundle */,
+				996D64FB21B671090095EA95 /* darkGreen.bundle */,
+				996D64FC21B671090095EA95 /* lightRed.bundle */,
+				996D64FD21B671090095EA95 /* darkBlue.bundle */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		996D64FE21B671090095EA95 /* TTS */ = {
+			isa = PBXGroup;
+			children = (
+				996D64FF21B671090095EA95 /* English_Speech_Female.dat */,
+				996D650021B671090095EA95 /* offline_engine_tmp_license.dat */,
+				996D650121B671090095EA95 /* English_Text.dat */,
+				996D650221B671090095EA95 /* .gitignore */,
+				996D650321B671090095EA95 /* English_Speech_Male.dat */,
+				996D650421B671090095EA95 /* Chinese_Speech_Male.dat */,
+				996D650521B671090095EA95 /* Chinese_Text.dat */,
+				996D650621B671090095EA95 /* Chinese_Speech_Female.dat */,
+			);
+			path = TTS;
+			sourceTree = "<group>";
+		};
 		996F504B2188292900D2A7E9 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2482,8 +2742,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				990A3BBF1F42F387006CB3CF /* 11.gif in Resources */,
+				996D651121B671090095EA95 /* record_end.caf in Resources */,
 				995A4A0D1F0B60570047EDBE /* pa_cvitem3.png in Resources */,
 				990A3BD91F42F387006CB3CF /* 35.gif in Resources */,
+				996D651221B671090095EA95 /* record_start.caf in Resources */,
 				990A3BC31F42F387006CB3CF /* 15.gif in Resources */,
 				999070BB1F025EC500B5E289 /* job_item1.png in Resources */,
 				993ED85C21B528AB00A988FF /* voiceage.mp3 in Resources */,
@@ -2510,29 +2772,38 @@
 				990A3BDF1F42F387006CB3CF /* 40.gif in Resources */,
 				999070A91F0252C300B5E289 /* img_licence.png in Resources */,
 				996131A51FDFC5A700194271 /* cp_account8.png in Resources */,
+				996D652121B671090095EA95 /* offline_engine_tmp_license.dat in Resources */,
 				993ED85521B528AB00A988FF /* voicemobile.mp3 in Resources */,
 				995C3DBC1EF7D02100277468 /* pa_guidepic4.png in Resources */,
+				996D650E21B671090095EA95 /* bds_easr_gramm.dat in Resources */,
 				990A3BE61F42F387006CB3CF /* 47.gif in Resources */,
 				993ED85321B528AB00A988FF /* “013”副本.mp3 in Resources */,
 				995A49F91F0A455A0047EDBE /* img_frog.png in Resources */,
 				99144F1E1F208B8D0091478D /* img_arrowdown.png in Resources */,
+				996D650721B671090095EA95 /* .gitIgnore in Resources */,
 				995C3DC21EF7D02100277468 /* pa_invitation4.png in Resources */,
+				996D651621B671090095EA95 /* lightBlue.bundle in Resources */,
 				990A3BC91F42F387006CB3CF /* 20.gif in Resources */,
 				995C3DC81EF7D02100277468 /* pa_loginphoto.png in Resources */,
 				996131A41FDFC5A700194271 /* cp_account5.png in Resources */,
+				996D651F21B671090095EA95 /* darkBlue.bundle in Resources */,
 				995C3DCC1EF7D02100277468 /* pa_mobilecer2.png in Resources */,
 				995C3DA21EF7D02100277468 /* cp_guidepic1.png in Resources */,
 				990A3BD41F42F387006CB3CF /* 30.gif in Resources */,
 				998F8A7C21916DE6003DBAB1 /* img_check2.png in Resources */,
 				991C6FBA200F7D9D009FD82A /* cp_logoadd.png in Resources */,
 				990A3BCE1F42F387006CB3CF /* 25.gif in Resources */,
+				996D651D21B671090095EA95 /* darkGreen.bundle in Resources */,
 				991970352091C53E003C31CB /* cp_jobreplyno.png in Resources */,
 				995C3DCE1EF7D02100277468 /* pa_remind2.png in Resources */,
 				990A3BDC1F42F387006CB3CF /* 38.gif in Resources */,
 				990A3BDD1F42F387006CB3CF /* 39.gif in Resources */,
 				995C3DC51EF7D02100277468 /* pa_jobexpired.png in Resources */,
+				996D652621B671090095EA95 /* Chinese_Text.dat in Resources */,
 				990431012093284D00B4267D /* cp_infotips.png in Resources */,
 				990A3BC61F42F387006CB3CF /* 18.gif in Resources */,
+				996D651E21B671090095EA95 /* lightRed.bundle in Resources */,
+				996D651321B671090095EA95 /* record_cancel.caf in Resources */,
 				995231AB20560FA500C8836D /* cp_jobrefresh.png in Resources */,
 				993ED85721B528AB00A988FF /* voicename.mp3 in Resources */,
 				991A24051EE64D5F008CD8E9 /* Media.xcassets in Resources */,
@@ -2548,18 +2819,25 @@
 				990A3BD71F42F387006CB3CF /* 33.gif in Resources */,
 				995A4A041F0B3A3C0047EDBE /* pa_open1.png in Resources */,
 				990A3BCC1F42F387006CB3CF /* 23.gif in Resources */,
+				996D652421B671090095EA95 /* English_Speech_Male.dat in Resources */,
 				9919F9551EDE445300BE51F0 /* LaunchScreen.storyboard in Resources */,
+				996D651A21B671090095EA95 /* lightGreen.bundle in Resources */,
 				996D64A221B60D170095EA95 /* voice_loading_4.png in Resources */,
 				994C83151F1E069C00414E98 /* pa_cvpreitem3.png in Resources */,
+				996D651521B671090095EA95 /* record_fail.caf in Resources */,
 				9957BB96207F395E000EEAF1 /* pa_cvpreitem7.png in Resources */,
 				99101B532073850100ED060B /* cp_accountsafe.png in Resources */,
 				99F7FC8820414AB80060E9F1 /* img_photoman.png in Resources */,
 				995C3DA31EF7D02100277468 /* cp_guidepic2.png in Resources */,
+				996D650821B671090095EA95 /* bds_license.dat in Resources */,
 				990A3BE31F42F387006CB3CF /* 44.gif in Resources */,
 				9919F9F91EDE519900BE51F0 /* ShareSDKUI.bundle in Resources */,
+				996D652221B671090095EA95 /* English_Text.dat in Resources */,
 				995C3DC41EF7D02100277468 /* pa_invitation6.png in Resources */,
 				995231AE20560FA500C8836D /* cp_jobissue.png in Resources */,
 				995C3DB51EF7D02100277468 /* pa_account3.png in Resources */,
+				996D650C21B671090095EA95 /* bds_easr_input_model.dat in Resources */,
+				996D650B21B671090095EA95 /* temp_license_2018-02-24.dat in Resources */,
 				995C3DA91EF7D02100277468 /* img_checksmall1.png in Resources */,
 				999070C71F03846E00B5E289 /* img_favorite2.png in Resources */,
 				995C3DB31EF7D02100277468 /* pa_account1.png in Resources */,
@@ -2586,22 +2864,28 @@
 				993ED85B21B528AB00A988FF /* voicejobplace.mp3 in Resources */,
 				9919907C2089E15C00E2B0D2 /* cp_jobrefreshall.png in Resources */,
 				994C83181F1E069C00414E98 /* pa_cvpreitem6.png in Resources */,
+				996D650F21B671090095EA95 /* bds_easr_wakeup_words.dat in Resources */,
 				999070BE1F025EC500B5E289 /* job_item4.png in Resources */,
 				995E9E221F05FAB600A34835 /* img_next1.png in Resources */,
 				995C3DCB1EF7D02100277468 /* pa_mobilecer1.png in Resources */,
+				996D651C21B671090095EA95 /* defaultFullScreenTheme.bundle in Resources */,
 				99A816AF2085A7C60026802B /* cp_chat.png in Resources */,
 				995E9E251F05FAB600A34835 /* img_prev2.png in Resources */,
 				990A3BD81F42F387006CB3CF /* 34.gif in Resources */,
+				996D650A21B671090095EA95 /* bds_easr_mfe_cmvn.dat in Resources */,
 				999070C11F03562D00B5E289 /* img_dial.png in Resources */,
 				990A3BE81F42F387006CB3CF /* 5.gif in Resources */,
+				996D652021B671090095EA95 /* English_Speech_Female.dat in Resources */,
 				996131A21FDFC5A700194271 /* cp_account6.png in Resources */,
 				996D649E21B60D170095EA95 /* voice_loading_8.png in Resources */,
 				999BA6B21F0E14FB003F85D1 /* pa_add.png in Resources */,
 				993ED85421B528AB00A988FF /* voicejobtype.mp3 in Resources */,
 				996D64A521B60D170095EA95 /* voice_loading_3.png in Resources */,
+				996D652721B671090095EA95 /* Chinese_Speech_Female.dat in Resources */,
 				995A4A0E1F0B60570047EDBE /* pa_cvitem4.png in Resources */,
 				994C831C1F1F46F800414E98 /* job_search.png in Resources */,
 				990A3BCD1F42F387006CB3CF /* 24.gif in Resources */,
+				996D651421B671090095EA95 /* record_success.caf in Resources */,
 				9957BB94207CBA07000EEAF1 /* cp_success.png in Resources */,
 				996131AC1FDFC5A700194271 /* cp_preview.png in Resources */,
 				99F7FC8720414AB80060E9F1 /* img_photowoman.png in Resources */,
@@ -2611,13 +2895,16 @@
 				996D649D21B60D170095EA95 /* voice_loading_9.png in Resources */,
 				990A3BCF1F42F387006CB3CF /* 26.gif in Resources */,
 				995C3DBB1EF7D02100277468 /* pa_guidepic3.png in Resources */,
+				996D650921B671090095EA95 /* bds_easr_basic_model.dat in Resources */,
 				990A3BE11F42F387006CB3CF /* 42.gif in Resources */,
+				996D651721B671090095EA95 /* lightOrange.bundle in Resources */,
 				996131A61FDFC5A700194271 /* cp_account1.png in Resources */,
 				995C3DB71EF7D02100277468 /* pa_defaultphoto.png in Resources */,
 				990108331F60EEA70002CECE /* img_defaultlogo.png in Resources */,
 				993ED85A21B528AB00A988FF /* “014”副本.mp3 in Resources */,
 				995A4ABA1F0B7B270047EDBE /* pa_photo.png in Resources */,
 				995C3DA51EF7D02100277468 /* img_arrowright.png in Resources */,
+				996D651921B671090095EA95 /* defaultTheme.bundle in Resources */,
 				990108311F594ED90002CECE /* job_trash.png in Resources */,
 				999070BF1F025EC500B5E289 /* job_item5.png in Resources */,
 				990A3BC71F42F387006CB3CF /* 19.gif in Resources */,
@@ -2626,6 +2913,7 @@
 				995C3DB01EF7D02100277468 /* img_rolecp2.png in Resources */,
 				999070A21F024D2800B5E289 /* job_chatgreen.png in Resources */,
 				995E9E241F05FAB600A34835 /* img_prev1.png in Resources */,
+				996D652521B671090095EA95 /* Chinese_Speech_Male.dat in Resources */,
 				990A3BD01F42F387006CB3CF /* 27.gif in Resources */,
 				990A3BDB1F42F387006CB3CF /* 37.gif in Resources */,
 				990A3BC01F42F387006CB3CF /* 12.gif in Resources */,
@@ -2654,11 +2942,13 @@
 				996D64A621B60D170095EA95 /* voice_loading_2.png in Resources */,
 				99101B5A20738B2D00ED060B /* cp_accountstart.png in Resources */,
 				990A3BC11F42F387006CB3CF /* 13.gif in Resources */,
+				996D651B21B671090095EA95 /* darkOrange.bundle in Resources */,
 				996D64A121B60D170095EA95 /* voice_loading_5.png in Resources */,
 				995A4A0C1F0B60570047EDBE /* pa_cvitem2.png in Resources */,
 				995A49FD1F0A76DE0047EDBE /* pa_refresh.png in Resources */,
 				990A3BBD1F42F387006CB3CF /* 1.gif in Resources */,
 				990A3BC51F42F387006CB3CF /* 17.gif in Resources */,
+				996D651821B671090095EA95 /* darkRed.bundle in Resources */,
 				994C831B1F1F46F800414E98 /* job_map.png in Resources */,
 				995C3DAC1EF7D02100277468 /* img_password1.png in Resources */,
 				995C3DB91EF7D02100277468 /* pa_guidepic1.png in Resources */,
@@ -2670,8 +2960,10 @@
 				995C3DB11EF7D02100277468 /* img_rolepa1.png in Resources */,
 				990A3B861F3C550A006CB3CF /* chat_photo.png in Resources */,
 				993ED85921B528AB00A988FF /* voicedegree.mp3 in Resources */,
+				996D650D21B671090095EA95 /* bds_easr_mfe_dnn.dat in Resources */,
 				995C3DCA1EF7D02100277468 /* pa_loginuser.png in Resources */,
 				990A3BEE1F42F387006CB3CF /* ico_emoitem2.png in Resources */,
+				996D651021B671090095EA95 /* bds_easr_dnn_wakeup_model.dat in Resources */,
 				995231AC20560FA500C8836D /* cp_jobmodify.png in Resources */,
 				995C3DAA1EF7D02100277468 /* img_checksmall2.png in Resources */,
 				995E9E231F05FAB600A34835 /* img_next2.png in Resources */,
@@ -2688,6 +2980,7 @@
 				996D64A021B60D170095EA95 /* voice_loading_7.png in Resources */,
 				994C83141F1E069C00414E98 /* pa_cvpreitem2.png in Resources */,
 				9919F9FF1EDE519900BE51F0 /* README.txt in Resources */,
+				996D652321B671090095EA95 /* .gitignore in Resources */,
 				995C3DB21EF7D02100277468 /* img_rolepa2.png in Resources */,
 				990108291F57A61D0002CECE /* img_picclose.png in Resources */,
 				995A49ED1F064D420047EDBE /* img_heart.png in Resources */,
@@ -3130,6 +3423,8 @@
 					"$(PROJECT_DIR)/iOS51rcProject/Resource/Class/JPush",
 					"$(PROJECT_DIR)/iOS51rcProject/Resource/Class/ShareSDK/Support/PlatformSDK/WeChatSDK",
 					"$(PROJECT_DIR)/Pods/BaiduMapKit/BaiduMapKit/thirdlibs",
+					"$(PROJECT_DIR)/iOS51rcProject/ThirdLib/BDSClientLib",
+					"$(PROJECT_DIR)/iOS51rcProject/Resource/Class/Third/BDSClientLib",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -3168,6 +3463,8 @@
 					"$(PROJECT_DIR)/iOS51rcProject/Resource/Class/JPush",
 					"$(PROJECT_DIR)/iOS51rcProject/Resource/Class/ShareSDK/Support/PlatformSDK/WeChatSDK",
 					"$(PROJECT_DIR)/Pods/BaiduMapKit/BaiduMapKit/thirdlibs",
+					"$(PROJECT_DIR)/iOS51rcProject/ThirdLib/BDSClientLib",
+					"$(PROJECT_DIR)/iOS51rcProject/Resource/Class/Third/BDSClientLib",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

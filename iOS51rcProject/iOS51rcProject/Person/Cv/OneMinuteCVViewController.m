@@ -38,6 +38,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 @property (nonatomic , strong) UIView *footView;// tableview的foot视图
 @property (nonatomic , strong) NSArray *dataArr;// 数据源
 @property (nonatomic , strong) NSMutableDictionary *dataParam;
+@property (nonatomic , copy) NSDictionary *paMainDict;// getPaMain接口返回的数据
 
 @end
 
@@ -75,7 +76,9 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
                       @"0", @"EducationID",// 教育背景id
                       @"", @"RelatedWorkYears",// 工作经验
                       nil];
-    
+    [self.view addSubview:self.tipLab];
+    [self.view addSubview:self.tableview];
+//    [self setupAddHuaTongButton];// 语音输入按钮
     [self getPaMain];
 }
 
@@ -83,39 +86,87 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
     [SVProgressHUD show];
     NSDictionary *parmaDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", nil];
     [AFNManager requestWithMethod:POST ParamDict:parmaDict url:URL_GETPAMAIN tableName:@"Table" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
-        [SVProgressHUD dismiss];
+        self.paMainDict = [NSDictionary dictionaryWithDictionary:dataDict];
         NSString *mobileVerifyDate = dataDict[@"MobileVerifyDate"];
+        // 参数字典添加手机号
+        [self.dataParam setValue:dataDict[@"Mobile"] forKey:@"Mobile"];
+        // 参数字典添加姓名
+        [self.dataParam setValue:dataDict[@"Name"] forKey:@"Name"];
+        // 参数字典添加求职状态
+        [self.dataParam setValue:dataDict[@"dcCareerStatus"] forKey:@"intCareerStatus"];
+        NSString *birthStr = dataDict[@"BirthDay"];
+        // 参数字典添加出生年月
+        [self.dataParam setValue:dataDict[@"BirthDay"] forKey:@"Birthday"];
+        
+        if (birthStr != nil && birthStr.length > 0) {
+            NSRange range1 = NSMakeRange(0, 4);
+            NSRange range2 = NSMakeRange(4, 2);
+            birthYear = [[birthStr substringWithRange:range1] integerValue];// 赋值给出生月份变量
+            birthMonth = [[birthStr substringWithRange:range2] integerValue];// 赋值给年份变量
+        }
+        
+        // 参数字典添加性别
+        [self.dataParam setValue:[dataDict[@"Gender"] boolValue]?@"0":@"1" forKey:@"Gender"];
+        
         if (mobileVerifyDate.length > 0) {
             DLog(@"手机号已经通过认证");
             mobileVerify = YES;
-            [self.dataParam setValue:dataDict[@"Mobile"] forKey:@"Mobile"];
-            [self.dataParam setValue:dataDict[@"Name"] forKey:@"Name"];
-        }else{
-            mobileVerify = NO;
-        }
+            [self GetIpMobilePlace:dataDict[@"Mobile"]];
         
-        [self.view addSubview:self.tipLab];
-        [self.view addSubview:self.tableview];
-        [self setupAddHuaTongButton];// 语音输入按钮
+        }else{// 手机号未通过认证
+            [SVProgressHUD dismiss];
+            mobileVerify = NO;
+            [self createDataArr:dataDict];
+            [self.tableview reloadData];
+            [self setupAddHuaTongButton];
+        }
         
     } failureBlock:^(NSInteger errCode, NSString *msg) {
         [SVProgressHUD dismiss];
     }];
 }
 
+#pragma mark - 获取手机号码归属地和位置id
+- (void)GetIpMobilePlace:(NSString *)mobile{
+    NSDictionary *paramDict = @{@"mobile":mobile};
+    [AFNManager requestWithMethod:POST ParamDict:paramDict url:URL_GETIPMOBILEPLACE tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        NSArray *arr = [(NSString *)dataDict componentsSeparatedByString:@"$"];
+        [SVProgressHUD dismiss];
+        [self createDataArr:self.paMainDict];
+    
+        [self resetDataValue:[arr lastObject] key:@"工作地点"];
+        // 参数字典添加位置
+        [self.dataParam setValue: [arr firstObject] forKey:@"JobPlace"];
+        [self.tableview reloadData];
+        [self setupAddHuaTongButton];
+    
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        DLog(@"");
+        [SVProgressHUD dismiss];
+    }];
+}
 #pragma mark - 话筒Button
 - (void)setupAddHuaTongButton{
+    
+    OnMinuteSingleCell *cell = (OnMinuteSingleCell *)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArr.count - 1 inSection:0]];
     SpeechButton *speechBtn = [SpeechButton new];
-    [self.view addSubview:speechBtn];
+    [cell.contentView addSubview:speechBtn];
     speechBtn.sd_layout
-    .rightSpaceToView(self.view, 20)
-    .bottomSpaceToView(self.tableview.tableFooterView, 0)
+    .rightSpaceToView(cell.contentView, 20)
+    .centerYEqualToView(cell.contentView)
     .widthIs(200)
     .heightIs(50);
     speechBtn.speechInput = ^{
-        DLog(@"");
-        SpeechViewController *svc = [SpeechViewController new];
+        SpeechViewController *svc = [[SpeechViewController alloc]init];
+        svc.mobileVerify = mobileVerify;
+        svc.dataArr = self.dataArr;
         WKNavigationController *nav = [[WKNavigationController alloc]initWithRootViewController:svc];
+        __weak typeof(self)weakself = self;
+        svc.speakContentBlock = ^(NSString *key, NSString *recognation) {
+            DLog(@"123说话内容：%@ - %@",key , recognation);
+            [weakself resetDataValue:recognation key:key];
+            [weakself.tableview reloadData];
+        };
         [self presentViewController:nav animated:YES completion:^{
             
         }];
@@ -129,6 +180,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
         _tableview.delegate = self;
         _tableview.dataSource = self;
         _tableview.backgroundColor = SEPARATECOLOR;
+        _tableview.hidden = YES;
     }
     return _tableview;
 }
@@ -139,15 +191,18 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
         _tipLab.backgroundColor = SEPARATECOLOR;
         _tipLab.text = @"   简历求职第一步，快速填写简历，给你一个满意的工作。";
         _tipLab.font = DEFAULTFONT;
+        _tipLab.hidden = YES;
     }
     return _tipLab;
 }
 
-- (NSArray *)dataArr{
+#pragma mark - 创建数据源
+- (void)createDataArr:(NSDictionary *)dataDict{
     if (!_dataArr) {
-        _dataArr = [OneMinuteArray createOneMinuteDataWithType:mobileVerify?1:0];
+        _dataArr = [OneMinuteArray createOneMinuteDataWithType:mobileVerify?1:0 dict:dataDict];
     }
-    return _dataArr;
+    self.tableview.hidden = NO;
+    self.tipLab.hidden = NO;
 }
 
 - (UIView *)footView{
@@ -194,6 +249,10 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
     if ([textField.placeholder isEqualToString:@"手机号码"]) {
         [self resetDataValue:textField.text key:@"手机号码"];
         [self.dataParam setObject:textField.text forKey:@"Mobile"];
+        BOOL valid = [Common checkMobile:textField.text];
+        if(valid){
+            [self GetIpMobilePlace:textField.text];
+        }
         
     }else if ([textField.placeholder isEqualToString:@"短信确认码"]) {
         [self resetDataValue:textField.text key:@"短信确认码"];
@@ -459,7 +518,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
     // 当前年份
     NSInteger nowYear = [[forMatter stringFromDate:date] integerValue];
     // 学历应该减的年数
-    NSInteger educationNum = [Common calulateRelatedWorkYearsWithEducation:[self.dataParam[@"EducationID"] integerValue]];
+    NSInteger educationNum = [Common calulateRelatedWorkYearsWithEducation:[self.dataParam[@"Education"] integerValue]];
     // 出生月份应该减的数
     NSInteger birthMonthNum = (birthMonth <=8 && birthMonth >=1)?0:1;
     // 计算工作经验

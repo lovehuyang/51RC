@@ -56,6 +56,7 @@
 + (NSString *)loginResult:(NSInteger)result;
 
 + (NSArray *)getProvince;
++ (NSArray *)getCareerStatus;
 
 + (NSDictionary *)welfare:(NSDictionary *)dict;
 + (NSDictionary *)welfare:(NSDictionary *)dict1 dict2:(NSDictionary *)dict2;

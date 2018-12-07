@@ -123,6 +123,17 @@
 - (IBAction)loginClick:(id)sender {
     [self.view endEditing:YES];
     
+//    UITabBarController *personCtrl = [[UIStoryboard storyboardWithName:@"Person" bundle:nil] instantiateViewControllerWithIdentifier:@"personView"];
+//    [personCtrl setSelectedIndex:4];
+//    [self presentViewController:personCtrl animated:YES completion:^{
+//        [USER_DEFAULT setObject:@"1" forKey:@"positioned"];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PALOGINSUCCESS object:self];
+//    }];
+//
+//    return;
+    // 以上代码要删除
+    
+    
     if (self.txtUsername.text.length == 0) {
         [RCToast showMessage:self.txtUsername.placeholder];
         return;

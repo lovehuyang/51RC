@@ -12,47 +12,65 @@
 #import "VoiceModel.h"// 语音数据模型
 #import "SpeakBtn.h"
 #import "AlertView.h"
+#import "OneMinuteModel.h"
 
-@interface SpeechViewController ()<AVAudioPlayerDelegate>
+#import "BDSEventManager.h"
+#import "BDSASRDefines.h"
+#import "BDSASRParameters.h"
+
+//#error "请在官网新建应用，配置包名，并在此填写应用的 api key, secret key, appid(即appcode)"
+const NSString* API_KEY = @"AsWVn84XpGviO1Fjs0bzuVlA";
+const NSString* SECRET_KEY = @"owf3Kyfqa8DsScEP2l1WnYTN3FeDXYYM";
+const NSString* APP_ID = @"15042909";
+
+@interface SpeechViewController ()<AVAudioPlayerDelegate,BDSClientASRDelegate>
 {
     NSInteger index;
 }
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
-@property (nonatomic, strong) NSArray *voiceData;// 音乐名数组
-@property (nonatomic, strong) VoiceWaveImgView *voiceWaveImgView;// 声波图
+@property (nonatomic, strong) AVAudioPlayer *errorPlayer;
+@property (nonatomic, strong) NSMutableArray *voiceData;// 音乐名数组
 @property (nonatomic, strong) UILabel *titleLab;// 标题
-@property (nonatomic, strong) SpeakBtn *speakBtn;// 话筒按钮
+@property (nonatomic, strong) SpeakBtn *reSpeakBtn;// 重说按钮
+@property (nonatomic, strong) UILabel *recognationLab;// 语音识别结果
+@property (nonatomic, strong) NSTimer *timer;// 计时器
 
+@property (strong, nonatomic) BDSEventManager *asrEventManager;// 语音识别管理类
 @end
 
 @implementation SpeechViewController
 - (instancetype)init{
     if (self = [super init]) {
-        self.view.backgroundColor = UIColorFromHex(0x0B033B);
+        index = 0;
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = UIColorFromHex(0x0B033B);
     
-    index = 0;
+     [self dealwithData];
     
+    // 关闭按钮
     [self setupCloseBtn];
-    
     // 创建标题
     [self setupTipLab];
     // 创建声波
     [self setupVoiceWave];
+    // 展示语音识别结果的labble
+    [self setupRecognationLab];
     // 创建“点击说话”按钮
     [self createSpeakButton];
-    
-    [self.audioPlayer play];// 开始播放
+    // 开始播放
+    [self.audioPlayer play];
+    // 配置语音识别
+    [self configVoiceRecognitionClient];
 }
 
-- (NSArray *)voiceData{
+- (NSMutableArray *)voiceData{
     if (!_voiceData) {
-        _voiceData = [VoiceModel createVoiceModel:1];
+        _voiceData = [VoiceModel createVoiceModel:self.mobileVerify? 1: 0];
     }
     return _voiceData;
 }
@@ -68,30 +86,41 @@
     return _audioPlayer;
 }
 
+- (BDSEventManager *)asrEventManager{
+    if (!_asrEventManager) {
+        _asrEventManager = [BDSEventManager createEventManagerWithName:BDS_ASR_NAME];
+        [_asrEventManager setDelegate:self];
+    }
+    return _asrEventManager;
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
+    
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    
-    self.audioPlayer = nil;
-    self.voiceWaveImgView.hidden = NO;
-    self.speakBtn.hidden = YES;
-    index ++;
-    if (index >= self.voiceData.count) {
-        index = 0;
-    }
-    [self setupTipLab];
-    [self.audioPlayer play];
+- (void)playVedio:(NSString *)vedioName{
+    self.errorPlayer = nil;
+    NSString *path = [[NSBundle mainBundle] pathForResource:vedioName ofType:@"mp3"];
+    NSURL *url = [NSURL fileURLWithPath:path];
+    self.errorPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:nil];
+    self.errorPlayer.delegate = self;
+    [self.errorPlayer prepareToPlay];
+    [self.errorPlayer play];
 }
 
 #pragma mark - AVAudioPlayerDelegate
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
-   
-    DLog(@"播放完毕");
-    self.voiceWaveImgView.hidden = YES;
-    self.speakBtn.hidden = NO;
+    
+    if (player == self.audioPlayer) {
+        // 启动语音识别
+        [self.asrEventManager sendCommand:BDS_ASR_CMD_START];
+    
+    }else{// player == self.errorPlayer
+        self.reSpeakBtn.hidden = NO;
+        self.recognationLab.text = @"请重试";
+    }
 }
 
 #pragma mark - 标题
@@ -111,11 +140,12 @@
     VoiceModel *model = [self.voiceData objectAtIndex:index];
     self.titleLab.text = model.titleStr;
 }
+
 #pragma mark - 声波
 - (void)setupVoiceWave{
-    self.voiceWaveImgView = [VoiceWaveImgView new];
-    [self.view addSubview:self.voiceWaveImgView];
-    self.voiceWaveImgView.sd_layout
+    VoiceWaveImgView *voiceWaveImgView = [VoiceWaveImgView new];
+    [self.view addSubview:voiceWaveImgView];
+    voiceWaveImgView.sd_layout
     .centerXEqualToView(self.view)
     .centerYEqualToView(self.view)
     .leftSpaceToView(self.view, 0)
@@ -123,9 +153,23 @@
     .heightIs(100);
 }
 
+#pragma mark - 语音识别结果labble
+- (void)setupRecognationLab{
+    self.recognationLab = [UILabel new];
+    [self.view addSubview:_recognationLab];
+    self.recognationLab.sd_layout
+    .leftSpaceToView(self.view, 20)
+    .rightSpaceToView(self.view, 20)
+    .topSpaceToView(self.titleLab, 20)
+    .autoHeightRatio(0);
+    self.recognationLab.textAlignment = NSTextAlignmentCenter;
+    self.recognationLab.font = [UIFont boldSystemFontOfSize:18];
+    [self.recognationLab setTextColor:NAVBARCOLOR];
+}
+
 #pragma mark - 点击说话按钮
 - (void)createSpeakButton{
-    if(self.speakBtn == nil){
+    if(self.reSpeakBtn == nil){
         SpeakBtn *speakBtn = [SpeakBtn new];
         [self.view addSubview:speakBtn];
         speakBtn.sd_layout
@@ -133,10 +177,11 @@
         .centerXEqualToView(self.view)
         .widthIs(60)
         .heightIs(80);
-        [speakBtn setTitle:@"点击说话" forState:UIControlStateNormal];
+        [speakBtn setTitle:@"重说" forState:UIControlStateNormal];
         [speakBtn setImage:[UIImage imageNamed:@"speak_icon"] forState:UIControlStateNormal];
-        self.speakBtn = speakBtn;
-        self.speakBtn.hidden = YES;
+        [speakBtn addTarget:self action:@selector(respeakEvent) forControlEvents:UIControlEventTouchUpInside];
+        self.reSpeakBtn = speakBtn;
+        self.reSpeakBtn.hidden = YES;
     }
 }
 
@@ -160,10 +205,312 @@
     [WeakAlertView initWithTitle:@"提示" content:@"确定退出语音填写模式么？" btnTitleArr:@[@"取消",@"确定"] canDismiss:YES];
     WeakAlertView.clickButtonBlock = ^(UIButton *button) {
         if (button.tag == 101) {
+            [self.asrEventManager sendCommand:BDS_ASR_CMD_CANCEL];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     };
     [WeakAlertView show];
 }
 
+#pragma mark - 重说
+- (void)respeakEvent{
+    self.recognationLab.text = @"";
+    self.reSpeakBtn.hidden = YES;
+    [self stopTimer];
+    // 启动语音识别
+    [self.asrEventManager sendCommand:BDS_ASR_CMD_START];
+}
+
+#pragma mark - 配置语音识别
+- (void)configVoiceRecognitionClient{
+    // 设置DEBUG_LOG的级别
+    [self.asrEventManager setParameter:@(EVRDebugLogLevelTrace) forKey:BDS_ASR_DEBUG_LOG_LEVEL];
+    // 配置API_KEY 和 SECRET_KEY 和 APP_ID
+    [self.asrEventManager setParameter:@[API_KEY, SECRET_KEY] forKey:BDS_ASR_API_SECRET_KEYS];
+    [self.asrEventManager setParameter:APP_ID forKey:BDS_ASR_OFFLINE_APP_CODE];
+    // 配置端点检测（二选一）
+    [self configDNNMFE];
+    // ---- 语义与标点 -----
+    [self enableNLU];
+}
+
+#pragma mark - 端点检测
+- (void)configDNNMFE {
+    NSString *mfe_dnn_filepath = [[NSBundle mainBundle] pathForResource:@"bds_easr_mfe_dnn" ofType:@"dat"];
+    [self.asrEventManager setParameter:mfe_dnn_filepath forKey:BDS_ASR_MFE_DNN_DAT_FILE];
+    NSString *cmvn_dnn_filepath = [[NSBundle mainBundle] pathForResource:@"bds_easr_mfe_cmvn" ofType:@"dat"];
+    [self.asrEventManager setParameter:cmvn_dnn_filepath forKey:BDS_ASR_MFE_CMVN_DAT_FILE];
+    [self.asrEventManager setParameter:@(NO) forKey:BDS_ASR_ENABLE_MODEL_VAD];
+}
+
+#pragma mark - 语义与标点
+- (void) enableNLU {
+    // 开启语义理解
+    [self.asrEventManager setParameter:@(YES) forKey:BDS_ASR_ENABLE_NLU];
+    [self.asrEventManager setParameter:@"1536" forKey:BDS_ASR_PRODUCT_ID];
+}
+
+- (void) enablePunctuation {
+    // ---- 开启标点输出 -----
+    [self.asrEventManager setParameter:@(NO) forKey:BDS_ASR_DISABLE_PUNCTUATION];
+    // 普通话标点
+    //    [self.asrEventManager setParameter:@"1537" forKey:BDS_ASR_PRODUCT_ID];
+    // 英文标点
+    [self.asrEventManager setParameter:@"1737" forKey:BDS_ASR_PRODUCT_ID];
+}
+
+#pragma mark - BDSClientASRDelegate
+
+- (void)VoiceRecognitionClientWorkStatus:(int)workStatus obj:(id)aObj{
+    switch (workStatus) {
+        case EVoiceRecognitionClientWorkStatusNewRecordData: {
+
+            DLog(@"录音数据回调");
+            break;
+        }
+            
+        case EVoiceRecognitionClientWorkStatusStartWorkIng: {
+            DLog(@"识别工作开始");
+            break;
+        }
+        case EVoiceRecognitionClientWorkStatusStart: {
+            DLog(@"检测到用户开始说话");
+            break;
+        }
+        case EVoiceRecognitionClientWorkStatusEnd: {
+            DLog(@"本地声音采集结束，等待识别结果返回并结束录音");
+            break;
+        }
+        case EVoiceRecognitionClientWorkStatusFlushData: {
+            NSString *result = [NSString stringWithFormat:@"CALLBACK: final result - %@.\n\n", [self getDescriptionForDic:aObj]];
+            [self voiceRecognition:(NSDictionary *)aObj];
+            DLog(@"连续上屏");
+            break;
+        }
+        case EVoiceRecognitionClientWorkStatusFinish: {
+            NSString *result = [NSString stringWithFormat:@"CALLBACK: final result - %@.\n\n", [self getDescriptionForDic:aObj]];
+            [self voiceRecognition:(NSDictionary *)aObj];
+            DLog(@"语音识别功能完成，服务器返回正确结果\n%@",result);
+            // 语音识别完成，显示重说按钮
+            self.reSpeakBtn.hidden = NO;
+            break;
+        }
+        case EVoiceRecognitionClientWorkStatusMeterLevel: {
+            break;
+        }
+        case EVoiceRecognitionClientWorkStatusCancel: {
+            DLog(@"用户取消");
+            break;
+        }
+        case EVoiceRecognitionClientWorkStatusError: {
+            DLog(@"发生错误");
+            [self playVedio:@"“013”副本"];
+            break;
+        }
+        case EVoiceRecognitionClientWorkStatusLoaded: {
+            DLog(@"离线引擎加载完成");
+            break;
+        }
+        case EVoiceRecognitionClientWorkStatusUnLoaded: {
+            DLog(@"离线引擎卸载完成");
+            break;
+        }
+        case EVoiceRecognitionClientWorkStatusChunkThirdData: {
+            DLog(@"CHUNK: 识别结果中的第三方数据");
+            break;
+        }
+        case EVoiceRecognitionClientWorkStatusChunkNlu: {
+            DLog(@"CHUNK: 识别结果中的语义结果");
+            break;
+        }
+        case EVoiceRecognitionClientWorkStatusChunkEnd: {
+            DLog(@"CHUNK: 识别过程结束");
+            [self openTimer];
+            break;
+        }
+        case EVoiceRecognitionClientWorkStatusFeedback: {
+            DLog(@"Feedback: 识别过程反馈的打点数据");
+            break;
+        }
+        case EVoiceRecognitionClientWorkStatusRecorderEnd: {
+            DLog(@"录音机关闭，页面跳转需检测此时间，规避状态条 (iOS)");
+            break;
+        }
+        case EVoiceRecognitionClientWorkStatusLongSpeechEnd: {
+            DLog(@"长语音结束状态");
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (NSString *)getDescriptionForDic:(NSDictionary *)dic {
+
+    if (dic) {
+        
+        NSString *resultStr = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
+        return resultStr;
+    }
+    return nil;
+}
+
+#pragma mark - 下一段语音
+- (void)nextVedio{
+    DLog(@"定时器事件执行");
+    self.audioPlayer = nil;
+    self.reSpeakBtn.hidden = YES;
+    self.recognationLab.text = @"";
+    
+    index ++;
+    if (index >= self.voiceData.count) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+        return;
+    }
+    [self setupTipLab];
+    [self.audioPlayer play];
+}
+
+#pragma mark - 语音识别结果处理
+
+- (void)voiceRecognition:(NSDictionary *)objc{
+    NSArray *recognationArr = objc[@"results_recognition"] ;
+    NSString *recognationStr = [recognationArr firstObject];
+    DLog(@"%@",recognationStr);
+    self.recognationLab.text = recognationStr;
+    VoiceModel *model = self.voiceData[index];
+    model.recognationStr = recognationStr;
+    self.speakContentBlock([self transformToLastPageKey:model.titleStr],model.recognationStr);
+}
+
+#pragma mark - 计时器
+- (void)openTimer{
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+    // 开启下一段语音识别
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(nextVedio) userInfo:nil repeats:NO];
+    DLog(@"定时器开启");
+}
+
+- (void)stopTimer {
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+        DLog(@"定时器取消");
+    }
+}
+
+- (void)dealloc {
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+}
+
+#pragma mark - 筛选出已经填写的项
+- (void)dealwithData{
+    
+    NSMutableArray *notEmptyArr = [NSMutableArray array];
+    
+    for (int i = 0; i < self.dataArr.count; i ++) {
+        id object = self.dataArr[i];
+        if ([object isKindOfClass:[OneMinuteModel class]]) {
+            OneMinuteModel *model = (OneMinuteModel *)object;
+            if (model.contentStr.length > 0) {
+                [notEmptyArr addObject:model];
+            }
+            
+        }else if([object isKindOfClass:[NSArray class]]){
+            NSArray *subDataArr = (NSArray *)object;
+            for (int j = 0; j < subDataArr.count; j ++) {
+                id object2 = subDataArr[j];
+                OneMinuteModel *model2 = (OneMinuteModel *)object2;
+                if (model2.contentStr.length > 0) {
+                    [notEmptyArr addObject:model2];
+                }
+            }
+        }
+    }
+    
+    for (OneMinuteModel *model in notEmptyArr) {
+        if ([model.placeholderStr containsString:@"姓名"]) {
+            [self deleteDataElement:@"姓名"];
+        }else if ([model.placeholderStr containsString:@"手机号码"]){
+            [self deleteDataElement:@"手机号码"];
+        }else if ([model.placeholderStr containsString:@"性别"]){
+            [self deleteDataElement:@"男士还是女士"];
+        }else if ([model.placeholderStr containsString:@"出生年月"]){
+            [self deleteDataElement:@"出生年"];
+        }else if ([model.placeholderStr containsString:@"毕业院校"]){
+            [self deleteDataElement:@"毕业学校"];
+        }else if ([model.placeholderStr containsString:@"学历"]){
+            [self deleteDataElement:@"学历"];
+        }else if ([model.placeholderStr containsString:@"专业名称"]){
+            [self deleteDataElement:@"专业名称"];
+        }else if ([model.placeholderStr containsString:@"职位类别"]){
+            [self deleteDataElement:@"岗位"];
+        }else if ([model.placeholderStr containsString:@"期望月薪"]){
+            [self deleteDataElement:@"期望月薪"];
+        }
+    }
+}
+/*
+ 
+ @[@"手机号码",
+ @"短信确认码",
+ @[@"姓名",@"性别"],
+ @"出生年月",
+ @[@"毕业院校",@"学历"],
+ @[@"专业名称",@"专业类别"],
+ @[@"期望工作地点",@"期望职位类别"],
+ @"期望月薪",@"求职状态"];
+ 
+ */
+
+/*
+ @[@"你的手机号码是？",
+ @"你是男士还是女士？",
+ @"你的出生年、月是？",
+ @"你的最高学历是？",
+ @"毕业学校是？",
+ @"你所学专业名称是？",
+ @"你最期望的岗位是？",
+ @"你的期望月薪是？",
+ @"你的姓名是？"];
+ */
+// 删除数据源的元素
+- (void)deleteDataElement:(NSString *)keyStr{
+    NSArray *tempArr = [NSArray arrayWithArray:self.voiceData];
+    for (VoiceModel *model in tempArr) {
+        if ([model.titleStr containsString:keyStr]) {
+            [self.voiceData removeObject:model];
+        }
+    }
+}
+
+#pragma mark - 把当前数据源key的值转成上个页面的key
+- (NSString *)transformToLastPageKey:(NSString *)nowKey{
+    if ([nowKey containsString:@"手机号码"]) {
+        return @"手机号码";
+    }else if ([nowKey containsString:@"男士还是女士"]){
+        return @"性别";
+    }else if ([nowKey containsString:@"姓名"]){
+        return @"姓名";
+    }else if ([nowKey containsString:@"出生年"]){
+        return @"出生年月";
+    }else if ([nowKey containsString:@"毕业学校"]){
+        return @"毕业院校";
+    }else if ([nowKey containsString:@"学历"]){
+        return @"学历";
+    }else if ([nowKey containsString:@"专业名称"]){
+        return @"专业名称";
+    }else if ([nowKey containsString:@"职位类别"]){
+        return @"岗位";
+    }else if ([nowKey containsString:@"期望月薪"]){
+        return @"期望月薪";
+    }
+    return @"";
+}
 @end

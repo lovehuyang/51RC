@@ -11,6 +11,7 @@
 @interface VoiceModel : NSObject
 @property (nonatomic , copy) NSString *titleStr;
 @property (nonatomic , copy) NSString *voicePath;
+@property (nonatomic , copy) NSString *recognationStr;// 语音识别结果
 
 
 /**
@@ -19,5 +20,5 @@
  @param type 1：手机通过审核 0：手机未通过审核
  @return 数据模型
  */
-+ (NSArray *)createVoiceModel:(NSInteger)type;
++ (NSMutableArray *)createVoiceModel:(NSInteger)type;
 @end

@@ -9,5 +9,9 @@
 #import "WKViewController.h"
 
 @interface SpeechViewController : WKViewController
+@property (nonatomic , assign) BOOL mobileVerify;// 手机号是否通过了验证
+@property (nonatomic , copy) NSArray *dataArr;// 数据源
 
+// 说话内容的结果回调
+@property (nonatomic , copy) void(^speakContentBlock)(NSString *key , NSString *recognation);
 @end
