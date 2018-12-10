@@ -43,6 +43,8 @@
 #define URL_SAVEONEMINUTE20180613NEW @"SaveOneMinute20180613New"
 // 获取手机号码归属地
 #define URL_GETIPMOBILEPLACE @"GetIpMobilePlace"
+// 根据语音获取职位类别
+#define URL_GETCVVOICEJOBTYPE @"GetCvVoiceJobType"
 
 
 #pragma mark - 公司用户

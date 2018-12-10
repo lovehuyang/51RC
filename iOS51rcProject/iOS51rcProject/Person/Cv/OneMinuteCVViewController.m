@@ -64,7 +64,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
                       @"", @"Mobile", // 手机号
                       @"", @"Salary", // 期望月薪
                       @"", @"JobType",// 期望职位类别
-                      @"", @"Negotiable",// 是否可以面议
+                      @"1", @"Negotiable",// 是否可以面议
                       @"", @"Education",// 学历id
                       @"", @"College",// 毕业院校
                       @"", @"MajorID",// 专业类别
@@ -78,7 +78,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
                       nil];
     [self.view addSubview:self.tipLab];
     [self.view addSubview:self.tableview];
-//    [self setupAddHuaTongButton];// 语音输入按钮
+    [self setupAddHuaTongButton];// 语音输入按钮
     [self getPaMain];
 }
 
@@ -118,7 +118,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
             mobileVerify = NO;
             [self createDataArr:dataDict];
             [self.tableview reloadData];
-            [self setupAddHuaTongButton];
+//            [self setupAddHuaTongButton];
         }
         
     } failureBlock:^(NSInteger errCode, NSString *msg) {
@@ -138,7 +138,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
         // 参数字典添加位置
         [self.dataParam setValue: [arr firstObject] forKey:@"JobPlace"];
         [self.tableview reloadData];
-        [self setupAddHuaTongButton];
+//        [self setupAddHuaTongButton];
     
     } failureBlock:^(NSInteger errCode, NSString *msg) {
         DLog(@"");
@@ -148,31 +148,41 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 #pragma mark - 话筒Button
 - (void)setupAddHuaTongButton{
     
-    OnMinuteSingleCell *cell = (OnMinuteSingleCell *)[self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArr.count - 1 inSection:0]];
     SpeechButton *speechBtn = [SpeechButton new];
-    [cell.contentView addSubview:speechBtn];
-    speechBtn.sd_layout
-    .rightSpaceToView(cell.contentView, 20)
-    .centerYEqualToView(cell.contentView)
-    .widthIs(200)
-    .heightIs(50);
+    speechBtn.frame = CGRectMake(SCREEN_WIDTH - 200 - 10, (SCREEN_HEIGHT - HEIGHT_STATUS_NAV - 49) * 0.65, 200, 50);
+    [self.view addSubview:speechBtn];
     speechBtn.speechInput = ^{
         SpeechViewController *svc = [[SpeechViewController alloc]init];
         svc.mobileVerify = mobileVerify;
         svc.dataArr = self.dataArr;
         WKNavigationController *nav = [[WKNavigationController alloc]initWithRootViewController:svc];
         __weak typeof(self)weakself = self;
-        svc.speakContentBlock = ^(NSString *key, NSString *recognation) {
-            DLog(@"123说话内容：%@ - %@",key , recognation);
-            [weakself resetDataValue:recognation key:key];
-            [weakself.tableview reloadData];
+        
+        svc.speakContentBlock = ^(NSDictionary *dict) {
+            NSArray *allKeys = [dict allKeys];
+            for (NSString *key in allKeys) {
+                NSString *value = dict[key];
+                DLog(@"123说话内容：%@ - %@",key , value);
+                [weakself resetDataValue:value key:key];
+                [weakself.tableview reloadData];
+            }
         };
-        [self presentViewController:nav animated:YES completion:^{
-            
-        }];
+        // 重置请求参数
+        svc.speakRestParam = ^(NSString *key, NSString *value) {
+            // 重置请求参数
+            [self.dataParam setObject:value forKey:key];
+        };
+        BOOL haveEmpty = [self dataIsEmpty:NO];
+        if (haveEmpty) {
+            [self presentViewController:nav animated:YES completion:nil];
+        }else{
+            [RCToast showMessage:@"一分钟简历已经填写完成，请点击保存按钮！"];
+        }
     };
 }
+
 #pragma mark - 懒加载
+
 - (UITableView *)tableview{
     if (!_tableview) {
         _tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, VIEW_BY(self.tipLab), SCREEN_WIDTH, SCREEN_HEIGHT - VIEW_BY(self.tipLab)) style:UITableViewStylePlain];
@@ -345,8 +355,6 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
         [self.dataParam setValue:[data objectForKey:@"id"] forKey:@"Education"];
         [self resetDataValue:[data objectForKey:@"value"] key:@"学历"];
         
-//        DLog(@"%@-%@",self.dataParam[@"EducationID"],self.dataParam[@"Education"]);
-        
         if ([[data objectForKey:@"id"] isEqualToString:@"1"] || [[data objectForKey:@"id"] isEqualToString:@"2"]) {
             
             [self.dataParam setValue:@"1106" forKey:@"MajorID"];
@@ -366,7 +374,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
         [self.dataParam setValue:[dataRegion objectForKey:@"id"] forKey:@"JobPlace"];
         [self resetDataValue:[dataRegion objectForKey:@"value"] key:@"期望工作地点"];
         
-    }else if (popView.tag == WKPopViewTag_Salary){
+    }else if (popView.tag == WKPopViewTag_Salary){// 期望月薪
         NSDictionary *data = [arraySelect objectAtIndex:0];
         [self.dataParam setValue:[data objectForKey:@"id"] forKey:@"Salary"];
         NSDictionary *dataNegotiable = [arraySelect objectAtIndex:1];
@@ -424,7 +432,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 }
 
 #pragma mark - 判断有无空信息
-- (BOOL)dataIsEmpty{
+- (BOOL)dataIsEmpty:(BOOL)showAlert{
     BOOL haveEmpty = NO;
     for (id object in self.dataArr) {
         if ([object isKindOfClass:[OneMinuteModel class]]) {
@@ -432,13 +440,17 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
             // 如果手机号通过了验证
             if(mobileVerify && !([model.placeholderStr containsString:@"手机号码"] || [model.placeholderStr containsString:@"短信确认码"])){
                 if (model.contentStr.length == 0 ||model.contentStr == nil) {
-                    [RCToast showMessage:[NSString stringWithFormat:@"请完善%@信息",model.placeholderStr]];
+                    if (showAlert) {
+                        [RCToast showMessage:[NSString stringWithFormat:@"请完善%@信息",model.placeholderStr]];
+                    }
                     haveEmpty = YES;
                     return haveEmpty;
                 }
             }else{// 如果手机号没通过验证
                 if (model.contentStr.length == 0 ||model.contentStr == nil) {
-                    [RCToast showMessage:[NSString stringWithFormat:@"请完善%@信息",model.placeholderStr]];
+                    if (showAlert) {
+                        [RCToast showMessage:[NSString stringWithFormat:@"请完善%@信息",model.placeholderStr]];
+                    }
                     haveEmpty = YES;
                     return haveEmpty;
                 }
@@ -448,7 +460,9 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
             for (id object2 in dataArr) {
                 OneMinuteModel *model2 = (OneMinuteModel *)object2;
                 if ([model2.contentStr length] == 0 || model2.contentStr == nil) {
-                    [RCToast showMessage:[NSString stringWithFormat:@"请完善%@信息",model2.placeholderStr]];
+                    if (showAlert) {
+                      [RCToast showMessage:[NSString stringWithFormat:@"请完善%@信息",model2.placeholderStr]];
+                    }
                     haveEmpty = YES;
                     return haveEmpty;
                 }
@@ -529,13 +543,13 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 #pragma mark - 保存
 - (void)saveEvent{
     
-    BOOL haveEmpty = [self dataIsEmpty];
+    BOOL haveEmpty = [self dataIsEmpty:YES];
     
     if(haveEmpty){
         return;
     }
     [self calulateRelatedWorkYears];
-    [SVProgressHUD dismiss];
+    [SVProgressHUD show];
     [AFNManager requestWithMethod:POST ParamDict:self.dataParam url:URL_SAVEONEMINUTE20180613NEW tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
         [SVProgressHUD dismiss];
         // -100：code验证不通过  -101：手机号认证失败    1：成功

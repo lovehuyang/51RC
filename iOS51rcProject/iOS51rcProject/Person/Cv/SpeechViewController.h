@@ -13,5 +13,8 @@
 @property (nonatomic , copy) NSArray *dataArr;// 数据源
 
 // 说话内容的结果回调
-@property (nonatomic , copy) void(^speakContentBlock)(NSString *key , NSString *recognation);
+@property (nonatomic , copy) void(^speakContentBlock)(NSDictionary *dict);
+// 重置上层页面请求参数
+@property (nonatomic , copy) void (^speakRestParam)(NSString *key , NSString *value);
+
 @end

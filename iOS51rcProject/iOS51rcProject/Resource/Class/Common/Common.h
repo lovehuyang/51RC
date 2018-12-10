@@ -57,6 +57,8 @@
 
 + (NSArray *)getProvince;
 + (NSArray *)getCareerStatus;
++ (NSArray *)getEducation;
++ (NSArray *)getSalary;
 
 + (NSDictionary *)welfare:(NSDictionary *)dict;
 + (NSDictionary *)welfare:(NSDictionary *)dict1 dict2:(NSDictionary *)dict2;
@@ -66,4 +68,6 @@
 
 + (NSInteger )calulateRelatedWorkYearsWithEducation:(NSInteger)EducationId;
 
++ (NSString *)translatNum:(NSString *)chnStr;
++ (NSString *)translatBirth:(NSString *)chnStr;
 @end

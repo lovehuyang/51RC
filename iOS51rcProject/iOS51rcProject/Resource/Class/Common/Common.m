@@ -713,6 +713,31 @@
     return array;
 }
 
+
+/**
+ 获取学历数组
+
+ @return 学历
+ */
++ (NSArray *)getEducation{
+    FMDatabase *dataBase;
+    NSString *sqlString = @"SELECT * FROM dcEducation";
+    NSArray *array = [Common querySql:sqlString dataBase:dataBase];
+    return array;
+}
+
+/**
+ 获取期望月薪
+
+ @return 月薪
+ */
++ (NSArray *)getSalary{
+    
+    FMDatabase *dataBase;
+    NSString *sqlString = @"SELECT * FROM dcSalary WHERE _id < 15";
+    NSArray *array = [Common querySql:sqlString dataBase:dataBase];
+    return array;
+}
 + (NSDictionary *)welfare:(NSDictionary *)dict{
     NSDictionary *welfareDict = @{
                                   @"Welfare1":dict[@"Welfare1"],
@@ -850,5 +875,125 @@
             break;
     }
     return minusNum;
+}
+
+/**
+ 汉字数字转阿拉伯数字
+
+ @param chnStr 汉字文字
+ @return 阿拉伯数字
+ */
++ (NSString *)translatNum:(NSString *)chnStr{
+
+    //测试数据
+    NSDictionary *chnNumChar = @{@"零":@0,@"一":@1,@"二":@2,@"两":@2,@"三":@3,@"四":@4,@"五":@5,@"六":@6,@"七":@7,@"八":@8,@"九":@9,@"十":@10,@"百":@100,@"千":@1000,@"万":@10000,@"亿":@100000000};
+    //遍历字符串用数组接收单个字符
+    NSMutableArray *strArrM = [NSMutableArray array];
+    for (NSInteger i = 0;i < chnStr.length;i ++) {
+        NSString *charStr = [chnStr substringWithRange:NSMakeRange(i, 1)];
+        if (chnNumChar[charStr] != nil) {
+            NSString *tempStr = [chnStr substringWithRange:NSMakeRange(i - 1, 1)];
+            //如果第一个字符为十则在其前面添‘一’；如果字符“十”的前一个字符为“零”或者前面没有数字字符则在其前面添“一”
+            if (i == 0 && [charStr isEqual:@"十"]) {
+                [strArrM addObject:@"一"];
+            }else if( i > 0 && (chnNumChar[tempStr] == nil || [tempStr isEqual:@"零"]) && [charStr isEqual:@"十"]){
+                [strArrM addObject:@"一"];
+            }
+            [strArrM addObject:charStr];
+        }
+    }
+    NSArray *arr = [[strArrM reverseObjectEnumerator] allObjects];//数组倒序
+    NSInteger total = 0;//总值
+    NSInteger r = 1;//位权
+    NSInteger u = 1;//记录单位节点
+    for (NSInteger i = 0; i < arr.count; i ++) {
+        NSInteger val = [chnNumChar[arr[i]] integerValue];//从右至左(从低位到高位)逐位取值 ←----
+        if (val >= 10){        //单位字符
+            if (val > r) {      //如果此时的字符单位值大于之前的位权
+                //把单位值赋值给位权r，并记录此时的最大单位u
+                r = val;
+                u = val;
+            }else{      //如果此时的字符单位值不大于之前的位权
+                //此前的最大单位u与此时的字符单位的乘积即为此时的位权
+                r = u * val;
+            }
+        }else{      //数字字符
+            //累加计算当前的总值
+            total +=  r * val;
+            //NSLog(@"%ld",total);
+        }
+    }
+    
+    
+    // 删除字符串中的其他中文
+    NSString *totalStr = [NSString stringWithFormat:@"%ld",total];
+    NSString *hanziStr = @"";
+    for (int i=0; i<totalStr.length; i++) {
+        NSRange range =NSMakeRange(i, 1);
+        NSString * strFromSubStr=[totalStr substringWithRange:range];
+        const char * cStringFromstr=[strFromSubStr UTF8String];
+        
+        if (strlen(cStringFromstr)==3) {
+            //汉字
+            NSRange range2 = NSMakeRange(i,  totalStr.length - i);
+            hanziStr = [totalStr substringWithRange:range2];
+            NSString *resultStr = [totalStr stringByReplacingOccurrencesOfString:hanziStr withString:@""];
+            return resultStr;
+        }
+    }
+    return totalStr;
+}
+
+/**
+ 声音识别日期转阿拉伯数字
+ 
+ @param chnStr 识别文字
+ @return 阿拉伯数字
+ */
++ (NSString *)translatBirth:(NSString *)chnStr{
+    
+    //测试数据
+    NSDictionary *chnNumChar = @{@"零":@0,@"一":@1,@"二":@2,@"两":@2,@"三":@3,@"四":@4,@"五":@5,@"六":@6,@"七":@7,@"八":@8,@"九":@9,@"十":@10,@"百":@100,@"千":@1000,@"万":@10000,@"亿":@100000000};
+    //遍历字符串用数组接收单个字符
+    NSMutableArray *strArrM = [NSMutableArray array];
+    for (NSInteger i = 0;i < chnStr.length;i ++) {
+        NSString *charStr = [chnStr substringWithRange:NSMakeRange(i, 1)];
+        if (chnNumChar[charStr] != nil) {
+            NSString *tempStr = [chnStr substringWithRange:NSMakeRange(i - 1, 1)];
+            //如果第一个字符为十则在其前面添‘一’；如果字符“十”的前一个字符为“零”或者前面没有数字字符则在其前面添“一”
+            if (i == 0 && [charStr isEqual:@"十"]) {
+                [strArrM addObject:@"一"];
+            }else if( i > 0 && (chnNumChar[tempStr] == nil || [tempStr isEqual:@"零"]) && [charStr isEqual:@"十"]){
+                [strArrM addObject:@"一"];
+            }
+            [strArrM addObject:charStr];
+        }
+    }
+    NSArray *arr = [[strArrM reverseObjectEnumerator] allObjects];//数组倒序
+    NSInteger total = 0;//总值
+    NSInteger r = 1;//位权
+    NSInteger u = 1;//记录单位节点
+    for (NSInteger i = 0; i < arr.count; i ++) {
+        NSInteger val = [chnNumChar[arr[i]] integerValue];//从右至左(从低位到高位)逐位取值 ←----
+        if (val >= 10){        //单位字符
+            if (val > r) {      //如果此时的字符单位值大于之前的位权
+                //把单位值赋值给位权r，并记录此时的最大单位u
+                r = val;
+                u = val;
+            }else{      //如果此时的字符单位值不大于之前的位权
+                //此前的最大单位u与此时的字符单位的乘积即为此时的位权
+                r = u * val;
+            }
+        }else{      //数字字符
+            //累加计算当前的总值
+            total +=  r * val;
+            //NSLog(@"%ld",total);
+        }
+    }
+    
+    
+    // 删除字符串中的其他中文
+    NSString *totalStr = [NSString stringWithFormat:@"%ld",total];
+    return totalStr;
 }
 @end

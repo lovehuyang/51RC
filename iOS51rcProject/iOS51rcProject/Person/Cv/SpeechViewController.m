@@ -13,6 +13,7 @@
 #import "SpeakBtn.h"
 #import "AlertView.h"
 #import "OneMinuteModel.h"
+#import "Common.h"
 
 #import "BDSEventManager.h"
 #import "BDSASRDefines.h"
@@ -283,13 +284,13 @@ const NSString* APP_ID = @"15042909";
         }
         case EVoiceRecognitionClientWorkStatusFlushData: {
             NSString *result = [NSString stringWithFormat:@"CALLBACK: final result - %@.\n\n", [self getDescriptionForDic:aObj]];
-            [self voiceRecognition:(NSDictionary *)aObj];
+            [self voiceRecognition:(NSDictionary *)aObj status:NO];
             DLog(@"连续上屏");
             break;
         }
         case EVoiceRecognitionClientWorkStatusFinish: {
             NSString *result = [NSString stringWithFormat:@"CALLBACK: final result - %@.\n\n", [self getDescriptionForDic:aObj]];
-            [self voiceRecognition:(NSDictionary *)aObj];
+            [self voiceRecognition:(NSDictionary *)aObj status:YES];
             DLog(@"语音识别功能完成，服务器返回正确结果\n%@",result);
             // 语音识别完成，显示重说按钮
             self.reSpeakBtn.hidden = NO;
@@ -372,15 +373,143 @@ const NSString* APP_ID = @"15042909";
 }
 
 #pragma mark - 语音识别结果处理
-
-- (void)voiceRecognition:(NSDictionary *)objc{
+/*
+ @[@"你的手机号码是？",
+ @"你是男士还是女士？",
+ @"你的出生年、月是？",
+ @"你的最高学历是？",
+ @"毕业学校是？",
+ @"你所学专业名称是？",
+ @"你最期望的岗位是？",
+ @"你的期望月薪是？",
+ @"你的姓名是？"];
+ */
+- (void)voiceRecognition:(NSDictionary *)objc status:(BOOL)isFinish{
+    // 回传参数
     NSArray *recognationArr = objc[@"results_recognition"] ;
     NSString *recognationStr = [recognationArr firstObject];
-    DLog(@"%@",recognationStr);
     self.recognationLab.text = recognationStr;
+    
+    if(!isFinish){
+        return;
+    }
     VoiceModel *model = self.voiceData[index];
     model.recognationStr = recognationStr;
-    self.speakContentBlock([self transformToLastPageKey:model.titleStr],model.recognationStr);
+
+    if([model.titleStr containsString:@"手机号码"]){
+        NSDictionary *dict = @{[self transformToLastPageKey:model.titleStr]:model.recognationStr};
+        self.speakContentBlock(dict);
+        self.speakRestParam(@"Mobile", model.recognationStr);
+        
+    }else if ([model.titleStr containsString:@"男士"]){
+        if([model.recognationStr containsString:@"男"] || [model.recognationStr containsString:@"爷"] || [model.recognationStr containsString:@"伙"] ||[model.recognationStr containsString:@"雄"]  ||[model.recognationStr containsString:@"父"] || [model.recognationStr containsString:@"爸"]  ||[model.recognationStr containsString:@"儿"]||[model.recognationStr containsString:@"兄"]||[model.recognationStr containsString:@"哥"]||[model.recognationStr containsString:@"弟"]){
+            self.speakRestParam(@"Gender", @"1");// 性别
+            NSDictionary *dict = @{[self transformToLastPageKey:model.titleStr]:@"男"};
+            self.speakContentBlock(dict);
+        }else{
+            self.speakRestParam(@"Gender",@"0");
+            NSDictionary *dict = @{[self transformToLastPageKey:model.titleStr]:@"女"};
+            self.speakContentBlock(dict);
+        }
+        
+    }else if ([model.titleStr containsString:@"出生年"]){
+        NSString *year = @"";
+        NSString *month = @"";
+        NSString *birth = [Common translatBirth:model.recognationStr];
+        NSArray *yearArr = [birth componentsSeparatedByString:@"年"];
+        if (yearArr.count > 0) {
+            year = [yearArr firstObject];
+            NSArray *tempArr = [[yearArr lastObject] componentsSeparatedByString:@"年"];
+            if(tempArr.count > 0){
+                NSArray *monthArr = [[tempArr lastObject] componentsSeparatedByString:@"月"];
+                month = [monthArr lastObject];
+                self.speakRestParam(@"Birthday", [NSString stringWithFormat:@"%@%@",year, month]);
+                NSDictionary *dict = @{[self transformToLastPageKey:model.titleStr]:model.recognationStr};
+                self.speakContentBlock(dict);
+            }
+        }else{
+            return;
+        }
+    }else if([model.titleStr containsString:@"最高学历"]){
+        NSArray *educationArr = [Common getEducation];
+        for (NSDictionary *tempDict in educationArr) {
+            NSString *value = tempDict[@"value"];
+            if ([model.recognationStr containsString:value]) {
+                self.speakRestParam(@"Education", tempDict[@"id"]);
+                NSDictionary *dict = @{[self transformToLastPageKey:model.titleStr]:value};
+                self.speakContentBlock(dict);
+                return;
+            }
+        }
+    }else if ([model.titleStr containsString:@"毕业学校"]){
+        self.speakRestParam(@"College", model.recognationStr);
+        NSDictionary *dict = @{[self transformToLastPageKey:model.titleStr]:model.recognationStr};
+        self.speakContentBlock(dict);
+    }else if ([model.titleStr containsString:@"专业名称"]){
+        NSDictionary *dict = @{[self transformToLastPageKey:model.titleStr]:model.recognationStr};
+        self.speakContentBlock(dict);
+        self.speakRestParam(@"MajorName", model.recognationStr);
+        // 获取专业类别
+        [self getMajor:model];
+    }else if ([model.titleStr containsString:@"岗位"]){
+        [self getCvVoiceJobType:model];
+    }else if ([model.titleStr containsString:@"期望月薪"]){
+        NSString *salay = [Common translatNum:model.recognationStr];// 把汉字数字转阿拉伯数字
+        NSDictionary *dict = @{[self transformToLastPageKey:model.titleStr]:[NSString stringWithFormat:@"%@ 可面议",[self getSalaryDegree:salay]]};
+        self.speakContentBlock(dict);
+        self.speakRestParam(@"Salary", [self getSalaryId:[self getSalaryDegree:salay]]);
+    }else if ([model.titleStr containsString:@"姓名"]){
+        NSDictionary *dict = @{[self transformToLastPageKey:model.titleStr]:model.recognationStr};
+        self.speakContentBlock(dict);
+        self.speakRestParam(@"Name", model.recognationStr);
+    }
+}
+
+#pragma mark - 根据语音获取职位类别
+- (void)getCvVoiceJobType:(VoiceModel *)voiceModel{
+    NSDictionary *parmaDict = @{@"voiceText":voiceModel.recognationStr};
+    [AFNManager requestWithMethod:POST ParamDict:parmaDict url:URL_GETCVVOICEJOBTYPE tableName:@"Table" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        DLog(@"");
+        if (requestData.count > 0) {
+            NSMutableString *mutStr = [NSMutableString string];
+            NSMutableString *idStr = [NSMutableString string];
+            for (int i = 0; i < requestData.count; i ++) {
+                NSDictionary *dict = requestData[i];
+                if(i < requestData.count - 1){
+                    [mutStr appendFormat:@"%@ ",dict[@"Description"]];
+                    [idStr appendFormat:@"%@ ",dict[@"dcJobTypeID"]];
+                }else{
+                    [mutStr appendFormat:@"%@",dict[@"Description"]];
+                    [idStr appendFormat:@"%@",dict[@"dcJobTypeID"]];
+                }
+            }
+    
+            NSDictionary *dict = @{[self transformToLastPageKey:voiceModel.titleStr]:mutStr};
+            self.speakContentBlock(dict);
+            self.speakRestParam(@"JobType", idStr);
+        }
+        
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        DLog(@"");
+    }];
+}
+
+
+#pragma mark - 根据专业名称获取专业类别
+
+- (void)getMajor:(VoiceModel *)voiceModel{
+    NSDictionary *paramDict = @{@"majorName":voiceModel.recognationStr};
+    [AFNManager requestWithMethod:POST ParamDict:paramDict url:@"GetMajor" tableName:@"Table" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        if(dataDict != nil){
+    
+            NSDictionary *dict = @{@"专业类别":dataDict[@"Major"]};
+            self.speakContentBlock(dict);
+            self.speakRestParam(@"MajorID", dataDict[@"dcMajorId"]);
+        }
+        
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        DLog(@"");
+    }];
 }
 
 #pragma mark - 计时器
@@ -506,10 +635,81 @@ const NSString* APP_ID = @"15042909";
         return @"学历";
     }else if ([nowKey containsString:@"专业名称"]){
         return @"专业名称";
-    }else if ([nowKey containsString:@"职位类别"]){
-        return @"岗位";
+    }else if ([nowKey containsString:@"岗位"]){
+        return @"职位类别";
     }else if ([nowKey containsString:@"期望月薪"]){
         return @"期望月薪";
+    }
+    return @"";
+}
+
+#pragma mark - 获取薪资范围
+- (NSString *)getSalaryDegree:(NSString *)salary{
+    
+    NSInteger averageSearchSalary = [salary integerValue];
+    
+    if (averageSearchSalary >= 20000) {
+        return @"20000元以上";
+    }
+    else if (averageSearchSalary >= 15000)
+    {
+        return @"15000元以上";
+    }
+    else if (averageSearchSalary >= 10000)
+    {
+        return @"10000元以上";
+    }
+    else if (averageSearchSalary >= 8000)
+    {
+        return @"8000元以上";
+    }
+    else if (averageSearchSalary >= 6000)
+    {
+        return @"6000元以上";
+    }
+    else if (averageSearchSalary >= 5000)
+    {
+        return @"5000元以上";
+    }
+    else if (averageSearchSalary >= 4000)
+    {
+        return @"4000元以上";
+    }
+    else if (averageSearchSalary >= 3500)
+    {
+        return @"3500元以上";
+    }
+    else if (averageSearchSalary >= 3000)
+    {
+        return @"3000元以上";
+    }
+    else if (averageSearchSalary >= 2500)
+    {
+        return @"2500元以上";
+    }
+    else if (averageSearchSalary >= 2000)
+    {
+        return @"2000元以上";
+    }
+    else if (averageSearchSalary >= 1500)
+    {
+        return @"1500元以上";
+    }
+    else if (averageSearchSalary > 0)
+    {
+        return @"1000元以上";
+    }else{
+        return @"";
+    }
+}
+
+#pragma mark - 获取月薪id
+- (NSString *)getSalaryId:(NSString *)salaryDegree{
+    NSArray *salaryArr = [Common getSalary];
+    for (NSDictionary *dict in salaryArr) {
+        if ([salaryDegree isEqualToString:dict[@"value"]]) {
+            return dict[@"id"];
+        }
     }
     return @"";
 }
