@@ -106,7 +106,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
         }
         
         // 参数字典添加性别
-        [self.dataParam setValue:[dataDict[@"Gender"] boolValue]?@"0":@"1" forKey:@"Gender"];
+        [self.dataParam setValue:[dataDict[@"Gender"] boolValue]?@"1":@"0" forKey:@"Gender"];
         
         if (mobileVerifyDate.length > 0) {
             DLog(@"手机号已经通过认证");
@@ -563,9 +563,13 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
                 if (self.pageType == PageType_Login) {
                     self.completeOneCV(@"一分钟简历创建成功");
                     [self.navigationController popViewControllerAnimated:NO];
+                   
                 }else{
                     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GETCVLIST object:nil];
                 }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GETJOBLISTBYSEARCH object:nil];
+                self.tabBarController.selectedIndex = 0;// 跳转至“职位”页面
             });
 
         }else if (result == -100){

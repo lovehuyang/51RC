@@ -7,8 +7,10 @@
 //
 
 #import "WKViewController.h"
+#import "RCRootViewController.h"
 
-@interface SpecialityModifyViewController : WKViewController
+
+@interface SpecialityModifyViewController :RCRootViewController
 
 @property (nonatomic, strong) NSString *cvMainId;
 @property (nonatomic, strong) NSString *speciality;

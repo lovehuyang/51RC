@@ -10,6 +10,7 @@
 #import "WKButton.h"
 
 @interface EducationModifyViewController : WKViewController
+@property (strong, nonatomic) IBOutlet UIView *bgView;
 
 @property (strong, nonatomic) IBOutlet UITextField *txtCollege;
 @property (strong, nonatomic) IBOutlet UIButton *btnGraduation;

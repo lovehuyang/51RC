@@ -12,6 +12,7 @@
 @interface ExperienceModifyViewController : WKViewController
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *constraintScrollWidth;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UITextField *txtCompanyName;
 @property (strong, nonatomic) IBOutlet UIButton *btnIndustry;
 @property (strong, nonatomic) IBOutlet UIButton *btnCompanySize;

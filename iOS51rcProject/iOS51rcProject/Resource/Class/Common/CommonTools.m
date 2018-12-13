@@ -32,4 +32,15 @@
     
     return  [self getStatusHight] + 44;
 }
+
+/**
+ 读取百度语音配置参数
+ 
+ @return 参数值
+ */
++ (NSString *)getBDSASRParameter:(NSString *)param{
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"BDSASRParameter" ofType:@"plist"];
+    NSDictionary *paramDict = [[NSDictionary alloc]initWithContentsOfFile:plistPath];
+    return paramDict[param];
+}
 @end

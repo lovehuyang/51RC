@@ -4,7 +4,7 @@
 //
 //  Created by Lucifer on 2017/6/29.
 //  Copyright © 2017年 Lucifer. All rights reserved.
-//
+//  职位页面
 
 #import "JobSearchViewController.h"
 #import "NetWebServiceRequest.h"
@@ -24,6 +24,8 @@
 #import "UIView+Toast.h"
 #import "OnlineLab.h"
 #import "NSString+RCString.h"
+#import "RecommendJobView.h"
+#import "InsertJobApplyModel.h"
 
 @interface JobSearchViewController ()<BMKLocationServiceDelegate, BMKGeoCodeSearchDelegate, BMKGeneralDelegate, NetWebServiceRequestDelegate, UITableViewDelegate, UITableViewDataSource, WKFilterViewDelegate, UIScrollViewDelegate, UITextFieldDelegate, KeyWordViewDelegate, WKPopViewDelegate>
 
@@ -47,11 +49,22 @@
 @property (nonatomic, strong) NSString *provinceId;
 @property (nonatomic, strong) NSString *province;
 @property (nonatomic, strong) NSArray *provinceArr;// 存放所有省份
+
+@property (nonatomic, strong) NSMutableArray *insertJobApplyDataArr;// 推荐职位的数据源
+@property (nonatomic, copy) NSString *cvMainID;// 推荐职位申请的简历id
+@property (nonatomic, copy) NSString *subsiteID;
 @property NSInteger page;
 @property int lastPosition;
 @end
 
 @implementation JobSearchViewController
+
+- (NSMutableArray *)insertJobApplyDataArr{
+    if (!_insertJobApplyDataArr) {
+        _insertJobApplyDataArr = [NSMutableArray array];
+    }
+    return _insertJobApplyDataArr;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -174,6 +187,8 @@
         [self getPic];
         [self defaultSearch];
     }
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getCvList) name:NOTIFICATION_GETJOBLISTBYSEARCH object:nil];
 }
 
 - (void)getPic {
@@ -357,6 +372,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self getCvList];
+    return;
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *data = [self.arrData objectAtIndex:indexPath.row];
     WKNavigationController *jobNav = [[UIStoryboard storyboardWithName:@"Person" bundle:nil] instantiateViewControllerWithIdentifier:@"jobView"];
@@ -506,6 +525,15 @@
             }
             [USER_DEFAULT setObject:[self.dataPic objectForKey:@"Id"] forKey:@"launcherPicId"];
         }
+    }else if (request.tag == 4){
+        //PaMain
+        NSDictionary *paMainData = [[Common getArrayFromXml:requestData tableName:@"PaMain"] objectAtIndex:0];
+        NSDictionary *jobIntentionData = [[Common getArrayFromXml:requestData tableName:@"JobIntention"] objectAtIndex:0];
+        NSString *workPlace = jobIntentionData[@"JobPlace"];
+        self.subsiteID = [NSString stringWithString:paMainData[@"dcSubSiteID"]];
+        NSString *salaryID = jobIntentionData[@"dcSalaryID"];
+        NSString *jobTypeID = jobIntentionData[@"JobType"];
+        [self getJobSearch:workPlace jobTypeID:jobTypeID salaryID:salaryID];
     }
 }
 
@@ -690,4 +718,114 @@
     [self defaultSearch];
 }
 
+#pragma mark - GetJobListBySearch 获取推荐的职位
+- (void)getJobSearch:(NSString *)regionID jobTypeID:(NSString *)jobTypeID salaryID:(NSString *)salaryID{
+    [SVProgressHUD show];
+    NSMutableDictionary *paramDict = [NSMutableDictionary dictionaryWithDictionary:self.dataParam];
+    [paramDict setValue:@"1" forKey:@"pageNumber"];
+    [paramDict setObject:regionID forKey:@"workPlace"];
+    [paramDict setObject:self.subsiteID forKey:@"subsiteID"];
+    [paramDict setObject:jobTypeID forKey:@"jobType"];
+    [paramDict setObject:salaryID forKey:@"salary"];
+    [AFNManager requestWithMethod:POST ParamDict:paramDict url:@"GetJobListBySearch" tableName:@"dtJobList" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        [SVProgressHUD dismiss];
+        [self.insertJobApplyDataArr removeAllObjects];
+        if (requestData.count>=4) {
+            for(int i =0 ; i< 4;i ++){
+                NSDictionary *tempDict = requestData[i];
+                InsertJobApplyModel *model = [InsertJobApplyModel buideModel:tempDict];
+                model.isSeleted = YES;
+                [self.insertJobApplyDataArr addObject:model];
+            }
+        }else{
+            for (NSDictionary *tempDict in requestData) {
+                InsertJobApplyModel *model = [InsertJobApplyModel buideModel:tempDict];
+                model.isSeleted = YES;
+                [self.insertJobApplyDataArr addObject:model];
+            }
+        }
+        
+        RecommendJobView *recommendView = [[RecommendJobView alloc]initWithData:self.insertJobApplyDataArr];
+        recommendView.applyFor = ^{
+            DLog(@"立即申请");
+            BOOL haveApply = NO;// 默认没有申请的职位
+            for(InsertJobApplyModel *mode in self.insertJobApplyDataArr){
+                haveApply = haveApply || mode.isSeleted;
+            }
+            if (haveApply == NO) {
+                [RCToast showMessage:@"请至少选择一个职位"];
+            }else{
+                [self insertJobApply];
+            }
+        };
+        [recommendView show];
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        [SVProgressHUD dismiss];
+    }];
+}
+
+#pragma mark - 获取完整简历
+- (void)getCvList{
+    NSDictionary *paramDict = [NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", nil];
+    [AFNManager requestWithMethod:POST ParamDict:paramDict url:@"GetCvList" tableName:@"Table" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        
+        if(requestData.count > 0){// 简历数目大于0
+            for (NSDictionary *dict in requestData) {
+                // 获取是完整的简历 Valid = 1
+                BOOL validBool = [dict[@"Valid"] boolValue];
+                if (validBool) {
+                    self.cvMainID = [NSString stringWithString:dict[@"ID"]];
+                    [self getCvInfo];
+                    return ;
+                }
+            }
+        }
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        
+    }];
+}
+
+#pragma mark - 获取简历详情
+- (void)getCvInfo{
+    NSDictionary *paramDict = [NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", self.cvMainID, @"cvMainId", nil];
+    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetCvInfo" Params:paramDict viewController:self];
+    [request setTag:4];
+    [request setDelegate:self];
+    [request startSynchronous];
+    self.runningRequest = request;
+}
+
+#pragma mark - InsertJobApply立即申请
+
+- (void)insertJobApply{
+    
+    NSArray *tempArr = [NSArray arrayWithArray:self.insertJobApplyDataArr];
+    for (InsertJobApplyModel *model in tempArr) {
+        if (!model.isSeleted) {
+            [self.insertJobApplyDataArr removeObject:model];
+        }
+    }
+    NSString *strJobIDs ;
+    for (int i = 0; i < self.insertJobApplyDataArr.count; i ++) {
+        InsertJobApplyModel *model = self.insertJobApplyDataArr[i];
+
+        if (i == 0) {
+            strJobIDs = model.ID;
+        }else{
+            strJobIDs = [NSString stringWithFormat:@"%@,%@",strJobIDs,model.ID];
+        }
+    }
+    
+    NSDictionary *paramDict = @{@"strCvMainID":self.cvMainID,
+                                @"PaMainID":PAMAINID,
+                                @"code":[USER_DEFAULT objectForKey:@"paMainCode"],
+                                @"strJobIDs":strJobIDs,
+                                @"subsiteID":self.subsiteID
+                                };
+    [AFNManager requestWithMethod:POST ParamDict:paramDict url:URL_INSERTJOBAPPLY tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        DLog(@"");
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        DLog(@"");
+    }];
+}
 @end

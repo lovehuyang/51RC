@@ -1,11 +1,12 @@
 //
-//  SpecialityModifyViewController.m
+//  LongVoiceInputController.m
 //  iOS51rcProject
 //
-//  Created by Lucifer on 2017/7/17.
-//  Copyright © 2017年 Lucifer. All rights reserved.
-//  工作能力页面
+//  Created by Lucifer on 2018/12/11.
+//  Copyright © 2018年 Jerry. All rights reserved.
+//
 
+#import "LongVoiceInputController.h"
 #import "SpecialityModifyViewController.h"
 #import "Common.h"
 #import "CommonMacro.h"
@@ -17,23 +18,19 @@
 #import "BDSASRDefines.h"
 #import "BDSASRParameters.h"
 
-
-@interface SpecialityModifyViewController ()<NetWebServiceRequestDelegate,BDSClientASRDelegate,UITextViewDelegate>
+@interface LongVoiceInputController ()<BDSClientASRDelegate,UITextViewDelegate>
 
 @property (nonatomic , assign) BOOL longPressFlag;//yes时为正在进行长语音识别
-@property (nonatomic , strong) NetWebServiceRequest *runningRequest;
 @property (nonatomic , strong) UITextView *txtSpeciality;
 @property (nonatomic , strong) SpeakLoadingBtn *speakBtn;
 @property (nonatomic , strong) BDSEventManager *asrEventManager;// 语音识别管理类
 
 @end
 
-@implementation SpecialityModifyViewController
+@implementation LongVoiceInputController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.title = @"工作能力";
     [Common changeFontSize:self.view];
     [self.view setBackgroundColor:SEPARATECOLOR];
     UIBarButtonItem *btnSave = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveSpeciality)];
@@ -42,10 +39,10 @@
     
     self.txtSpeciality = [[UITextView alloc] initWithFrame:CGRectMake(15, 20, SCREEN_WIDTH - 30, 100)];
     [self.txtSpeciality setBackgroundColor:[UIColor whiteColor]];
-    if (self.speciality == nil) {
-        self.speciality = @"";
+    if (self.detail == nil) {
+        self.detail = @"";
     }
-    [self.txtSpeciality setText:self.speciality];
+    [self.txtSpeciality setText:self.detail];
     [self.txtSpeciality setFont:DEFAULTFONT];
     [self.txtSpeciality.layer setCornerRadius:5];
     [self.txtSpeciality setDelegate:self];
@@ -58,7 +55,7 @@
     .topSpaceToView(self.txtSpeciality, 20)
     .rightEqualToView(self.txtSpeciality)
     .autoHeightRatio(0);
-    tipLab.text = @"例如：\n有一定的知识经验积累，学习能力强，工作的同时会进一步提升个人知识储备。\n本人工作态度严谨认真，有较强的执行力，有很好的团队协作能力，有良好的分析解决问题的思维。";
+    tipLab.text = self.tipStr;
     tipLab.textColor = TEXTGRAYCOLOR;
     tipLab.font = DEFAULTFONT;
     
@@ -73,7 +70,7 @@
     self.speakBtn.speakStatus = ^(BOOL speaking) {
         if (speaking) {
             NSLog(@"说话中");
-             [weakself.asrEventManager sendCommand:BDS_ASR_CMD_START];
+            [weakself.asrEventManager sendCommand:BDS_ASR_CMD_START];
         }else{
             NSLog(@"暂停中");
             [weakself.asrEventManager sendCommand:BDS_ASR_CMD_STOP];
@@ -93,17 +90,13 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.runningRequest cancel];
     [self.asrEventManager sendCommand:BDS_ASR_CMD_CANCEL];
 }
 
 - (void)saveSpeciality {
     [self.view endEditing:YES];
-    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"ModifySpeciality" Params:[NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", self.cvMainId, @"cvMainId", self.txtSpeciality.text, @"speciality", nil] viewController:self];
-    [request setTag:1];
-    [request setDelegate:self];
-    [request startAsynchronous];
-    self.runningRequest = request;
+    self.detailContent(self.txtSpeciality.text);
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)netRequestFinished:(NetWebServiceRequest *)request
@@ -115,7 +108,7 @@
 #pragma mark - UITextViewDelegate
 - (void)textViewDidChange:(UITextView *)textView{
     DLog(@"文字发生了改变：%@",textView.text);
-    self.speciality = textView.text;
+    self.detail = textView.text;
 }
 #pragma mark - 配置语音识别
 - (void)longSpeechRecognition{
@@ -268,14 +261,14 @@
     NSString *recognationStr = [recognationArr firstObject];
     
     if (!isFinish) {// 正在识别中
-        self.txtSpeciality.text = [NSString stringWithFormat:@"%@%@",self.speciality,recognationStr];
+        self.txtSpeciality.text = [NSString stringWithFormat:@"%@%@",self.detail,recognationStr];
         
     }else{// 该段识别结束
-        self.txtSpeciality.text = [NSString stringWithFormat:@"%@%@",self.speciality,recognationStr];
-        self.speciality = self.txtSpeciality.text;
+        self.txtSpeciality.text = [NSString stringWithFormat:@"%@%@",self.detail,recognationStr];
+        self.detail = self.txtSpeciality.text;
     }
-
     DLog(@"语音识别内容：%@",recognationStr);
 }
+
 
 @end

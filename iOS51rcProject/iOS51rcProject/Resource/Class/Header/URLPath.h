@@ -45,6 +45,8 @@
 #define URL_GETIPMOBILEPLACE @"GetIpMobilePlace"
 // 根据语音获取职位类别
 #define URL_GETCVVOICEJOBTYPE @"GetCvVoiceJobType"
+// 推荐职位立即申请接口
+#define URL_INSERTJOBAPPLY @"InsertJobApply"
 
 
 #pragma mark - 公司用户

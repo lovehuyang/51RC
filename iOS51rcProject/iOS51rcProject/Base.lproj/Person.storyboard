@@ -3127,7 +3127,7 @@
                                 </connections>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xm7-JT-Ib3" customClass="WKButton">
-                                <rect key="frame" x="20" y="465" width="280" height="40"/>
+                                <rect key="frame" x="20" y="495" width="280" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="uEl-st-ff9"/>
                                 </constraints>
@@ -3246,7 +3246,7 @@
                             <constraint firstItem="CIX-7r-pYj" firstAttribute="top" secondItem="4aC-Zm-3Jx" secondAttribute="bottom" constant="60" id="lrK-Y7-CxN"/>
                             <constraint firstItem="FcF-H2-6Np" firstAttribute="leading" secondItem="W2d-oh-MrX" secondAttribute="trailing" constant="10" id="mIb-TZ-WeH"/>
                             <constraint firstAttribute="trailing" secondItem="LI0-jP-uFc" secondAttribute="trailing" constant="20" id="rRu-Fv-lu4"/>
-                            <constraint firstItem="xm7-JT-Ib3" firstAttribute="top" secondItem="9CG-UZ-EW6" secondAttribute="bottom" constant="10" id="tg5-yE-5gi"/>
+                            <constraint firstItem="xm7-JT-Ib3" firstAttribute="top" secondItem="9CG-UZ-EW6" secondAttribute="bottom" constant="40" id="tg5-yE-5gi"/>
                             <constraint firstItem="PLd-lz-j9U" firstAttribute="top" secondItem="CIX-7r-pYj" secondAttribute="bottom" constant="10" id="uD9-Bv-hsc"/>
                             <constraint firstItem="4aC-Zm-3Jx" firstAttribute="leading" secondItem="KFN-uH-dfi" secondAttribute="trailing" constant="10" id="uUs-aS-bCA"/>
                             <constraint firstAttribute="trailing" secondItem="8kc-WQ-Nyb" secondAttribute="trailing" constant="20" id="uYM-uc-Eun"/>
@@ -3259,6 +3259,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bgView" destination="zRT-D4-yQt" id="GXD-7y-xiG"/>
                         <outlet property="btnDegree" destination="8kc-WQ-Nyb" id="IfE-ZV-6qd"/>
                         <outlet property="btnDelete" destination="xm7-JT-Ib3" id="w2H-Nn-jur"/>
                         <outlet property="btnEduType" destination="nwm-Pa-8xv" id="D3e-RX-W6J"/>
@@ -3718,6 +3719,7 @@
                         <outlet property="btnJobType" destination="0HE-fM-tVJ" id="QCX-Eb-aKu"/>
                         <outlet property="btnLowerNumber" destination="WvO-jI-CwO" id="hQ0-y9-aMc"/>
                         <outlet property="constraintScrollWidth" destination="qH8-AM-m50" id="B7m-a5-kjd"/>
+                        <outlet property="scrollView" destination="0si-vu-LVX" id="9IX-M4-C3u"/>
                         <outlet property="txtCompanyName" destination="dPL-dh-TCA" id="Px8-Nh-VL7"/>
                         <outlet property="txtDetail" destination="AQV-0s-Eve" id="RmC-UM-Aaz"/>
                         <outlet property="txtJobName" destination="VN9-R7-Gkw" id="XxK-al-xRc"/>

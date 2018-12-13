@@ -66,6 +66,9 @@
 		990A3BEC1F42F387006CB3CF /* 9.gif in Resources */ = {isa = PBXBuildFile; fileRef = 990A3BBA1F42F387006CB3CF /* 9.gif */; };
 		990A3BED1F42F387006CB3CF /* ico_emoitem1.png in Resources */ = {isa = PBXBuildFile; fileRef = 990A3BBB1F42F387006CB3CF /* ico_emoitem1.png */; };
 		990A3BEE1F42F387006CB3CF /* ico_emoitem2.png in Resources */ = {isa = PBXBuildFile; fileRef = 990A3BBC1F42F387006CB3CF /* ico_emoitem2.png */; };
+		990E9D7F21BF7DF30066082A /* BDSASRParameter.plist in Resources */ = {isa = PBXBuildFile; fileRef = 990E9D7E21BF7DF30066082A /* BDSASRParameter.plist */; };
+		990E9D8121BFAA3A0066082A /* ico_cvlist_smartvoice.png in Resources */ = {isa = PBXBuildFile; fileRef = 990E9D8021BFAA3A0066082A /* ico_cvlist_smartvoice.png */; };
+		990E9D8421BFB02D0066082A /* LongVoiceInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = 990E9D8321BFB02D0066082A /* LongVoiceInputController.m */; };
 		990EF79D21A3903A00C63AEB /* ReplyAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 990EF79C21A3903900C63AEB /* ReplyAlert.m */; };
 		99101B4820720E0200ED060B /* img_cpcheck2.png in Resources */ = {isa = PBXBuildFile; fileRef = 99101B4620720E0100ED060B /* img_cpcheck2.png */; };
 		99101B4920720E0200ED060B /* img_cpcheck1.png in Resources */ = {isa = PBXBuildFile; fileRef = 99101B4720720E0100ED060B /* img_cpcheck1.png */; };
@@ -437,6 +440,24 @@
 		9993A587218AD0C80057B6FD /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 9993A581218AD0C80057B6FD /* Common.m */; };
 		9993A588218AD0C80057B6FD /* CommonTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 9993A583218AD0C80057B6FD /* CommonTools.m */; };
 		9993A589218AD0C80057B6FD /* CvOperate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9993A584218AD0C80057B6FD /* CvOperate.m */; };
+		9993C33921BF50F20085A6F8 /* voice_loadingright_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 9993C32C21BF50F20085A6F8 /* voice_loadingright_6.png */; };
+		9993C33A21BF50F20085A6F8 /* voice_loadingright_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 9993C32D21BF50F20085A6F8 /* voice_loadingright_4.png */; };
+		9993C33B21BF50F20085A6F8 /* voice_loadingright_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 9993C32E21BF50F20085A6F8 /* voice_loadingright_5.png */; };
+		9993C33C21BF50F20085A6F8 /* voice_loadingright_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9993C32F21BF50F20085A6F8 /* voice_loadingright_1.png */; };
+		9993C33D21BF50F20085A6F8 /* voice_loadingright_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9993C33021BF50F20085A6F8 /* voice_loadingright_2.png */; };
+		9993C33E21BF50F20085A6F8 /* voice_loadingright_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9993C33121BF50F20085A6F8 /* voice_loadingright_3.png */; };
+		9993C33F21BF50F20085A6F8 /* voice_loadingleft_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9993C33321BF50F20085A6F8 /* voice_loadingleft_1.png */; };
+		9993C34021BF50F20085A6F8 /* voice_loadingleft_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9993C33421BF50F20085A6F8 /* voice_loadingleft_3.png */; };
+		9993C34121BF50F20085A6F8 /* voice_loadingleft_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9993C33521BF50F20085A6F8 /* voice_loadingleft_2.png */; };
+		9993C34221BF50F20085A6F8 /* voice_loadingleft_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 9993C33621BF50F20085A6F8 /* voice_loadingleft_6.png */; };
+		9993C34321BF50F20085A6F8 /* voice_loadingleft_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 9993C33721BF50F20085A6F8 /* voice_loadingleft_5.png */; };
+		9993C34421BF50F20085A6F8 /* voice_loadingleft_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 9993C33821BF50F20085A6F8 /* voice_loadingleft_4.png */; };
+		9993C34721BF51FB0085A6F8 /* SpeakLoadingBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 9993C34621BF51FB0085A6F8 /* SpeakLoadingBtn.m */; };
+		9993C34921BF53930085A6F8 /* ico_cvlist_startvoice.png in Resources */ = {isa = PBXBuildFile; fileRef = 9993C34821BF53920085A6F8 /* ico_cvlist_startvoice.png */; };
+		9993C34B21BF60080085A6F8 /* ico_cvlist_stopvoice.png in Resources */ = {isa = PBXBuildFile; fileRef = 9993C34A21BF60080085A6F8 /* ico_cvlist_stopvoice.png */; };
+		99949F4D21C0D4EE002109D1 /* RecommendJobView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99949F4C21C0D4EE002109D1 /* RecommendJobView.m */; };
+		99949F5021C0E312002109D1 /* RecommendJobCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99949F4F21C0E312002109D1 /* RecommendJobCell.m */; };
+		99949F5321C248B2002109D1 /* InsertJobApplyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99949F5221C248B2002109D1 /* InsertJobApplyModel.m */; };
 		9997438C21AD11DD00B076A2 /* OnMinuteSingleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997438B21AD11DD00B076A2 /* OnMinuteSingleCell.m */; };
 		9997439221AD1AEF00B076A2 /* OneMinuteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997439121AD1AEF00B076A2 /* OneMinuteModel.m */; };
 		9997439821AD204A00B076A2 /* OneMinuteArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997439721AD204A00B076A2 /* OneMinuteArray.m */; };
@@ -564,6 +585,10 @@
 		990A3BBA1F42F387006CB3CF /* 9.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 9.gif; sourceTree = "<group>"; };
 		990A3BBB1F42F387006CB3CF /* ico_emoitem1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_emoitem1.png; sourceTree = "<group>"; };
 		990A3BBC1F42F387006CB3CF /* ico_emoitem2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_emoitem2.png; sourceTree = "<group>"; };
+		990E9D7E21BF7DF30066082A /* BDSASRParameter.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = BDSASRParameter.plist; sourceTree = "<group>"; };
+		990E9D8021BFAA3A0066082A /* ico_cvlist_smartvoice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_cvlist_smartvoice.png; sourceTree = "<group>"; };
+		990E9D8221BFB02D0066082A /* LongVoiceInputController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LongVoiceInputController.h; sourceTree = "<group>"; };
+		990E9D8321BFB02D0066082A /* LongVoiceInputController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LongVoiceInputController.m; sourceTree = "<group>"; };
 		990EF79B21A3903900C63AEB /* ReplyAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReplyAlert.h; sourceTree = "<group>"; };
 		990EF79C21A3903900C63AEB /* ReplyAlert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReplyAlert.m; sourceTree = "<group>"; };
 		99101B4620720E0100ED060B /* img_cpcheck2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_cpcheck2.png; sourceTree = "<group>"; };
@@ -1130,6 +1155,28 @@
 		9993A584218AD0C80057B6FD /* CvOperate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CvOperate.m; sourceTree = "<group>"; };
 		9993A585218AD0C80057B6FD /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		9993A586218AD0C80057B6FD /* CommonTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonTools.h; sourceTree = "<group>"; };
+		9993C32C21BF50F20085A6F8 /* voice_loadingright_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loadingright_6.png; sourceTree = "<group>"; };
+		9993C32D21BF50F20085A6F8 /* voice_loadingright_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loadingright_4.png; sourceTree = "<group>"; };
+		9993C32E21BF50F20085A6F8 /* voice_loadingright_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loadingright_5.png; sourceTree = "<group>"; };
+		9993C32F21BF50F20085A6F8 /* voice_loadingright_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loadingright_1.png; sourceTree = "<group>"; };
+		9993C33021BF50F20085A6F8 /* voice_loadingright_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loadingright_2.png; sourceTree = "<group>"; };
+		9993C33121BF50F20085A6F8 /* voice_loadingright_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loadingright_3.png; sourceTree = "<group>"; };
+		9993C33321BF50F20085A6F8 /* voice_loadingleft_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loadingleft_1.png; sourceTree = "<group>"; };
+		9993C33421BF50F20085A6F8 /* voice_loadingleft_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loadingleft_3.png; sourceTree = "<group>"; };
+		9993C33521BF50F20085A6F8 /* voice_loadingleft_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loadingleft_2.png; sourceTree = "<group>"; };
+		9993C33621BF50F20085A6F8 /* voice_loadingleft_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loadingleft_6.png; sourceTree = "<group>"; };
+		9993C33721BF50F20085A6F8 /* voice_loadingleft_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loadingleft_5.png; sourceTree = "<group>"; };
+		9993C33821BF50F20085A6F8 /* voice_loadingleft_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_loadingleft_4.png; sourceTree = "<group>"; };
+		9993C34521BF51FB0085A6F8 /* SpeakLoadingBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeakLoadingBtn.h; sourceTree = "<group>"; };
+		9993C34621BF51FB0085A6F8 /* SpeakLoadingBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpeakLoadingBtn.m; sourceTree = "<group>"; };
+		9993C34821BF53920085A6F8 /* ico_cvlist_startvoice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_cvlist_startvoice.png; sourceTree = "<group>"; };
+		9993C34A21BF60080085A6F8 /* ico_cvlist_stopvoice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_cvlist_stopvoice.png; sourceTree = "<group>"; };
+		99949F4B21C0D4EE002109D1 /* RecommendJobView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecommendJobView.h; sourceTree = "<group>"; };
+		99949F4C21C0D4EE002109D1 /* RecommendJobView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecommendJobView.m; sourceTree = "<group>"; };
+		99949F4E21C0E311002109D1 /* RecommendJobCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecommendJobCell.h; sourceTree = "<group>"; };
+		99949F4F21C0E312002109D1 /* RecommendJobCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecommendJobCell.m; sourceTree = "<group>"; };
+		99949F5121C248B2002109D1 /* InsertJobApplyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InsertJobApplyModel.h; sourceTree = "<group>"; };
+		99949F5221C248B2002109D1 /* InsertJobApplyModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InsertJobApplyModel.m; sourceTree = "<group>"; };
 		9997438A21AD11DD00B076A2 /* OnMinuteSingleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OnMinuteSingleCell.h; sourceTree = "<group>"; };
 		9997438B21AD11DD00B076A2 /* OnMinuteSingleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OnMinuteSingleCell.m; sourceTree = "<group>"; };
 		9997439021AD1AEF00B076A2 /* OneMinuteModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneMinuteModel.h; sourceTree = "<group>"; };
@@ -1412,6 +1459,7 @@
 				993ED84521B528AA00A988FF /* AudioFile */,
 				9919F9791EDE467600BE51F0 /* Class */,
 				995C3D721EF7D02000277468 /* Images */,
+				990E9D7E21BF7DF30066082A /* BDSASRParameter.plist */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -1758,6 +1806,8 @@
 				996D64A821B60DB80095EA95 /* VoiceWaveImgView.m */,
 				996D64AD21B643BA0095EA95 /* SpeakBtn.h */,
 				996D64AE21B643BA0095EA95 /* SpeakBtn.m */,
+				9993C34521BF51FB0085A6F8 /* SpeakLoadingBtn.h */,
+				9993C34621BF51FB0085A6F8 /* SpeakLoadingBtn.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2018,6 +2068,7 @@
 		995C3D721EF7D02000277468 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9993C32A21BF50F10085A6F8 /* SpeakLoading */,
 				996D649221B60D170095EA95 /* VoiceWave */,
 				998F8A7921916DE5003DBAB1 /* img_check1.png */,
 				998F8A7A21916DE5003DBAB1 /* img_check2.png */,
@@ -2184,6 +2235,10 @@
 				996C90872189368D00C0EF66 /* ComplainView.m */,
 				9993A571218AB1060057B6FD /* OnlineLab.h */,
 				9993A572218AB1060057B6FD /* OnlineLab.m */,
+				99949F4B21C0D4EE002109D1 /* RecommendJobView.h */,
+				99949F4C21C0D4EE002109D1 /* RecommendJobView.m */,
+				99949F4E21C0E311002109D1 /* RecommendJobCell.h */,
+				99949F4F21C0E312002109D1 /* RecommendJobCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2465,6 +2520,8 @@
 				99E031EB21ABE9F000FB5530 /* OneMinuteCVViewController.m */,
 				993ED84221B51E4100A988FF /* SpeechViewController.h */,
 				993ED84321B51E4100A988FF /* SpeechViewController.m */,
+				990E9D8221BFB02D0066082A /* LongVoiceInputController.h */,
+				990E9D8321BFB02D0066082A /* LongVoiceInputController.m */,
 				9997439521AD201B00B076A2 /* Other */,
 				991DAA9821A5525A00586AA7 /* Model */,
 				991D7A8D219D43230019123A /* View */,
@@ -2558,6 +2615,8 @@
 			children = (
 				9993A56E218AAA180057B6FD /* UserInfo.h */,
 				9993A56F218AAA180057B6FD /* UserInfo.m */,
+				99949F5121C248B2002109D1 /* InsertJobApplyModel.h */,
+				99949F5221C248B2002109D1 /* InsertJobApplyModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2589,11 +2648,49 @@
 				9993A585218AD0C80057B6FD /* Common.h */,
 				9993A581218AD0C80057B6FD /* Common.m */,
 				9993A582218AD0C80057B6FD /* CvOperate.h */,
-				9993A583218AD0C80057B6FD /* CommonTools.m */,
 				9993A584218AD0C80057B6FD /* CvOperate.m */,
 				9993A586218AD0C80057B6FD /* CommonTools.h */,
+				9993A583218AD0C80057B6FD /* CommonTools.m */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		9993C32A21BF50F10085A6F8 /* SpeakLoading */ = {
+			isa = PBXGroup;
+			children = (
+				990E9D8021BFAA3A0066082A /* ico_cvlist_smartvoice.png */,
+				9993C34A21BF60080085A6F8 /* ico_cvlist_stopvoice.png */,
+				9993C34821BF53920085A6F8 /* ico_cvlist_startvoice.png */,
+				9993C32B21BF50F20085A6F8 /* Right */,
+				9993C33221BF50F20085A6F8 /* Left */,
+			);
+			path = SpeakLoading;
+			sourceTree = "<group>";
+		};
+		9993C32B21BF50F20085A6F8 /* Right */ = {
+			isa = PBXGroup;
+			children = (
+				9993C32C21BF50F20085A6F8 /* voice_loadingright_6.png */,
+				9993C32D21BF50F20085A6F8 /* voice_loadingright_4.png */,
+				9993C32E21BF50F20085A6F8 /* voice_loadingright_5.png */,
+				9993C32F21BF50F20085A6F8 /* voice_loadingright_1.png */,
+				9993C33021BF50F20085A6F8 /* voice_loadingright_2.png */,
+				9993C33121BF50F20085A6F8 /* voice_loadingright_3.png */,
+			);
+			path = Right;
+			sourceTree = "<group>";
+		};
+		9993C33221BF50F20085A6F8 /* Left */ = {
+			isa = PBXGroup;
+			children = (
+				9993C33321BF50F20085A6F8 /* voice_loadingleft_1.png */,
+				9993C33421BF50F20085A6F8 /* voice_loadingleft_3.png */,
+				9993C33521BF50F20085A6F8 /* voice_loadingleft_2.png */,
+				9993C33621BF50F20085A6F8 /* voice_loadingleft_6.png */,
+				9993C33721BF50F20085A6F8 /* voice_loadingleft_5.png */,
+				9993C33821BF50F20085A6F8 /* voice_loadingleft_4.png */,
+			);
+			path = Left;
 			sourceTree = "<group>";
 		};
 		9997439521AD201B00B076A2 /* Other */ = {
@@ -2756,6 +2853,7 @@
 				992DC19F206B7A2C00563456 /* ico_mapcenter.png in Resources */,
 				995C3DB41EF7D02100277468 /* pa_account2.png in Resources */,
 				995C3DAD1EF7D02100277468 /* img_password2.png in Resources */,
+				990E9D7F21BF7DF30066082A /* BDSASRParameter.plist in Resources */,
 				991970342091C53E003C31CB /* cp_jobreply.png in Resources */,
 				995C17171F3309AE004A50F2 /* job_applysuccess.png in Resources */,
 				99523196204FC5CD00C8836D /* cp_mobilecer.png in Resources */,
@@ -2766,12 +2864,14 @@
 				993ED85621B528AB00A988FF /* voicemajorname.mp3 in Resources */,
 				995C3DBA1EF7D02100277468 /* pa_guidepic2.png in Resources */,
 				994C83161F1E069C00414E98 /* pa_cvpreitem4.png in Resources */,
+				9993C33D21BF50F20085A6F8 /* voice_loadingright_2.png in Resources */,
 				9919F9F61EDE519900BE51F0 /* ShareSDKConfigFile.bundle in Resources */,
 				990A3BE91F42F387006CB3CF /* 6.gif in Resources */,
 				994C83131F1E069C00414E98 /* pa_cvpreitem1.png in Resources */,
 				990A3BDF1F42F387006CB3CF /* 40.gif in Resources */,
 				999070A91F0252C300B5E289 /* img_licence.png in Resources */,
 				996131A51FDFC5A700194271 /* cp_account8.png in Resources */,
+				9993C33E21BF50F20085A6F8 /* voice_loadingright_3.png in Resources */,
 				996D652121B671090095EA95 /* offline_engine_tmp_license.dat in Resources */,
 				993ED85521B528AB00A988FF /* voicemobile.mp3 in Resources */,
 				995C3DBC1EF7D02100277468 /* pa_guidepic4.png in Resources */,
@@ -2795,7 +2895,9 @@
 				990A3BCE1F42F387006CB3CF /* 25.gif in Resources */,
 				996D651D21B671090095EA95 /* darkGreen.bundle in Resources */,
 				991970352091C53E003C31CB /* cp_jobreplyno.png in Resources */,
+				9993C33F21BF50F20085A6F8 /* voice_loadingleft_1.png in Resources */,
 				995C3DCE1EF7D02100277468 /* pa_remind2.png in Resources */,
+				9993C34921BF53930085A6F8 /* ico_cvlist_startvoice.png in Resources */,
 				990A3BDC1F42F387006CB3CF /* 38.gif in Resources */,
 				990A3BDD1F42F387006CB3CF /* 39.gif in Resources */,
 				995C3DC51EF7D02100277468 /* pa_jobexpired.png in Resources */,
@@ -2814,10 +2916,12 @@
 				996131AA1FDFC5A700194271 /* cp_defaultlogo.png in Resources */,
 				996131A71FDFC5A700194271 /* cp_account7.png in Resources */,
 				99101B542073850100ED060B /* cp_accountmodify.png in Resources */,
+				9993C34B21BF60080085A6F8 /* ico_cvlist_stopvoice.png in Resources */,
 				999070C81F03846E00B5E289 /* img_mappoint.png in Resources */,
 				993ED85D21B528AB00A988FF /* voicebirth.mp3 in Resources */,
 				990A3BD71F42F387006CB3CF /* 33.gif in Resources */,
 				995A4A041F0B3A3C0047EDBE /* pa_open1.png in Resources */,
+				9993C34421BF50F20085A6F8 /* voice_loadingleft_4.png in Resources */,
 				990A3BCC1F42F387006CB3CF /* 23.gif in Resources */,
 				996D652421B671090095EA95 /* English_Speech_Male.dat in Resources */,
 				9919F9551EDE445300BE51F0 /* LaunchScreen.storyboard in Resources */,
@@ -2832,6 +2936,7 @@
 				996D650821B671090095EA95 /* bds_license.dat in Resources */,
 				990A3BE31F42F387006CB3CF /* 44.gif in Resources */,
 				9919F9F91EDE519900BE51F0 /* ShareSDKUI.bundle in Resources */,
+				9993C33921BF50F20085A6F8 /* voice_loadingright_6.png in Resources */,
 				996D652221B671090095EA95 /* English_Text.dat in Resources */,
 				995C3DC41EF7D02100277468 /* pa_invitation6.png in Resources */,
 				995231AE20560FA500C8836D /* cp_jobissue.png in Resources */,
@@ -2859,6 +2964,7 @@
 				996D64A421B60D170095EA95 /* voice_loading_1.png in Resources */,
 				9990707D1EFC97D500B5E289 /* img_nodata.png in Resources */,
 				9919FA011EDE519900BE51F0 /* ShareSDK.bundle in Resources */,
+				9993C34221BF50F20085A6F8 /* voice_loadingleft_6.png in Resources */,
 				990108301F594ED90002CECE /* job_history.png in Resources */,
 				990A3BD61F42F387006CB3CF /* 32.gif in Resources */,
 				993ED85B21B528AB00A988FF /* voicejobplace.mp3 in Resources */,
@@ -2876,6 +2982,7 @@
 				999070C11F03562D00B5E289 /* img_dial.png in Resources */,
 				990A3BE81F42F387006CB3CF /* 5.gif in Resources */,
 				996D652021B671090095EA95 /* English_Speech_Female.dat in Resources */,
+				990E9D8121BFAA3A0066082A /* ico_cvlist_smartvoice.png in Resources */,
 				996131A21FDFC5A700194271 /* cp_account6.png in Resources */,
 				996D649E21B60D170095EA95 /* voice_loading_8.png in Resources */,
 				999BA6B21F0E14FB003F85D1 /* pa_add.png in Resources */,
@@ -2897,14 +3004,18 @@
 				995C3DBB1EF7D02100277468 /* pa_guidepic3.png in Resources */,
 				996D650921B671090095EA95 /* bds_easr_basic_model.dat in Resources */,
 				990A3BE11F42F387006CB3CF /* 42.gif in Resources */,
+				9993C33C21BF50F20085A6F8 /* voice_loadingright_1.png in Resources */,
 				996D651721B671090095EA95 /* lightOrange.bundle in Resources */,
 				996131A61FDFC5A700194271 /* cp_account1.png in Resources */,
 				995C3DB71EF7D02100277468 /* pa_defaultphoto.png in Resources */,
 				990108331F60EEA70002CECE /* img_defaultlogo.png in Resources */,
+				9993C34021BF50F20085A6F8 /* voice_loadingleft_3.png in Resources */,
 				993ED85A21B528AB00A988FF /* “014”副本.mp3 in Resources */,
 				995A4ABA1F0B7B270047EDBE /* pa_photo.png in Resources */,
+				9993C33A21BF50F20085A6F8 /* voice_loadingright_4.png in Resources */,
 				995C3DA51EF7D02100277468 /* img_arrowright.png in Resources */,
 				996D651921B671090095EA95 /* defaultTheme.bundle in Resources */,
+				9993C34321BF50F20085A6F8 /* voice_loadingleft_5.png in Resources */,
 				990108311F594ED90002CECE /* job_trash.png in Resources */,
 				999070BF1F025EC500B5E289 /* job_item5.png in Resources */,
 				990A3BC71F42F387006CB3CF /* 19.gif in Resources */,
@@ -2959,6 +3070,7 @@
 				996D649F21B60D170095EA95 /* voice_loading_6.png in Resources */,
 				995C3DB11EF7D02100277468 /* img_rolepa1.png in Resources */,
 				990A3B861F3C550A006CB3CF /* chat_photo.png in Resources */,
+				9993C33B21BF50F20085A6F8 /* voice_loadingright_5.png in Resources */,
 				993ED85921B528AB00A988FF /* voicedegree.mp3 in Resources */,
 				996D650D21B671090095EA95 /* bds_easr_mfe_dnn.dat in Resources */,
 				995C3DCA1EF7D02100277468 /* pa_loginuser.png in Resources */,
@@ -2976,6 +3088,7 @@
 				990A3BCB1F42F387006CB3CF /* 22.gif in Resources */,
 				999070A01F023AC000B5E289 /* job_hasapply.png in Resources */,
 				995C3DA11EF7D02100277468 /* cp_guidebg.png in Resources */,
+				9993C34121BF50F20085A6F8 /* voice_loadingleft_2.png in Resources */,
 				999070A71F024FF000B5E289 /* img_realname.png in Resources */,
 				996D64A021B60D170095EA95 /* voice_loading_7.png in Resources */,
 				994C83141F1E069C00414E98 /* pa_cvpreitem2.png in Resources */,
@@ -3142,6 +3255,7 @@
 				997B068E1F5500A000391289 /* MultiSelectViewController.m in Sources */,
 				990EF79D21A3903A00C63AEB /* ReplyAlert.m in Sources */,
 				998F8A7121913D3C003DBAB1 /* EmploymentNewsController.m in Sources */,
+				990E9D8421BFB02D0066082A /* LongVoiceInputController.m in Sources */,
 				996F504E2188292900D2A7E9 /* OptionView.m in Sources */,
 				991C6FB3200E368D009FD82A /* CpBriefViewController.m in Sources */,
 				992985231F5539CB0021F863 /* WKFilterView.m in Sources */,
@@ -3150,11 +3264,13 @@
 				997B06811F5500A000391289 /* PaRegisterViewController.m in Sources */,
 				9997439221AD1AEF00B076A2 /* OneMinuteModel.m in Sources */,
 				997B067F1F5500A000391289 /* PaIndexViewController.m in Sources */,
+				99949F5021C0E312002109D1 /* RecommendJobCell.m in Sources */,
 				99C5EEBF2018734800AC8FBD /* PayMethodViewController.m in Sources */,
 				9947F2B22193ED25002C97F2 /* BaseTabbar.m in Sources */,
 				991A243C1EE6D7A9008CD8E9 /* ASIDataCompressor.m in Sources */,
 				991C6F7C200C3B4E009FD82A /* SysViewController.m in Sources */,
 				996C9084218934B600C0EF66 /* ComplainViewController.m in Sources */,
+				99949F4D21C0D4EE002109D1 /* RecommendJobView.m in Sources */,
 				9990A70521A6490200A320FD /* AttachMentView.m in Sources */,
 				991DAA9E21A557DD00586AA7 /* AttachmentImgView.m in Sources */,
 				9993A589218AD0C80057B6FD /* CvOperate.m in Sources */,
@@ -3209,6 +3325,7 @@
 				99C5EEB22017293F00AC8FBD /* ChatListCpViewController.m in Sources */,
 				991D7A89219D37A20019123A /* BarButtonItem.m in Sources */,
 				991A243E1EE6D7A9008CD8E9 /* ASIDownloadCache.m in Sources */,
+				9993C34721BF51FB0085A6F8 /* SpeakLoadingBtn.m in Sources */,
 				997B06831F5500A000391289 /* SalaryViewController.m in Sources */,
 				997B069D1F5500A000391289 /* YourFoodViewController.m in Sources */,
 				997B06841F5500A000391289 /* ChatListViewController.m in Sources */,
@@ -3245,6 +3362,7 @@
 				997B068B1F5500A000391289 /* ExperienceViewController.m in Sources */,
 				99C5EEBC2018733D00AC8FBD /* OrderListViewController.m in Sources */,
 				9919FA191EDE6A6100BE51F0 /* GuideViewController.m in Sources */,
+				99949F5321C248B2002109D1 /* InsertJobApplyModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

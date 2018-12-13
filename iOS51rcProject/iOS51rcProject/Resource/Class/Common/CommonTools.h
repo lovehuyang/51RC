@@ -13,4 +13,6 @@
 + (CGFloat)getStatusHight;
 + (CGFloat)getStatusAndNavHight;
 
++ (NSString *)getBDSASRParameter:(NSString *)param;
+
 @end

@@ -27,7 +27,7 @@
             [self setupSubViews2:(NSArray *)data];
         }
         
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(openCountdown) name:@"OneMinuteGetVerifyCode" object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(openCountdown) name:NOTIFICATION_ONEMINUTEGETVERIFYCODE object:nil];
     }
     return self;
 }

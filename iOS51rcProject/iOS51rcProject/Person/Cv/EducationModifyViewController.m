@@ -13,6 +13,7 @@
 #import "NetWebServiceRequest.h"
 #import "WKPopView.h"
 #import "MajorViewController.h"
+#import "LongVoiceInputController.h"
 
 @interface EducationModifyViewController ()<WKPopViewDelegate, MajorViewDelete, NetWebServiceRequestDelegate, UITextFieldDelegate, UITextViewDelegate>
 
@@ -35,6 +36,21 @@
     [self.txtDetail.layer setBorderWidth:1];
     [self.txtDetail.layer setCornerRadius:5];
     [self.btnDelete setBackgroundColor:UIColorWithRGBA(182, 182, 182, 1)];
+    UIButton *speakBtn = [UIButton new];
+    [speakBtn setImage:[UIImage imageNamed:@"huatong"] forState:UIControlStateNormal];
+    [speakBtn setTitle:@"不喜欢打字，我要语音填写" forState:UIControlStateNormal];
+    [self.bgView addSubview:speakBtn];
+    speakBtn.sd_layout
+    .leftSpaceToView(self.bgView, 20)
+    .rightSpaceToView(self.bgView, 20)
+    .topSpaceToView(self.txtDetail, 0)
+    .heightIs(30);
+    speakBtn.titleLabel.font = DEFAULTFONT;
+    [speakBtn setTitleColor:NAVBARCOLOR forState:UIControlStateNormal];
+    speakBtn.layer.cornerRadius = 5;
+    speakBtn.layer.borderWidth = 1;
+    speakBtn.layer.borderColor = SEPARATECOLOR.CGColor;
+    [speakBtn addTarget:self action:@selector(speakBtnClick) forControlEvents:UIControlEventTouchUpInside];
     
     self.dataParam = [NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", self.cvMainId, @"cvMainId", @"0", @"educationId", @"", @"college", @"", @"graduation", @"", @"majorId", @"", @"majorName", @"", @"degree", @"", @"eduType", @"", @"details", nil];
     
@@ -237,19 +253,16 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - 跳转至语音输入页面
+- (void)speakBtnClick{
+    LongVoiceInputController *lvc = [LongVoiceInputController new];
+    lvc.title = @"学习经历";
+    lvc.detail = self.txtDetail.text;
+    lvc.tipStr = @"例如：\n在校期间认真学习专业知识，综合成绩名列前**。\n积极参加学生会组织，加入**部，主要责任：**。\n各方面表现优异，曾获得教学金**次。\n在校期间品学兼优，曾获得**荣誉称号。";
+    lvc.detailContent = ^(NSString *inputStr) {
+        self.txtDetail.text = inputStr;
+    };
+    [self.navigationController pushViewController:lvc animated:YES];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

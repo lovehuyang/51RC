@@ -12,6 +12,7 @@
 #import "UIView+Toast.h"
 #import "NetWebServiceRequest.h"
 #import "WKPopView.h"
+#import "LongVoiceInputController.h"
 
 @interface ExperienceModifyViewController ()<WKPopViewDelegate, NetWebServiceRequestDelegate, UITextFieldDelegate, UITextViewDelegate>
 
@@ -35,7 +36,18 @@
     [self.txtDetail.layer setBorderWidth:1];
     [self.txtDetail.layer setCornerRadius:5];
     [self.btnDelete setBackgroundColor:UIColorWithRGBA(182, 182, 182, 1)];
-    
+    UIButton *speakBtn = [UIButton new];
+    speakBtn.frame = CGRectMake(VIEW_X(self.txtDetail), VIEW_BY(self.txtDetail), SCREEN_WIDTH - VIEW_X(self.txtDetail) * 2, 30);
+    [speakBtn setImage:[UIImage imageNamed:@"huatong"] forState:UIControlStateNormal];
+    [speakBtn setTitle:@"不喜欢打字，我要语音填写" forState:UIControlStateNormal];
+    [self.scrollView addSubview:speakBtn];
+    speakBtn.titleLabel.font = DEFAULTFONT;
+    [speakBtn setTitleColor:NAVBARCOLOR forState:UIControlStateNormal];
+    speakBtn.layer.cornerRadius = 5;
+    speakBtn.layer.borderWidth = 1;
+    speakBtn.layer.borderColor = SEPARATECOLOR.CGColor;
+    [speakBtn addTarget:self action:@selector(speakBtnClick) forControlEvents:UIControlEventTouchUpInside];
+
     self.dataParam = [NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", self.cvMainId, @"cvMainId", @"0", @"experienceId", @"", @"companyName", @"", @"industryId", @"", @"companySizeId", @"", @"jobTypeId", @"", @"jobName", @"", @"beginDate", @"", @"endDate", @"", @"subNodeNum", @"", @"description", nil];
     
     if (self.dataExperience == nil) {
@@ -270,19 +282,16 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - 跳转至语音输入页面
+- (void)speakBtnClick{
+    LongVoiceInputController *lvc = [LongVoiceInputController new];
+    lvc.title = @"工作描述";
+    lvc.detail = self.txtDetail.text;
+    lvc.tipStr = @"例如：\n日常本职工作都能按时或者提前顺利完成。\n除本职工作以外还能主动协助其他部门完成完成部分工作。\n工作态度积极努力，业绩突出并得到领导及同事的一致好评。多次获得优秀员工等荣誉称号。\n始终保持学习的态度，工作能力提升迅速，未来继续努力，为贵公司创造更多的价值。";
+    lvc.detailContent = ^(NSString *inputStr) {
+        self.txtDetail.text = inputStr;
+    };
+    [self.navigationController pushViewController:lvc animated:YES];
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

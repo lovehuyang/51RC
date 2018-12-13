@@ -19,11 +19,6 @@
 #import "BDSASRDefines.h"
 #import "BDSASRParameters.h"
 
-//#error "请在官网新建应用，配置包名，并在此填写应用的 api key, secret key, appid(即appcode)"
-const NSString* API_KEY = @"AsWVn84XpGviO1Fjs0bzuVlA";
-const NSString* SECRET_KEY = @"owf3Kyfqa8DsScEP2l1WnYTN3FeDXYYM";
-const NSString* APP_ID = @"15042909";
-
 @interface SpeechViewController ()<AVAudioPlayerDelegate,BDSClientASRDelegate>
 {
     NSInteger index;
@@ -227,8 +222,8 @@ const NSString* APP_ID = @"15042909";
     // 设置DEBUG_LOG的级别
     [self.asrEventManager setParameter:@(EVRDebugLogLevelTrace) forKey:BDS_ASR_DEBUG_LOG_LEVEL];
     // 配置API_KEY 和 SECRET_KEY 和 APP_ID
-    [self.asrEventManager setParameter:@[API_KEY, SECRET_KEY] forKey:BDS_ASR_API_SECRET_KEYS];
-    [self.asrEventManager setParameter:APP_ID forKey:BDS_ASR_OFFLINE_APP_CODE];
+    [self.asrEventManager setParameter:@[BD_API_KEY, BD_SECRET_KEY] forKey:BDS_ASR_API_SECRET_KEYS];
+    [self.asrEventManager setParameter:BD_APP_ID forKey:BDS_ASR_OFFLINE_APP_CODE];
     // 配置端点检测（二选一）
     [self configDNNMFE];
     // ---- 语义与标点 -----
@@ -403,11 +398,11 @@ const NSString* APP_ID = @"15042909";
         
     }else if ([model.titleStr containsString:@"男士"]){
         if([model.recognationStr containsString:@"男"] || [model.recognationStr containsString:@"爷"] || [model.recognationStr containsString:@"伙"] ||[model.recognationStr containsString:@"雄"]  ||[model.recognationStr containsString:@"父"] || [model.recognationStr containsString:@"爸"]  ||[model.recognationStr containsString:@"儿"]||[model.recognationStr containsString:@"兄"]||[model.recognationStr containsString:@"哥"]||[model.recognationStr containsString:@"弟"]){
-            self.speakRestParam(@"Gender", @"1");// 性别
+            self.speakRestParam(@"Gender", @"0");// 性别
             NSDictionary *dict = @{[self transformToLastPageKey:model.titleStr]:@"男"};
             self.speakContentBlock(dict);
         }else{
-            self.speakRestParam(@"Gender",@"0");
+            self.speakRestParam(@"Gender",@"1");
             NSDictionary *dict = @{[self transformToLastPageKey:model.titleStr]:@"女"};
             self.speakContentBlock(dict);
         }
