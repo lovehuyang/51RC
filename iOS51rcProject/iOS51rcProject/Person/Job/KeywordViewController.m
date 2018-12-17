@@ -88,17 +88,29 @@
     [self.runningRequest cancel];
 }
 
-- (void)getHistory {
-    if ([USER_DEFAULT objectForKey:@"paSearchHistory"] == nil) {
-        self.arrayHistory = [[NSMutableArray alloc] init];
+- (NSMutableArray *)arrayHistory{
+    if (!_arrayHistory) {
+        _arrayHistory = [NSMutableArray array];
     }
-    else {
+    return _arrayHistory;
+}
+#pragma mark - 获取搜索记录
+- (void)getHistory {
+    [self.arrayHistory removeAllObjects];
+    
+    if ([USER_DEFAULT objectForKey:@"paSearchHistory"] ) {
         self.arrayHistory = [[USER_DEFAULT objectForKey:@"paSearchHistory"] mutableCopy];
     }
+    
     if (self.arrayHistory.count > 0) {
         [self.tableViewHistory setHidden:NO];
-        [self.tableViewHistory reloadData];
+        [self.viewHot setHeight:YES];
+    }else{
+        [self.tableViewHistory setHidden:YES];
+        [self.viewHot setHeight:NO];
     }
+    
+     [self.tableViewHistory reloadData];
 }
 
 - (void)getHot {
@@ -311,25 +323,17 @@
     return YES;
 }
 
+- (BOOL)textFieldShouldClear:(UITextField *)textField{
+    [self getHistory];
+
+    return YES;
+}
+
+#pragma mark - 清除搜索记录
 - (void)clearHistory {
     [USER_DEFAULT removeObjectForKey:@"paSearchHistory"];
-    [self.tableViewHistory setHidden:YES];
-    [self.viewHot setHidden:NO];
+    [USER_DEFAULT synchronize];
+    [self getHistory];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

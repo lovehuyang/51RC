@@ -46,8 +46,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = UIColorFromHex(0x0B033B);
     
-     [self dealwithData];
-    
+    [self dealwithData];
+
     // 关闭按钮
     [self setupCloseBtn];
     // 创建标题
@@ -73,6 +73,11 @@
 
 - (AVAudioPlayer *)audioPlayer{
     if (!_audioPlayer) {
+        // 启动扬声器
+        AVAudioSession *audioSession=[AVAudioSession sharedInstance];
+        [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
+        [audioSession setActive:YES error:nil];
+        
         VoiceModel *model = [self.voiceData objectAtIndex:index];
         NSURL *url = [NSURL fileURLWithPath:model.voicePath];
         _audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:nil];

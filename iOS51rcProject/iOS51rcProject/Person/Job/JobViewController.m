@@ -15,6 +15,7 @@
 #import "CompanyInfoViewController.h"
 #import "NetWebServiceRequest.h"
 #import "UIView+Toast.h"
+#import "OneMinuteCVViewController.h"
 
 @interface JobViewController ()<NetWebServiceRequestDelegate, CompanyInfoViewDelegate>
 
@@ -226,11 +227,23 @@
     if (sender.tag == 0) {
         return;
     }
-    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"Attention" Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", sender.titleLabel.text, @"attentionId", [NSString stringWithFormat:@"%ld", sender.tag], @"attentionType", nil] viewController:self];
-    [request setTag:2];
-    [request setDelegate:self];
-    [request startAsynchronous];
-    self.runningRequest = request;
+
+    NSDictionary *paramDict = [NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", nil];
+    [AFNManager requestWithMethod:POST ParamDict:paramDict url:@"GetCvListApply" tableName:@"Table" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        if(requestData.count == 0){
+            OneMinuteCVViewController *oneCV = [[OneMinuteCVViewController alloc]init];
+            oneCV.pageType = PageType_JobInfo;
+            [self.navigationController pushViewController:oneCV animated:NO];
+        }else{
+            NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"Attention" Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", sender.titleLabel.text, @"attentionId", [NSString stringWithFormat:@"%ld", sender.tag], @"attentionType", nil] viewController:self];
+            [request setTag:2];
+            [request setDelegate:self];
+            [request startAsynchronous];
+            self.runningRequest = request;
+        }
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+    
+    }];
 }
 
 - (void)loginClick {

@@ -12,7 +12,8 @@
 // 页面类型
 typedef enum _PageType {
     PageType_Login = 0,// 登录成功跳转
-    PageType_CV = 1// “简历”页面跳转
+    PageType_CV = 1,// “简历”页面跳转
+    PageType_JobInfo// 职位详情页面跳转
 } PageType;
 
 @interface OneMinuteCVViewController : RCRootViewController

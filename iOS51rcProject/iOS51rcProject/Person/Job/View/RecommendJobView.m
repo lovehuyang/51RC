@@ -41,8 +41,8 @@
         self.alertView.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.alertView];
         self.alertView.sd_layout
-        .leftSpaceToView(self, 30)
-        .rightSpaceToView(self, 30)
+        .leftSpaceToView(self, 35)
+        .rightSpaceToView(self, 35)
         .heightIs(420)
         .centerYEqualToView(self);
         self.alertView.backgroundColor = [UIColor whiteColor];
@@ -93,9 +93,9 @@
     [self.alertView addSubview:acceptBtn];
     acceptBtn.sd_layout
     .leftSpaceToView(self.alertView, 20)
-    .heightIs(30)
+    .heightIs(35)
     .widthRatioToView(self.alertView, 0.5)
-    .bottomSpaceToView(self.alertView, 20);
+    .bottomSpaceToView(self.alertView, 15);
     acceptBtn.backgroundColor = NAVBARCOLOR;
     acceptBtn.sd_cornerRadius = @(5);
     [acceptBtn setTitle:@"立即申请" forState:UIControlStateNormal];
@@ -114,7 +114,7 @@
     rejectBtn.sd_cornerRadius = @(5);
     [rejectBtn setTitle:@"残忍拒绝" forState:UIControlStateNormal];
     rejectBtn.layer.borderWidth = 1;
-    rejectBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    rejectBtn.layer.borderColor = SEPARATECOLOR.CGColor;
     [rejectBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     rejectBtn.titleLabel.font = [UIFont boldSystemFontOfSize:DEFAULTFONTSIZE];
     [rejectBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];

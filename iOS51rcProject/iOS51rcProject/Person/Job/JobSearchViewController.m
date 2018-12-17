@@ -53,6 +53,7 @@
 @property (nonatomic, strong) NSMutableArray *insertJobApplyDataArr;// 推荐职位的数据源
 @property (nonatomic, copy) NSString *cvMainID;// 推荐职位申请的简历id
 @property (nonatomic, copy) NSString *subsiteID;
+@property (nonatomic , strong) RecommendJobView *recommendView;// 推荐职位的弹出
 @property NSInteger page;
 @property int lastPosition;
 @end
@@ -372,9 +373,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    [self getCvList];
-    return;
+//    [self getCvList];
+//    return;
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary *data = [self.arrData objectAtIndex:indexPath.row];
@@ -719,16 +719,24 @@
 }
 
 #pragma mark - GetJobListBySearch 获取推荐的职位
+
 - (void)getJobSearch:(NSString *)regionID jobTypeID:(NSString *)jobTypeID salaryID:(NSString *)salaryID{
-    [SVProgressHUD show];
-    NSMutableDictionary *paramDict = [NSMutableDictionary dictionaryWithDictionary:self.dataParam];
+    NSMutableDictionary *paramDict = [NSMutableDictionary dictionary];
     [paramDict setValue:@"1" forKey:@"pageNumber"];
     [paramDict setObject:regionID forKey:@"workPlace"];
     [paramDict setObject:self.subsiteID forKey:@"subsiteID"];
     [paramDict setObject:jobTypeID forKey:@"jobType"];
     [paramDict setObject:salaryID forKey:@"salary"];
+    [paramDict setObject:@"" forKey:@"keyWord"];
+    [paramDict setObject:@"" forKey:@"companySize"];
+    [paramDict setObject:@"" forKey:@"education"];
+    [paramDict setObject:@"" forKey:@"employType"];
+    [paramDict setObject:@"" forKey:@"experience"];
+    [paramDict setObject:@"" forKey:@"isOnline"];
+    [paramDict setObject:@"" forKey:@"welfare"];
+    
+
     [AFNManager requestWithMethod:POST ParamDict:paramDict url:@"GetJobListBySearch" tableName:@"dtJobList" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
-        [SVProgressHUD dismiss];
         [self.insertJobApplyDataArr removeAllObjects];
         if (requestData.count>=4) {
             for(int i =0 ; i< 4;i ++){
@@ -746,21 +754,22 @@
         }
         
         RecommendJobView *recommendView = [[RecommendJobView alloc]initWithData:self.insertJobApplyDataArr];
-        recommendView.applyFor = ^{
-            DLog(@"立即申请");
+        self.recommendView = recommendView;
+        __weak typeof (self)weakself = self;
+        self.recommendView.applyFor = ^{
             BOOL haveApply = NO;// 默认没有申请的职位
-            for(InsertJobApplyModel *mode in self.insertJobApplyDataArr){
+            for(InsertJobApplyModel *mode in weakself.insertJobApplyDataArr){
                 haveApply = haveApply || mode.isSeleted;
             }
             if (haveApply == NO) {
                 [RCToast showMessage:@"请至少选择一个职位"];
             }else{
-                [self insertJobApply];
+                
+                [weakself insertJobApply];
             }
         };
-        [recommendView show];
+        [self.recommendView show];
     } failureBlock:^(NSInteger errCode, NSString *msg) {
-        [SVProgressHUD dismiss];
     }];
 }
 
@@ -799,6 +808,7 @@
 
 - (void)insertJobApply{
     
+    [SVProgressHUD show];
     NSArray *tempArr = [NSArray arrayWithArray:self.insertJobApplyDataArr];
     for (InsertJobApplyModel *model in tempArr) {
         if (!model.isSeleted) {
@@ -823,9 +833,11 @@
                                 @"subsiteID":self.subsiteID
                                 };
     [AFNManager requestWithMethod:POST ParamDict:paramDict url:URL_INSERTJOBAPPLY tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
-        DLog(@"");
+        [SVProgressHUD dismiss];
+        [self.recommendView dissmiss];
+        [RCToast showMessage:@"申请成功！"];
     } failureBlock:^(NSInteger errCode, NSString *msg) {
-        DLog(@"");
+        [SVProgressHUD dismiss];
     }];
 }
 @end

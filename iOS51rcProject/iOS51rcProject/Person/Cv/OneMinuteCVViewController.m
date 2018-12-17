@@ -149,7 +149,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 - (void)setupAddHuaTongButton{
     
     SpeechButton *speechBtn = [SpeechButton new];
-    speechBtn.frame = CGRectMake(SCREEN_WIDTH - 200 - 10, (SCREEN_HEIGHT - HEIGHT_STATUS_NAV - 49) * 0.65, 200, 50);
+    speechBtn.frame = CGRectMake(SCREEN_WIDTH - 200 - 10, (SCREEN_HEIGHT - HEIGHT_STATUS_NAV - 49) * 0.50, 200, 50);
     [self.view addSubview:speechBtn];
     speechBtn.speechInput = ^{
         SpeechViewController *svc = [[SpeechViewController alloc]init];
@@ -563,13 +563,17 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
                 if (self.pageType == PageType_Login) {
                     self.completeOneCV(@"一分钟简历创建成功");
                     [self.navigationController popViewControllerAnimated:NO];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GETJOBLISTBYSEARCH object:nil];
+                    self.tabBarController.selectedIndex = 0;// 跳转至“职位”页面
                    
-                }else{
+                }else if(self.pageType == PageType_CV){
                     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GETCVLIST object:nil];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GETJOBLISTBYSEARCH object:nil];
+                    self.tabBarController.selectedIndex = 0;// 跳转至“职位”页面
+                }else if (self.pageType == PageType_JobInfo){
+                    [self.navigationController popViewControllerAnimated:YES];
                 }
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GETJOBLISTBYSEARCH object:nil];
-                self.tabBarController.selectedIndex = 0;// 跳转至“职位”页面
+    
             });
 
         }else if (result == -100){

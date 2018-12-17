@@ -18,6 +18,7 @@
 #import "WKApplyView.h"
 #import "ChatViewController.h"
 #import "ComplainViewController.h"
+#import "OneMinuteCVViewController.h"
 
 @interface JobInfoViewController ()<NetWebServiceRequestDelegate, WKApplyViewDelegate>
 
@@ -393,16 +394,12 @@
         [self loginClick];
         return;
     }
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定要查看该联系方式吗？" preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetContact" Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", [self.jobData objectForKey:@"id"], @"jobId", nil] viewController:self];
-        [request setTag:1];
-        [request setDelegate:self];
-        [request startAsynchronous];
-        self.runningRequest = request;
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
+    
+    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetCvListApply" Params:[NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", nil] viewController:nil];
+    [request setTag:7];
+    [request setDelegate:self];
+    [request startAsynchronous];
+    self.runningRequest = request;
 }
 
 - (void)loginClick {
@@ -456,7 +453,8 @@
     else if (request.tag == 3) {
         NSArray *arrayCv = [Common getArrayFromXml:requestData tableName:@"Table"];
         if (arrayCv.count == 0) {
-            [self.view makeToast:@"您还没有完整简历，无法申请职位"];
+//            [self.view makeToast:@"您还没有完整简历，无法申请职位"];
+            [self presentOneMinutesViewController];
         }
         else if (arrayCv.count == 1) {
             [self applyJob:[[arrayCv objectAtIndex:0] objectForKey:@"ID"]];
@@ -471,7 +469,8 @@
     else if (request.tag == 6) {
         NSArray *arrayCv = [Common getArrayFromXml:requestData tableName:@"Table"];
         if (arrayCv.count == 0) {
-            [self.view makeToast:@"您还没有完整简历，无法与HR沟通"];
+//            [self.view makeToast:@"您还没有完整简历，无法与HR沟通"];
+            [self presentOneMinutesViewController];
         }
         else if (arrayCv.count == 1) {
             [self gotoChat:[[arrayCv objectAtIndex:0] objectForKey:@"ID"]];
@@ -483,6 +482,28 @@
             [applyView show:self];
         }
     }
+    else if (request.tag == 7){// 查看联系方式
+        NSArray *arrayCv = [Common getArrayFromXml:requestData tableName:@"Table"];
+        if (arrayCv.count == 0) {
+            [self presentOneMinutesViewController];
+        
+        }else if(arrayCv.count == 1){
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定要查看该联系方式吗？" preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetContact" Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", [self.jobData objectForKey:@"id"], @"jobId", nil] viewController:self];
+                [request setTag:1];
+                [request setDelegate:self];
+                [request startAsynchronous];
+                self.runningRequest = request;
+            }]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
+        
+        }else{
+    
+        }
+    }
+    
     else if (request.tag == 4) {
         NSArray *arrayValidNumber = [Common getArrayFromXml:requestData tableName:@"Table"];
         if (arrayValidNumber.count == 0) {
@@ -669,6 +690,12 @@
     cvc.jobId = self.jobData[@"id"];
     cvc.caMainId = self.jobData[@"caMainID"];
     [self.navigationController pushViewController:cvc animated:YES];
+}
+
+- (void)presentOneMinutesViewController{
+    OneMinuteCVViewController *oneCV = [[OneMinuteCVViewController alloc]init];
+    oneCV.pageType = PageType_JobInfo;
+    [self.navigationController pushViewController:oneCV animated:NO];
 }
 
 @end

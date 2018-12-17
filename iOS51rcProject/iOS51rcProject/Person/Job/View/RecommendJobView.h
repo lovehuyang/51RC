@@ -13,4 +13,5 @@
 
 - (instancetype)initWithData:(NSArray *)dataArr;
 - (void)show;
+- (void)dissmiss;
 @end
