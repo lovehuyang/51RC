@@ -18,6 +18,7 @@
 #import "JobViewController.h"
 #import "WKNavigationController.h"
 #import "AlertView.h"
+#import "OnlineLab.h"
 
 @interface JobApplyChildViewController ()<UITableViewDelegate, UITableViewDataSource, NetWebServiceRequestDelegate>
 
@@ -141,9 +142,13 @@
     [cell.contentView addSubview:lbJob];
     
     if ([[data objectForKey:@"IsOnline"] boolValue]) {
-        UIImageView *imgOnline = [[UIImageView alloc] initWithFrame:CGRectMake(VIEW_BX(lbJob) + 3, VIEW_Y(lbJob) + 2, 16, 16)];
-        [imgOnline setImage:[UIImage imageNamed:@"pa_chat.png"]];
-        [cell.contentView addSubview:imgOnline];
+        OnlineLab *onlineLab = [[OnlineLab alloc]initWithFrame:CGRectMake(VIEW_BX(lbJob) + 3, VIEW_Y(lbJob) + 2, 30, 16)];
+        [cell.contentView addSubview:onlineLab];
+        
+        // “聊”图标
+//        UIImageView *imgOnline = [[UIImageView alloc] initWithFrame:CGRectMake(VIEW_BX(lbJob) + 3, VIEW_Y(lbJob) + 2, 16, 16)];
+//        [imgOnline setImage:[UIImage imageNamed:@"pa_chat.png"]];
+//        [cell.contentView addSubview:imgOnline];
     }
     
     WKLabel *lbCompany = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_X(lbJob), VIEW_BY(lbJob), maxWidth, 20) content:[data objectForKey:@"cpName"] size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR];

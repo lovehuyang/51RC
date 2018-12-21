@@ -24,7 +24,7 @@
 - (void)setupSubviews:(NSArray *)data{
     
 
-    CGFloat IMG_W = 100;
+    CGFloat IMG_W = 90;
     if (data.count == 1) {
         AttachmentImgView *imgview = [AttachmentImgView new];
         imgview.model = [data firstObject];
@@ -33,7 +33,7 @@
         .widthIs(IMG_W)
         .centerXEqualToView(self)
         .centerYEqualToView(self)
-        .heightIs(150);
+        .heightIs(120);
         imgview.deleteAttachment = ^(AttachmentModel *attach) {
             self.deleteAttachMent(attach);
         };

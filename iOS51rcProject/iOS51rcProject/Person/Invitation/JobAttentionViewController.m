@@ -19,6 +19,7 @@
 #import "WKNavigationController.h"
 #import "JobViewController.h"
 #import "WKApplyView.h"
+#import "OnlineLab.h"
 
 @interface JobAttentionViewController ()<UITableViewDelegate, UITableViewDataSource, NetWebServiceRequestDelegate, WKApplyViewDelegate>
 
@@ -122,9 +123,13 @@
     [cell.contentView addSubview:lbJob];
     
     if ([[data objectForKey:@"IsOnline"] boolValue]) {
-        UIImageView *imgOnline = [[UIImageView alloc] initWithFrame:CGRectMake(VIEW_BX(lbJob) + 3, VIEW_Y(lbJob) + 2, 16, 16)];
-        [imgOnline setImage:[UIImage imageNamed:@"pa_chat.png"]];
-        [cell.contentView addSubview:imgOnline];
+        
+        OnlineLab *onlineLab = [[OnlineLab alloc]initWithFrame:CGRectMake(VIEW_BX(lbJob) + 3, VIEW_Y(lbJob) + 2, 30, 16)];
+        [cell.contentView addSubview:onlineLab];
+        //"聊"图标
+//        UIImageView *imgOnline = [[UIImageView alloc] initWithFrame:CGRectMake(VIEW_BX(lbJob) + 3, VIEW_Y(lbJob) + 2, 16, 16)];
+//        [imgOnline setImage:[UIImage imageNamed:@"pa_chat.png"]];
+//        [cell.contentView addSubview:imgOnline];
     }
     
     UIButton *btnCancel = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 75, 0, 60, 80)];

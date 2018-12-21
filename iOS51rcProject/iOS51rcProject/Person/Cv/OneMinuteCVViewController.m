@@ -17,6 +17,7 @@
 #import "SpeechButton.h"
 #import "SpeechViewController.h"
 #import "WKNavigationController.h"
+#import <CoreLocation/CoreLocation.h>
 
 NSInteger const WKPopViewTag_Gender = 1;//性别
 NSInteger const WKPopViewTag_Birthday = 2;//出生年月
@@ -26,7 +27,7 @@ NSInteger const WKPopViewTag_JobPlace = 5;// 期望工作地点
 NSInteger const WKPopViewTag_Salary = 6;// 期望月薪
 NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 
-@interface OneMinuteCVViewController ()<UITableViewDelegate, UITableViewDataSource,WKPopViewDelegate,MajorViewDelete,MultiSelectDelegate>
+@interface OneMinuteCVViewController ()<UITableViewDelegate, UITableViewDataSource,WKPopViewDelegate,MajorViewDelete,MultiSelectDelegate,CLLocationManagerDelegate>
 {
     BOOL mobileVerify;// 手机号是否认证通过
     NSInteger birthMonth;// 出生月份
@@ -39,6 +40,8 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 @property (nonatomic , strong) NSArray *dataArr;// 数据源
 @property (nonatomic , strong) NSMutableDictionary *dataParam;
 @property (nonatomic , copy) NSDictionary *paMainDict;// getPaMain接口返回的数据
+
+@property (nonatomic, strong) CLLocationManager *locationManager;// 位置
 
 @end
 
@@ -82,6 +85,45 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
     [self getPaMain];
 }
 
+//开始定位
+- (void)startLocation {
+    if ([CLLocationManager locationServicesEnabled]) {
+        self.locationManager = [[CLLocationManager alloc]init];
+        self.locationManager.delegate = self;
+        [self.locationManager requestAlwaysAuthorization];
+        [self.locationManager requestWhenInUseAuthorization];
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;// 定位精度（枚举）
+        [self.locationManager startUpdatingLocation];// 开启定位
+    }
+}
+//定位代理经纬度回调
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    CLLocation *currentLocation = locations.lastObject;
+    NSLog(@"位置信息：纬度：%f - 经度%f", currentLocation.coordinate.latitude , currentLocation.coordinate.longitude);
+    
+    //反地理编码
+    CLGeocoder *geocoder = [[CLGeocoder alloc]init];
+    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (placemarks.count > 0) {
+            CLPlacemark *placeMark = placemarks.firstObject;
+            NSString *city = placeMark.locality;
+            if (!city) {
+                //四大直辖市的城市信息无法通过locality获得，只能通过获取省份的方法来获得（如果city为空，则可知为直辖市）
+                city = placeMark.administrativeArea;
+            }
+            
+            NSString *locationStr = [[NSString alloc]initWithFormat:@"%@ - %@ - %@ - %@ - %@",placeMark.country,placeMark.locality, placeMark.subLocality,placeMark.thoroughfare,placeMark.name];
+            DLog(@"%@",locationStr);
+            
+            [self resetDataValue:placeMark.subLocality?placeMark.subLocality:city key:@"工作地点"];
+            // 参数字典添加位置
+            [self.dataParam setValue:placeMark.subLocality?placeMark.subLocality:city forKey:@"JobPlace"];
+            [self.tableview reloadData];
+        }
+    }];
+    
+}
+
 - (void)getPaMain{
     [SVProgressHUD show];
     NSDictionary *parmaDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", nil];
@@ -118,6 +160,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
             mobileVerify = NO;
             [self createDataArr:dataDict];
             [self.tableview reloadData];
+            [self startLocation];
 //            [self setupAddHuaTongButton];
         }
         
@@ -149,7 +192,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 - (void)setupAddHuaTongButton{
     
     SpeechButton *speechBtn = [SpeechButton new];
-    speechBtn.frame = CGRectMake(SCREEN_WIDTH - 200 - 10, (SCREEN_HEIGHT - HEIGHT_STATUS_NAV - 49) * 0.50, 200, 50);
+    speechBtn.frame = CGRectMake(SCREEN_WIDTH - 200 - 10, (SCREEN_HEIGHT - HEIGHT_STATUS_NAV - 49) * 0.50, 195, 50);
     [self.view addSubview:speechBtn];
     speechBtn.speechInput = ^{
         SpeechViewController *svc = [[SpeechViewController alloc]init];
@@ -240,6 +283,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     OnMinuteSingleCell *cell = [[OnMinuteSingleCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil data:self.dataArr[indexPath.row] viewController:self];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     __weak typeof(self)weakSelf = self;
@@ -250,6 +294,23 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
     cell.getMobileVerifyCode = ^{
         [weakSelf getMobileVerifyCode];
     };
+    
+    OneMinuteModel *model = nil;
+    if (self.dataArr.count == 9) {
+        model = [self.dataArr[4] lastObject];
+        if ([model.contentStr isEqualToString:@"初中"]|| [model.contentStr isEqualToString:@"高中"]) {
+            if(indexPath.row == 5){
+                cell.userInteractionEnabled = NO;
+            }
+        }
+    }else if(self.dataArr.count == 7){
+        model = [self.dataArr[2] lastObject];
+        if ([model.contentStr isEqualToString:@"初中"]|| [model.contentStr isEqualToString:@"高中"]) {
+            if(indexPath.row == 3){
+                cell.userInteractionEnabled = NO;
+            }
+        }
+    }
     
     return cell;
 }

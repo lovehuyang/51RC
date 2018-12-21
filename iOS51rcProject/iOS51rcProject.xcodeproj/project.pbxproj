@@ -192,6 +192,8 @@
 		993ED85E21B528AB00A988FF /* voicesalary.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 993ED85121B528AA00A988FF /* voicesalary.mp3 */; };
 		993ED85F21B528AB00A988FF /* voicepardon.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 993ED85221B528AA00A988FF /* voicepardon.mp3 */; };
 		993ED86121B52AC500A988FF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 993ED86021B52AC200A988FF /* AVFoundation.framework */; };
+		9945A3C521CC912800818358 /* ApplySucceedAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 9945A3C421CC912800818358 /* ApplySucceedAlert.m */; };
+		9945A3C821CCBD6200818358 /* SelectCvAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 9945A3C721CCBD6200818358 /* SelectCvAlert.m */; };
 		9947F2B22193ED25002C97F2 /* BaseTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 9947F2B02193ED25002C97F2 /* BaseTabbar.m */; };
 		9947F2B32193ED25002C97F2 /* WKTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9947F2B12193ED25002C97F2 /* WKTabBarController.m */; };
 		994A85031F4FF9F100097B44 /* job_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 994A85021F4FF9F100097B44 /* job_top.png */; };
@@ -797,6 +799,10 @@
 		993ED85221B528AA00A988FF /* voicepardon.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = voicepardon.mp3; sourceTree = "<group>"; };
 		993ED86021B52AC200A988FF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		993ED86621B530D800A988FF /* libc++abi.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++abi.tbd"; path = "usr/lib/libc++abi.tbd"; sourceTree = SDKROOT; };
+		9945A3C321CC912800818358 /* ApplySucceedAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplySucceedAlert.h; sourceTree = "<group>"; };
+		9945A3C421CC912800818358 /* ApplySucceedAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplySucceedAlert.m; sourceTree = "<group>"; };
+		9945A3C621CCBD6200818358 /* SelectCvAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectCvAlert.h; sourceTree = "<group>"; };
+		9945A3C721CCBD6200818358 /* SelectCvAlert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectCvAlert.m; sourceTree = "<group>"; };
 		9947F2AE2193ED25002C97F2 /* BaseTabbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabbar.h; sourceTree = "<group>"; };
 		9947F2AF2193ED25002C97F2 /* WKTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKTabBarController.h; sourceTree = "<group>"; };
 		9947F2B02193ED25002C97F2 /* BaseTabbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabbar.m; sourceTree = "<group>"; };
@@ -2239,6 +2245,10 @@
 				99949F4C21C0D4EE002109D1 /* RecommendJobView.m */,
 				99949F4E21C0E311002109D1 /* RecommendJobCell.h */,
 				99949F4F21C0E312002109D1 /* RecommendJobCell.m */,
+				9945A3C321CC912800818358 /* ApplySucceedAlert.h */,
+				9945A3C421CC912800818358 /* ApplySucceedAlert.m */,
+				9945A3C621CCBD6200818358 /* SelectCvAlert.h */,
+				9945A3C721CCBD6200818358 /* SelectCvAlert.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3324,6 +3334,7 @@
 				996EB7AB218BE824000B475E /* RCToast.m in Sources */,
 				99C5EEB22017293F00AC8FBD /* ChatListCpViewController.m in Sources */,
 				991D7A89219D37A20019123A /* BarButtonItem.m in Sources */,
+				9945A3C821CCBD6200818358 /* SelectCvAlert.m in Sources */,
 				991A243E1EE6D7A9008CD8E9 /* ASIDownloadCache.m in Sources */,
 				9993C34721BF51FB0085A6F8 /* SpeakLoadingBtn.m in Sources */,
 				997B06831F5500A000391289 /* SalaryViewController.m in Sources */,
@@ -3332,6 +3343,7 @@
 				997B06801F5500A000391289 /* PaLoginViewController.m in Sources */,
 				991A243F1EE6D7A9008CD8E9 /* ASIFormDataRequest.m in Sources */,
 				992985241F5539CB0021F863 /* WKLabel.m in Sources */,
+				9945A3C521CC912800818358 /* ApplySucceedAlert.m in Sources */,
 				996F50572188340200D2A7E9 /* TABButton.m in Sources */,
 				992985321F553BCE0021F863 /* CpLoginViewController.m in Sources */,
 				991C6F761FFE1262009FD82A /* ApplyInvitationCpViewController.m in Sources */,

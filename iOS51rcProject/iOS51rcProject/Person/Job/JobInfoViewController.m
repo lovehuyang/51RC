@@ -19,14 +19,20 @@
 #import "ChatViewController.h"
 #import "ComplainViewController.h"
 #import "OneMinuteCVViewController.h"
+#import "ApplySucceedAlert.h"
+#import "SelectCvAlert.h"
+#import "ExperienceModifyViewController.h"// 工作经历页面
 
 @interface JobInfoViewController ()<NetWebServiceRequestDelegate, WKApplyViewDelegate>
-
+{
+    BOOL cvExpStatus;// 简历中有无工作经历 默认没有no
+}
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *viewContact;
 @property (nonatomic, strong) NetWebServiceRequest *runningRequest;
 @property (nonatomic, strong) NSString *selCvMainId;
 @property (nonatomic, strong) WKButton *btnApply;
+@property (nonatomic, strong) NSArray *cvListApplyArr;// 可以用于申请职位的简历列表
 @end
 
 @implementation JobInfoViewController
@@ -34,6 +40,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    cvExpStatus = NO;
+    
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, NAVIGATION_BAR_HEIGHT + STATUS_BAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT - STATUS_BAR_HEIGHT - TAB_BAR_HEIGHT)];
     [self.scrollView setBackgroundColor:SEPARATECOLOR];
     [self.view addSubview:self.scrollView];
@@ -422,6 +431,10 @@
 }
 
 - (void)applyClick {
+//    SelectCvAlert *svc = [SelectCvAlert new];
+//    [svc show];
+//    return;
+    
     if ([[USER_DEFAULT objectForKey:@"userType"] isEqualToString:@"2"]) {
         [self.view.window makeToast:@"您当前的角色为企业，请切换至求职者后方可操作"];
         return;
@@ -456,7 +469,8 @@
 //            [self.view makeToast:@"您还没有完整简历，无法申请职位"];
             [self presentOneMinutesViewController];
         }
-        else if (arrayCv.count == 1) {
+        else if (arrayCv.count == 1) {// 一个可用于投递的简历则直接投递
+            self.cvListApplyArr = [NSArray arrayWithArray:arrayCv];
             [self applyJob:[[arrayCv objectAtIndex:0] objectForKey:@"ID"]];
         }
         else {
@@ -465,7 +479,37 @@
             [applyView setDelegate:self];
             [applyView show:self];
         }
+    }else if (request.tag == 4) {
+        
+        NSArray *arrayValidNumber = [Common getArrayFromXml:requestData tableName:@"Table"];
+        NSArray *arrayJob;// 接口返回的推荐职位
+        if (arrayValidNumber.count == 0) {
+            [self.view.window makeToast:@"职位申请失败，可能是您30天内申请过该职位"];
+            return;
+        }
+        else if ([[[arrayValidNumber objectAtIndex:0] objectForKey:@"ValidJobNumber"] isEqualToString:@"0"]) {
+            [self.view.window makeToast:@"职位申请成功"];
+        }
+        else {
+            arrayJob = [Common getArrayFromXml:requestData tableName:@"Table1"];
+        }
+        [self.btnApply setTitle:@"已申请" forState:UIControlStateNormal];
+        [self.btnApply setTitleEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
+        [self.btnApply setTitleColor:TEXTGRAYCOLOR forState:UIControlStateNormal];
+        [self.btnApply setBackgroundColor:UIColorWithRGBA(215, 215, 215, 1)];
+        [self.btnApply setImage:[UIImage imageNamed:@"job_hasapply.png"] forState:UIControlStateNormal];
+        [self.btnApply.imageView setContentMode:UIViewContentModeScaleAspectFit];
+        [self.btnApply setImageEdgeInsets:UIEdgeInsetsMake(11, -10, 11, 0)];
+        [self.btnApply removeTarget:self action:@selector(applyClick) forControlEvents:UIControlEventTouchUpInside];
+        
+        // 检查可用于投递的所有简历是否填写了工作经历
+        [self checkCvExpStatus:arrayJob];
+        
     }
+    else if (request.tag == 5) {
+        [self.view.window makeToast:@"职位申请成功"];
+    }
+    
     else if (request.tag == 6) {
         NSArray *arrayCv = [Common getArrayFromXml:requestData tableName:@"Table"];
         if (arrayCv.count == 0) {
@@ -502,32 +546,6 @@
         }else{
     
         }
-    }
-    
-    else if (request.tag == 4) {
-        NSArray *arrayValidNumber = [Common getArrayFromXml:requestData tableName:@"Table"];
-        if (arrayValidNumber.count == 0) {
-            [self.view.window makeToast:@"职位申请失败，可能是您30天内申请过该职位"];
-            return;
-        }
-        else if ([[[arrayValidNumber objectAtIndex:0] objectForKey:@"ValidJobNumber"] isEqualToString:@"0"]) {
-            [self.view.window makeToast:@"职位申请成功"];
-        }
-        else {
-            NSArray *arrayJob = [Common getArrayFromXml:requestData tableName:@"Table1"];
-            [self applySuccess:arrayJob];
-        }
-        [self.btnApply setTitle:@"已申请" forState:UIControlStateNormal];
-        [self.btnApply setTitleEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
-        [self.btnApply setTitleColor:TEXTGRAYCOLOR forState:UIControlStateNormal];
-        [self.btnApply setBackgroundColor:UIColorWithRGBA(215, 215, 215, 1)];
-        [self.btnApply setImage:[UIImage imageNamed:@"job_hasapply.png"] forState:UIControlStateNormal];
-        [self.btnApply.imageView setContentMode:UIViewContentModeScaleAspectFit];
-        [self.btnApply setImageEdgeInsets:UIEdgeInsetsMake(11, -10, 11, 0)];
-        [self.btnApply removeTarget:self action:@selector(applyClick) forControlEvents:UIControlEventTouchUpInside];
-    }
-    else if (request.tag == 5) {
-        [self.view.window makeToast:@"职位申请成功"];
     }
 }
 
@@ -698,4 +716,29 @@
     [self.navigationController pushViewController:oneCV animated:NO];
 }
 
+- (void)checkCvExpStatus:(NSArray *)jobArr{
+    for (NSDictionary *cvDict in self.cvListApplyArr) {
+        BOOL expStatus = [cvDict[@"CvExpStatus"] boolValue];
+        cvExpStatus = expStatus || cvExpStatus;
+    }
+    
+    if(cvExpStatus == NO){
+        NSString *cvMainId = @"";
+        for (NSDictionary *cvDict in self.cvListApplyArr) {
+            cvMainId = cvDict[@"ID"];
+        }
+        ApplySucceedAlert *applySucceedAlert = [ApplySucceedAlert new];
+        [applySucceedAlert show];
+        __weak typeof(self)weakself = self;
+        applySucceedAlert.completeInformation = ^{
+            DLog(@"去完善");
+            ExperienceModifyViewController *evc = [[UIStoryboard storyboardWithName:@"Person" bundle:nil] instantiateViewControllerWithIdentifier:@"experienceModifyView"];
+            evc.cvMainId = cvMainId;
+            [weakself.navigationController pushViewController:evc animated:YES];
+        };
+    
+    }else if(jobArr != nil && jobArr.count > 0){
+        [self applySuccess:jobArr];
+    }
+}
 @end

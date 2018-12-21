@@ -4,7 +4,7 @@
 //
 //  Created by Lucifer on 2017/6/12.
 //  Copyright © 2017年 Lucifer. All rights reserved.
-//
+//  查工资页面
 
 #import "SalaryViewController.h"
 @import WebKit;
@@ -24,7 +24,8 @@
     [config.userContentController addScriptMessageHandler:self name:@"popView"];
     self.webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, NAVIGATION_BAR_HEIGHT + STATUS_BAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT - STATUS_BAR_HEIGHT) configuration:config];
     [self.webView setNavigationDelegate:self];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/personal/news/salaryanalysis", [USER_DEFAULT valueForKey:@"subsite"]]];
+    NSString *pathStr = [NSString stringWithFormat:@"http://%@/personal/news/salaryanalysisjob?PaMainID=%@&Code=%@", [USER_DEFAULT valueForKey:@"subsite"],PAMAINID,[USER_DEFAULT valueForKey:@"paMainCode"]];
+    NSURL *url = [NSURL URLWithString:pathStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:request];
     [self.view addSubview:self.webView];

@@ -19,6 +19,7 @@
 #import "WKPopView.h"
 #import "CvOperate.h"
 #import "PullDownMenu.h"
+#import "OnlineLab.h"
 
 static const CGFloat Menu_H =  0;// 菜单栏的高度//35
 
@@ -255,11 +256,17 @@ static const CGFloat Menu_H =  0;// 菜单栏的高度//35
     }
     
     if ([[data objectForKey:@"IsOnline"] boolValue]) {
-        UIImageView *imgOnline = [[UIImageView alloc] initWithFrame:CGRectMake(xForName + 5, VIEW_Y(lbName) + 7, 16, 16)];
-        [imgOnline setImage:[UIImage imageNamed:@"pa_chat.png"]];
-        [imgOnline setContentMode:UIViewContentModeScaleAspectFit];
-        [cell.contentView addSubview:imgOnline];
-        xForName = VIEW_BX(imgOnline);
+        
+        OnlineLab *onlineLab = [[OnlineLab alloc]initWithFrame:CGRectMake(xForName + 5, VIEW_Y(lbName) + 7, 30, 16)];
+        [cell.contentView addSubview:onlineLab];
+        xForName = VIEW_BX(onlineLab);
+        
+        // “聊”图标
+//        UIImageView *imgOnline = [[UIImageView alloc] initWithFrame:CGRectMake(xForName + 5, VIEW_Y(lbName) + 7, 16, 16)];
+//        [imgOnline setImage:[UIImage imageNamed:@"pa_chat.png"]];
+//        [imgOnline setContentMode:UIViewContentModeScaleAspectFit];
+//        [cell.contentView addSubview:imgOnline];
+//        xForName = VIEW_BX(imgOnline);
     }
     
     if ([[data objectForKey:@"RemindDate"] length] > 0 && [[data objectForKey:@"Reply"] isEqualToString:@"0"]) {

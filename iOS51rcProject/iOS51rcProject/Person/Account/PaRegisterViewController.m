@@ -74,6 +74,7 @@
         return;
     }
     if (![Common checkMobile:self.txtUsername.text]) {
+        [self.view makeToast:@"您输入的不是正确的手机号码，不能获取验证码!"];
         return;
     }
     NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:URL_GETPAMOBILEVERIFYCODE Params:[NSDictionary dictionaryWithObjectsAndKeys:[Common enMobile:self.txtUsername.text], @"mobile", [USER_DEFAULT valueForKey:@"subsitename"], @"subsitename", nil] viewController:self];
@@ -154,31 +155,13 @@
       finishedInfoToResult:(NSString *)result
               responseData:(GDataXMLDocument *)requestData {
     if (request.tag == 1) { //获取短信验证码
-        switch ([result intValue]) {
-            case 1:
-                [self.btnMobileCer setTag:1];
-                self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(sendInterval) userInfo:nil repeats:YES];
-                break;
-            case 0:
-                [self.view makeToast:@"该手机号发送短信验证码次数过多"];
-                break;
-            case -1:
-                [self.view makeToast:@"该ip今天发送短信验证码次数过多"];
-                break;
-            case -2:
-                [self.view makeToast:@"您输入手机号已经存在，请重新输入"];
-                break;
-            case -3:
-                [self.view makeToast:@"短信发送失败，请稍后重试"];
-                break;
-            case -4:
-                [self.view makeToast:@"您输入的手机号已经存在"];
-                break;
-            case -5:
-                [self.view makeToast:@"您在180s内获取过验证码，请稍后重试"];
-                break;
-            default:
-                break;
+        
+        if ([result intValue] == 1) {
+            [self.btnMobileCer setTag:1];
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(sendInterval) userInfo:nil repeats:YES];
+        }else{
+            NSString *resultStr = [Common getPaMobileVerifyCodeResult:[result intValue]];
+            [self.view makeToast:resultStr];
         }
     }
     else if (request.tag == 2) { //注册

@@ -74,7 +74,7 @@
                       @"", @"NeedNum",
                       @"", @"dcSalaryID",
                       @"", @"dcSalaryMaxID",
-                      @"", @"EmployType",
+                      @"1", @"EmployType",
                       @"", @"RegionID",
                       @"", @"Lat",
                       @"", @"Lng",
@@ -206,6 +206,9 @@
             [self.constraintsJobTypeTop setConstant:0];
         }
     }
+}
+- (void)netRequestFailed:(NetWebServiceRequest *)request didRequestError:(int *)error{
+    
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {

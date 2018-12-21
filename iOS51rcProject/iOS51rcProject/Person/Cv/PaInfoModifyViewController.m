@@ -33,6 +33,7 @@
     self.navigationItem.rightBarButtonItem = btnSave;
     [self setupUIStatus];// 调整控件
     [self fillData];
+    [self getPaMain];
 }
 
 - (void)setupUIStatus{
@@ -298,4 +299,20 @@
     
 }
 
+- (void)getPaMain{
+    NSDictionary *parmaDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", nil];
+    [AFNManager requestWithMethod:POST ParamDict:parmaDict url:URL_GETPAMAIN tableName:@"Table" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        
+        NSString *mobileVerifyDate = dataDict[@"MobileVerifyDate"];
+        if (mobileVerifyDate.length) {
+            DLog(@"已经认证");
+            self.authenticationLab.hidden = NO;
+        }else{
+            self.authenticationLab.hidden = YES;
+        }
+        
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        
+    }];
+}
 @end

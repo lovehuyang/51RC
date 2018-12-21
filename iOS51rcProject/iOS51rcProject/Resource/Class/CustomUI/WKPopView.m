@@ -10,11 +10,22 @@
 #import "CommonMacro.h"
 #import "Common.h"
 
+@interface WKPopView()
+@property (nonatomic , strong)UIViewController *viewController;
+@end
+
 @implementation WKPopView
 
 - (id)initWithCustomView:(UIView *)customView {
     self = [super initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     if (self) {
+        
+        // 键盘弹起
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillShowNotification object:nil];
+        // 键盘收起
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
+
+        
         UIButton *btnBackground = [[UIButton alloc] initWithFrame:self.frame];
         [btnBackground setTag:POPBACKGROUNDVIEWTAG];
         [btnBackground addTarget:self action:@selector(cancelClick) forControlEvents:UIControlEventTouchUpInside];
@@ -146,6 +157,7 @@
 }
 
 - (void)showPopView:(UIViewController *)viewController {
+    self.viewController = viewController;
     [viewController.view endEditing:YES];
     if (self.pickerType == WKPickerTypeBirth) {
         [self.pickerView selectRow:5 inComponent:0 animated:YES];
@@ -557,4 +569,49 @@
     [self.arrayData setObject:array atIndexedSubscript:index];
 }
 
+
+#pragma mark --键盘弹出
+- (void)keyboardWillChangeFrame:(NSNotification *)notification{
+    
+    if (![self.viewController isKindOfClass:[[self viewControllerFromStr:@"InterviewViewController"] class]]) {
+        return;
+    }
+    UIView *viewContent = [self viewWithTag:POPVIEWTAG];
+    //取出键盘动画的时间
+    CGFloat duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    
+    //取得键盘最后的frame
+    CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    //计算控制器的view需要平移的距离
+    CGFloat transformY = keyboardFrame.origin.y - VIEW_H(viewContent);
+    
+    //执行动画
+    [UIView animateWithDuration:duration animations:^{
+        viewContent.frame = CGRectMake(0, transformY, VIEW_W(viewContent),VIEW_H(viewContent));
+    }];
+}
+#pragma mark --键盘收回
+- (void)keyboardDidHide:(NSNotification *)notification{
+    
+    if (![self.viewController isKindOfClass:[[self viewControllerFromStr:@"InterviewViewController"] class]]) {
+        return;
+    }
+    UIView *viewContent = [self viewWithTag:POPVIEWTAG];
+    CGFloat duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    [UIView animateWithDuration:duration animations:^{
+        //执行动画
+        [UIView animateWithDuration:duration animations:^{
+            [viewContent setFrame:CGRectMake(VIEW_X(viewContent), SCREEN_HEIGHT - VIEW_H(viewContent), VIEW_W(viewContent), VIEW_H(viewContent))];
+        }];
+    }];
+}
+
+- (UIViewController *)viewControllerFromStr:(NSString *)viewcontrollerName{
+    ;
+    Class aVCClass = NSClassFromString(viewcontrollerName);
+    //创建vc对象
+    UIViewController * vc = [[aVCClass alloc] init];
+    return vc;
+}
 @end

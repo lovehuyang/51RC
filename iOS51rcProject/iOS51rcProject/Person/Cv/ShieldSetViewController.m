@@ -44,8 +44,6 @@
     [btn addTarget:self action:@selector(addKeyWords) forControlEvents:UIControlEventTouchUpInside];
     self.btn = btn;
     [self getData];
-    
-    
 }
 
 #pragma mark - 懒加载

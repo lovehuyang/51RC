@@ -689,6 +689,38 @@
 }
 
 /**
+ 个人用户注册页面获取验证码接口返回结果
+
+ @param result 错误码
+ @return 错误信息
+ */
++ (NSString *)getPaMobileVerifyCodeResult:(NSInteger)result{
+    switch (result) {
+        case 0:
+            return @"该手机号发送短信验证码次数过多";
+            break;
+        case -1:
+            return @"该ip今天发送短信验证码次数过多";
+            break;
+        case -2:
+            return @"您输入手机号已经存在，请重新输入";
+            break;
+        case -3:
+            return @"短信发送失败，请稍后重试";
+            break;
+        case -4:
+            return @"您输入的手机号已经存在";
+            break;
+        case -5:
+            return @"您在180s内获取过验证码，请稍后重试";
+            break;
+        default:
+            return @"未知错误";
+            break;
+    }
+}
+
+/**
  读取本地数据库省信息
 
  @return 数组

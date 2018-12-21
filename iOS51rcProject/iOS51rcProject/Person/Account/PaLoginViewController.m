@@ -364,4 +364,8 @@
     });
     dispatch_resume(_timer);
 }
+- (IBAction)registerClick:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

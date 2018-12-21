@@ -19,6 +19,7 @@
 #import "WKTableView.h"
 #import "WKNavigationController.h"
 #import "JobViewController.h"
+#import "OnlineLab.h"
 
 @interface InterviewViewController ()<UITableViewDelegate, UITableViewDataSource, NetWebServiceRequestDelegate, WKPopViewDelegate, UITextViewDelegate>
 
@@ -134,9 +135,14 @@
     [cell.contentView addSubview:lbJob];
     
     if ([[data objectForKey:@"IsOnline"] boolValue]) {
-        UIImageView *imgOnline = [[UIImageView alloc] initWithFrame:CGRectMake(VIEW_BX(lbJob) + 3, VIEW_Y(lbJob) + 5, 15, 15)];
-        [imgOnline setImage:[UIImage imageNamed:@"pa_chat.png"]];
-        [cell.contentView addSubview:imgOnline];
+        
+        OnlineLab *onlineLab = [[OnlineLab alloc]initWithFrame:CGRectMake(VIEW_BX(lbJob) + 3, VIEW_Y(lbJob) + 2, 30, 16)];
+        [cell.contentView addSubview:onlineLab];
+        
+        // “聊”图标
+//        UIImageView *imgOnline = [[UIImageView alloc] initWithFrame:CGRectMake(VIEW_BX(lbJob) + 3, VIEW_Y(lbJob) + 5, 15, 15)];
+//        [imgOnline setImage:[UIImage imageNamed:@"pa_chat.png"]];
+//        [cell.contentView addSubview:imgOnline];
     }
     
     if (![[data objectForKey:@"JobValid"] boolValue]) {
@@ -359,20 +365,5 @@
     }];
     return YES;
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -1186,7 +1186,7 @@
         return;
     }
     
-    AttachMentView *attachmentView = [[AttachMentView alloc]initWithFrame:CGRectMake(0, VIEW_BY(self.btnAddAttachment) + 10, SCREEN_WIDTH, 150) data:self.attachmentData];
+    AttachMentView *attachmentView = [[AttachMentView alloc]initWithFrame:CGRectMake(0, VIEW_BY(self.btnAddAttachment) -10, SCREEN_WIDTH, 120) data:self.attachmentData];
     attachmentView.tag = 101;
     attachmentView.deleteAttachMent = ^(AttachmentModel *attach) {
         

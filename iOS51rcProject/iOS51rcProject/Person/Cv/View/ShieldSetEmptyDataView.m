@@ -35,10 +35,10 @@
     UIImageView *imgView = [UIImageView new];
     [self addSubview:imgView];
     imgView.sd_layout
-    .leftSpaceToView(self, 20)
-    .rightSpaceToView(self, 20)
-    .topSpaceToView(tipLab, 10)
-    .heightIs(150);
+    .leftSpaceToView(self, 50)
+    .rightSpaceToView(self, 50)
+    .topSpaceToView(tipLab, 20)
+    .heightIs(120);
     [imgView setImage:[UIImage imageNamed:@"img_frog"]];
     
     AddShieldBtn *btn = [AddShieldBtn new];
@@ -47,7 +47,7 @@
     .leftEqualToView(imgView)
     .rightEqualToView(imgView)
     .heightIs(35)
-    .topSpaceToView(imgView, 0);
+    .topSpaceToView(imgView, 10);
     [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
 }
 

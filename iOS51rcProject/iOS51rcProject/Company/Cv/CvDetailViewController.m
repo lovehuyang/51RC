@@ -551,7 +551,7 @@
             UIButton *btnReply;
             if (replyPass) {
                 widthForButton = widthForButton / 2;
-                UIButton *btnInterview = [[UIButton alloc] initWithFrame:CGRectMake(xForButton, yForButton, widthForButton, VIEW_H(viewLink))];
+                UIButton *btnInterview = [[UIButton alloc] initWithFrame:CGRectMake(xForButton, yForButton, 0, VIEW_H(viewLink))];
                 [btnInterview setTitle:@"发送面试通知" forState:UIControlStateNormal];
                 [btnInterview.titleLabel setTextAlignment:NSTextAlignmentCenter];
                 [btnInterview.titleLabel setNumberOfLines:0];
@@ -564,7 +564,7 @@
                 btnReply = [[UIButton alloc] initWithFrame:CGRectMake(VIEW_BX(btnInterview), VIEW_Y(btnInterview), widthForButton, VIEW_H(viewLink))];
                 [btnReply setTag:2];
                 [btnReply setTitle:@"改为暂不合适，放入储备人才库" forState:UIControlStateNormal];
-                [btnReply setBackgroundColor:[UIColor redColor]];
+                [btnReply setBackgroundColor:NAVBARCOLOR];
                 [btnReply.titleLabel setNumberOfLines:0];
                 [btnReply.titleLabel setTextAlignment:NSTextAlignmentCenter];
                 [btnReply setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
