@@ -71,4 +71,5 @@
 
 + (NSString *)translatNum:(NSString *)chnStr;
 + (NSString *)translatBirth:(NSString *)chnStr;
++ (BOOL) deptNumInputShouldNumber:(NSString *)str;
 @end

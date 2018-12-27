@@ -723,10 +723,10 @@
 - (void)getJobSearch:(NSString *)regionID jobTypeID:(NSString *)jobTypeID salaryID:(NSString *)salaryID{
     NSMutableDictionary *paramDict = [NSMutableDictionary dictionary];
     [paramDict setValue:@"1" forKey:@"pageNumber"];
-    [paramDict setObject:regionID forKey:@"workPlace"];
+    [paramDict setObject:[NSString juedeString:regionID] forKey:@"workPlace"];
     [paramDict setObject:self.subsiteID forKey:@"subsiteID"];
-    [paramDict setObject:jobTypeID forKey:@"jobType"];
-    [paramDict setObject:salaryID forKey:@"salary"];
+    [paramDict setObject:[NSString juedeString:jobTypeID] forKey:@"jobType"];
+    [paramDict setObject:[NSString juedeString:salaryID] forKey:@"salary"];
     [paramDict setObject:@"" forKey:@"keyWord"];
     [paramDict setObject:@"" forKey:@"companySize"];
     [paramDict setObject:@"" forKey:@"education"];
@@ -753,6 +753,9 @@
             }
         }
         
+        if(self.insertJobApplyDataArr.count == 0){
+            return ;
+        }
         RecommendJobView *recommendView = [[RecommendJobView alloc]initWithData:self.insertJobApplyDataArr];
         self.recommendView = recommendView;
         __weak typeof (self)weakself = self;

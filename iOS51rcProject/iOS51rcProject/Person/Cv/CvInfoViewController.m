@@ -92,7 +92,7 @@
         NSArray *arrayCv = [Common getArrayFromXml:requestData tableName:@"Table"];
         
         if(arrayCv.count == 0){// 一分钟填写简历
-            [self createOneMinuteController];
+            [self createOneMinuteController:@"0"];
             return;
             
         }else{
@@ -103,7 +103,8 @@
             }
             if (!isValid) {
                 //一分钟填写简历
-                [self createOneMinuteController];
+                NSDictionary *dict = [arrayCv firstObject];
+                [self createOneMinuteController:dict[@"ID"]];
                 return;
             }
         }
@@ -157,11 +158,12 @@
 }
 
 #pragma mark - 一分钟填写简历
-- (void)createOneMinuteController{
+- (void)createOneMinuteController:(NSString *)cvID{
     self.navigationItem.title = @"一分钟填写简历";
     [self.navigationItem setRightBarButtonItem:nil];
     OneMinuteCVViewController *oneMinuteCV = [[OneMinuteCVViewController alloc] init];
     oneMinuteCV.pageType = PageType_CV;
+    oneMinuteCV.intCvMainID = cvID;
     [oneMinuteCV.view setFrame:CGRectMake(0, 0, SCREEN_WIDTH, VIEW_H(oneMinuteCV.view))];
     [self addChildViewController:oneMinuteCV];
     [self.view addSubview:oneMinuteCV.view];

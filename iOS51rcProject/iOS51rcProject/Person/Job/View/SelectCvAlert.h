@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface SelectCvAlert : UIView
-@property (nonatomic , copy)void(^completeInformation)();
+@property (nonatomic , copy)void(^ensureEvent)(NSString *cvMainID);
+
+- (instancetype)initWithData:(NSArray *)dataArr;
+
 - (void)show;
 - (void)dissmiss;
 @end

@@ -115,22 +115,22 @@
         age = [NSString stringWithFormat:@"%@-%@岁", [self.jobData objectForKey:@"MinAge"], [self.jobData objectForKey:@"MaxAge"]];
     }
     NSString *needNumber = [self.jobData objectForKey:@"NeedNumber"];
-    if ([needNumber isEqualToString:@"不限"]) {
+    if ([needNumber containsString:@"不限"]) {
         needNumber = @"人数不限";
     }
     NSString *experience = [self.jobData objectForKey:@"Experience"];
-    if ([experience isEqualToString:@"不限"]) {
+    if ([experience containsString:@"不限"]) {
         experience = @"经验不限";
     }
     NSString *education = [self.jobData objectForKey:@"Education"];
-    if ([education isEqualToString:@"不限"]) {
+    if ([education containsString:@"不限"]) {
         education = @"学历不限";
     }
-    [self fillDetail:viewDetail index:0 description:needNumber];
+    [self fillDetail:viewDetail index:4 description:needNumber];
     [self fillDetail:viewDetail index:1 description:education];
-    [self fillDetail:viewDetail index:2 description:age];
-    [self fillDetail:viewDetail index:3 description:experience];
-    [self fillDetail:viewDetail index:4 description:[self.jobData objectForKey:@"EmployType"]];
+    [self fillDetail:viewDetail index:3 description:age];
+    [self fillDetail:viewDetail index:2 description:experience];
+    [self fillDetail:viewDetail index:0 description:[self.jobData objectForKey:@"EmployType"]];
     //福利待遇
     NSArray *arrWelfare = [NSArray arrayWithObjects:@"社会保险", @"商业保险", @"公积金", @"年终奖", @"奖金提成", @"全勤奖", @"节日福利", @"双休", @"8小时工作制", @"带薪年假", @"公费培训", @"公费旅游", @"健康体检", @"通讯补贴", @"提供住宿", @"餐补/工作餐", @"住房补贴", @"交通补贴", @"班车接送", nil];
     NSArray *arrWelfareId = [NSArray arrayWithObjects:@"1", @"19", @"2", @"4", @"13", @"14", @"11", @"3", @"9", @"5", @"12", @"6", @"16", @"17", @"10", @"7", @"18", @"8", @"15", nil];
@@ -392,6 +392,10 @@
         [viewSeparate setBackgroundColor:SEPARATECOLOR];
         [viewItem addSubview:viewSeparate];
     }
+    
+    if ([description containsString:@"经验不限"] ||[description containsString:@"应届毕业生"]) {
+        lbItem.textColor = NAVBARCOLOR;
+    }
 }
 
 - (void)contactClick {
@@ -430,11 +434,9 @@
     [self.navigationController pushViewController:mapCtrl animated:YES];
 }
 
+#pragma mark - 立即申请点击事件
 - (void)applyClick {
-//    SelectCvAlert *svc = [SelectCvAlert new];
-//    [svc show];
-//    return;
-    
+  
     if ([[USER_DEFAULT objectForKey:@"userType"] isEqualToString:@"2"]) {
         [self.view.window makeToast:@"您当前的角色为企业，请切换至求职者后方可操作"];
         return;
@@ -443,6 +445,7 @@
         [self loginClick];
         return;
     }
+    // 获取可以用于投递的简历列表
     NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetCvListApply" Params:[NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", nil] viewController:nil];
     [request setTag:3];
     [request setDelegate:self];
@@ -469,11 +472,11 @@
 //            [self.view makeToast:@"您还没有完整简历，无法申请职位"];
             [self presentOneMinutesViewController];
         }
-        else if (arrayCv.count == 1) {// 一个可用于投递的简历则直接投递
+        else if (arrayCv.count > 0) {// 取第一个用于投递的简历
             self.cvListApplyArr = [NSArray arrayWithArray:arrayCv];
             [self applyJob:[[arrayCv objectAtIndex:0] objectForKey:@"ID"]];
         }
-        else {
+        else {// 有多个可用简历的话默认投递第一个简历
             WKApplyView *applyView = [[WKApplyView alloc] initWithArrayCv:arrayCv];
             [applyView setTag:1001];
             [applyView setDelegate:self];
@@ -546,6 +549,18 @@
         }else{
     
         }
+    }else if (request.tag == 8){
+        
+        NSArray *arrayValidNumber = [Common getArrayFromXml:requestData tableName:@"Table"];
+        if (arrayValidNumber.count == 0) {
+            [self.view.window makeToast:@"职位申请失败，可能是您30天内申请过该职位"];
+            return;
+        }
+        else if ([[[arrayValidNumber objectAtIndex:0] objectForKey:@"ValidJobNumber"] isEqualToString:@"0"]) {
+            [self.view.window makeToast:@"投递成功"];
+        }else{
+            [self.view.window makeToast:@"投递成功"];
+        }
     }
 }
 
@@ -558,6 +573,7 @@
     [self.navigationController pushViewController:chatCtrl animated:YES];
 }
 
+#pragma mark - 申请职位的网络请求
 - (void)applyJob:(NSString *)cvMainId {
     self.selCvMainId = cvMainId;
     NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"InsertJobApply" Params:[NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"PaMainID", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", cvMainId, @"strCvMainID", [self.jobData objectForKey:@"id"], @"strJobIDs", [USER_DEFAULT objectForKey:@"provinceId"], @"subsiteID", nil] viewController:self];
@@ -722,6 +738,7 @@
         cvExpStatus = expStatus || cvExpStatus;
     }
     
+    // 无工作尽力则提示补充工作经历
     if(cvExpStatus == NO){
         NSString *cvMainId = @"";
         for (NSDictionary *cvDict in self.cvListApplyArr) {
@@ -737,8 +754,22 @@
             [weakself.navigationController pushViewController:evc animated:YES];
         };
     
-    }else if(jobArr != nil && jobArr.count > 0){
+    }else if (self.cvListApplyArr.count > 1){// 有多个简历则选择可以改变投递的简历
+        SelectCvAlert *selectAlert = [[SelectCvAlert alloc]initWithData:self.cvListApplyArr];
+        [selectAlert show];
+        selectAlert.ensureEvent = ^(NSString *cvMainID) {
+            
+            NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"InsertJobApply" Params:[NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"PaMainID", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", cvMainID, @"strCvMainID", [self.jobData objectForKey:@"id"], @"strJobIDs", [USER_DEFAULT objectForKey:@"provinceId"], @"subsiteID", nil] viewController:self];
+            [request setTag:8];
+            [request setDelegate:self];
+            [request startAsynchronous];
+            self.runningRequest = request;
+            
+        };
+        
+    }else if(jobArr != nil && jobArr.count > 0){// 投递成功后展示推荐职位
         [self applySuccess:jobArr];
     }
 }
+
 @end

@@ -33,6 +33,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
     NSInteger birthMonth;// 出生月份
     NSInteger birthYear;// 出生年份
     NSString *moblieNumber;// 手机号
+    NSString *intCareerStatus;// 求职状态
 }
 @property (nonatomic , strong) UILabel *tipLab;//
 @property (nonatomic , strong) UITableView *tableview;
@@ -48,13 +49,13 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 @implementation OneMinuteCVViewController
 - (instancetype)init{
     if (self = [super init]) {
-        self.title = @"一分钟填写简历";
-        self.view.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"一分钟填写简历";
+    self.view.backgroundColor = [UIColor whiteColor];
     
     // 接口参数
     self.dataParam = [NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -75,13 +76,13 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
                       @"", @"intCareerStatus",//求职状态
                       PAMAINID, @"paMainID",
                       [USER_DEFAULT objectForKey:@"paMainCode"], @"strCode",
-                      @"0", @"intCvMainID",
+                      self.intCvMainID, @"intCvMainID",
                       @"0", @"EducationID",// 教育背景id
                       @"", @"RelatedWorkYears",// 工作经验
                       nil];
     [self.view addSubview:self.tipLab];
     [self.view addSubview:self.tableview];
-    [self setupAddHuaTongButton];// 语音输入按钮
+//    [self setupAddHuaTongButton];// 语音输入按钮
     [self getPaMain];
 }
 
@@ -135,6 +136,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
         // 参数字典添加姓名
         [self.dataParam setValue:dataDict[@"Name"] forKey:@"Name"];
         // 参数字典添加求职状态
+        intCareerStatus = dataDict[@"dcCareerStatus"];
         [self.dataParam setValue:dataDict[@"dcCareerStatus"] forKey:@"intCareerStatus"];
         NSString *birthStr = dataDict[@"BirthDay"];
         // 参数字典添加出生年月
@@ -161,7 +163,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
             [self createDataArr:dataDict];
             [self.tableview reloadData];
             [self startLocation];
-//            [self setupAddHuaTongButton];
+            [self setupAddHuaTongButton];
         }
         
     } failureBlock:^(NSInteger errCode, NSString *msg) {
@@ -181,7 +183,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
         // 参数字典添加位置
         [self.dataParam setValue: [arr firstObject] forKey:@"JobPlace"];
         [self.tableview reloadData];
-//        [self setupAddHuaTongButton];
+        [self setupAddHuaTongButton];
     
     } failureBlock:^(NSInteger errCode, NSString *msg) {
         DLog(@"");
@@ -190,9 +192,10 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 }
 #pragma mark - 话筒Button
 - (void)setupAddHuaTongButton{
-    
+    CGFloat cell_H = 45;
     SpeechButton *speechBtn = [SpeechButton new];
     speechBtn.frame = CGRectMake(SCREEN_WIDTH - 200 - 10, (SCREEN_HEIGHT - HEIGHT_STATUS_NAV - 49) * 0.50, 195, 50);
+    speechBtn.center = CGPointMake(speechBtn.center.x, (self.dataArr.count - 1)*cell_H + 35 + cell_H/2);
     [self.view addSubview:speechBtn];
     speechBtn.speechInput = ^{
         SpeechViewController *svc = [[SpeechViewController alloc]init];
@@ -228,7 +231,8 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 
 - (UITableView *)tableview{
     if (!_tableview) {
-        _tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, VIEW_BY(self.tipLab), SCREEN_WIDTH, SCREEN_HEIGHT - VIEW_BY(self.tipLab)) style:UITableViewStylePlain];
+        _tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, VIEW_BY(self.tipLab), SCREEN_WIDTH, SCREEN_HEIGHT - VIEW_BY(self.tipLab) - 30) style:UITableViewStylePlain];
+        //(0, VIEW_BY(self.tipLab), SCREEN_WIDTH, SCREEN_HEIGHT - VIEW_BY(self.tipLab)
         _tableview.tableFooterView = self.footView;
         _tableview.delegate = self;
         _tableview.dataSource = self;
@@ -281,7 +285,9 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArr.count;
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 45;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     OnMinuteSingleCell *cell = [[OnMinuteSingleCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil data:self.dataArr[indexPath.row] viewController:self];
@@ -408,6 +414,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
         birthYear = [dataYear[@"id"] integerValue];// 赋值给年份变量
         [self.dataParam setValue:[NSString stringWithFormat:@"%@%@%@", [dataYear objectForKey:@"id"], ([[dataMonth objectForKey:@"id"] length] == 1 ? @"0": @""), [dataMonth objectForKey:@"id"]] forKey:@"Birthday"];
         [self resetDataValue:[NSString stringWithFormat:@"%@%@",dataYear[@"value"],dataMonth[@"value"]] key:@"出生年月"];
+        [self calulateRelatedWorkYears];
         
     }else if(popView.tag == WKPopViewTag_Education){// 学历
        
@@ -423,7 +430,15 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
             
             [self.dataParam setValue:@"无" forKey:@"MajorName"];
             [self resetDataValue:@"无" key:@"专业名称"];
+        }else{
+            NSString *majorStr = self.dataParam[@"MajorID"];
+            NSString *majorNameStr = self.dataParam[@"MajorName"];
+            if ([majorStr isEqualToString:@"1106"] || [majorNameStr isEqualToString:@"无"]) {
+                [self resetDataValue:@"" key:@"专业类别"];
+                [self resetDataValue:@"" key:@"专业名称"];
+            }
         }
+        [self calulateRelatedWorkYears];
         
     }else if (popView.tag == WKPopViewTag_MajorID){// 专业类别
         NSDictionary *data = [arraySelect objectAtIndex:1];
@@ -434,6 +449,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
         NSDictionary *dataRegion = [arraySelect objectAtIndex:(arraySelect.count - 1)];
         [self.dataParam setValue:[dataRegion objectForKey:@"id"] forKey:@"JobPlace"];
         [self resetDataValue:[dataRegion objectForKey:@"value"] key:@"期望工作地点"];
+        [self matchSalary];
         
     }else if (popView.tag == WKPopViewTag_Salary){// 期望月薪
         NSDictionary *data = [arraySelect objectAtIndex:0];
@@ -551,6 +567,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
         [self.dataParam setValue:[arraySelect objectAtIndex:0] forKey:@"JobType"];
         [self resetDataValue:[arraySelect objectAtIndex:1] key:@"期望职位类别"];
     }
+    [self matchSalary];
     [self.tableview reloadData];
 }
 
@@ -586,6 +603,13 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 
 #pragma mark - 计算工作经验
 - (void)calulateRelatedWorkYears{
+    
+    NSString *birthStr = self.dataParam[@"Birthday"];
+    NSString *educationSrr = self.dataParam[@"Education"];
+    if(!(birthStr.length && educationSrr.length)){
+        return;
+    }
+    
     // 获取现在年份
     NSDate *date = [NSDate date];
     NSDateFormatter *forMatter = [[NSDateFormatter alloc] init];
@@ -599,6 +623,27 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
     // 计算工作经验
     NSInteger relatedWorkYears = nowYear + educationNum - birthMonthNum - birthYear;
     [self.dataParam setValue:[NSString stringWithFormat:@"%ld",(long)relatedWorkYears] forKey:@"RelatedWorkYears"];
+    if (relatedWorkYears == 0) {//应届生
+        [self.dataParam setValue:@"4" forKey:@"intCareerStatus"];
+        [self resetDataValue:@"应届毕业生" key:@"求职状态"];
+        
+    }else if(relatedWorkYears > 0 && relatedWorkYears < 50){
+        [self.dataParam setValue:intCareerStatus forKey:@"intCareerStatus"];
+        NSArray *careerStatusArr = [Common getCareerStatus];
+        NSString *careerStatusStr = @"";
+        for (NSDictionary *dic in careerStatusArr) {
+            if ([dic[@"id"] isEqualToString:intCareerStatus]) {
+                careerStatusStr = dic[@"value"];
+                [self resetDataValue:dic[@"value"] key:@"求职状态"];
+                break;
+            }
+        }
+    }else if(relatedWorkYears<0){
+         [self.dataParam setValue:@"0" forKey:@"RelatedWorkYears"];
+    }else{
+        [self.dataParam setValue:@"5" forKey:@"RelatedWorkYears"];
+    }
+    [self.tableview reloadData];
 }
 
 #pragma mark - 保存
@@ -624,6 +669,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
                 if (self.pageType == PageType_Login) {
                     self.completeOneCV(@"一分钟简历创建成功");
                     [self.navigationController popViewControllerAnimated:NO];
+                    [self dismissViewControllerAnimated:YES completion:nil];
                     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_GETJOBLISTBYSEARCH object:nil];
                     self.tabBarController.selectedIndex = 0;// 跳转至“职位”页面
                    
@@ -649,4 +695,41 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
     }];
 }
 
+#pragma mark - 匹配薪资
+- (void)matchSalary{
+    NSString *regionID = self.dataParam[@"JobPlace"];
+    NSString *jobTypeID = self.dataParam[@"JobType"];
+    if (regionID && jobTypeID) {
+        NSArray *jobTypeArr = [jobTypeID componentsSeparatedByString:@" "];
+        if (jobTypeArr.count > 0) {
+            jobTypeID = [jobTypeArr firstObject];
+        }
+        NSDictionary *paramDict = @{@"RegionID":regionID,@"JobTypeID":jobTypeID};
+        [AFNManager requestWithMethod:POST ParamDict:paramDict url:URL_GETSALARYJOBSTRING tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+            DLog(@"");
+            NSString *resultStr = (NSString *)dataDict;
+            if (resultStr == nil) {
+                return ;
+            }
+            NSArray *resultArr = [resultStr componentsSeparatedByString:@","];
+            if (resultArr.count > 0) {
+                NSString *salaryId = [resultArr firstObject];
+                NSArray *salaryValue = [resultArr lastObject];
+                [self.dataParam setValue:salaryId forKey:@"Salary"];
+                
+                NSString *negotiableStr = self.dataParam[@"Negotiable"];
+                if (negotiableStr == nil || negotiableStr.length == 0) {
+                    negotiableStr = @"1";
+                    [self.dataParam setValue:negotiableStr forKey:@"Negotiable"];
+                }
+                
+                [self resetDataValue:[NSString stringWithFormat:@"%@ %@", salaryValue, ([negotiableStr isEqualToString:@"0"] ? @"不可面议" : @"可面议")] key:@"期望月薪"];
+                [self.tableview reloadData];
+                
+            }
+        } failureBlock:^(NSInteger errCode, NSString *msg) {
+            DLog(@"");
+        }];
+    }
+}
 @end

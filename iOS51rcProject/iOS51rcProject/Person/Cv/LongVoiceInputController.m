@@ -62,7 +62,7 @@
     self.speakBtn = [SpeakLoadingBtn new];
     [self.view addSubview:self.speakBtn];
     self.speakBtn.sd_layout
-    .bottomSpaceToView(self.view, 0)
+    .bottomSpaceToView(self.view, 10)
     .centerXEqualToView(self.view)
     .widthIs(200)
     .heightIs(80);

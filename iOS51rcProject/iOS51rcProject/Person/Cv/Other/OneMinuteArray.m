@@ -37,11 +37,11 @@
     // 获取日期信息
     NSString *birthStr = dataDict[@"BirthDay"];
     NSString *birthDayStr = @"";
-    if (birthStr.length > 0) {
-        NSRange range1 = NSMakeRange(0, 4);
-        NSRange range2 = NSMakeRange(4, 2);
-        birthDayStr = [NSString stringWithFormat:@"%@年%@月",[birthStr substringWithRange:range1],[birthStr substringWithRange:range2] ];
-    }
+//    if (birthStr.length > 0) {
+//        NSRange range1 = NSMakeRange(0, 4);
+//        NSRange range2 = NSMakeRange(4, 2);
+//        birthDayStr = [NSString stringWithFormat:@"%@年%@月",[birthStr substringWithRange:range1],[birthStr substringWithRange:range2] ];
+//    }
     // 获取求职状态id 转成文字
     NSArray *careerStatusArr = [Common getCareerStatus];
     NSString *careerStatusStr = @"";

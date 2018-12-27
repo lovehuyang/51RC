@@ -917,6 +917,10 @@
  */
 + (NSString *)translatNum:(NSString *)chnStr{
 
+    if ([Common deptNumInputShouldNumber:chnStr]) {
+        return chnStr;
+    }
+    
     //测试数据
     NSDictionary *chnNumChar = @{@"零":@0,@"一":@1,@"二":@2,@"两":@2,@"三":@3,@"四":@4,@"五":@5,@"六":@6,@"七":@7,@"八":@8,@"九":@9,@"十":@10,@"百":@100,@"千":@1000,@"万":@10000,@"亿":@100000000};
     //遍历字符串用数组接收单个字符
@@ -976,6 +980,24 @@
     return totalStr;
 }
 
+    
+/**
+ 判断字符串是否全是数字
+
+ @param str 字符串
+ @return 结果
+ */
++ (BOOL) deptNumInputShouldNumber:(NSString *)str{
+    if (str.length == 0) {
+        return NO;
+    }
+    NSString *regex = @"[0-9]*";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
+    if ([pred evaluateWithObject:str]) {
+        return YES;
+    }
+    return NO;
+}
 /**
  声音识别日期转阿拉伯数字
  

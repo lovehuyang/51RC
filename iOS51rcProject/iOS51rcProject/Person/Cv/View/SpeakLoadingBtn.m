@@ -32,7 +32,7 @@
     .topSpaceToView(self, 0);
     _tipLab.textAlignment = NSTextAlignmentCenter;
     _tipLab.text = @"点击说话";
-    _tipLab.font =  SMALLERFONT;
+    _tipLab.font =  DEFAULTFONT;
     _tipLab.textColor = NAVBARCOLOR;
     
     // 说话按钮
@@ -41,8 +41,8 @@
     _speakBtn.sd_layout
     .centerXEqualToView(_tipLab)
     .topSpaceToView(_tipLab, 0)
-    .widthIs(40)
-    .heightIs(46.3);
+    .widthIs(40*1.2)// 1.1575
+    .heightIs(46.3*1.2);
     [_speakBtn setImage:[UIImage imageNamed:@"ico_cvlist_startvoice"] forState:UIControlStateNormal];
     [_speakBtn setImage:[UIImage imageNamed:@"ico_cvlist_stopvoice"] forState:UIControlStateSelected];
     [_speakBtn addTarget:self action:@selector(speakBtnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -53,7 +53,7 @@
     [self addSubview:_leftImg];
     _leftImg.sd_layout
     .rightSpaceToView(_speakBtn, 5)
-    .centerYIs(42.5)
+    .centerYIs(42.5*1.2)
     .widthIs(32)
     .heightIs(8);
     NSMutableArray *leftImgArr = [NSMutableArray array];
@@ -90,9 +90,9 @@
     if(self.speakBtn.selected){// 说话中
         self.tipLab.hidden = YES;
         self.speakBtn.sd_layout
-        .topSpaceToView(_tipLab, 6.3)
-        .widthIs(40)
-        .heightIs(40);
+        .topSpaceToView(_tipLab, 6.3*1.2)
+        .widthIs(40*1.2)
+        .heightIs(40*1.2);
         [_leftImg startAnimating];
         [_rightImg startAnimating];
         self.speakStatus(YES);
@@ -101,8 +101,8 @@
         self.tipLab.text = @"点击继续说话";
         self.speakBtn.sd_layout
         .topSpaceToView(_tipLab, 0)
-        .widthIs(40)
-        .heightIs(46.3);
+        .widthIs(40*1.2)
+        .heightIs(46.3*1.2);
         [_leftImg stopAnimating];
         [_rightImg stopAnimating];
         self.speakStatus(NO);

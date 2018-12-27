@@ -7,9 +7,10 @@
 //
 
 #import "WKViewController.h"
+@class WKButton;
 
 @interface PaLoginViewController : WKViewController
-
+@property (strong, nonatomic) IBOutlet WKButton *loginBtn;
 @property (strong, nonatomic) IBOutlet UIView *textFieldBgView;
 @property (strong, nonatomic) IBOutlet UIButton *getSecurityBtn;
 @property (strong, nonatomic) IBOutlet UITextField *txtUsername;

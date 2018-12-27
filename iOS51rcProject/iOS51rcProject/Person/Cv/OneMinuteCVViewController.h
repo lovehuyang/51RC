@@ -19,6 +19,7 @@ typedef enum _PageType {
 @interface OneMinuteCVViewController : RCRootViewController
 
 @property (nonatomic , assign) PageType  pageType;
+@property (nonatomic , copy) NSString *intCvMainID;//一分钟简历的id（无简历时id = 0，有简历时id为不完整简历的id）
 @property (nonatomic , copy) void (^completeOneCV)(NSString * tempStr);// 完成一分钟简历
 
 @end

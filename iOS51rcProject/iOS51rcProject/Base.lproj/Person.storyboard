@@ -1650,14 +1650,14 @@
                                     <action selector="agreeClick:" destination="l6A-yx-5Vr" eventType="touchUpInside" id="X4t-u2-7KF"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CT8-wn-W5g">
-                                <rect key="frame" x="219" y="460" width="75" height="25"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CT8-wn-W5g">
+                                <rect key="frame" x="26" y="460" width="100" height="25"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="75" id="Ur3-QQ-RFq"/>
+                                    <constraint firstAttribute="width" constant="100" id="Ur3-QQ-RFq"/>
                                     <constraint firstAttribute="height" constant="25" id="yua-sn-Cb8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <state key="normal" title="验证码登录">
+                                <state key="normal" title="验证码登录" image="duanxin_icon.png">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1665,7 +1665,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w5N-5H-178">
-                                <rect key="frame" x="76" y="390" width="168" height="30"/>
+                                <rect key="frame" x="76" y="505" width="168" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="lt1-Jr-72m"/>
                                 </constraints>
@@ -1692,7 +1692,7 @@
                             <constraint firstItem="gbv-bs-aqG" firstAttribute="top" secondItem="HhZ-kP-Zj0" secondAttribute="bottom" constant="30" id="Nsk-ab-vIK"/>
                             <constraint firstItem="y2I-PI-hbf" firstAttribute="leading" secondItem="s51-pk-YOO" secondAttribute="trailing" constant="10" id="Pce-rL-016"/>
                             <constraint firstItem="BvI-SG-EAg" firstAttribute="top" secondItem="tKh-WR-CHW" secondAttribute="bottom" constant="15" id="RSs-Ld-2T5"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="CT8-wn-W5g" secondAttribute="trailing" constant="10" id="Ydg-IF-3ta"/>
+                            <constraint firstItem="CT8-wn-W5g" firstAttribute="leading" secondItem="8dW-RE-Tba" secondAttribute="leadingMargin" id="ZaM-fJ-vvE"/>
                             <constraint firstItem="gbv-bs-aqG" firstAttribute="centerX" secondItem="8dW-RE-Tba" secondAttribute="centerX" id="Zr5-6o-4YG"/>
                             <constraint firstItem="cG0-dR-NMN" firstAttribute="leading" secondItem="8dW-RE-Tba" secondAttribute="leading" id="jEj-PE-2yQ"/>
                             <constraint firstItem="6XN-sJ-uk4" firstAttribute="leading" secondItem="8dW-RE-Tba" secondAttribute="leading" id="jzf-vT-MBz"/>
@@ -1702,7 +1702,7 @@
                             <constraint firstItem="s51-pk-YOO" firstAttribute="leading" secondItem="8dW-RE-Tba" secondAttribute="leadingMargin" id="od2-EN-BBu"/>
                             <constraint firstAttribute="trailing" secondItem="edS-Nf-TJ0" secondAttribute="trailing" constant="20" id="peg-Ec-Wd6"/>
                             <constraint firstItem="CT8-wn-W5g" firstAttribute="top" secondItem="BvI-SG-EAg" secondAttribute="bottom" constant="90" id="pvl-AO-RB4"/>
-                            <constraint firstItem="w5N-5H-178" firstAttribute="top" secondItem="BvI-SG-EAg" secondAttribute="bottom" constant="20" id="t5F-hH-B71"/>
+                            <constraint firstItem="w5N-5H-178" firstAttribute="top" secondItem="BvI-SG-EAg" secondAttribute="bottom" constant="135" id="t5F-hH-B71"/>
                             <constraint firstItem="cG0-dR-NMN" firstAttribute="top" secondItem="8dW-RE-Tba" secondAttribute="top" constant="180" id="ugg-LJ-Ugv"/>
                             <constraint firstItem="y2I-PI-hbf" firstAttribute="leading" secondItem="s51-pk-YOO" secondAttribute="trailing" constant="10" id="vwH-OQ-OxP"/>
                         </constraints>
@@ -1716,6 +1716,7 @@
                         <outlet property="btnOneMinute" destination="Pdi-li-heJ" id="c8I-36-iB0"/>
                         <outlet property="btnPassword" destination="1Iz-Q2-YHi" id="ZWe-ai-bml"/>
                         <outlet property="getSecurityBtn" destination="JPr-5f-TWw" id="Kq0-ms-pgg"/>
+                        <outlet property="loginBtn" destination="BvI-SG-EAg" id="U2x-KW-aqf"/>
                         <outlet property="passwordBtn" destination="1Iz-Q2-YHi" id="2OS-dH-G8e"/>
                         <outlet property="textFieldBgView" destination="cG0-dR-NMN" id="OZV-ZY-T5u"/>
                         <outlet property="txtPassword" destination="7dL-XT-dia" id="hqq-Sq-sG4"/>
@@ -1964,7 +1965,7 @@
                             <constraint firstItem="zZf-YF-jOr" firstAttribute="leading" secondItem="YCX-9e-PSb" secondAttribute="trailing" constant="10" id="JC4-hr-7E6"/>
                             <constraint firstItem="5OB-49-Rsk" firstAttribute="leading" secondItem="37A-xf-HS1" secondAttribute="leading" constant="20" id="NgM-U7-dn0"/>
                             <constraint firstItem="zZf-YF-jOr" firstAttribute="top" secondItem="3Am-HW-zdm" secondAttribute="bottom" constant="10" id="RwP-5s-hSW"/>
-                            <constraint firstItem="RhQ-sZ-XgI" firstAttribute="top" secondItem="5OB-49-Rsk" secondAttribute="bottom" constant="20" id="Wdp-wL-drv"/>
+                            <constraint firstItem="RhQ-sZ-XgI" firstAttribute="top" secondItem="5OB-49-Rsk" secondAttribute="bottom" constant="35" id="Wdp-wL-drv"/>
                             <constraint firstItem="YCX-9e-PSb" firstAttribute="top" secondItem="3Am-HW-zdm" secondAttribute="bottom" constant="15" id="XcH-RY-hIr"/>
                             <constraint firstItem="3Am-HW-zdm" firstAttribute="leading" secondItem="37A-xf-HS1" secondAttribute="leading" id="Z7X-Cl-nSa"/>
                             <constraint firstItem="3Am-HW-zdm" firstAttribute="top" secondItem="37A-xf-HS1" secondAttribute="top" constant="100" id="drK-o0-A0h"/>
@@ -3734,6 +3735,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="duanxin_icon.png" width="25" height="25"/>
         <image name="img_arrowright.png" width="18" height="33"/>
         <image name="img_checksmall1.png" width="52" height="52"/>
         <image name="img_checksmall2.png" width="52" height="52"/>

@@ -9,7 +9,6 @@
 #import "OnMinuteSingleCell.h"
 #import "OneMinuteModel.h"
 
-
 @interface OnMinuteSingleCell()<UITextFieldDelegate>
 @property (nonatomic , strong) UIButton *getSecurityBtn;// 获取验证码的button
 @property (nonatomic , strong) UIViewController *vc;

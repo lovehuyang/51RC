@@ -41,7 +41,7 @@
     [titleView addSubview:replyRateLab];
     replyRateLab.sd_layout
     .rightSpaceToView(titleView, 15)
-    .widthIs(80)
+    .widthIs(100)
     .topEqualToView(titleView)
     .heightRatioToView(titleView, 1);
     replyRateLab.textAlignment = NSTextAlignmentRight;
@@ -50,7 +50,7 @@
 
     //
     MenuButton *button = [[MenuButton alloc]initWithFrame:CGRectMake(15, 0, self.frame.size.width, VIEW_H(titleView))];
-    [button setTitle:@"菜单" forState:UIControlStateNormal];
+    [button setTitle:@"全部职位" forState:UIControlStateNormal];
     CGSize btnSize = [Common sizeWithText:button.titleLabel.text font:DEFAULTFONT maxSize:CGSizeMake(SCREEN_WIDTH, button.frame.size.height)];
     button.frame = CGRectMake(20, 0, btnSize.width + 20, button.frame.size.height);
     [button addTarget:self action:@selector(menuBtnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -62,6 +62,10 @@
     _titleArr = titleArr;
     [self.menuBtn setTitle:[_titleArr firstObject] forState:UIControlStateNormal];
 }
+- (void)setTitleStr:(NSString *)titleStr{
+    [self.menuBtn setTitle:titleStr forState:UIControlStateNormal];
+    [self updateMenuBtnStatus:self.menuBtn];
+}
 
 - (void)setReplyRate:(NSString *)replyRate{
     _replyRate = replyRate;
@@ -70,9 +74,7 @@
 }
 
 - (void)menuBtnClick{
-    [self.menuBtn setTitle:@"菜单123" forState:UIControlStateNormal];
     self.menuClick(self.menuBtn.titleLabel.text);
-    [self updateMenuBtnStatus:self.menuBtn];
 }
 
 #pragma mark - 更新菜单栏按钮显示

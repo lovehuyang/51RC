@@ -21,7 +21,7 @@
 #import "PullDownMenu.h"
 #import "OnlineLab.h"
 
-static const CGFloat Menu_H =  0;// 菜单栏的高度//35
+static const CGFloat Menu_H =  35;// 菜单栏的高度//35
 
 @interface ApplyCvViewController ()<UITableViewDelegate, UITableViewDataSource, NetWebServiceRequestDelegate, WKPopViewDelegate, CvOperateDelegate>
 {
@@ -35,6 +35,8 @@ static const CGFloat Menu_H =  0;// 菜单栏的高度//35
 @property (nonatomic, strong) NSDictionary *cpData;
 @property (nonatomic, strong) WKPopView *replyPop;
 @property (nonatomic, strong) CvOperate *operate;
+@property (nonatomic, strong) NSMutableArray *jobListIdArr;//
+@property (nonatomic, strong) NSMutableArray *jobListNameArr;//
 @property NSInteger page;
 
 @end
@@ -43,17 +45,8 @@ static const CGFloat Menu_H =  0;// 菜单栏的高度//35
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     self.title = @"应聘的简历";
     hideMenu = YES;
-//    PullDownMenu *pulldownMenu = [[PullDownMenu alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, Menu_H) controller:self Title:@[@"",@""] replyRate:@""];
-//    [self.view addSubview:pulldownMenu];
-//    self.pulldownMenu = pulldownMenu;
-//    __weak typeof(self)weakself = self;
-//    self.pulldownMenu.menuClick = ^(NSString *title) {
-//        hideMenu = !hideMenu;
-//        [weakself setMenuTabViewStatus];
-//    };
     
     if (self.jobId == nil) {
         self.jobId = @"0";
@@ -75,16 +68,17 @@ static const CGFloat Menu_H =  0;// 菜单栏的高度//35
         [self getData];
     }];
     [self.view addSubview:self.tableView];
-    [self.view addSubview:self.menuTableview];
     self.arrData = [[NSMutableArray alloc] init];
+    
+    [self getCpJobList];
 }
 #pragma mark - 懒加载
 - (UITableView *)menuTableview{
     if (!_menuTableview) {
-        _menuTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, VIEW_BY(self.pulldownMenu), SCREEN_WIDTH, VIEW_H(self.view) - VIEW_H(self.pulldownMenu)) style:UITableViewStylePlain];
+        _menuTableview = [[UITableView alloc]initWithFrame:CGRectMake(0, Menu_H, SCREEN_WIDTH, VIEW_H(self.view) - VIEW_H(self.pulldownMenu)) style:UITableViewStylePlain];
         _menuTableview.delegate = self;
         _menuTableview.dataSource = self;
-        UIView *footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 500)];
+        UIView *footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 300)];
         _menuTableview.backgroundColor = UIColorWithRGBA(1, 1, 1, 0.5);
         _menuTableview.tableFooterView = footView;
         _menuTableview.hidden = hideMenu;
@@ -93,7 +87,18 @@ static const CGFloat Menu_H =  0;// 菜单栏的高度//35
     }
     return _menuTableview;
 }
-
+- (NSMutableArray *)jobListIdArr{
+    if (!_jobListIdArr) {
+        _jobListIdArr = [NSMutableArray array];
+    }
+    return _jobListIdArr;
+}
+- (NSMutableArray *)jobListNameArr{
+    if (!_jobListNameArr) {
+        _jobListNameArr = [NSMutableArray array];
+    }
+    return _jobListNameArr;
+}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.page = 1;
@@ -177,7 +182,7 @@ static const CGFloat Menu_H =  0;// 菜单栏的高度//35
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView == self.menuTableview) {
-        return 4;
+        return self.jobListNameArr.count;
     }
     return 1;
 }
@@ -202,7 +207,7 @@ static const CGFloat Menu_H =  0;// 菜单栏的高度//35
     // 下拉菜单的cell
     if (tableView == self.menuTableview) {
         UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        cell.textLabel.text = @"123456";
+        cell.textLabel.text = self.jobListNameArr[indexPath.row];
         cell.textLabel.font = DEFAULTFONT;
         cell.backgroundColor = [UIColor whiteColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -318,7 +323,7 @@ static const CGFloat Menu_H =  0;// 菜单栏的高度//35
         [btnReply setTitle:@"符合要求" forState:UIControlStateNormal];
     }
     else if ([[data objectForKey:@"Reply"] isEqualToString:@"5"]) {
-        [btnReply setTitle:@"储备（自动）" forState:UIControlStateNormal];
+        [btnReply setTitle:@"储备(自动)" forState:UIControlStateNormal];
     }
     else { // 2
         [btnReply setTitle:@"储备" forState:UIControlStateNormal];
@@ -342,8 +347,12 @@ static const CGFloat Menu_H =  0;// 菜单栏的高度//35
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.menuTableview) {
+        self.jobId = self.jobListIdArr[indexPath.row];
+        self.pulldownMenu.titleStr = self.jobListNameArr[indexPath.row];
+        [self.tableView.mj_header beginRefreshing];
         hideMenu = YES;
         [self setMenuTabViewStatus];
+        
         return;
     }
     
@@ -447,7 +456,39 @@ static const CGFloat Menu_H =  0;// 菜单栏的高度//35
         self.menuTableview.alpha = 1;
         self.menuTableview.hidden = hideMenu;
     }
+}
+
+- (void)getCpJobList{
+    NSDictionary *paramDict = [NSDictionary dictionaryWithObjectsAndKeys:CAMAINID, @"caMainID", CAMAINCODE, @"Code", [NSString stringWithFormat:@"%ld", self.page], @"intPageNo", @"4", @"intJobStatus", nil];
+    [AFNManager requestCpWithMethod:POST ParamDict:paramDict url:@"GetCpJobList" tableName:@"Table" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        DLog(@"");
+        if (requestData.count>0) {
+            [self.jobListNameArr addObject:@"全部职位"];
+            [self.jobListIdArr addObject:@"0"];
+            for (NSDictionary *dic in requestData) {
+                [self.jobListNameArr addObject:dic[@"Name"]];
+                [self.jobListIdArr addObject:dic[@"ID"]];
+            }
+        }
+        [self addPopMenue];
+        
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        DLog(@"");
+    }];
+}
+
+- (void)addPopMenue{
     
+    PullDownMenu *pulldownMenu = [[PullDownMenu alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, Menu_H) controller:self Title:@[@"安抚",@"阿斯蒂芬"] replyRate:@""];
+    [self.view addSubview:pulldownMenu];
+    self.pulldownMenu = pulldownMenu;
+    __weak typeof(self)weakself = self;
+    self.pulldownMenu.menuClick = ^(NSString *title) {
+        hideMenu = !hideMenu;
+        [weakself setMenuTabViewStatus];
+    };
+    
+    [self.view addSubview:self.menuTableview];
 }
 @end
 

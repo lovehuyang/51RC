@@ -28,6 +28,8 @@
 #import "OptionView.h"
 #import "AFNManager.h"
 #import "OneMinuteCVViewController.h"
+#import "WKNavigationController.h"
+#import "AlertView.h"
 
 @interface PaIndexViewController ()<UIScrollViewDelegate, NetWebServiceRequestDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MLImageCropDelegate, WKPopViewDelegate>
 
@@ -111,7 +113,7 @@
     [optionSeparate4 setBackgroundColor:SEPARATECOLOR];
     [self.scrollView addSubview:optionSeparate4];
     
-    self.heightForScroll = VIEW_BY(optionView);
+    self.heightForScroll = VIEW_BY(optionSeparate4);
     
 //    [self otherButton:0];// 招聘会
 //    [self otherButton:1];// 查工资
@@ -406,7 +408,7 @@
     }
     else if (button.tag == 2) {
         url = @"/personal/sys/mobilecer";
-        title = @"修改手机号";
+        title = button.titleLabel.text;
     }
     else if (button.tag == 3) {
         url = @"/personal/sys/yourfood";
@@ -444,6 +446,7 @@
 }
 #pragma mark - optionView的点击事件
 - (void)optionClick:(NSString *)optionTitle{
+
     if([optionTitle isEqualToString:@"招聘会"]){
         RecruitmentViewController *recruitmentCtrl = [[RecruitmentViewController alloc] init];
         recruitmentCtrl.title = @"招聘会";
@@ -568,15 +571,17 @@
         if(requestData.count == 0){// 一分钟填写简历
             OneMinuteCVViewController *oneCV = [[OneMinuteCVViewController alloc]init];
             oneCV.pageType = PageType_Login;
+            oneCV.intCvMainID = @"0";
             oneCV.completeOneCV = ^(NSString *tempStr) {
                 DLog(@"%@",tempStr);
                 //
                 [self.tabBarController setSelectedIndex:0];
             };
-            [self.navigationController pushViewController:oneCV animated:NO];
+            WKNavigationController *nav = [[WKNavigationController alloc]initWithRootViewController:oneCV];
+            [self presentViewController:nav animated:YES completion:nil];
             return;
             
-        }else{
+        }else if(requestData.count > 0){
             BOOL isValid = NO;
             for (NSDictionary *dict in requestData) {
                 BOOL validBool = [dict[@"Valid"] boolValue];
@@ -584,15 +589,20 @@
             }
             if (!isValid) {
                 //一分钟填写简历
+                NSDictionary *dict = [requestData firstObject];
                 OneMinuteCVViewController *oneCV = [[OneMinuteCVViewController alloc]init];
+                oneCV.intCvMainID = dict[@"ID"];
                 oneCV.completeOneCV = ^(NSString *tempStr) {
                    self.tabBarController.selectedIndex = 0;
                 };
                 
-                [self.navigationController pushViewController:oneCV animated:NO];
+                WKNavigationController *nav = [[WKNavigationController alloc]initWithRootViewController:oneCV];
+                [self presentViewController:nav animated:YES completion:nil];
                 
                 return;
             }
+        }else{
+            [self paMainId];// 判断手机号是否认证了
         }
     
     } failureBlock:^(NSInteger errCode, NSString *msg) {
@@ -601,4 +611,36 @@
     
 }
 
+- (void)paMainId{
+    NSDictionary *parmaDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", nil];
+    [AFNManager requestWithMethod:POST ParamDict:parmaDict url:URL_GETPAMAIN tableName:@"Table" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        
+        NSString *mobileVerifyDate = dataDict[@"MobileVerifyDate"];
+        
+        
+        if (mobileVerifyDate.length > 0) {// 已经认证
+            
+            
+        }else{// 手机号未通过认证
+            
+            AlertView *alertView = [[AlertView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+            __weak __typeof(alertView)WeakAlertView = alertView;
+            [WeakAlertView initWithTitle:@"认证手机号" content:@"快人一步，让HR迅速找到你！" btnTitleArr:@[@"残忍拒绝",@"去认证"] canDismiss:YES];
+            WeakAlertView.clickButtonBlock = ^(UIButton *button) {
+                if (button.tag == 101) {
+                    if (button.tag == 101) {
+                        UIButton *tempBtn = [UIButton new];
+                        tempBtn.tag = 2;
+                        [self accountClick:tempBtn];
+                    }
+                }
+            };
+            [WeakAlertView show];
+            
+        }
+        
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        [SVProgressHUD dismiss];
+    }];
+}
 @end

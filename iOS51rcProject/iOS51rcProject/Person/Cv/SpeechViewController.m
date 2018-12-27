@@ -105,10 +105,18 @@
     self.errorPlayer = nil;
     NSString *path = [[NSBundle mainBundle] pathForResource:vedioName ofType:@"mp3"];
     NSURL *url = [NSURL fileURLWithPath:path];
+    // 启动扬声器
+    AVAudioSession *audioSession=[AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [audioSession setActive:YES error:nil];
     self.errorPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:nil];
     self.errorPlayer.delegate = self;
     [self.errorPlayer prepareToPlay];
     [self.errorPlayer play];
+    
+    if([vedioName isEqualToString:@"“013”副本"]){
+        [self.asrEventManager sendCommand:BDS_ASR_CMD_CANCEL];
+    }
 }
 
 #pragma mark - AVAudioPlayerDelegate
@@ -413,18 +421,95 @@
         }
         
     }else if ([model.titleStr containsString:@"出生年"]){
+        if (model.recognationStr.length<=4) {
+            return;
+        }
+        
         NSString *year = @"";
         NSString *month = @"";
-        NSString *birth = [Common translatBirth:model.recognationStr];
+        
+        if(![model.recognationStr containsString:@"年"] && model.recognationStr.length> 4){// 不包含“年”字的语音
+            year = [model.recognationStr substringWithRange:NSMakeRange(0, 4)];
+            NSString *tempMonth = [model.recognationStr substringWithRange:NSMakeRange(year.length, model.recognationStr.length - year.length)];
+            if (tempMonth.length == 4) {
+                if([tempMonth hasPrefix:@"0"]){
+                    month = [tempMonth substringWithRange:NSMakeRange(1, 1)];
+                }else{
+                    NSString *tempMonthStr = [tempMonth substringWithRange:NSMakeRange(0, 2)];
+                    if ([tempMonthStr integerValue] > 12) {
+                        month = [tempMonth substringWithRange:NSMakeRange(0, 1)];
+                    }
+                }
+            
+            }else if(tempMonth.length >2){
+                if ([tempMonth hasPrefix:@"0"]) {
+                    month = [NSString stringWithFormat:@"%@",[tempMonth substringWithRange:NSMakeRange(1, 1)]];
+                }else{
+                    NSString *tempMonthStr = [tempMonth substringWithRange:NSMakeRange(0, 2)];
+                    if ([tempMonthStr integerValue] > 12) {
+                        month = [tempMonth substringWithRange:NSMakeRange(0, 1)];
+                    }else{
+                        month = [NSString stringWithFormat:@"%@",tempMonthStr];
+                    }
+                }
+            }else if (tempMonth.length == 2){
+                if ([tempMonth hasPrefix:@"0"]) {
+                    month = [tempMonth substringWithRange:NSMakeRange(1, 1)];
+                }else{
+                    if([tempMonth integerValue]> 12){
+                        month = [tempMonth substringWithRange:NSMakeRange(0, 1)];
+                    }else{
+                       month = [NSString stringWithFormat:@"%@",tempMonth];
+                    }
+                }
+            }else{
+                month = [NSString stringWithFormat:@"%@",tempMonth];
+            }
+            DLog(@"出生年：%@  月：%@",year,month);
+            if(month.length == 1){
+                month = [NSString stringWithFormat:@"0%@",month];
+            }
+            self.speakRestParam(@"Birthday", [NSString stringWithFormat:@"%@%@",year, month]);
+            NSDictionary *dict = @{[self transformToLastPageKey:model.titleStr]:[NSString stringWithFormat:@"%@年%@月",year, month]};
+            self.speakContentBlock(dict);
+            return;
+        }
+//        NSString *birth = [Common translatBirth:model.recognationStr];
+        NSString *birth = model.recognationStr;
         NSArray *yearArr = [birth componentsSeparatedByString:@"年"];
+        
         if (yearArr.count > 0) {
+            
             year = [yearArr firstObject];
+            if (![Common deptNumInputShouldNumber:year]) {
+                DLog(@"");
+                
+                year = [Common translatNum:year];
+            }
+            if(year.length == 2){
+                if ( [year integerValue]/10 > 0) {
+                    year = [NSString stringWithFormat:@"19%@",year];
+                }else{
+                    year = [NSString stringWithFormat:@"20%@",year];
+                }
+            }
+            
             NSArray *tempArr = [[yearArr lastObject] componentsSeparatedByString:@"年"];
             if(tempArr.count > 0){
                 NSArray *monthArr = [[tempArr lastObject] componentsSeparatedByString:@"月"];
-                month = [monthArr lastObject];
+                month = [monthArr firstObject];
+                if ( ![Common deptNumInputShouldNumber:month]) {
+                    month = [Common translatNum:month];
+                }
+                if(month.length == 0){
+                    month = @"01";
+                }
+                DLog(@"出生年：%@  月：%@",year,month);
+                if(month.length == 1){
+                    month = [NSString stringWithFormat:@"0%@",month];
+                }
                 self.speakRestParam(@"Birthday", [NSString stringWithFormat:@"%@%@",year, month]);
-                NSDictionary *dict = @{[self transformToLastPageKey:model.titleStr]:model.recognationStr};
+                NSDictionary *dict = @{[self transformToLastPageKey:model.titleStr]:[NSString stringWithFormat:@"%@年%@月",year, month]};
                 self.speakContentBlock(dict);
             }
         }else{
@@ -500,8 +585,11 @@
 - (void)getMajor:(VoiceModel *)voiceModel{
     NSDictionary *paramDict = @{@"majorName":voiceModel.recognationStr};
     [AFNManager requestWithMethod:POST ParamDict:paramDict url:@"GetMajor" tableName:@"Table" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
-        if(dataDict != nil){
-    
+        if(dataDict != nil && [dataDict isKindOfClass:[NSDictionary class]]){
+            NSString *value = dataDict[@"Major"];
+            if (value == nil || [value isKindOfClass:[NSNull class]]) {
+                return ;
+            }
             NSDictionary *dict = @{@"专业类别":dataDict[@"Major"]};
             self.speakContentBlock(dict);
             self.speakRestParam(@"MajorID", dataDict[@"dcMajorId"]);

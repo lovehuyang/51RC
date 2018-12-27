@@ -12,14 +12,16 @@
 
 @property (nonatomic , strong) UIView *bgView;// 全局背景
 @property (nonatomic , strong) UIView *alertView;// alerview
+@property (nonatomic , strong) UIView *btnBgView;// 单选按钮容器
+@property (nonatomic , copy) NSArray *dataArr;// 数据源
 
 @end
 
 @implementation SelectCvAlert
 
-- (instancetype)init{
+- (instancetype)initWithData:(NSArray *)dataArr{
     if (self = [super init]) {
-        
+        self.dataArr = [NSArray arrayWithArray:dataArr];
         self.bgView = [UIView new];
         [self addSubview:self.bgView];
         self.bgView.sd_layout
@@ -95,29 +97,49 @@
     tipLab.text = @"您可以更换其他简历：";
     tipLab.font = DEFAULTFONT;
     
-    CGFloat btn_H = 25;
-    for (int i = 0; i < 3; i ++) {
-        
-        UIImageView *imgView = [UIImageView new];
-//        [self.alertView addSubview:imgView];
-//        imgView.sd_layout
-//        .leftSpaceToView(self.alertView, 25)
-//        .topSpaceToView(<#id viewOrViewsArray#>, <#CGFloat value#>)
-//        
-//        UIButton *btn = [UIButton new];
-//        btn.backgroundColor = [UIColor redColor];
-//        [self.alertView addSubview:btn];
-//        btn.sd_layout
-//        .leftSpaceToView(self.alertView, 20)
-//        .topSpaceToView(tipLab, btn_H *i);
-//        [btn setTitle:@"dffffff" forState:UIControlStateNormal];
-//        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//        [btn setupAutoSizeWithHorizontalPadding:10 buttonHeight:btn_H];
-//        [btn setImage:[UIImage imageNamed:@"img_checksmall1"] forState:UIControlStateSelected];
-//        [btn setImage:[UIImage imageNamed:@"img_checksmall2"] forState:UIControlStateNormal];
-//        btn.selected = YES;
-    }
     
+    UIView *btnBgView = [UIView new];
+    [self.alertView addSubview:btnBgView];
+    btnBgView.sd_layout
+    .topSpaceToView(tipLab, 0)
+    .leftSpaceToView(self.alertView, 20)
+    .rightSpaceToView(self.alertView, 10)
+    .heightIs(30);
+    self.btnBgView = btnBgView;
+    
+    CGFloat btn_H = 30;
+    for (int i = 0; i < self.dataArr.count; i ++) {
+        NSDictionary *dataDict = self.dataArr[i];
+        UIButton *btn = [UIButton new];
+        [btnBgView addSubview:btn];
+        btn.sd_layout
+        .leftSpaceToView(self.btnBgView, 0)
+        .topSpaceToView(self.btnBgView, btn_H *i)
+        .heightIs(btn_H)
+        .rightSpaceToView(self.btnBgView, 0);
+        [btn setTitle:dataDict[@"Name"] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"img_checksmall1"] forState:UIControlStateSelected];
+        [btn setImage:[UIImage imageNamed:@"img_checksmall2"] forState:UIControlStateNormal];
+        btn.titleLabel.font = DEFAULTFONT;
+        btn.tag = 100 + i;
+        [btn addTarget:self action:@selector(selectCV:) forControlEvents:UIControlEventTouchUpInside];
+        
+        btn.imageView.sd_layout
+        .leftSpaceToView(btn, 5)
+        .centerYEqualToView(btn)
+        .widthIs(15)
+        .heightEqualToWidth();
+        btn.titleLabel.sd_layout
+        .leftSpaceToView(btn.imageView, 5)
+        .centerYEqualToView(btn)
+        .rightSpaceToView(btn, 0)
+        .heightRatioToView(btn, 1);
+        if (i == 0) {
+            btn.selected = YES;
+        }
+        [self.btnBgView setupAutoHeightWithBottomView:btn bottomMargin:0];
+    }
     
     CGFloat btn_W = (SCREEN_WIDTH - 80 - 40 - 20)/2;
     UIButton *acceptBtn = [UIButton new];
@@ -126,14 +148,13 @@
     .rightSpaceToView(self.alertView, 20)
     .heightIs(35)
     .widthIs(btn_W)
-    .topSpaceToView(tipLab, 25);
+    .topSpaceToView(self.btnBgView, 20);
     acceptBtn.backgroundColor = NAVBARCOLOR;
     acceptBtn.sd_cornerRadius = @(5);
-    [acceptBtn setTitle:@"马上去完善" forState:UIControlStateNormal];
+    [acceptBtn setTitle:@"确定" forState:UIControlStateNormal];
     acceptBtn.titleLabel.font = [UIFont boldSystemFontOfSize:DEFAULTFONTSIZE];
     acceptBtn.tag = 100;
     [acceptBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-    
     
     UIButton *rejectBtn = [UIButton new];
     [self.alertView addSubview:rejectBtn];
@@ -143,7 +164,7 @@
     .topEqualToView(acceptBtn)
     .widthRatioToView(acceptBtn, 1);
     rejectBtn.sd_cornerRadius = @(5);
-    [rejectBtn setTitle:@"放弃机会" forState:UIControlStateNormal];
+    [rejectBtn setTitle:@"取消" forState:UIControlStateNormal];
     rejectBtn.layer.borderWidth = 1;
     rejectBtn.layer.borderColor = SEPARATECOLOR.CGColor;
     [rejectBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -183,11 +204,26 @@
 }
 
 - (void)btnClick:(UIButton *)btn{
-    if (btn.tag == 100) {// 去完善
-        self.completeInformation();
+    if (btn.tag == 100) {// 确定
+        NSString *cvMainIDStr = @"";
+        for (UIButton *subBtn in self.btnBgView.subviews) {
+            if (subBtn.selected) {
+                NSDictionary *dataDict = self.dataArr[subBtn.tag - 100];
+                cvMainIDStr = dataDict[@"ID"];
+                break;
+            }
+        }
+        self.ensureEvent(cvMainIDStr);
     }
-    
     [self dissmiss];
 }
 
+- (void)selectCV:(UIButton *)btn{
+    btn.selected = YES;
+    for (UIButton *subBtn in self.btnBgView.subviews) {
+        if (subBtn.tag != btn.tag) {
+            subBtn.selected = NO;
+        }
+    }
+}
 @end

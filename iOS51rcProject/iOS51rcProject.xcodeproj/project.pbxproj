@@ -175,6 +175,10 @@
 		9929852F1F553A300021F863 /* CpIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9929852E1F553A300021F863 /* CpIndexViewController.m */; };
 		992985321F553BCE0021F863 /* CpLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992985311F553BCE0021F863 /* CpLoginViewController.m */; };
 		992DC19F206B7A2C00563456 /* ico_mapcenter.png in Resources */ = {isa = PBXBuildFile; fileRef = 992DC19E206B7A2C00563456 /* ico_mapcenter.png */; };
+		9931FA3121D330C000CFB45F /* duanxin_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9931FA2F21D330C000CFB45F /* duanxin_icon.png */; };
+		9931FA3221D330C000CFB45F /* mima_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9931FA3021D330C000CFB45F /* mima_icon.png */; };
+		9931FA3521D3346400CFB45F /* mima_icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9931FA3321D3346300CFB45F /* mima_icon1.png */; };
+		9931FA3621D3346400CFB45F /* duanxin_icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9931FA3421D3346400CFB45F /* duanxin_icon1.png */; };
 		9939A603207A0AB1005D2146 /* AccountSafeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9939A602207A0AB1005D2146 /* AccountSafeViewController.m */; };
 		993ED84121B510F700A988FF /* SpeechButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 993ED84021B510F700A988FF /* SpeechButton.m */; };
 		993ED84421B51E4100A988FF /* SpeechViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 993ED84321B51E4100A988FF /* SpeechViewController.m */; };
@@ -423,11 +427,6 @@
 		999070A61F024FF000B5E289 /* img_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070A41F024FF000B5E289 /* img_map.png */; };
 		999070A71F024FF000B5E289 /* img_realname.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070A51F024FF000B5E289 /* img_realname.png */; };
 		999070A91F0252C300B5E289 /* img_licence.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070A81F0252C300B5E289 /* img_licence.png */; };
-		999070BB1F025EC500B5E289 /* job_item1.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070B61F025EC500B5E289 /* job_item1.png */; };
-		999070BC1F025EC500B5E289 /* job_item2.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070B71F025EC500B5E289 /* job_item2.png */; };
-		999070BD1F025EC500B5E289 /* job_item3.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070B81F025EC500B5E289 /* job_item3.png */; };
-		999070BE1F025EC500B5E289 /* job_item4.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070B91F025EC500B5E289 /* job_item4.png */; };
-		999070BF1F025EC500B5E289 /* job_item5.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070BA1F025EC500B5E289 /* job_item5.png */; };
 		999070C11F03562D00B5E289 /* img_dial.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070C01F03562D00B5E289 /* img_dial.png */; };
 		999070C61F03846D00B5E289 /* img_favorite1.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070C21F03846D00B5E289 /* img_favorite1.png */; };
 		999070C71F03846E00B5E289 /* img_favorite2.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070C31F03846D00B5E289 /* img_favorite2.png */; };
@@ -457,6 +456,7 @@
 		9993C34721BF51FB0085A6F8 /* SpeakLoadingBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 9993C34621BF51FB0085A6F8 /* SpeakLoadingBtn.m */; };
 		9993C34921BF53930085A6F8 /* ico_cvlist_startvoice.png in Resources */ = {isa = PBXBuildFile; fileRef = 9993C34821BF53920085A6F8 /* ico_cvlist_startvoice.png */; };
 		9993C34B21BF60080085A6F8 /* ico_cvlist_stopvoice.png in Resources */ = {isa = PBXBuildFile; fileRef = 9993C34A21BF60080085A6F8 /* ico_cvlist_stopvoice.png */; };
+		9994848121D1CD7400C78955 /* MyTalentsTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9994848021D1CD7400C78955 /* MyTalentsTestViewController.m */; };
 		99949F4D21C0D4EE002109D1 /* RecommendJobView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99949F4C21C0D4EE002109D1 /* RecommendJobView.m */; };
 		99949F5021C0E312002109D1 /* RecommendJobCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99949F4F21C0E312002109D1 /* RecommendJobCell.m */; };
 		99949F5321C248B2002109D1 /* InsertJobApplyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99949F5221C248B2002109D1 /* InsertJobApplyModel.m */; };
@@ -503,6 +503,11 @@
 		99FCF1FA2011BECE008B5A69 /* cp_imgclose.png in Resources */ = {isa = PBXBuildFile; fileRef = 99FCF1F92011BECE008B5A69 /* cp_imgclose.png */; };
 		99FCF1FD2011D320008B5A69 /* AccountListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FCF1FC2011D320008B5A69 /* AccountListViewController.m */; };
 		99FCF2002011D344008B5A69 /* AccountQuotaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FCF1FF2011D344008B5A69 /* AccountQuotaViewController.m */; };
+		99FFAD9A21D3AAB8009FA88D /* job_item1.png in Resources */ = {isa = PBXBuildFile; fileRef = 99FFAD9521D3AAB4009FA88D /* job_item1.png */; };
+		99FFAD9B21D3AAB8009FA88D /* job_item4.png in Resources */ = {isa = PBXBuildFile; fileRef = 99FFAD9621D3AAB5009FA88D /* job_item4.png */; };
+		99FFAD9C21D3AAB8009FA88D /* job_item5.png in Resources */ = {isa = PBXBuildFile; fileRef = 99FFAD9721D3AAB6009FA88D /* job_item5.png */; };
+		99FFAD9D21D3AAB8009FA88D /* job_item3.png in Resources */ = {isa = PBXBuildFile; fileRef = 99FFAD9821D3AAB7009FA88D /* job_item3.png */; };
+		99FFAD9E21D3AAB8009FA88D /* job_item2.png in Resources */ = {isa = PBXBuildFile; fileRef = 99FFAD9921D3AAB8009FA88D /* job_item2.png */; };
 		B1AF16228822E1887C0D4A16 /* libPods-iOS51rcProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E9C8B7ED74655D2EFE8D48F /* libPods-iOS51rcProject.a */; };
 /* End PBXBuildFile section */
 
@@ -778,6 +783,10 @@
 		992985301F553BCE0021F863 /* CpLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpLoginViewController.h; sourceTree = "<group>"; };
 		992985311F553BCE0021F863 /* CpLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CpLoginViewController.m; sourceTree = "<group>"; };
 		992DC19E206B7A2C00563456 /* ico_mapcenter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_mapcenter.png; sourceTree = "<group>"; };
+		9931FA2F21D330C000CFB45F /* duanxin_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = duanxin_icon.png; sourceTree = "<group>"; };
+		9931FA3021D330C000CFB45F /* mima_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mima_icon.png; sourceTree = "<group>"; };
+		9931FA3321D3346300CFB45F /* mima_icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mima_icon1.png; sourceTree = "<group>"; };
+		9931FA3421D3346400CFB45F /* duanxin_icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = duanxin_icon1.png; sourceTree = "<group>"; };
 		9939A601207A0AB1005D2146 /* AccountSafeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountSafeViewController.h; sourceTree = "<group>"; };
 		9939A602207A0AB1005D2146 /* AccountSafeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountSafeViewController.m; sourceTree = "<group>"; };
 		993ED83F21B510F600A988FF /* SpeechButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeechButton.h; sourceTree = "<group>"; };
@@ -1128,11 +1137,6 @@
 		999070A41F024FF000B5E289 /* img_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_map.png; sourceTree = "<group>"; };
 		999070A51F024FF000B5E289 /* img_realname.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_realname.png; sourceTree = "<group>"; };
 		999070A81F0252C300B5E289 /* img_licence.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_licence.png; sourceTree = "<group>"; };
-		999070B61F025EC500B5E289 /* job_item1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = job_item1.png; sourceTree = "<group>"; };
-		999070B71F025EC500B5E289 /* job_item2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = job_item2.png; sourceTree = "<group>"; };
-		999070B81F025EC500B5E289 /* job_item3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = job_item3.png; sourceTree = "<group>"; };
-		999070B91F025EC500B5E289 /* job_item4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = job_item4.png; sourceTree = "<group>"; };
-		999070BA1F025EC500B5E289 /* job_item5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = job_item5.png; sourceTree = "<group>"; };
 		999070C01F03562D00B5E289 /* img_dial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_dial.png; sourceTree = "<group>"; };
 		999070C21F03846D00B5E289 /* img_favorite1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_favorite1.png; sourceTree = "<group>"; };
 		999070C31F03846D00B5E289 /* img_favorite2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_favorite2.png; sourceTree = "<group>"; };
@@ -1177,6 +1181,8 @@
 		9993C34621BF51FB0085A6F8 /* SpeakLoadingBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpeakLoadingBtn.m; sourceTree = "<group>"; };
 		9993C34821BF53920085A6F8 /* ico_cvlist_startvoice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_cvlist_startvoice.png; sourceTree = "<group>"; };
 		9993C34A21BF60080085A6F8 /* ico_cvlist_stopvoice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ico_cvlist_stopvoice.png; sourceTree = "<group>"; };
+		9994847F21D1CD7400C78955 /* MyTalentsTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTalentsTestViewController.h; sourceTree = "<group>"; };
+		9994848021D1CD7400C78955 /* MyTalentsTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTalentsTestViewController.m; sourceTree = "<group>"; };
 		99949F4B21C0D4EE002109D1 /* RecommendJobView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecommendJobView.h; sourceTree = "<group>"; };
 		99949F4C21C0D4EE002109D1 /* RecommendJobView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecommendJobView.m; sourceTree = "<group>"; };
 		99949F4E21C0E311002109D1 /* RecommendJobCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecommendJobCell.h; sourceTree = "<group>"; };
@@ -1264,6 +1270,11 @@
 		99FCF1FC2011D320008B5A69 /* AccountListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountListViewController.m; sourceTree = "<group>"; };
 		99FCF1FE2011D344008B5A69 /* AccountQuotaViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountQuotaViewController.h; sourceTree = "<group>"; };
 		99FCF1FF2011D344008B5A69 /* AccountQuotaViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountQuotaViewController.m; sourceTree = "<group>"; };
+		99FFAD9521D3AAB4009FA88D /* job_item1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = job_item1.png; sourceTree = "<group>"; };
+		99FFAD9621D3AAB5009FA88D /* job_item4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = job_item4.png; sourceTree = "<group>"; };
+		99FFAD9721D3AAB6009FA88D /* job_item5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = job_item5.png; sourceTree = "<group>"; };
+		99FFAD9821D3AAB7009FA88D /* job_item3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = job_item3.png; sourceTree = "<group>"; };
+		99FFAD9921D3AAB8009FA88D /* job_item2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = job_item2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2074,6 +2085,10 @@
 		995C3D721EF7D02000277468 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9931FA3421D3346400CFB45F /* duanxin_icon1.png */,
+				9931FA3321D3346300CFB45F /* mima_icon1.png */,
+				9931FA2F21D330C000CFB45F /* duanxin_icon.png */,
+				9931FA3021D330C000CFB45F /* mima_icon.png */,
 				9993C32A21BF50F10085A6F8 /* SpeakLoading */,
 				996D649221B60D170095EA95 /* VoiceWave */,
 				998F8A7921916DE5003DBAB1 /* img_check1.png */,
@@ -2162,14 +2177,14 @@
 				999070C41F03846D00B5E289 /* img_mappoint.png */,
 				999070C51F03846D00B5E289 /* img_share.png */,
 				999070C01F03562D00B5E289 /* img_dial.png */,
-				999070B61F025EC500B5E289 /* job_item1.png */,
-				999070B71F025EC500B5E289 /* job_item2.png */,
-				999070B81F025EC500B5E289 /* job_item3.png */,
-				999070B91F025EC500B5E289 /* job_item4.png */,
-				999070BA1F025EC500B5E289 /* job_item5.png */,
 				999070A81F0252C300B5E289 /* img_licence.png */,
 				999070A41F024FF000B5E289 /* img_map.png */,
 				999070A51F024FF000B5E289 /* img_realname.png */,
+				99FFAD9521D3AAB4009FA88D /* job_item1.png */,
+				99FFAD9921D3AAB8009FA88D /* job_item2.png */,
+				99FFAD9821D3AAB7009FA88D /* job_item3.png */,
+				99FFAD9621D3AAB5009FA88D /* job_item4.png */,
+				99FFAD9721D3AAB6009FA88D /* job_item5.png */,
 				999070A11F024D2800B5E289 /* job_chatgreen.png */,
 				9990709F1F023AC000B5E289 /* job_hasapply.png */,
 				9990709D1F022E1A00B5E289 /* job_chat.png */,
@@ -2481,6 +2496,8 @@
 				998F8A7021913D3C003DBAB1 /* EmploymentNewsController.m */,
 				998F8A72219141BC003DBAB1 /* TalentsTestController.h */,
 				998F8A73219141BC003DBAB1 /* TalentsTestController.m */,
+				9994847F21D1CD7400C78955 /* MyTalentsTestViewController.h */,
+				9994848021D1CD7400C78955 /* MyTalentsTestViewController.m */,
 				996F504B2188292900D2A7E9 /* View */,
 			);
 			path = Account;
@@ -2854,9 +2871,9 @@
 				990A3BD91F42F387006CB3CF /* 35.gif in Resources */,
 				996D651221B671090095EA95 /* record_start.caf in Resources */,
 				990A3BC31F42F387006CB3CF /* 15.gif in Resources */,
-				999070BB1F025EC500B5E289 /* job_item1.png in Resources */,
 				993ED85C21B528AB00A988FF /* voiceage.mp3 in Resources */,
 				996EB7AD218C21AF000B475E /* p_registerClose@2x.png in Resources */,
+				99FFAD9D21D3AAB8009FA88D /* job_item3.png in Resources */,
 				995A49FB1F0A735B0047EDBE /* pa_edit.png in Resources */,
 				995C3DCD1EF7D02100277468 /* pa_remind1.png in Resources */,
 				996131AB1FDFC5A700194271 /* cp_account4.png in Resources */,
@@ -2981,7 +2998,6 @@
 				9919907C2089E15C00E2B0D2 /* cp_jobrefreshall.png in Resources */,
 				994C83181F1E069C00414E98 /* pa_cvpreitem6.png in Resources */,
 				996D650F21B671090095EA95 /* bds_easr_wakeup_words.dat in Resources */,
-				999070BE1F025EC500B5E289 /* job_item4.png in Resources */,
 				995E9E221F05FAB600A34835 /* img_next1.png in Resources */,
 				995C3DCB1EF7D02100277468 /* pa_mobilecer1.png in Resources */,
 				996D651C21B671090095EA95 /* defaultFullScreenTheme.bundle in Resources */,
@@ -2989,6 +3005,7 @@
 				995E9E251F05FAB600A34835 /* img_prev2.png in Resources */,
 				990A3BD81F42F387006CB3CF /* 34.gif in Resources */,
 				996D650A21B671090095EA95 /* bds_easr_mfe_cmvn.dat in Resources */,
+				99FFAD9B21D3AAB8009FA88D /* job_item4.png in Resources */,
 				999070C11F03562D00B5E289 /* img_dial.png in Resources */,
 				990A3BE81F42F387006CB3CF /* 5.gif in Resources */,
 				996D652021B671090095EA95 /* English_Speech_Female.dat in Resources */,
@@ -3027,7 +3044,7 @@
 				996D651921B671090095EA95 /* defaultTheme.bundle in Resources */,
 				9993C34321BF50F20085A6F8 /* voice_loadingleft_5.png in Resources */,
 				990108311F594ED90002CECE /* job_trash.png in Resources */,
-				999070BF1F025EC500B5E289 /* job_item5.png in Resources */,
+				9931FA3221D330C000CFB45F /* mima_icon.png in Resources */,
 				990A3BC71F42F387006CB3CF /* 19.gif in Resources */,
 				99101B4920720E0200ED060B /* img_cpcheck1.png in Resources */,
 				999070C91F03846E00B5E289 /* img_share.png in Resources */,
@@ -3053,7 +3070,6 @@
 				995C3DBD1EF7D02100277468 /* pa_guidepic5.png in Resources */,
 				997B06A91F5500B700391289 /* Company.storyboard in Resources */,
 				990A3BED1F42F387006CB3CF /* ico_emoitem1.png in Resources */,
-				999070BD1F025EC500B5E289 /* job_item3.png in Resources */,
 				995C3DBE1EF7D02100277468 /* pa_indexbg.png in Resources */,
 				995C3DBF1EF7D02100277468 /* pa_invitation1.png in Resources */,
 				99101B572073852400ED060B /* cp_accountbuy.png in Resources */,
@@ -3072,11 +3088,12 @@
 				996D651821B671090095EA95 /* darkRed.bundle in Resources */,
 				994C831B1F1F46F800414E98 /* job_map.png in Resources */,
 				995C3DAC1EF7D02100277468 /* img_password1.png in Resources */,
+				99FFAD9A21D3AAB8009FA88D /* job_item1.png in Resources */,
 				995C3DB91EF7D02100277468 /* pa_guidepic1.png in Resources */,
-				999070BC1F025EC500B5E289 /* job_item2.png in Resources */,
 				995A4A051F0B3A3C0047EDBE /* pa_open2.png in Resources */,
 				990A3BDA1F42F387006CB3CF /* 36.gif in Resources */,
 				995C3DD01EF7D24E00277468 /* pa_chat.png in Resources */,
+				99FFAD9C21D3AAB8009FA88D /* job_item5.png in Resources */,
 				996D649F21B60D170095EA95 /* voice_loading_6.png in Resources */,
 				995C3DB11EF7D02100277468 /* img_rolepa1.png in Resources */,
 				990A3B861F3C550A006CB3CF /* chat_photo.png in Resources */,
@@ -3088,6 +3105,7 @@
 				996D651021B671090095EA95 /* bds_easr_dnn_wakeup_model.dat in Resources */,
 				995231AC20560FA500C8836D /* cp_jobmodify.png in Resources */,
 				995C3DAA1EF7D02100277468 /* img_checksmall2.png in Resources */,
+				9931FA3121D330C000CFB45F /* duanxin_icon.png in Resources */,
 				995E9E231F05FAB600A34835 /* img_next2.png in Resources */,
 				995C3DC11EF7D02100277468 /* pa_invitation3.png in Resources */,
 				9919907E2089E1E100E2B0D2 /* cp_jobadd.png in Resources */,
@@ -3096,8 +3114,10 @@
 				99FCF1FA2011BECE008B5A69 /* cp_imgclose.png in Resources */,
 				9990709C1F01FCAE00B5E289 /* job_contact.png in Resources */,
 				990A3BCB1F42F387006CB3CF /* 22.gif in Resources */,
+				9931FA3521D3346400CFB45F /* mima_icon1.png in Resources */,
 				999070A01F023AC000B5E289 /* job_hasapply.png in Resources */,
 				995C3DA11EF7D02100277468 /* cp_guidebg.png in Resources */,
+				9931FA3621D3346400CFB45F /* duanxin_icon1.png in Resources */,
 				9993C34121BF50F20085A6F8 /* voice_loadingleft_2.png in Resources */,
 				999070A71F024FF000B5E289 /* img_realname.png in Resources */,
 				996D64A021B60D170095EA95 /* voice_loading_7.png in Resources */,
@@ -3107,6 +3127,7 @@
 				995C3DB21EF7D02100277468 /* img_rolepa2.png in Resources */,
 				990108291F57A61D0002CECE /* img_picclose.png in Resources */,
 				995A49ED1F064D420047EDBE /* img_heart.png in Resources */,
+				99FFAD9E21D3AAB8009FA88D /* job_item2.png in Resources */,
 				9919F94D1EDE445300BE51F0 /* Person.storyboard in Resources */,
 				9990709E1F022E1A00B5E289 /* job_chat.png in Resources */,
 				990A3BD31F42F387006CB3CF /* 3.gif in Resources */,
@@ -3284,6 +3305,7 @@
 				9990A70521A6490200A320FD /* AttachMentView.m in Sources */,
 				991DAA9E21A557DD00586AA7 /* AttachmentImgView.m in Sources */,
 				9993A589218AD0C80057B6FD /* CvOperate.m in Sources */,
+				9994848121D1CD7400C78955 /* MyTalentsTestViewController.m in Sources */,
 				997B069F1F5500A000391289 /* CompanyInfoViewController.m in Sources */,
 				9929852C1F5539CB0021F863 /* WKViewController.m in Sources */,
 				99C5EEB92018732600AC8FBD /* FeeStandardViewController.m in Sources */,

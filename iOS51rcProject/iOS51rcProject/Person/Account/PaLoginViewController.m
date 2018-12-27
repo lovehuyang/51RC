@@ -91,6 +91,32 @@
     // 获取验证码的事件
     [self.getSecurityBtn addTarget:self action:@selector(getVerifyCodeEvent) forControlEvents:UIControlEventTouchUpInside];
     
+    
+    UIButton *changeTypeBtn = [UIButton new];
+    [self.view addSubview:changeTypeBtn];
+    changeTypeBtn.sd_layout
+    .leftSpaceToView(self.view, 20)
+    .topSpaceToView(self.loginBtn, 30)
+    .heightIs(25)
+    .widthIs(100);
+    changeTypeBtn.imageView.sd_layout
+    .leftSpaceToView(changeTypeBtn, 0)
+    .centerYEqualToView(changeTypeBtn)
+    .widthIs(20)
+    .heightEqualToWidth();
+    [changeTypeBtn setImage:[UIImage imageNamed:@"duanxin_icon1"] forState:UIControlStateNormal];
+    changeTypeBtn.titleLabel.sd_layout
+    .leftSpaceToView(changeTypeBtn.imageView, 5)
+    .centerYEqualToView(changeTypeBtn)
+    .rightSpaceToView(changeTypeBtn, 0)
+    .heightRatioToView(changeTypeBtn, 1);
+    changeTypeBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
+    [changeTypeBtn setTitle:@"验证码登录" forState:UIControlStateNormal];
+    [changeTypeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    changeTypeBtn.titleLabel.textColor = [UIColor blackColor];
+    changeTypeBtn.titleLabel.font = DEFAULTFONT;
+    [changeTypeBtn addTarget:self action:@selector(changeLoginType:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 #pragma mark - 懒加载
@@ -237,8 +263,12 @@
     if ([btn.titleLabel.text isEqualToString:@"验证码登录"]) {
         [btn setTitle:@"密码登录" forState:UIControlStateNormal];
         isPasswordLogin = NO;
+        [btn setImage:[UIImage imageNamed:@"mima_icon1"] forState:UIControlStateNormal];
+        btn.imageView.contentMode = UIViewContentModeScaleAspectFit;
     }else{
         [btn setTitle:@"验证码登录" forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"duanxin_icon1"] forState:UIControlStateNormal];
+        btn.imageView.contentMode = UIViewContentModeScaleAspectFit;
         isPasswordLogin = YES;
     }
     [self changeUIStatus];

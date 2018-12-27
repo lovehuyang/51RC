@@ -36,7 +36,7 @@
         if (COMPANYLOGIN) {
             [self getCpBadge:YES];
             self.delegate = self;
-            [NSTimer scheduledTimerWithTimeInterval:600 target:self selector:@selector(noViewRepeat) userInfo:nil repeats:YES];
+            [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(noViewRepeat) userInfo:nil repeats:YES];
         }
     }
 }
