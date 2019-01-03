@@ -62,4 +62,7 @@ typedef void(^FailureBlock) (NSInteger errCode , NSString *msg);
  */
 +(NSURLSessionDataTask *)requestCpWithMethod:(RequestMethod)method ParamDict:(NSDictionary *)paramDict url:(NSString *)url tableName:(NSString *)tableName successBlock:(SuccessBlock)successBlock failureBlock:(FailureBlock)failureBlock;
 
+
+#pragma mark - 个人用户优化接口1.0
++(NSURLSessionDataTask *)requestPaWithParamDict:(NSDictionary *)paramDict url:(NSString *)url tableNames:(NSArray *)tableNames successBlock:(SuccessBlock)successBlock failureBlock:(FailureBlock)failureBlock;
 @end

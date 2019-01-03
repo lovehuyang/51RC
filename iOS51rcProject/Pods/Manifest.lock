@@ -31,6 +31,7 @@ PODS:
     - FLAnimatedImage (~> 1.0)
     - SDWebImage/Core
   - SVProgressHUD (2.2.5)
+  - YBAttributeTextTapAction (2.0.6)
 
 DEPENDENCIES:
   - AFNetworking
@@ -44,6 +45,7 @@ DEPENDENCIES:
   - SDWebImage
   - SDWebImage/GIF
   - SVProgressHUD
+  - YBAttributeTextTapAction
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -58,6 +60,7 @@ SPEC REPOS:
     - SDAutoLayout
     - SDWebImage
     - SVProgressHUD
+    - YBAttributeTextTapAction
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
@@ -71,7 +74,8 @@ SPEC CHECKSUMS:
   SDAutoLayout: 8bf6b3bbc8b01f775d4defbb4fda2ace805461be
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  YBAttributeTextTapAction: 650ff36251479f8cfc7b5dd8fb62587c538ce502
 
-PODFILE CHECKSUM: 7f0fcc82cd563582b510cdec8d46a2d38f499f87
+PODFILE CHECKSUM: 6a9adc1ae7bcdcc0422f29104b33c9046ad3da7f
 
 COCOAPODS: 1.5.3

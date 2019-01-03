@@ -14,6 +14,17 @@
 		990431012093284D00B4267D /* cp_infotips.png in Resources */ = {isa = PBXBuildFile; fileRef = 990431002093284C00B4267D /* cp_infotips.png */; };
 		990431032093FE9800B4267D /* cp_cvrm.png in Resources */ = {isa = PBXBuildFile; fileRef = 990431022093FE9700B4267D /* cp_cvrm.png */; };
 		990431062094076900B4267D /* UIImage+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = 990431052094076900B4267D /* UIImage+Size.m */; };
+		9908DD2B21D499130002B609 /* NearSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9908DD1921D499120002B609 /* NearSearchViewController.m */; };
+		9908DD2C21D499130002B609 /* KeywordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9908DD1B21D499120002B609 /* KeywordViewController.m */; };
+		9908DD2D21D499130002B609 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9908DD1D21D499120002B609 /* MapViewController.m */; };
+		9908DD2E21D499130002B609 /* JobViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9908DD1E21D499120002B609 /* JobViewController.m */; };
+		9908DD2F21D499130002B609 /* CompanyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9908DD1F21D499120002B609 /* CompanyInfoViewController.m */; };
+		9908DD3021D499130002B609 /* JobSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9908DD2221D499120002B609 /* JobSearchViewController.m */; };
+		9908DD3121D499130002B609 /* CompanyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9908DD2321D499120002B609 /* CompanyDetailViewController.m */; };
+		9908DD3221D499130002B609 /* ComplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9908DD2521D499120002B609 /* ComplainViewController.m */; };
+		9908DD3321D499130002B609 /* JobListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9908DD2821D499120002B609 /* JobListViewController.m */; };
+		9908DD3421D499130002B609 /* JobInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9908DD2921D499120002B609 /* JobInfoViewController.m */; };
+		9908DD3821D49D2C0002B609 /* AdAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 9908DD3721D49D2C0002B609 /* AdAlert.m */; };
 		990A3B861F3C550A006CB3CF /* chat_photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 990A3B841F3C550A006CB3CF /* chat_photo.png */; };
 		990A3B891F3C559A006CB3CF /* chat_emotion.png in Resources */ = {isa = PBXBuildFile; fileRef = 990A3B881F3C559A006CB3CF /* chat_emotion.png */; };
 		990A3BBD1F42F387006CB3CF /* 1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 990A3B8B1F42F387006CB3CF /* 1.gif */; };
@@ -307,7 +318,6 @@
 		996131AA1FDFC5A700194271 /* cp_defaultlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9961319F1FDFC5A600194271 /* cp_defaultlogo.png */; };
 		996131AB1FDFC5A700194271 /* cp_account4.png in Resources */ = {isa = PBXBuildFile; fileRef = 996131A01FDFC5A700194271 /* cp_account4.png */; };
 		996131AC1FDFC5A700194271 /* cp_preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 996131A11FDFC5A700194271 /* cp_preview.png */; };
-		996C9084218934B600C0EF66 /* ComplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 996C9083218934B600C0EF66 /* ComplainViewController.m */; };
 		996C90882189368D00C0EF66 /* ComplainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 996C90872189368D00C0EF66 /* ComplainView.m */; };
 		996C908C21894F8500C0EF66 /* AFNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 996C908B21894F8500C0EF66 /* AFNManager.m */; };
 		996D649D21B60D170095EA95 /* voice_loading_9.png in Resources */ = {isa = PBXBuildFile; fileRef = 996D649321B60D170095EA95 /* voice_loading_9.png */; };
@@ -403,17 +413,20 @@
 		997B069B1F5500A000391289 /* JobApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06621F5500A000391289 /* JobApplyViewController.m */; };
 		997B069C1F5500A000391289 /* JobAttentionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06641F5500A000391289 /* JobAttentionViewController.m */; };
 		997B069D1F5500A000391289 /* YourFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06661F5500A000391289 /* YourFoodViewController.m */; };
-		997B069E1F5500A000391289 /* CompanyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06691F5500A000391289 /* CompanyDetailViewController.m */; };
-		997B069F1F5500A000391289 /* CompanyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B066B1F5500A000391289 /* CompanyInfoViewController.m */; };
-		997B06A01F5500A000391289 /* JobInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B066D1F5500A000391289 /* JobInfoViewController.m */; };
-		997B06A11F5500A000391289 /* JobListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B066F1F5500A000391289 /* JobListViewController.m */; };
-		997B06A21F5500A000391289 /* JobSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06711F5500A000391289 /* JobSearchViewController.m */; };
-		997B06A31F5500A000391289 /* JobViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06731F5500A000391289 /* JobViewController.m */; };
-		997B06A41F5500A000391289 /* KeywordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06751F5500A000391289 /* KeywordViewController.m */; };
-		997B06A51F5500A000391289 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06771F5500A000391289 /* MapViewController.m */; };
-		997B06A61F5500A000391289 /* NearSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06791F5500A000391289 /* NearSearchViewController.m */; };
 		997B06A91F5500B700391289 /* Company.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 997B06A71F5500B700391289 /* Company.storyboard */; };
 		997B0D0920203FD100ABB4F7 /* OrderApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B0D0820203FD100ABB4F7 /* OrderApplyViewController.m */; };
+		9980766121D5BAED000BC5F8 /* PJobListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9980766021D5BAED000BC5F8 /* PJobListModel.m */; };
+		9980766421D5CE7E000BC5F8 /* PJobListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9980766321D5CE7E000BC5F8 /* PJobListCell.m */; };
+		9980766821D6072C000BC5F8 /* pa_SetTop.png in Resources */ = {isa = PBXBuildFile; fileRef = 9980766721D6072C000BC5F8 /* pa_SetTop.png */; };
+		9980766B21D608DA000BC5F8 /* SetCvTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9980766A21D608DA000BC5F8 /* SetCvTopViewController.m */; };
+		9980766E21D6147C000BC5F8 /* TopTableFirstCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9980766D21D6147C000BC5F8 /* TopTableFirstCell.m */; };
+		9980767121D627E5000BC5F8 /* TopTableSecondCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9980767021D627E5000BC5F8 /* TopTableSecondCell.m */; };
+		9980767421D62882000BC5F8 /* CVTopPackageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9980767321D62882000BC5F8 /* CVTopPackageModel.m */; };
+		998E888B21D703C400E8D622 /* CVPackageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 998E888A21D703C400E8D622 /* CVPackageView.m */; };
+		998E888E21D7376C00E8D622 /* TopTableThirdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 998E888D21D7376C00E8D622 /* TopTableThirdCell.m */; };
+		998E889121D7385100E8D622 /* CVTicketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 998E889021D7385100E8D622 /* CVTicketModel.m */; };
+		998E889421D739F200E8D622 /* CVTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 998E889321D739F200E8D622 /* CVTicketCell.m */; };
+		998E889721D7739800E8D622 /* ZHAttributeTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 998E889621D7739800E8D622 /* ZHAttributeTextView.m */; };
 		998F8A7121913D3C003DBAB1 /* EmploymentNewsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 998F8A7021913D3C003DBAB1 /* EmploymentNewsController.m */; };
 		998F8A74219141BC003DBAB1 /* TalentsTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 998F8A73219141BC003DBAB1 /* TalentsTestController.m */; };
 		998F8A7B21916DE6003DBAB1 /* img_check1.png in Resources */ = {isa = PBXBuildFile; fileRef = 998F8A7921916DE5003DBAB1 /* img_check1.png */; };
@@ -486,6 +499,16 @@
 		99DA6BA72047D58800BBDA59 /* ApplyCvViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DA6BA62047D58800BBDA59 /* ApplyCvViewController.m */; };
 		99DA6BAA2047F62600BBDA59 /* DownloadCvViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DA6BA92047F62600BBDA59 /* DownloadCvViewController.m */; };
 		99DA6BAD2047F6EB00BBDA59 /* FavoriteCvViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DA6BAC2047F6EB00BBDA59 /* FavoriteCvViewController.m */; };
+		99DCE27421DC431A0060B147 /* ProtocolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DCE27321DC431A0060B147 /* ProtocolView.m */; };
+		99DCE27721DC915D0060B147 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DCE27621DC915D0060B147 /* ShareView.m */; };
+		99DCE27A21DCBA890060B147 /* RedPacketView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DCE27921DCBA890060B147 /* RedPacketView.m */; };
+		99DCE27D21DDAB410060B147 /* ConfirmOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DCE27C21DDAB410060B147 /* ConfirmOrderController.m */; };
+		99DCE28021DDBA9F0060B147 /* DiscountInfoModle.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DCE27F21DDBA9F0060B147 /* DiscountInfoModle.m */; };
+		99DCE28321DDD6D30060B147 /* ConfirmOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DCE28221DDD6D30060B147 /* ConfirmOrderCell.m */; };
+		99DCE28621DDE38B0060B147 /* DiscountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DCE28521DDE38B0060B147 /* DiscountCell.m */; };
+		99DCE28921DDECDA0060B147 /* PayWayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DCE28821DDECDA0060B147 /* PayWayCell.m */; };
+		99DCE28C21DDED720060B147 /* PayWayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DCE28B21DDED720060B147 /* PayWayModel.m */; };
+		99DCE28F21DDFB120060B147 /* BottomPayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DCE28E21DDFB120060B147 /* BottomPayView.m */; };
 		99E031E921ABE13400FB5530 /* CVListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E031E821ABE13400FB5530 /* CVListModel.m */; };
 		99E031EC21ABE9F000FB5530 /* OneMinuteCVViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E031EB21ABE9F000FB5530 /* OneMinuteCVViewController.m */; };
 		99EC66E621B0D79F00756113 /* RCRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EC66E521B0D79F00756113 /* RCRootViewController.m */; };
@@ -540,6 +563,28 @@
 		990431022093FE9700B4267D /* cp_cvrm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cp_cvrm.png; sourceTree = "<group>"; };
 		990431042094076900B4267D /* UIImage+Size.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Size.h"; sourceTree = "<group>"; };
 		990431052094076900B4267D /* UIImage+Size.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Size.m"; sourceTree = "<group>"; };
+		9908DD1721D499120002B609 /* CompanyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyDetailViewController.h; sourceTree = "<group>"; };
+		9908DD1821D499120002B609 /* JobSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobSearchViewController.h; sourceTree = "<group>"; };
+		9908DD1921D499120002B609 /* NearSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearSearchViewController.m; sourceTree = "<group>"; };
+		9908DD1A21D499120002B609 /* ComplainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplainViewController.h; sourceTree = "<group>"; };
+		9908DD1B21D499120002B609 /* KeywordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeywordViewController.m; sourceTree = "<group>"; };
+		9908DD1C21D499120002B609 /* JobListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobListViewController.h; sourceTree = "<group>"; };
+		9908DD1D21D499120002B609 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		9908DD1E21D499120002B609 /* JobViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobViewController.m; sourceTree = "<group>"; };
+		9908DD1F21D499120002B609 /* CompanyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyInfoViewController.m; sourceTree = "<group>"; };
+		9908DD2021D499120002B609 /* JobInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobInfoViewController.h; sourceTree = "<group>"; };
+		9908DD2121D499120002B609 /* NearSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearSearchViewController.h; sourceTree = "<group>"; };
+		9908DD2221D499120002B609 /* JobSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobSearchViewController.m; sourceTree = "<group>"; };
+		9908DD2321D499120002B609 /* CompanyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyDetailViewController.m; sourceTree = "<group>"; };
+		9908DD2421D499120002B609 /* KeywordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeywordViewController.h; sourceTree = "<group>"; };
+		9908DD2521D499120002B609 /* ComplainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComplainViewController.m; sourceTree = "<group>"; };
+		9908DD2621D499120002B609 /* JobViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobViewController.h; sourceTree = "<group>"; };
+		9908DD2721D499120002B609 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		9908DD2821D499120002B609 /* JobListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobListViewController.m; sourceTree = "<group>"; };
+		9908DD2921D499120002B609 /* JobInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobInfoViewController.m; sourceTree = "<group>"; };
+		9908DD2A21D499120002B609 /* CompanyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyInfoViewController.h; sourceTree = "<group>"; };
+		9908DD3621D49D2C0002B609 /* AdAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdAlert.h; sourceTree = "<group>"; };
+		9908DD3721D49D2C0002B609 /* AdAlert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdAlert.m; sourceTree = "<group>"; };
 		990A3B841F3C550A006CB3CF /* chat_photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_photo.png; sourceTree = "<group>"; };
 		990A3B881F3C559A006CB3CF /* chat_emotion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_emotion.png; sourceTree = "<group>"; };
 		990A3B8B1F42F387006CB3CF /* 1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 1.gif; sourceTree = "<group>"; };
@@ -937,8 +982,6 @@
 		9961319F1FDFC5A600194271 /* cp_defaultlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cp_defaultlogo.png; sourceTree = "<group>"; };
 		996131A01FDFC5A700194271 /* cp_account4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cp_account4.png; sourceTree = "<group>"; };
 		996131A11FDFC5A700194271 /* cp_preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cp_preview.png; sourceTree = "<group>"; };
-		996C9082218934B600C0EF66 /* ComplainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComplainViewController.h; sourceTree = "<group>"; };
-		996C9083218934B600C0EF66 /* ComplainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComplainViewController.m; sourceTree = "<group>"; };
 		996C90862189368D00C0EF66 /* ComplainView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComplainView.h; sourceTree = "<group>"; };
 		996C90872189368D00C0EF66 /* ComplainView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComplainView.m; sourceTree = "<group>"; };
 		996C908A21894F8500C0EF66 /* AFNManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNManager.h; sourceTree = "<group>"; };
@@ -1100,27 +1143,32 @@
 		997B06641F5500A000391289 /* JobAttentionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobAttentionViewController.m; sourceTree = "<group>"; };
 		997B06651F5500A000391289 /* YourFoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YourFoodViewController.h; sourceTree = "<group>"; };
 		997B06661F5500A000391289 /* YourFoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YourFoodViewController.m; sourceTree = "<group>"; };
-		997B06681F5500A000391289 /* CompanyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyDetailViewController.h; sourceTree = "<group>"; };
-		997B06691F5500A000391289 /* CompanyDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyDetailViewController.m; sourceTree = "<group>"; };
-		997B066A1F5500A000391289 /* CompanyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyInfoViewController.h; sourceTree = "<group>"; };
-		997B066B1F5500A000391289 /* CompanyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyInfoViewController.m; sourceTree = "<group>"; };
-		997B066C1F5500A000391289 /* JobInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobInfoViewController.h; sourceTree = "<group>"; };
-		997B066D1F5500A000391289 /* JobInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobInfoViewController.m; sourceTree = "<group>"; };
-		997B066E1F5500A000391289 /* JobListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobListViewController.h; sourceTree = "<group>"; };
-		997B066F1F5500A000391289 /* JobListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobListViewController.m; sourceTree = "<group>"; };
-		997B06701F5500A000391289 /* JobSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobSearchViewController.h; sourceTree = "<group>"; };
-		997B06711F5500A000391289 /* JobSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobSearchViewController.m; sourceTree = "<group>"; };
-		997B06721F5500A000391289 /* JobViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobViewController.h; sourceTree = "<group>"; };
-		997B06731F5500A000391289 /* JobViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobViewController.m; sourceTree = "<group>"; };
-		997B06741F5500A000391289 /* KeywordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeywordViewController.h; sourceTree = "<group>"; };
-		997B06751F5500A000391289 /* KeywordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeywordViewController.m; sourceTree = "<group>"; };
-		997B06761F5500A000391289 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
-		997B06771F5500A000391289 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
-		997B06781F5500A000391289 /* NearSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearSearchViewController.h; sourceTree = "<group>"; };
-		997B06791F5500A000391289 /* NearSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearSearchViewController.m; sourceTree = "<group>"; };
 		997B06A81F5500B700391289 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Company.storyboard; sourceTree = "<group>"; };
 		997B0D0720203FD100ABB4F7 /* OrderApplyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderApplyViewController.h; sourceTree = "<group>"; };
 		997B0D0820203FD100ABB4F7 /* OrderApplyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderApplyViewController.m; sourceTree = "<group>"; };
+		9980765F21D5BAED000BC5F8 /* PJobListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJobListModel.h; sourceTree = "<group>"; };
+		9980766021D5BAED000BC5F8 /* PJobListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJobListModel.m; sourceTree = "<group>"; };
+		9980766221D5CE7E000BC5F8 /* PJobListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJobListCell.h; sourceTree = "<group>"; };
+		9980766321D5CE7E000BC5F8 /* PJobListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJobListCell.m; sourceTree = "<group>"; };
+		9980766721D6072C000BC5F8 /* pa_SetTop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pa_SetTop.png; sourceTree = "<group>"; };
+		9980766921D608DA000BC5F8 /* SetCvTopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetCvTopViewController.h; sourceTree = "<group>"; };
+		9980766A21D608DA000BC5F8 /* SetCvTopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetCvTopViewController.m; sourceTree = "<group>"; };
+		9980766C21D6147C000BC5F8 /* TopTableFirstCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopTableFirstCell.h; sourceTree = "<group>"; };
+		9980766D21D6147C000BC5F8 /* TopTableFirstCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopTableFirstCell.m; sourceTree = "<group>"; };
+		9980766F21D627E5000BC5F8 /* TopTableSecondCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopTableSecondCell.h; sourceTree = "<group>"; };
+		9980767021D627E5000BC5F8 /* TopTableSecondCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopTableSecondCell.m; sourceTree = "<group>"; };
+		9980767221D62882000BC5F8 /* CVTopPackageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVTopPackageModel.h; sourceTree = "<group>"; };
+		9980767321D62882000BC5F8 /* CVTopPackageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CVTopPackageModel.m; sourceTree = "<group>"; };
+		998E888921D703C400E8D622 /* CVPackageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVPackageView.h; sourceTree = "<group>"; };
+		998E888A21D703C400E8D622 /* CVPackageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CVPackageView.m; sourceTree = "<group>"; };
+		998E888C21D7376C00E8D622 /* TopTableThirdCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopTableThirdCell.h; sourceTree = "<group>"; };
+		998E888D21D7376C00E8D622 /* TopTableThirdCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopTableThirdCell.m; sourceTree = "<group>"; };
+		998E888F21D7385100E8D622 /* CVTicketModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVTicketModel.h; sourceTree = "<group>"; };
+		998E889021D7385100E8D622 /* CVTicketModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CVTicketModel.m; sourceTree = "<group>"; };
+		998E889221D739F200E8D622 /* CVTicketCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVTicketCell.h; sourceTree = "<group>"; };
+		998E889321D739F200E8D622 /* CVTicketCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CVTicketCell.m; sourceTree = "<group>"; };
+		998E889521D7739700E8D622 /* ZHAttributeTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHAttributeTextView.h; sourceTree = "<group>"; };
+		998E889621D7739800E8D622 /* ZHAttributeTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHAttributeTextView.m; sourceTree = "<group>"; };
 		998F8A6F21913D3C003DBAB1 /* EmploymentNewsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmploymentNewsController.h; sourceTree = "<group>"; };
 		998F8A7021913D3C003DBAB1 /* EmploymentNewsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmploymentNewsController.m; sourceTree = "<group>"; };
 		998F8A72219141BC003DBAB1 /* TalentsTestController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TalentsTestController.h; sourceTree = "<group>"; };
@@ -1239,6 +1287,26 @@
 		99DA6BA92047F62600BBDA59 /* DownloadCvViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadCvViewController.m; sourceTree = "<group>"; };
 		99DA6BAB2047F6EB00BBDA59 /* FavoriteCvViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FavoriteCvViewController.h; sourceTree = "<group>"; };
 		99DA6BAC2047F6EB00BBDA59 /* FavoriteCvViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FavoriteCvViewController.m; sourceTree = "<group>"; };
+		99DCE27221DC431A0060B147 /* ProtocolView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProtocolView.h; sourceTree = "<group>"; };
+		99DCE27321DC431A0060B147 /* ProtocolView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProtocolView.m; sourceTree = "<group>"; };
+		99DCE27521DC915D0060B147 /* ShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
+		99DCE27621DC915D0060B147 /* ShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
+		99DCE27821DCBA890060B147 /* RedPacketView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedPacketView.h; sourceTree = "<group>"; };
+		99DCE27921DCBA890060B147 /* RedPacketView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedPacketView.m; sourceTree = "<group>"; };
+		99DCE27B21DDAB410060B147 /* ConfirmOrderController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfirmOrderController.h; sourceTree = "<group>"; };
+		99DCE27C21DDAB410060B147 /* ConfirmOrderController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfirmOrderController.m; sourceTree = "<group>"; };
+		99DCE27E21DDBA9F0060B147 /* DiscountInfoModle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscountInfoModle.h; sourceTree = "<group>"; };
+		99DCE27F21DDBA9F0060B147 /* DiscountInfoModle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscountInfoModle.m; sourceTree = "<group>"; };
+		99DCE28121DDD6D30060B147 /* ConfirmOrderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfirmOrderCell.h; sourceTree = "<group>"; };
+		99DCE28221DDD6D30060B147 /* ConfirmOrderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfirmOrderCell.m; sourceTree = "<group>"; };
+		99DCE28421DDE38B0060B147 /* DiscountCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscountCell.h; sourceTree = "<group>"; };
+		99DCE28521DDE38B0060B147 /* DiscountCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscountCell.m; sourceTree = "<group>"; };
+		99DCE28721DDECDA0060B147 /* PayWayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayWayCell.h; sourceTree = "<group>"; };
+		99DCE28821DDECDA0060B147 /* PayWayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayWayCell.m; sourceTree = "<group>"; };
+		99DCE28A21DDED720060B147 /* PayWayModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PayWayModel.h; sourceTree = "<group>"; };
+		99DCE28B21DDED720060B147 /* PayWayModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayWayModel.m; sourceTree = "<group>"; };
+		99DCE28D21DDFB120060B147 /* BottomPayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BottomPayView.h; sourceTree = "<group>"; };
+		99DCE28E21DDFB120060B147 /* BottomPayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BottomPayView.m; sourceTree = "<group>"; };
 		99E031E721ABE13400FB5530 /* CVListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVListModel.h; sourceTree = "<group>"; };
 		99E031E821ABE13400FB5530 /* CVListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CVListModel.m; sourceTree = "<group>"; };
 		99E031EA21ABE9F000FB5530 /* OneMinuteCVViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneMinuteCVViewController.h; sourceTree = "<group>"; };
@@ -1339,6 +1407,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9908DD1621D499120002B609 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9908DD1821D499120002B609 /* JobSearchViewController.h */,
+				9908DD2221D499120002B609 /* JobSearchViewController.m */,
+				9908DD1A21D499120002B609 /* ComplainViewController.h */,
+				9908DD2521D499120002B609 /* ComplainViewController.m */,
+				9908DD1C21D499120002B609 /* JobListViewController.h */,
+				9908DD2821D499120002B609 /* JobListViewController.m */,
+				9908DD2621D499120002B609 /* JobViewController.h */,
+				9908DD1E21D499120002B609 /* JobViewController.m */,
+				9908DD2A21D499120002B609 /* CompanyInfoViewController.h */,
+				9908DD1F21D499120002B609 /* CompanyInfoViewController.m */,
+				9908DD2021D499120002B609 /* JobInfoViewController.h */,
+				9908DD2921D499120002B609 /* JobInfoViewController.m */,
+				9908DD2121D499120002B609 /* NearSearchViewController.h */,
+				9908DD1921D499120002B609 /* NearSearchViewController.m */,
+				9908DD1721D499120002B609 /* CompanyDetailViewController.h */,
+				9908DD2321D499120002B609 /* CompanyDetailViewController.m */,
+				9908DD2421D499120002B609 /* KeywordViewController.h */,
+				9908DD1B21D499120002B609 /* KeywordViewController.m */,
+				9908DD2721D499120002B609 /* MapViewController.h */,
+				9908DD1D21D499120002B609 /* MapViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		9908DD3521D499290002B609 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		990A3B8A1F42F387006CB3CF /* Emotion */ = {
 			isa = PBXGroup;
 			children = (
@@ -1799,6 +1901,18 @@
 		991D7A8D219D43230019123A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				99DCE28121DDD6D30060B147 /* ConfirmOrderCell.h */,
+				99DCE28221DDD6D30060B147 /* ConfirmOrderCell.m */,
+				99DCE28421DDE38B0060B147 /* DiscountCell.h */,
+				99DCE28521DDE38B0060B147 /* DiscountCell.m */,
+				99DCE28721DDECDA0060B147 /* PayWayCell.h */,
+				99DCE28821DDECDA0060B147 /* PayWayCell.m */,
+				99DCE27221DC431A0060B147 /* ProtocolView.h */,
+				99DCE27321DC431A0060B147 /* ProtocolView.m */,
+				99DCE27521DC915D0060B147 /* ShareView.h */,
+				99DCE27621DC915D0060B147 /* ShareView.m */,
+				99DCE27821DCBA890060B147 /* RedPacketView.h */,
+				99DCE27921DCBA890060B147 /* RedPacketView.m */,
 				99D18D80219D688D00FBEDD6 /* TagView.h */,
 				99D18D7F219D688C00FBEDD6 /* TagView.m */,
 				991D7A8F219D43230019123A /* ShieldSetEmptyDataView.h */,
@@ -1825,6 +1939,18 @@
 				996D64AE21B643BA0095EA95 /* SpeakBtn.m */,
 				9993C34521BF51FB0085A6F8 /* SpeakLoadingBtn.h */,
 				9993C34621BF51FB0085A6F8 /* SpeakLoadingBtn.m */,
+				9980766C21D6147C000BC5F8 /* TopTableFirstCell.h */,
+				9980766D21D6147C000BC5F8 /* TopTableFirstCell.m */,
+				9980766F21D627E5000BC5F8 /* TopTableSecondCell.h */,
+				9980767021D627E5000BC5F8 /* TopTableSecondCell.m */,
+				998E888C21D7376C00E8D622 /* TopTableThirdCell.h */,
+				998E888D21D7376C00E8D622 /* TopTableThirdCell.m */,
+				998E888921D703C400E8D622 /* CVPackageView.h */,
+				998E888A21D703C400E8D622 /* CVPackageView.m */,
+				998E889221D739F200E8D622 /* CVTicketCell.h */,
+				998E889321D739F200E8D622 /* CVTicketCell.m */,
+				99DCE28D21DDFB120060B147 /* BottomPayView.h */,
+				99DCE28E21DDFB120060B147 /* BottomPayView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1850,6 +1976,14 @@
 				9997439121AD1AEF00B076A2 /* OneMinuteModel.m */,
 				996D64AA21B626B30095EA95 /* VoiceModel.h */,
 				996D64AB21B626B30095EA95 /* VoiceModel.m */,
+				9980767221D62882000BC5F8 /* CVTopPackageModel.h */,
+				9980767321D62882000BC5F8 /* CVTopPackageModel.m */,
+				998E888F21D7385100E8D622 /* CVTicketModel.h */,
+				998E889021D7385100E8D622 /* CVTicketModel.m */,
+				99DCE27E21DDBA9F0060B147 /* DiscountInfoModle.h */,
+				99DCE27F21DDBA9F0060B147 /* DiscountInfoModle.m */,
+				99DCE28A21DDED720060B147 /* PayWayModel.h */,
+				99DCE28B21DDED720060B147 /* PayWayModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2165,6 +2299,7 @@
 				995A4A021F0B3A3C0047EDBE /* pa_open1.png */,
 				995A4A031F0B3A3C0047EDBE /* pa_open2.png */,
 				995A49FC1F0A76DE0047EDBE /* pa_refresh.png */,
+				9980766721D6072C000BC5F8 /* pa_SetTop.png */,
 				995A49FA1F0A735B0047EDBE /* pa_edit.png */,
 				995A49F81F0A455A0047EDBE /* img_frog.png */,
 				995A49EC1F064D420047EDBE /* img_heart.png */,
@@ -2252,6 +2387,8 @@
 		996C90852189366F00C0EF66 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9980766221D5CE7E000BC5F8 /* PJobListCell.h */,
+				9980766321D5CE7E000BC5F8 /* PJobListCell.m */,
 				996C90862189368D00C0EF66 /* ComplainView.h */,
 				996C90872189368D00C0EF66 /* ComplainView.m */,
 				9993A571218AB1060057B6FD /* OnlineLab.h */,
@@ -2264,6 +2401,8 @@
 				9945A3C421CC912800818358 /* ApplySucceedAlert.m */,
 				9945A3C621CCBD6200818358 /* SelectCvAlert.h */,
 				9945A3C721CCBD6200818358 /* SelectCvAlert.m */,
+				9908DD3621D49D2C0002B609 /* AdAlert.h */,
+				9908DD3721D49D2C0002B609 /* AdAlert.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2549,6 +2688,10 @@
 				993ED84321B51E4100A988FF /* SpeechViewController.m */,
 				990E9D8221BFB02D0066082A /* LongVoiceInputController.h */,
 				990E9D8321BFB02D0066082A /* LongVoiceInputController.m */,
+				9980766921D608DA000BC5F8 /* SetCvTopViewController.h */,
+				9980766A21D608DA000BC5F8 /* SetCvTopViewController.m */,
+				99DCE27B21DDAB410060B147 /* ConfirmOrderController.h */,
+				99DCE27C21DDAB410060B147 /* ConfirmOrderController.m */,
 				9997439521AD201B00B076A2 /* Other */,
 				991DAA9821A5525A00586AA7 /* Model */,
 				991D7A8D219D43230019123A /* View */,
@@ -2591,28 +2734,10 @@
 		997B06671F5500A000391289 /* Job */ = {
 			isa = PBXGroup;
 			children = (
-				997B06681F5500A000391289 /* CompanyDetailViewController.h */,
-				997B06691F5500A000391289 /* CompanyDetailViewController.m */,
-				997B066A1F5500A000391289 /* CompanyInfoViewController.h */,
-				997B066B1F5500A000391289 /* CompanyInfoViewController.m */,
-				997B066C1F5500A000391289 /* JobInfoViewController.h */,
-				997B066D1F5500A000391289 /* JobInfoViewController.m */,
-				997B066E1F5500A000391289 /* JobListViewController.h */,
-				997B066F1F5500A000391289 /* JobListViewController.m */,
-				997B06701F5500A000391289 /* JobSearchViewController.h */,
-				997B06711F5500A000391289 /* JobSearchViewController.m */,
-				997B06721F5500A000391289 /* JobViewController.h */,
-				997B06731F5500A000391289 /* JobViewController.m */,
-				997B06741F5500A000391289 /* KeywordViewController.h */,
-				997B06751F5500A000391289 /* KeywordViewController.m */,
-				997B06761F5500A000391289 /* MapViewController.h */,
-				997B06771F5500A000391289 /* MapViewController.m */,
-				997B06781F5500A000391289 /* NearSearchViewController.h */,
-				997B06791F5500A000391289 /* NearSearchViewController.m */,
-				996C9082218934B600C0EF66 /* ComplainViewController.h */,
-				996C9083218934B600C0EF66 /* ComplainViewController.m */,
+				9908DD1621D499120002B609 /* Controller */,
 				9993A56D218AA9FA0057B6FD /* Model */,
 				996C90852189366F00C0EF66 /* View */,
+				9908DD3521D499290002B609 /* Other */,
 			);
 			path = Job;
 			sourceTree = "<group>";
@@ -2644,6 +2769,8 @@
 				9993A56F218AAA180057B6FD /* UserInfo.m */,
 				99949F5121C248B2002109D1 /* InsertJobApplyModel.h */,
 				99949F5221C248B2002109D1 /* InsertJobApplyModel.m */,
+				9980765F21D5BAED000BC5F8 /* PJobListModel.h */,
+				9980766021D5BAED000BC5F8 /* PJobListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2723,6 +2850,8 @@
 		9997439521AD201B00B076A2 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				998E889521D7739700E8D622 /* ZHAttributeTextView.h */,
+				998E889621D7739800E8D622 /* ZHAttributeTextView.m */,
 				9997439621AD204A00B076A2 /* OneMinuteArray.h */,
 				9997439721AD204A00B076A2 /* OneMinuteArray.m */,
 			);
@@ -3092,6 +3221,7 @@
 				995C3DB91EF7D02100277468 /* pa_guidepic1.png in Resources */,
 				995A4A051F0B3A3C0047EDBE /* pa_open2.png in Resources */,
 				990A3BDA1F42F387006CB3CF /* 36.gif in Resources */,
+				9980766821D6072C000BC5F8 /* pa_SetTop.png in Resources */,
 				995C3DD01EF7D24E00277468 /* pa_chat.png in Resources */,
 				99FFAD9C21D3AAB8009FA88D /* job_item5.png in Resources */,
 				996D649F21B60D170095EA95 /* voice_loading_6.png in Resources */,
@@ -3213,7 +3343,6 @@
 			files = (
 				9939A603207A0AB1005D2146 /* AccountSafeViewController.m in Sources */,
 				9919FA411EDFC24400BE51F0 /* UIView+Toast.m in Sources */,
-				997B06A31F5500A000391289 /* JobViewController.m in Sources */,
 				99937992219AAB730087D404 /* MenuButton.m in Sources */,
 				9997439821AD204A00B076A2 /* OneMinuteArray.m in Sources */,
 				997B067D1F5500A000391289 /* ForgetPasswordViewController.m in Sources */,
@@ -3226,15 +3355,20 @@
 				995231A02052AB0400C8836D /* ExpiredJobListViewController.m in Sources */,
 				996D64AF21B643BA0095EA95 /* SpeakBtn.m in Sources */,
 				9960E25D219019CC008E6DE5 /* MBProgressHUD+Gif.m in Sources */,
+				9980766121D5BAED000BC5F8 /* PJobListModel.m in Sources */,
 				991A24421EE6D7A9008CD8E9 /* ASINetworkQueue.m in Sources */,
 				9952319D2052AAE200C8836D /* IssueJobListViewController.m in Sources */,
+				9908DD3421D499130002B609 /* JobInfoViewController.m in Sources */,
 				99AAF5E4201EFC220047959C /* OrderDetailViewController.m in Sources */,
 				991C6F791FFE1B7B009FD82A /* InterviewCpDetailViewController.m in Sources */,
+				9908DD3021D499130002B609 /* JobSearchViewController.m in Sources */,
 				99C5EEB32017293F00AC8FBD /* ChatCpViewController.m in Sources */,
 				992985271F5539CB0021F863 /* WKNavigationController.m in Sources */,
+				99DCE28621DDE38B0060B147 /* DiscountCell.m in Sources */,
 				991C6F6D1FFB6402009FD82A /* ContactUsViewController.m in Sources */,
 				99ED2804219E499B00ED656A /* InputAlertView.m in Sources */,
 				997B068F1F5500A000391289 /* PaInfoModifyViewController.m in Sources */,
+				998E888B21D703C400E8D622 /* CVPackageView.m in Sources */,
 				997B06921F5500A000391289 /* ApplyInvitationViewController.m in Sources */,
 				9957BB9C207F4148000EEAF1 /* InterviewSendViewController.m in Sources */,
 				9919F9501EDE445300BE51F0 /* iOS51rcProject.xcdatamodeld in Sources */,
@@ -3248,18 +3382,22 @@
 				99FCF1FD2011D320008B5A69 /* AccountListViewController.m in Sources */,
 				997B06851F5500A000391289 /* ChatViewController.m in Sources */,
 				9929852A1F5539CB0021F863 /* WKTableView.m in Sources */,
+				998E889721D7739800E8D622 /* ZHAttributeTextView.m in Sources */,
 				997B06971F5500A000391289 /* CpViewViewController.m in Sources */,
 				9957BB8F207C4B34000EEAF1 /* CvDetailViewController.m in Sources */,
 				992985261F5539CB0021F863 /* WKLoginView.m in Sources */,
 				997B068D1F5500A000391289 /* MajorViewController.m in Sources */,
+				9908DD2B21D499130002B609 /* NearSearchViewController.m in Sources */,
 				997B069A1F5500A000391289 /* JobApplyChildViewController.m in Sources */,
 				992985251F5539CB0021F863 /* WKLoadingView.m in Sources */,
 				99EE84C11F7205B900B2AFF9 /* CpForgetPasswordViewController.m in Sources */,
 				99C5EEB62018731600AC8FBD /* OrderStatusViewController.m in Sources */,
+				99DCE27A21DCBA890060B147 /* RedPacketView.m in Sources */,
 				997B06871F5500A000391289 /* CvInfoViewController.m in Sources */,
 				995231BA2059105700C8836D /* DemandViewController.m in Sources */,
+				99DCE28921DDECDA0060B147 /* PayWayCell.m in Sources */,
+				9908DD3321D499130002B609 /* JobListViewController.m in Sources */,
 				99A816B52088972F0026802B /* CpMobileVerifyViewController.m in Sources */,
-				997B06A41F5500A000391289 /* KeywordViewController.m in Sources */,
 				99ED2807219E90B000ED656A /* AlertView.m in Sources */,
 				9919F9471EDE445300BE51F0 /* AppDelegate.m in Sources */,
 				9929852B1F5539CB0021F863 /* WKTextView.m in Sources */,
@@ -3269,20 +3407,25 @@
 				991C6F6A1FFB636E009FD82A /* AccountViewController.m in Sources */,
 				99E031EC21ABE9F000FB5530 /* OneMinuteCVViewController.m in Sources */,
 				991C6F85200C49CB009FD82A /* CpEnvironmentViewController.m in Sources */,
-				997B06A51F5500A000391289 /* MapViewController.m in Sources */,
 				997B06881F5500A000391289 /* EducationModifyViewController.m in Sources */,
 				997B06891F5500A000391289 /* EducationViewController.m in Sources */,
 				9993A570218AAA180057B6FD /* UserInfo.m in Sources */,
 				9929852F1F553A300021F863 /* CpIndexViewController.m in Sources */,
+				998E889421D739F200E8D622 /* CVTicketCell.m in Sources */,
+				998E888E21D7376C00E8D622 /* TopTableThirdCell.m in Sources */,
+				9980766421D5CE7E000BC5F8 /* PJobListCell.m in Sources */,
 				99EE84BE1F72028700B2AFF9 /* CpRegisterViewController.m in Sources */,
 				997B06991F5500A000391289 /* InvitationViewController.m in Sources */,
 				991D7A93219D48F50019123A /* AddShieldBtn.m in Sources */,
 				995C3D701EF7CD7100277468 /* SCNavTabBar.m in Sources */,
 				9993A573218AB1060057B6FD /* OnlineLab.m in Sources */,
+				99DCE28021DDBA9F0060B147 /* DiscountInfoModle.m in Sources */,
+				9908DD3821D49D2C0002B609 /* AdAlert.m in Sources */,
 				996EB7B0218C3687000B475E /* NavBar.m in Sources */,
 				9960E259218FCA95008E6DE5 /* CountdownBtn.m in Sources */,
 				993ED84121B510F700A988FF /* SpeechButton.m in Sources */,
 				991A24431EE6D7A9008CD8E9 /* Reachability.m in Sources */,
+				99DCE28F21DDFB120060B147 /* BottomPayView.m in Sources */,
 				997B068E1F5500A000391289 /* MultiSelectViewController.m in Sources */,
 				990EF79D21A3903A00C63AEB /* ReplyAlert.m in Sources */,
 				998F8A7121913D3C003DBAB1 /* EmploymentNewsController.m in Sources */,
@@ -3292,6 +3435,8 @@
 				992985231F5539CB0021F863 /* WKFilterView.m in Sources */,
 				99D74045202732A1005B2CD3 /* CvSearchConditionViewController.m in Sources */,
 				991C6F701FFB6451009FD82A /* Html5ViewController.m in Sources */,
+				9908DD2F21D499130002B609 /* CompanyInfoViewController.m in Sources */,
+				998E889121D7385100E8D622 /* CVTicketModel.m in Sources */,
 				997B06811F5500A000391289 /* PaRegisterViewController.m in Sources */,
 				9997439221AD1AEF00B076A2 /* OneMinuteModel.m in Sources */,
 				997B067F1F5500A000391289 /* PaIndexViewController.m in Sources */,
@@ -3300,24 +3445,21 @@
 				9947F2B22193ED25002C97F2 /* BaseTabbar.m in Sources */,
 				991A243C1EE6D7A9008CD8E9 /* ASIDataCompressor.m in Sources */,
 				991C6F7C200C3B4E009FD82A /* SysViewController.m in Sources */,
-				996C9084218934B600C0EF66 /* ComplainViewController.m in Sources */,
 				99949F4D21C0D4EE002109D1 /* RecommendJobView.m in Sources */,
 				9990A70521A6490200A320FD /* AttachMentView.m in Sources */,
 				991DAA9E21A557DD00586AA7 /* AttachmentImgView.m in Sources */,
 				9993A589218AD0C80057B6FD /* CvOperate.m in Sources */,
 				9994848121D1CD7400C78955 /* MyTalentsTestViewController.m in Sources */,
-				997B069F1F5500A000391289 /* CompanyInfoViewController.m in Sources */,
 				9929852C1F5539CB0021F863 /* WKViewController.m in Sources */,
 				99C5EEB92018732600AC8FBD /* FeeStandardViewController.m in Sources */,
 				99DA6BAA2047F62600BBDA59 /* DownloadCvViewController.m in Sources */,
+				9980766B21D608DA000BC5F8 /* SetCvTopViewController.m in Sources */,
 				997B06951F5500A000391289 /* CpAttentionViewController.m in Sources */,
 				99DA6BA72047D58800BBDA59 /* ApplyCvViewController.m in Sources */,
 				997B068C1F5500A000391289 /* IntentionModifyViewController.m in Sources */,
-				997B06A61F5500A000391289 /* NearSearchViewController.m in Sources */,
 				991A24471EE6D7A9008CD8E9 /* SoapXmlParseHelper.m in Sources */,
 				99101B4D2073703400ED060B /* AccountInfoViewController.m in Sources */,
 				995231A32052AB5200C8836D /* JobManagerViewController.m in Sources */,
-				997B06A21F5500A000391289 /* JobSearchViewController.m in Sources */,
 				99D18D81219D688D00FBEDD6 /* TagView.m in Sources */,
 				997B06901F5500A000391289 /* PreviewViewController.m in Sources */,
 				991A24411EE6D7A9008CD8E9 /* ASIInputStream.m in Sources */,
@@ -3329,14 +3471,16 @@
 				991C6F631FFB5A5F009FD82A /* CvManagerViewController.m in Sources */,
 				99EC66E621B0D79F00756113 /* RCRootViewController.m in Sources */,
 				99F7FC8B2043B7170060E9F1 /* CvRecruitmentListViewController.m in Sources */,
+				99DCE27421DC431A0060B147 /* ProtocolView.m in Sources */,
 				99F7FC842041427D0060E9F1 /* WKCvTableViewCell.m in Sources */,
 				992985221F5539CB0021F863 /* WKButton.m in Sources */,
-				997B06A11F5500A000391289 /* JobListViewController.m in Sources */,
 				997B0D0920203FD100ABB4F7 /* OrderApplyViewController.m in Sources */,
 				996C908C21894F8500C0EF66 /* AFNManager.m in Sources */,
 				9919FA251EDF9BB500BE51F0 /* RoleViewController.m in Sources */,
 				997B067B1F5500A000391289 /* AgreementViewController.m in Sources */,
+				9908DD2D21D499130002B609 /* MapViewController.m in Sources */,
 				991A24451EE6D7A9008CD8E9 /* NetWebServiceRequest.m in Sources */,
+				99DCE28C21DDED720060B147 /* PayWayModel.m in Sources */,
 				99AAD49B206BD25C0053C2A0 /* JobPushViewController.m in Sources */,
 				991A24401EE6D7A9008CD8E9 /* ASIHTTPRequest.m in Sources */,
 				991C6F731FFE1239009FD82A /* InterviewCpViewController.m in Sources */,
@@ -3347,8 +3491,9 @@
 				99A826611EEA329800609D94 /* MLImageCrop.m in Sources */,
 				997B06861F5500A000391289 /* CvInfoChildViewController.m in Sources */,
 				997B067E1F5500A000391289 /* OneMinuteViewController.m in Sources */,
-				997B069E1F5500A000391289 /* CompanyDetailViewController.m in Sources */,
 				991C6F82200C49B1009FD82A /* CpLogoViewController.m in Sources */,
+				9908DD3121D499130002B609 /* CompanyDetailViewController.m in Sources */,
+				99DCE27D21DDAB410060B147 /* ConfirmOrderController.m in Sources */,
 				997B06981F5500A000391289 /* InterviewViewController.m in Sources */,
 				991C6F7F200C4995009FD82A /* CpModifyViewController.m in Sources */,
 				991DAA9B21A5528D00586AA7 /* AttachmentModel.m in Sources */,
@@ -3358,6 +3503,7 @@
 				991D7A89219D37A20019123A /* BarButtonItem.m in Sources */,
 				9945A3C821CCBD6200818358 /* SelectCvAlert.m in Sources */,
 				991A243E1EE6D7A9008CD8E9 /* ASIDownloadCache.m in Sources */,
+				9908DD2E21D499130002B609 /* JobViewController.m in Sources */,
 				9993C34721BF51FB0085A6F8 /* SpeakLoadingBtn.m in Sources */,
 				997B06831F5500A000391289 /* SalaryViewController.m in Sources */,
 				997B069D1F5500A000391289 /* YourFoodViewController.m in Sources */,
@@ -3365,6 +3511,8 @@
 				997B06801F5500A000391289 /* PaLoginViewController.m in Sources */,
 				991A243F1EE6D7A9008CD8E9 /* ASIFormDataRequest.m in Sources */,
 				992985241F5539CB0021F863 /* WKLabel.m in Sources */,
+				9980766E21D6147C000BC5F8 /* TopTableFirstCell.m in Sources */,
+				9908DD2C21D499130002B609 /* KeywordViewController.m in Sources */,
 				9945A3C521CC912800818358 /* ApplySucceedAlert.m in Sources */,
 				996F50572188340200D2A7E9 /* TABButton.m in Sources */,
 				992985321F553BCE0021F863 /* CpLoginViewController.m in Sources */,
@@ -3372,6 +3520,9 @@
 				991D7A86219D35FB0019123A /* ShieldSetViewController.m in Sources */,
 				99D7404B20273F71005B2CD3 /* CvRecruitmentConditionViewController.m in Sources */,
 				995C3D6F1EF7CD7100277468 /* SCNavTabBarController.m in Sources */,
+				99DCE27721DC915D0060B147 /* ShareView.m in Sources */,
+				9980767121D627E5000BC5F8 /* TopTableSecondCell.m in Sources */,
+				9980767421D62882000BC5F8 /* CVTopPackageModel.m in Sources */,
 				9993798F219A9C250087D404 /* PullDownMenu.m in Sources */,
 				990431062094076900B4267D /* UIImage+Size.m in Sources */,
 				9997438C21AD11DD00B076A2 /* OnMinuteSingleCell.m in Sources */,
@@ -3386,17 +3537,18 @@
 				998F8A74219141BC003DBAB1 /* TalentsTestController.m in Sources */,
 				997B06911F5500A000391289 /* SpecialityModifyViewController.m in Sources */,
 				99AA4AAD2192B7780053F750 /* NSString+RCString.m in Sources */,
+				9908DD3221D499130002B609 /* ComplainViewController.m in Sources */,
 				99D18D84219D6E4B00FBEDD6 /* TagViewBtn.m in Sources */,
 				99F7FC7E204034190060E9F1 /* CvSearchListViewController.m in Sources */,
 				99D7404820273EE5005B2CD3 /* CvRecommendViewController.m in Sources */,
 				991A243B1EE6D7A9008CD8E9 /* ASIAuthenticationDialog.m in Sources */,
 				99FCF2002011D344008B5A69 /* AccountQuotaViewController.m in Sources */,
-				997B06A01F5500A000391289 /* JobInfoViewController.m in Sources */,
 				991A243D1EE6D7A9008CD8E9 /* ASIDataDecompressor.m in Sources */,
 				997B068B1F5500A000391289 /* ExperienceViewController.m in Sources */,
 				99C5EEBC2018733D00AC8FBD /* OrderListViewController.m in Sources */,
 				9919FA191EDE6A6100BE51F0 /* GuideViewController.m in Sources */,
 				99949F5321C248B2002109D1 /* InsertJobApplyModel.m in Sources */,
+				99DCE28321DDD6D30060B147 /* ConfirmOrderCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,4 +15,6 @@
 
 + (NSString *)getBDSASRParameter:(NSString *)param;
 
++ (NSDictionary *)translateJsonStrToDictionary:(NSString *)jsonStr;
+
 @end

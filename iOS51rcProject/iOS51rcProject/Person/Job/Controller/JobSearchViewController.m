@@ -22,10 +22,12 @@
 #import "KeywordViewController.h"
 #import "NearSearchViewController.h"
 #import "UIView+Toast.h"
-#import "OnlineLab.h"
 #import "NSString+RCString.h"
 #import "RecommendJobView.h"
 #import "InsertJobApplyModel.h"
+#import "AdAlert.h"
+#import "PJobListModel.h"
+#import "PJobListCell.h"
 
 @interface JobSearchViewController ()<BMKLocationServiceDelegate, BMKGeoCodeSearchDelegate, BMKGeneralDelegate, NetWebServiceRequestDelegate, UITableViewDelegate, UITableViewDataSource, WKFilterViewDelegate, UIScrollViewDelegate, UITextFieldDelegate, KeyWordViewDelegate, WKPopViewDelegate>
 
@@ -36,10 +38,9 @@
 @property (nonatomic, strong) WKFilterView *viewPopFilterOther;
 @property (nonatomic, strong) UITextField *txtKeyword;
 @property (nonatomic, strong) UIView *viewFilter;
-@property (nonatomic, strong) UIView *viewAd;
 @property (nonatomic, strong) WKTableView *tableView;
 @property (nonatomic, strong) NSMutableDictionary *dataParam;
-@property (nonatomic, strong) NSMutableArray *arrData;
+@property (nonatomic, strong) NSMutableArray *arrData;// 职位列表数据源
 @property (nonatomic, strong) NSMutableArray *arrJobType;
 @property (nonatomic, strong) NSMutableArray *arrJobPlace;
 @property (nonatomic, strong) NSMutableArray *arrJobTypeSelect;
@@ -66,7 +67,12 @@
     }
     return _insertJobApplyDataArr;
 }
-
+- (NSMutableArray *)arrData{
+    if (!_arrData) {
+        _arrData = [[NSMutableArray alloc]init];
+    }
+    return _arrData;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -173,7 +179,6 @@
     [viewStatusBar setBackgroundColor:NAVBARCOLOR];
     [self.view addSubview:viewStatusBar];
     //搜索
-    self.arrData = [[NSMutableArray alloc] init];
     if ([[USER_DEFAULT objectForKey:@"positioned"] isEqualToString:@"0"]) {
         self.searcher = [[BMKGeoCodeSearch alloc] init];
         self.searcher.delegate = self;
@@ -307,90 +312,25 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-    return cell.frame.size.height;
+    
+    return [self.tableView cellHeightForIndexPath:indexPath model:self.arrData[indexPath.row] keyPath:@"model" cellClass:[PJobListCell class] contentViewWidth:SCREEN_WIDTH];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    }
-    for (UIView *view in cell.contentView.subviews) {
-        [view removeFromSuperview];
-    }
-    NSDictionary *data = [self.arrData objectAtIndex:indexPath.row];
-    
-    if ([[data objectForKey:@"IsTop"] boolValue]) {
-        UIImageView *imgTop = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-        [imgTop setImage:[UIImage imageNamed:@"job_top.png"]];
-        [imgTop setContentMode:UIViewContentModeScaleAspectFit];
-        [cell.contentView addSubview:imgTop];
-    }
-    UIImageView *imgLogo = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, 50, 50)];
-    [imgLogo sd_setImageWithURL:[NSURL URLWithString:[data objectForKey:@"LogoUrl"]] placeholderImage:[UIImage imageNamed:@"img_defaultlogo.png"]];
-    [cell.contentView addSubview:imgLogo];
-    
-    float maxWidth = SCREEN_WIDTH - VIEW_BX(imgLogo) - 20;
-    WKLabel *lbJob = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_BX(imgLogo) + 15, VIEW_Y(imgLogo) - 5, maxWidth - 70, 20) content:[data objectForKey:@"JobName"] size:BIGGERFONTSIZE color:[UIColor blackColor]];
-    [cell.contentView addSubview:lbJob];
-    
-    if ([[data objectForKey:@"IsOnline"] boolValue]) {
-        OnlineLab *onlineLab = [[OnlineLab alloc]initWithFrame:CGRectMake(VIEW_BX(lbJob) + 3, VIEW_Y(lbJob) + 2, 30, 16)];
-        [cell.contentView addSubview:onlineLab];
-    }
-    
-    WKLabel *lbSalary = [[WKLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 75, VIEW_Y(lbJob), 70, 20) content:[Common getSalary:[data objectForKey:@"dcSalaryID"] salaryMin:[data objectForKey:@"dcSalary"] salaryMax:[data objectForKey:@"dcSalaryMax"] negotiable:@""] size:DEFAULTFONTSIZE color:NAVBARCOLOR];
-    [lbSalary setTextAlignment:NSTextAlignmentRight];
-    [cell.contentView addSubview:lbSalary];
-    
-    WKLabel *lbCompany = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_X(lbJob), VIEW_BY(lbJob), maxWidth - 65, 20) content:[data objectForKey:@"cpName"] size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR];
-    [cell.contentView addSubview:lbCompany];
-    
-    // 刷新时间
-    WKLabel *lbDate = [[WKLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 75, VIEW_Y(lbCompany), 70, 20) content:[Common stringFromRefreshDate:[data objectForKey:@"RefreshDate"]] size:SMALLERFONTSIZE color:TEXTGRAYCOLOR];
-    [lbDate setTextAlignment:NSTextAlignmentRight];
-    [cell.contentView addSubview:lbDate];
-    
-    NSString *experience = [data objectForKey:@"ExperienceName"];
-    if ([experience isEqualToString:@"不限"]) {
-        experience = @"经验不限";
-    }
-    NSString *education = [data objectForKey:@"EducationName"];
-    if ([education length] == 0) {
-        education = @"学历不限";
-    }
-    NSString *reginStr = [NSString cutProvince:[data objectForKey:@"Region"]];
-    WKLabel *lbDetail = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_X(lbCompany), VIEW_BY(lbCompany), maxWidth, 20) content:[NSString stringWithFormat:@"%@ | %@ | %@", reginStr, experience, education] size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR];
-    [cell.contentView addSubview:lbDetail];
-    
-    UIView *viewSeparate = [[UIView alloc] initWithFrame:CGRectMake(15, VIEW_BY(lbDetail) + 10, SCREEN_WIDTH - 30, 1)];
-    [viewSeparate setBackgroundColor:SEPARATECOLOR];
-    [cell.contentView addSubview:viewSeparate];
-    
-    [cell setFrame:CGRectMake(0, 0, SCREEN_WIDTH, VIEW_BY(viewSeparate))];
-    return cell;
+    PJobListModel *model = [self.arrData objectAtIndex:indexPath.row];
+    PJobListCell *cellTest = [[PJobListCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
+    cellTest.model = model;
+    return cellTest;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [self getCvList];
-//    return;
-    
+
+    PJobListModel *model = [self.arrData objectAtIndex:indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSDictionary *data = [self.arrData objectAtIndex:indexPath.row];
     WKNavigationController *jobNav = [[UIStoryboard storyboardWithName:@"Person" bundle:nil] instantiateViewControllerWithIdentifier:@"jobView"];
     JobViewController *jobCtrl = jobNav.viewControllers[0];
-    jobCtrl.jobId = [data objectForKey:@"ID"];
+    jobCtrl.jobId = model.ID;
     [self presentViewController:jobNav animated:YES completion:nil];
-//    [self.navigationController pushViewController:jobCtrl animated:YES];
-    
-    //JobDetail
-    
-//    JobViewController *jobvc = [[UIStoryboard storyboardWithName:@"Person" bundle:nil] instantiateViewControllerWithIdentifier:@"JobDetail"];
-//    JobViewController *jobCtrl = jobNav.viewControllers[0];
-//    jobCtrl.jobId = [data objectForKey:@"ID"];
-//    [self presentViewController:jobNav animated:YES completion:nil];
-    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -464,17 +404,20 @@
             [self.arrData removeAllObjects];
             [self.tableView setContentOffset:CGPointMake(0, 0)];
         }
-        NSArray *arrayData = [Common getArrayFromXml:requestData tableName:@"dtJobList"];
-        [self.arrData addObjectsFromArray:arrayData];
+        NSArray *dtJobListArr  = [Common getArrayFromXml:requestData tableName:@"dtJobList"];
+        for (NSDictionary *dict in dtJobListArr) {
+            PJobListModel *model = [PJobListModel buideModel:dict];
+            [self.arrData addObject:model];
+        }
         [self.tableView reloadData];
         
-        if (self.arrData.count > 0) {
+        if (dtJobListArr > 0) {
             [[self.tableView viewWithTag:NODATAVIEWTAG] setHidden:YES];
         }
         else {
             [[self.tableView viewWithTag:NODATAVIEWTAG] setHidden:NO];
         }
-        if (arrayData.count < 30) {
+        if (dtJobListArr.count < 30) {
             [self.tableView.mj_footer setHidden:YES];
         }
         else {
@@ -498,32 +441,10 @@
     else if (request.tag == 3) {
         NSArray *arrayPic = [Common getArrayFromXml:requestData tableName:@"Table"];
         if (arrayPic.count > 0) {
+            
             self.dataPic = [arrayPic objectAtIndex:0];
-            if ([[self.dataPic objectForKey:@"Id"] isEqualToString:[USER_DEFAULT objectForKey:@"launcherPicId"]]) {
-                return;
-            }
-            self.viewAd = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-            [self.viewAd setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.5]];
-            [self.viewAd setUserInteractionEnabled:YES];
-            UITapGestureRecognizer *backgroundTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundClick)];
-            [self.viewAd addGestureRecognizer:backgroundTap];
-            [[UIApplication sharedApplication].keyWindow addSubview:self.viewAd];
-            
-            UIImageView *imgPic = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH * 0.8, SCREEN_WIDTH * 0.8 * 1.45)];
-            [imgPic sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://down.51rc.com/imagefolder/operational/hpimage/%@", [self.dataPic objectForKey:@"ImageFile"]]]];
-            [imgPic setCenter:self.view.center];
-            [self.viewAd addSubview:imgPic];
-            
-            UIImageView *imgPicClose = [[UIImageView alloc] initWithFrame:CGRectMake(VIEW_BX(imgPic) - 60 * 0.575, VIEW_Y(imgPic) - 60, 60 * 0.575, 60)];
-            [imgPicClose setImage:[UIImage imageNamed:@"img_picclose.png"]];
-            [self.viewAd addSubview:imgPicClose];
-            
-            if ([[self.dataPic objectForKey:@"Url"] length] > 0) {
-                [imgPic setUserInteractionEnabled:YES];
-                UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(launcherPicClick)];
-                [imgPic addGestureRecognizer:singleTap];
-            }
-            [USER_DEFAULT setObject:[self.dataPic objectForKey:@"Id"] forKey:@"launcherPicId"];
+            AdAlert *adAlert = [[AdAlert alloc]initWithData:self.dataPic];
+            [adAlert show:self];
         }
     }else if (request.tag == 4){
         //PaMain
@@ -535,14 +456,6 @@
         NSString *jobTypeID = jobIntentionData[@"JobType"];
         [self getJobSearch:workPlace jobTypeID:jobTypeID salaryID:salaryID];
     }
-}
-
-- (void)backgroundClick {
-    [self.viewAd removeFromSuperview];
-}
-
-- (void)launcherPicClick {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[self.dataPic objectForKey:@"Url"]]];
 }
 
 - (void)WKFilterItemClick:(WKFilterType)filterType selectedItem:(NSDictionary *)selectedItem {

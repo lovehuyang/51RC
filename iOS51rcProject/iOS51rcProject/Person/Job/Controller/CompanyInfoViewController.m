@@ -74,12 +74,12 @@
     
     CGRect frameViewInfo = viewInfo.frame;
     frameViewInfo.size.height = VIEW_BY(lbDetail) ;
-    if ([[self.companyData objectForKey:@"HomePage"] length] > 0) {
-        //公司主页
-        WKLabel *lbHomePage = [[WKLabel alloc] initWithFixedSpacing:CGRectMake(VIEW_X(lbCompany), VIEW_BY(lbDetail) + 5, maxWidth, 20) content:[self.companyData objectForKey:@"HomePage"] size:DEFAULTFONTSIZE color:nil spacing:0];
-        [viewInfo addSubview:lbHomePage];
-        frameViewInfo.size.height = VIEW_BY(lbHomePage);
-    }
+//    if ([[self.companyData objectForKey:@"HomePage"] length] > 0) {
+//        //公司主页
+//        WKLabel *lbHomePage = [[WKLabel alloc] initWithFixedSpacing:CGRectMake(VIEW_X(lbCompany), VIEW_BY(lbDetail) + 5, maxWidth, 20) content:[self.companyData objectForKey:@"HomePage"] size:DEFAULTFONTSIZE color:nil spacing:0];
+//        [viewInfo addSubview:lbHomePage];
+//        frameViewInfo.size.height = VIEW_BY(lbHomePage);
+//    }
     
     // 答复率
     //答复率

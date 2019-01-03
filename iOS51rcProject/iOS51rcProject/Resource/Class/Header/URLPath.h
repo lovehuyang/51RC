@@ -47,6 +47,12 @@
 #define URL_GETCVVOICEJOBTYPE @"GetCvVoiceJobType"
 // 推荐职位立即申请接口
 #define URL_INSERTJOBAPPLY @"InsertJobApply"
+// 简历置顶页面数据
+#define URL_GETPAORDERRESUMETOP @"GetpaOrderResumeTop"
+// 获取代金券金额
+#define URL_SAVAPAORDERDISCOUNT @"SavepaOrderDiscount"
+// 确认订单页面
+#define URL_GETCONFIRMORDER @"GetConfirmOrder"
 
 
 

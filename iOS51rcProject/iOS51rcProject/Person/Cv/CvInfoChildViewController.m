@@ -19,6 +19,7 @@
 #import "PaInfoModifyViewController.h"
 #import "IntentionModifyViewController.h"
 #import "EducationModifyViewController.h"
+#import "SetCvTopViewController.h"// 简历置顶页面
 #import "EducationViewController.h"
 #import "ExperienceViewController.h"
 #import "ExperienceModifyViewController.h"
@@ -124,12 +125,14 @@
     [btnPreview addTarget:self action:@selector(preview) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:btnPreview];
     
+    // 分割线
     UIView *viewSeparate = [[UIView alloc] initWithFrame:CGRectMake(15, VIEW_BY(lbCvOther) + 15, SCREEN_WIDTH - 30, 1)];
     [viewSeparate setBackgroundColor:SEPARATECOLOR];
     [self.scrollView addSubview:viewSeparate];
     
+    // 姓名状态的开关
     bool blnNameOpen = ![[cvData objectForKey:@"IsNameHidden"] boolValue];
-    UIButton *btnNameOpen = [[UIButton alloc] initWithFrame:CGRectMake(15, VIEW_BY(viewSeparate) + 15, (SCREEN_WIDTH - 120) / 2, 50)];
+    UIButton *btnNameOpen = [[UIButton alloc] initWithFrame:CGRectMake(0, VIEW_BY(viewSeparate) + 10, SCREEN_WIDTH/3.1, 50)];
     [btnNameOpen setTag:(blnNameOpen ? 1 : 0)];
     [btnNameOpen addTarget:self action:@selector(nameOpenClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:btnNameOpen];
@@ -148,6 +151,7 @@
     [viewSeparate1 setBackgroundColor:SEPARATECOLOR];
     [btnNameOpen addSubview:viewSeparate1];
     
+    // 简历状态的开关
     bool blnCvOpen = ![[cvData objectForKey:@"IscvHidden"] boolValue];
     UIButton *btnCvOpen = [[UIButton alloc] initWithFrame:CGRectMake(VIEW_BX(btnNameOpen), VIEW_Y(btnNameOpen), VIEW_W(btnNameOpen), VIEW_H(btnNameOpen))];
     [btnCvOpen setTag:(blnCvOpen ? 1 : 0)];
@@ -167,7 +171,8 @@
     [viewSeparate2 setBackgroundColor:SEPARATECOLOR];
     [btnCvOpen addSubview:viewSeparate2];
     
-    UIButton *btnRefresh = [[UIButton alloc] initWithFrame:CGRectMake(VIEW_BX(btnCvOpen), VIEW_Y(btnNameOpen), 100, VIEW_H(btnNameOpen))];
+    // 更新按钮
+    UIButton *btnRefresh = [[UIButton alloc] initWithFrame:CGRectMake(VIEW_BX(btnCvOpen), VIEW_Y(btnNameOpen), SCREEN_WIDTH/3/2, VIEW_H(btnNameOpen))];
     [btnRefresh addTarget:self action:@selector(refresh) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:btnRefresh];
     
@@ -180,11 +185,29 @@
     [lbRefresh setTextAlignment:NSTextAlignmentCenter];
     [btnRefresh addSubview:lbRefresh];
     
-    UIView *viewSeparate3 = [[UIView alloc] initWithFrame:CGRectMake(VIEW_X(viewSeparate), VIEW_BY(btnNameOpen) + 15, VIEW_W(viewSeparate), 1)];
+    UIView *viewSeparate3 = [[UIView alloc] initWithFrame:CGRectMake(VIEW_W(btnRefresh) - 1, 0, 1, VIEW_H(btnRefresh))];
     [viewSeparate3 setBackgroundColor:SEPARATECOLOR];
-    [self.scrollView addSubview:viewSeparate3];
+    [btnRefresh addSubview:viewSeparate3];
     
-    self.heightForScroll = VIEW_BY(viewSeparate3);
+    // 置顶按钮
+    UIButton *setTopBtn = [[UIButton alloc] initWithFrame:CGRectMake(VIEW_BX(btnRefresh), VIEW_Y(btnRefresh), SCREEN_WIDTH/3/2, VIEW_H(btnRefresh))];
+    [setTopBtn addTarget:self action:@selector(setCvToTop) forControlEvents:UIControlEventTouchUpInside];
+    [self.scrollView addSubview:setTopBtn];
+    
+    UIImageView *setTopImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, VIEW_W(setTopBtn), 25)];
+    [setTopImg setImage:[UIImage imageNamed:@"pa_SetTop"]];
+    [setTopImg setContentMode:UIViewContentModeScaleAspectFit];
+    [setTopBtn addSubview:setTopImg];
+    
+    WKLabel *setTopLab = [[WKLabel alloc] initWithFrame:CGRectMake(0, VIEW_BY(setTopImg) + 5, VIEW_W(setTopBtn), 20) content:@"置顶" size:DEFAULTFONTSIZE color:nil];
+    [setTopLab setTextAlignment:NSTextAlignmentCenter];
+    [setTopBtn addSubview:setTopLab];
+    
+    UIView *viewSeparate4 = [[UIView alloc] initWithFrame:CGRectMake(VIEW_X(viewSeparate), VIEW_BY(btnNameOpen) + 10, VIEW_W(viewSeparate), 1)];
+    [viewSeparate4 setBackgroundColor:SEPARATECOLOR];
+    [self.scrollView addSubview:viewSeparate4];
+    
+    self.heightForScroll = VIEW_BY(viewSeparate4);
 }
 
 #pragma mark - 基本信息UI
@@ -939,6 +962,8 @@
     }else if (request.tag == 4){// 删除简历
         [self.delegate cvInfoReload];
         
+    }else if(request.tag == 6){
+        // 改变姓名状态/简历状态接口返回结果
     }else{
         [self getData];
     }
@@ -1052,6 +1077,7 @@
     [self presentViewController:alerPhoto animated:YES completion:nil];
 }
 
+#pragma mark - 更新
 - (void)refresh {
     NSDictionary *paData = [[Common getArrayFromXml:self.xmlData tableName:@"PaMain"] objectAtIndex:0];
     UIView *viewRefresh = [[UIView alloc] init];
@@ -1096,6 +1122,13 @@
     self.refreshPop = [[WKPopView alloc] initWithCustomView:viewRefresh];
     [self.refreshPop setDelegate:self];
     [self.refreshPop showPopView:self];
+}
+
+#pragma mark - 置顶
+- (void)setCvToTop{
+    SetCvTopViewController *cvTopVC = [SetCvTopViewController new];
+    cvTopVC.cvMainId = self.cvMainId;
+    [self.navigationController pushViewController:cvTopVC animated:YES];
 }
 
 - (void)careerStatusClick {

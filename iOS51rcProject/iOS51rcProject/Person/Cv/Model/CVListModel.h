@@ -23,5 +23,7 @@
 @property (nonatomic ,copy )NSString *isOpen;
 @property (nonatomic ,copy )NSString *paMainID;
 
+@property (nonatomic ,assign) BOOL isSlected;// 是否被选中（自己添加的字段）
+
 + (id)buildModelWithDic:(NSDictionary *)dic;
 @end
