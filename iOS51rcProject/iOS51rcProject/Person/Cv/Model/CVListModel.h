@@ -22,6 +22,7 @@
 @property (nonatomic ,copy )NSString *cvType;
 @property (nonatomic ,copy )NSString *isOpen;
 @property (nonatomic ,copy )NSString *paMainID;
+@property (nonatomic ,copy ) NSString *perfectType;// 0不完整简历 1完整简历
 
 @property (nonatomic ,assign) BOOL isSlected;// 是否被选中（自己添加的字段）
 

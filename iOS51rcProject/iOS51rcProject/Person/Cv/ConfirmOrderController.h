@@ -11,4 +11,5 @@
 
 @interface ConfirmOrderController : RCRootViewController
 @property (nonatomic , strong) CVTopPackageModel *model;
+@property (nonatomic , copy) NSString *cvMainId;// 需要置顶的简历id
 @end

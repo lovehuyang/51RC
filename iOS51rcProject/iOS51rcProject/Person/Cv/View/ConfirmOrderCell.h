@@ -10,7 +10,7 @@
 @class CVListModel;
 
 @interface ConfirmOrderCell : UITableViewCell
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier indexPath:(NSIndexPath *)indexPath;
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier indexPath:(NSIndexPath *)indexPath dataArr:(NSArray *)data;
 
 @property (nonatomic , strong)CVListModel *cvModel;
 

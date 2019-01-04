@@ -4,7 +4,7 @@
 //
 //  Created by Lucifer on 2019/1/3.
 //  Copyright © 2019年 Jerry. All rights reserved.
-//
+//  确认订单页面
 
 #import "ConfirmOrderController.h"
 #import "CVTopPackageModel.h"
@@ -133,7 +133,7 @@
     
     __weak typeof(self)weakself = self;
     if (indexPath.section == 0) {
-        ConfirmOrderCell *cell = [[ConfirmOrderCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:nil indexPath:indexPath];
+        ConfirmOrderCell *cell = [[ConfirmOrderCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:nil indexPath:indexPath dataArr:self.cvDataArr];
         if(indexPath.row > 0){
             cell.cvModel = self.cvDataArr[indexPath.row - 1];
         }
@@ -236,6 +236,8 @@
     headerView.backgroundColor = SEPARATECOLOR;
     return headerView;
 }
+
+#pragma mark - 获取订单数据
 - (void)getConfirmOrder{
     [SVProgressHUD show];
     NSDictionary *paramDict = @{@"paMainId":PAMAINID,
@@ -244,31 +246,17 @@
                                 };
     [AFNManager requestPaWithParamDict:paramDict url:URL_GETCONFIRMORDER tableNames:@[@"CvMainInfo",@"DiscountInfo"] successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
         [SVProgressHUD dismiss];
+        
         // 简历数据
         NSArray *cvArr = [requestData firstObject];
-        for (NSDictionary *dict in cvArr) {
-            CVListModel *model = [CVListModel buildModelWithDic:dict];
-            [self.cvDataArr addObject:model];
-        }
-        for (CVListModel *model in self.cvDataArr) {
-            if ([model.Valid boolValue] ) {
-                model.isSlected = YES;
-                break;
-            }
-        }
+        [self dealwithCvData:cvArr];
         
+        // 代金券数据
         if (requestData.count>1) {
             NSArray *discountArr = [requestData objectAtIndex:1];
-            for (NSDictionary *dict in discountArr) {
-                DiscountInfoModle *model = [DiscountInfoModle buildModelWithDic:dict];
-                [self.discountInfoArr addObject:model];
-            }
+            [self dealwithDiscount:discountArr];
         }
-        
-        for (DiscountInfoModle *model in self.discountInfoArr) {
-            model.isSelceted = YES;
-            break;
-        }
+
         [self createBottomView];
         [self.tableView reloadData];
         
@@ -277,5 +265,47 @@
     }];
 }
 
+#pragma mark - 处理简历数据源
+- (void)dealwithCvData:(NSArray *)cvArr{
+    
+    for (NSDictionary *dict in cvArr) {
+        CVListModel *model = [CVListModel buildModelWithDic:dict];
+        [self.cvDataArr addObject:model];
+    }
+    
+    for (CVListModel *model in self.cvDataArr) {
+        
+        if([model.ID isEqualToString:self.cvMainId] && [model.perfectType boolValue]){
+            model.isSlected = YES;
+            break;
+        }
+    }
+    //  查看有没有选中的完整的简历
+    BOOL isSelected = NO;
+    for (CVListModel *model in self.cvDataArr) {
+        isSelected = isSelected || model.isSlected;
+    }
+    // 没有选中的，则第一个完整简历为选中状态
+    if (isSelected == NO) {
+        for (CVListModel *model in self.cvDataArr) {
+            if( [model.perfectType boolValue]){
+                model.isSlected = YES;
+                break;
+            }
+        }
+    }
+}
 
+#pragma mark - 处理代金券数据
+- (void)dealwithDiscount:(NSArray *)discountArr{
+    for (NSDictionary *dict in discountArr) {
+        DiscountInfoModle *model = [DiscountInfoModle buildModelWithDic:dict];
+        [self.discountInfoArr addObject:model];
+    }
+    
+    for (DiscountInfoModle *model in self.discountInfoArr) {
+        model.isSelceted = YES;
+        break;
+    }
+}
 @end

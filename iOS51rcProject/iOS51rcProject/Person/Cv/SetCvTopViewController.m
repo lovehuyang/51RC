@@ -217,7 +217,7 @@
             NSLog(@"购买的套餐：%@",model.orderName);
             ConfirmOrderController *cvc = [ConfirmOrderController new];
             cvc.model = model;
-            
+            cvc.cvMainId = self.cvMainId;
             [weakself.navigationController pushViewController:cvc animated:YES];
             
         };
