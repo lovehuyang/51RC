@@ -12,4 +12,7 @@
 @interface ConfirmOrderController : RCRootViewController
 @property (nonatomic , strong) CVTopPackageModel *model;
 @property (nonatomic , copy) NSString *cvMainId;// 需要置顶的简历id
+@property (nonatomic , copy) NSString *orderType;// 同orderService（置顶套餐类型id）
+
+@property (nonatomic , copy)void (^sendbackOrderName)(BOOL paySuccess, NSString *orderName);
 @end

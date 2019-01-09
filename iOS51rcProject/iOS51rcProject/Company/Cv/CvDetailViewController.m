@@ -60,13 +60,15 @@
     for (UIView *view in self.scrollView.subviews) {
         [view removeFromSuperview];
     }
-    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrlCp:@"GetCvDetailByView" Params:[NSDictionary dictionaryWithObjectsAndKeys:CAMAINID, @"caMainID", CPMAINID, @"cpMainID", CAMAINCODE, @"Code", self.cvMainId, @"cvMainID", self.jobId, @"intJobID", nil] viewController:self];
+    
+    NSDictionary *paramDict = [NSDictionary dictionaryWithObjectsAndKeys:CAMAINID, @"caMainID", CPMAINID, @"cpMainID", CAMAINCODE, @"Code", self.cvMainId, @"cvMainID", self.jobId, @"intJobID", nil];
+    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrlCp:@"GetCvDetailByView" Params:paramDict viewController:self];
     [request setTag:1];
     [request setDelegate:self];
     [request startAsynchronous];
     self.runningRequest = request;
 }
-
+#pragma mark - 头部信息
 - (void)fillData {
     NSDictionary *paData = [[Common getArrayFromXml:self.xmlData tableName:@"PaMain"] objectAtIndex:0];
     NSDictionary *cvData = [[Common getArrayFromXml:self.xmlData tableName:@"CvMain"] objectAtIndex:0];
@@ -156,7 +158,7 @@
     
     self.heightForScroll = VIEW_BY(viewTop);
 }
-
+#pragma mark - 基本信息
 - (void)fillBasic {
     NSDictionary *paData = [[Common getArrayFromXml:self.xmlData tableName:@"PaMain"] objectAtIndex:0];
     NSString *gender, *birth;
@@ -226,7 +228,7 @@
     
     self.heightForScroll = VIEW_BY(viewContent);
 }
-
+#pragma mark - 求职意向
 - (void)fillJobIntention {
     NSDictionary *jobIntentionData = [[NSDictionary alloc] initWithObjectsAndKeys:@"", @"", nil];
     NSArray *arrayJobIntention = [Common getArrayFromXml:self.xmlData tableName:@"JobIntention"];
@@ -301,7 +303,7 @@
     
     self.heightForScroll = VIEW_BY(viewContent);
 }
-
+#pragma mark - 教育背景
 - (void)fillEducation {
     NSArray *arrayEducation = [Common getArrayFromXml:self.xmlData tableName:@"Education"];
     
@@ -358,7 +360,7 @@
     
     self.heightForScroll = VIEW_BY(viewContent);
 }
-
+#pragma mark - 工作经历
 - (void)fillExperience {
     NSArray *arrayExperience = [Common getArrayFromXml:self.xmlData tableName:@"Experience"];
     
@@ -433,7 +435,7 @@
     
     self.heightForScroll = VIEW_BY(viewContent);
 }
-
+#pragma mark - 工作能力
 - (void)fillSpeciality {
     NSDictionary *cvData = [[Common getArrayFromXml:self.xmlData tableName:@"CvMain"] objectAtIndex:0];
     
@@ -461,8 +463,9 @@
     
     self.heightForScroll = VIEW_BY(viewContent);
 }
-
+#pragma mark - 联系方式
 - (void)fillLink {
+//    return;
     NSDictionary *paData = [[Common getArrayFromXml:self.xmlData tableName:@"PaMain"] objectAtIndex:0];
     NSDictionary *otherData = [[Common getArrayFromXml:self.xmlData tableName:@"dtOtherInfo"] objectAtIndex:0];
     
@@ -658,13 +661,29 @@
     }
     else {
         
+        if(arrayApply.count == 0 || arrayApply == nil){
+            WKButton *btnInvitation = [[WKButton alloc] initWithFrame:CGRectMake(30, 10, (VIEW_W(viewBottom) - 120) / 3, 35) title:@"应聘邀请" fontSize:DEFAULTFONTSIZE color:[UIColor whiteColor] bgColor:CPNAVBARCOLOR];
+            [btnInvitation addTarget:self action:@selector(invitationClick) forControlEvents:UIControlEventTouchUpInside];
+            [viewBottom addSubview:btnInvitation];
+            btnInvitation.layer.cornerRadius = 3;
+            
+            WKButton *btnInterview = [[WKButton alloc] initWithFrame:CGRectMake(VIEW_BX(btnInvitation) + 30, VIEW_Y(btnInvitation), VIEW_W(btnInvitation), VIEW_H(btnInvitation)) title:@"面试通知" fontSize:DEFAULTFONTSIZE color:[UIColor whiteColor] bgColor:CPNAVBARCOLOR];
+            [btnInterview addTarget:self action:@selector(interviewClick) forControlEvents:UIControlEventTouchUpInside];
+            [viewBottom addSubview:btnInterview];
+            btnInterview.layer.cornerRadius = 3;
+
+            
+            WKButton *btnChat = [[WKButton alloc] initImageButtonWithFrame:CGRectMake(VIEW_BX(btnInterview) + 30, VIEW_Y(btnInterview), VIEW_W(btnInterview), VIEW_H(btnInterview)) image:@"cp_chat.png" title:@"跟TA聊聊" fontSize:DEFAULTFONTSIZE color:GREENCOLOR bgColor:[UIColor clearColor]];
+            [btnChat addTarget:self action:@selector(chatClick) forControlEvents:UIControlEventTouchUpInside];
+            [viewBottom addSubview:btnChat];
+            btnChat.layer.cornerRadius = 3;
+            
+            return;
+        }
+        
         NSDictionary *applyData = [arrayApply objectAtIndex:0];
         // reply == 1:符合要求 ； reply == 2：储备;reply == 5:储备（自动）
         NSString *replyStatus = [applyData objectForKey:@"Reply"];
-        
-//        WKButton *btnInvitation = [[WKButton alloc] initWithFrame:CGRectMake(30, 10, (VIEW_W(viewBottom) - 120) / 3, 30) title:@"应聘邀请" fontSize:DEFAULTFONTSIZE color:[UIColor whiteColor] bgColor:CPNAVBARCOLOR];
-//        [btnInvitation addTarget:self action:@selector(invitationClick) forControlEvents:UIControlEventTouchUpInside];
-//        [viewBottom addSubview:btnInvitation];
         
         CGFloat BTN_W = (VIEW_W(viewBottom) - 30 *3)/2;
         CGFloat BTN_H = 35;

@@ -131,6 +131,7 @@
     [self.scrollView addSubview:viewSeparate];
     
     // 姓名状态的开关
+    //CGRectMake(0, VIEW_BY(viewSeparate) + 10, SCREEN_WIDTH/3.1, 50)
     bool blnNameOpen = ![[cvData objectForKey:@"IsNameHidden"] boolValue];
     UIButton *btnNameOpen = [[UIButton alloc] initWithFrame:CGRectMake(0, VIEW_BY(viewSeparate) + 10, SCREEN_WIDTH/3.1, 50)];
     [btnNameOpen setTag:(blnNameOpen ? 1 : 0)];
@@ -172,6 +173,7 @@
     [btnCvOpen addSubview:viewSeparate2];
     
     // 更新按钮
+    //CGRectMake(VIEW_BX(btnCvOpen), VIEW_Y(btnNameOpen), SCREEN_WIDTH/3/2, VIEW_H(btnNameOpen)
     UIButton *btnRefresh = [[UIButton alloc] initWithFrame:CGRectMake(VIEW_BX(btnCvOpen), VIEW_Y(btnNameOpen), SCREEN_WIDTH/3/2, VIEW_H(btnNameOpen))];
     [btnRefresh addTarget:self action:@selector(refresh) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:btnRefresh];
@@ -193,12 +195,12 @@
     UIButton *setTopBtn = [[UIButton alloc] initWithFrame:CGRectMake(VIEW_BX(btnRefresh), VIEW_Y(btnRefresh), SCREEN_WIDTH/3/2, VIEW_H(btnRefresh))];
     [setTopBtn addTarget:self action:@selector(setCvToTop) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:setTopBtn];
-    
+
     UIImageView *setTopImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, VIEW_W(setTopBtn), 25)];
     [setTopImg setImage:[UIImage imageNamed:@"pa_SetTop"]];
     [setTopImg setContentMode:UIViewContentModeScaleAspectFit];
     [setTopBtn addSubview:setTopImg];
-    
+
     WKLabel *setTopLab = [[WKLabel alloc] initWithFrame:CGRectMake(0, VIEW_BY(setTopImg) + 5, VIEW_W(setTopBtn), 20) content:@"置顶" size:DEFAULTFONTSIZE color:nil];
     [setTopLab setTextAlignment:NSTextAlignmentCenter];
     [setTopBtn addSubview:setTopLab];

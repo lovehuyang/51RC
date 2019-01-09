@@ -18,6 +18,9 @@
 #define NOTIFICATION_GETJOBLISTBYSEARCH @"GetJobListBySearch"// 登录成功→一分钟简历完成→首页获取匹配的职位
 #define NOTIFICATION_ONEMINUTEGETVERIFYCODE @"OneMinuteGetVerifyCode"// 一分钟填写简历页面获取验证码 
 #define NOTIFICATION_PALOGINSUCCESS @"paLoginSuccess"// 个人用户登陆成功
+#define NOTIFICATION_ALIPAYSUCCESS @"alipaySuccess"// 蚂蚁支付成功
+#define NOTIFICATION_ALIPAYFAILED @"alipayFailed"// 蚂蚁支付失败
+#define NOTIFICATION_CANCELORDER @"cancelOrder"// 取消订单
 
 // 百度语音相关参数
 #define BD_APP_ID [CommonTools getBDSASRParameter:@"APP_ID"]

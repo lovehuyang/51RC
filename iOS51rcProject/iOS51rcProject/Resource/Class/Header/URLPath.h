@@ -53,7 +53,14 @@
 #define URL_SAVAPAORDERDISCOUNT @"SavepaOrderDiscount"
 // 确认订单页面
 #define URL_GETCONFIRMORDER @"GetConfirmOrder"
-
+// WX、Ali统一下单接口
+#define URL_GETAPPPAYORDER @"GetAppPayOrder"
+//获取待支付订单
+#define URL_GETWAITPAYORDER @"GetWaitPayOrder"
+// 获取订单列表数据
+#define URL_GETPAORDERLIST @"GetPaOrderList"
+// 取消订单接口
+#define URL_WEIXINORDERCANCEL @"WeiXinOrderCancel"
 
 
 #pragma mark - 公司用户

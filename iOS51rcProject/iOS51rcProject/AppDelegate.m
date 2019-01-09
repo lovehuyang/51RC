@@ -25,6 +25,7 @@
 #import "CvRecommendViewController.h"
 #import "InterviewCpViewController.h"
 #import "IQKeyboardManager.h"
+#import <AlipaySDK/AlipaySDK.h>
 
 @interface AppDelegate ()<JPUSHRegisterDelegate, UIAlertViewDelegate>
 
@@ -285,7 +286,71 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [self saveContext];
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    if ([url.host isEqualToString:@"safepay"]) {
+        // 支付跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+        }];
+        
+        // 授权跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processAuth_V2Result:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+            // 解析 auth code
+            NSString *result = resultDic[@"result"];
+            NSString *authCode = nil;
+            if (result.length>0) {
+                NSArray *resultArr = [result componentsSeparatedByString:@"&"];
+                for (NSString *subResult in resultArr) {
+                    if (subResult.length > 10 && [subResult hasPrefix:@"auth_code="]) {
+                        authCode = [subResult substringFromIndex:10];
+                        break;
+                    }
+                }
+            }
+            NSLog(@"授权结果 authCode = %@", authCode?:@"");
+        }];
+    }
+    return YES;
+}
 
+
+// NOTE: 9.0以后使用新API接口
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
+{
+    if ([url.host isEqualToString:@"safepay"]) {
+        // 支付跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+            if ([[resultDic objectForKey:@"resultStatus"] isEqualToString:@"9000"]) {
+                // 支付成功
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ALIPAYSUCCESS object:nil];
+            }else{
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ALIPAYFAILED object:nil];
+            }
+        }];
+        
+        // 授权跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processAuth_V2Result:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+            // 解析 auth code
+            NSString *result = resultDic[@"result"];
+            NSString *authCode = nil;
+            if (result.length>0) {
+                NSArray *resultArr = [result componentsSeparatedByString:@"&"];
+                for (NSString *subResult in resultArr) {
+                    if (subResult.length > 10 && [subResult hasPrefix:@"auth_code="]) {
+                        authCode = [subResult substringFromIndex:10];
+                        break;
+                    }
+                }
+            }
+            NSLog(@"授权结果 authCode = %@", authCode?:@"");
+        }];
+    }
+    return YES;
+}
 #pragma mark - Core Data stack
 
 @synthesize persistentContainer = _persistentContainer;

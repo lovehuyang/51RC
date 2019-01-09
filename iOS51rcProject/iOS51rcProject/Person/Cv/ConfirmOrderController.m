@@ -16,24 +16,50 @@
 #import "PayWayModel.h"
 #import "WXApi.h"
 #import "BottomPayView.h"
+#import "Common.h"
+#import <AlipaySDK/AlipaySDK.h>
+#import "AlertView.h"
+#import "BuyTopServiceSuccessAlert.h"
+#import "MyOrderViewController.h"
 
 @interface ConfirmOrderController ()<UITableViewDelegate,UITableViewDataSource>
+{
+    NSInteger payMethodID;// 支付方式1微信，2支付宝（默认）
+}
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) NSMutableArray *cvDataArr;//简历的数据源
 @property (nonatomic , strong) NSMutableArray *discountInfoArr;// 代金券数据源
 @property (nonatomic , strong) NSMutableArray *payWayArr;//支付方式数据源
 @property (nonatomic , strong) BottomPayView *bottomPayView;//底部支付按钮
+
 @end
 
 @implementation ConfirmOrderController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    payMethodID = 2;//
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"确认订单";
     [self.view addSubview:self.tableView];
     [self createUI];
     [self getConfirmOrder];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(alipayFailed) name:NOTIFICATION_ALIPAYFAILED object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(alipaySuccess) name:NOTIFICATION_ALIPAYSUCCESS object:nil];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:NOTIFICATION_ALIPAYFAILED object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:NOTIFICATION_ALIPAYSUCCESS object:nil];
+}
+- (void)dealloc{
+   
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 - (void)createUI{
     UILabel *titleLab = [UILabel new];
@@ -57,15 +83,6 @@
     priceLab.font = DEFAULTFONT;
 }
 - (void)createBottomView{
-    
-    // 计算优惠的金额
-    CGFloat totalDiscountMoney = 0;
-    for (DiscountInfoModle *model in self.discountInfoArr) {
-        CGFloat discountMoney = [model.Money floatValue];
-        totalDiscountMoney =+discountMoney;
-    }
-    // 计算应付的金额
-    CGFloat totalMoney = [self.model.nowPrice floatValue] - totalDiscountMoney;
 
     if (!_bottomPayView) {
         BottomPayView *bottomPayView = [BottomPayView new];
@@ -77,9 +94,11 @@
         .heightIs(45);
         self.bottomPayView = bottomPayView;
     }
-    self.bottomPayView.money = [NSString stringWithFormat:@"%.2f",totalMoney];
+    self.bottomPayView.money = [NSString stringWithFormat:@"%.2f",[self payTotalMoney]];
+    __weak typeof(self)weakself = self;
     self.bottomPayView.payEvent = ^{
         NSLog(@"去支付");
+        [weakself getAppPayOrder];
     };
 }
 
@@ -172,6 +191,12 @@
             cell.payModel = self.payWayArr[indexPath.row - 1];
         }
         cell.selectPayWay = ^(PayWayModel *payModel) {
+            if([payModel.payWay containsString:@"微信"]){
+                payMethodID = 1;
+            }else if([payModel.payWay containsString:@"支付宝"]){
+                payMethodID = 2;
+            }
+            
             for (PayWayModel *modle in self.payWayArr) {
                 if ([modle.payWay isEqualToString:payModel.payWay]) {
                     modle.isSelected = YES;
@@ -190,6 +215,11 @@
             cell.payModel = self.payWayArr[indexPath.row - 1];
         }
         cell.selectPayWay = ^(PayWayModel *payModel) {
+            if([payModel.payWay containsString:@"微信"]){
+                payMethodID = 1;
+            }else if([payModel.payWay containsString:@"支付宝"]){
+                payMethodID = 2;
+            }
             for (PayWayModel *modle in self.payWayArr) {
                 if ([modle.payWay isEqualToString:payModel.payWay]) {
                     modle.isSelected = YES;
@@ -235,6 +265,19 @@
     UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 100)];
     headerView.backgroundColor = SEPARATECOLOR;
     return headerView;
+}
+
+#pragma mark - 支付金额
+- (CGFloat)payTotalMoney{
+    // 计算优惠的金额
+    CGFloat totalDiscountMoney = 0;
+    for (DiscountInfoModle *model in self.discountInfoArr) {
+        CGFloat discountMoney = [model.Money floatValue];
+        totalDiscountMoney =+discountMoney;
+    }
+    // 计算应付的金额
+    CGFloat totalMoney = [self.model.nowPrice floatValue] - totalDiscountMoney;
+    return totalMoney;
 }
 
 #pragma mark - 获取订单数据
@@ -307,5 +350,85 @@
         model.isSelceted = YES;
         break;
     }
+}
+
+#pragma mark - 统一下单接口
+- (void)getAppPayOrder{
+    [SVProgressHUD show];
+    
+    // 代金券id
+    NSString *discountId = @"";
+    if (self.discountInfoArr.count > 0) {
+        DiscountInfoModle *discountModel = [self.discountInfoArr firstObject];
+        discountId = discountModel.ID;
+    }
+    
+    // ip地址
+    NSString *ipStr = [Common getIPaddress];
+    
+    // 置顶简历的id
+    NSString *cvIdStr = @"";
+    for (CVListModel *model in self.cvDataArr) {
+        if (model.isSlected) {
+            cvIdStr = model.ID;
+            break;
+        }
+    }
+    
+    NSDictionary *paramDict = @{@"paMainId":PAMAINID,
+                                @"code":[USER_DEFAULT objectForKey:@"paMainCode"],
+                                @"cvmainId":cvIdStr,
+                                @"orderid":@"",
+                                @"orderType":self.orderType,
+                                @"payMoney":[NSString stringWithFormat:@"%f",[self payTotalMoney]],
+                                @"discountID":discountId,// 代金券id
+                                @"payMethodID":[NSString stringWithFormat:@"%ld",(long)payMethodID],
+                                @"mobileIP":payMethodID == 2? @"":ipStr,
+                                @"payFrom":@"4"
+                                };
+    
+    [AFNManager requestWithMethod:POST ParamDict:paramDict url:@"GetAppPayOrderIOS" tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        [SVProgressHUD dismiss];
+        if (payMethodID == 1) {
+            [self wxpayParamData:(NSString *)dataDict];
+        }else if (payMethodID == 2){
+            [self alipayParamData:(NSString *)dataDict];
+        }
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        [SVProgressHUD dismiss];
+        [RCToast showMessage:msg];
+    }];
+}
+
+- (void)wxpayParamData:(NSString *)dataStr{
+    NSDictionary *dataDict = [CommonTools translateJsonStrToDictionary:dataStr];
+}
+
+- (void)alipayParamData:(NSString *)dataStr{
+    // 获取appScheme
+    NSDictionary *plistDic = [[NSBundle mainBundle] infoDictionary];
+    NSArray * arr = plistDic[@"CFBundleURLTypes"];
+    NSString * appScheme = [[[arr objectAtIndex:1] objectForKey:@"CFBundleURLSchemes"] firstObject];
+    
+    [[AlipaySDK defaultService]payOrder:dataStr fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+        
+        if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]){
+            [self alipaySuccess];
+            
+        }else{
+            [self alipayFailed];
+        }
+    }];
+}
+
+#pragma mark - 支付宝支付通知
+- (void)alipayFailed{
+    self.sendbackOrderName(NO, nil);
+    [self.navigationController popViewControllerAnimated:NO];
+}
+- (void)alipaySuccess{
+    
+    self.sendbackOrderName(YES,self.model.orderName);
+    [self.navigationController popViewControllerAnimated:NO];
 }
 @end

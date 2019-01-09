@@ -18,7 +18,9 @@
 #import "ShareView.h"
 #import <ShareSDK/ShareSDK.h>
 #import "RedPacketView.h"
+#import "BuyTopServiceSuccessAlert.h"
 #import "ConfirmOrderController.h"
+#import "MyOrderViewController.h"
 
 @interface SetCvTopViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong) UITableView *tableView;
@@ -214,10 +216,44 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         __weak typeof(self)weakself = self;
         cell.buyPackageBlock = ^(CVTopPackageModel *model) {
-            NSLog(@"购买的套餐：%@",model.orderName);
+            
             ConfirmOrderController *cvc = [ConfirmOrderController new];
             cvc.model = model;
             cvc.cvMainId = self.cvMainId;
+            cvc.orderType = model.orderService;
+            cvc.sendbackOrderName = ^(BOOL paySuccess, NSString *orderName) {
+                
+                if (paySuccess == NO) {
+                    AlertView *alertView = [[AlertView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+                    __weak __typeof(alertView)WeakAlertView = alertView;
+                    [WeakAlertView initWithTitle:@"提示" content:@"未支付成功，您可以到我的订单页面重新支付" btnTitleArr:@[@"暂不支付",@"去支付"] canDismiss:NO];
+                    WeakAlertView.clickButtonBlock = ^(UIButton *button) {
+                        if (button.tag == 101) {// 支付
+                            [self pushToMyOrder];
+                        }
+                    };
+                    
+                    [WeakAlertView show];
+                    
+                    return ;
+                }
+                
+                __weak typeof(self)weakself = self;
+                BuyTopServiceSuccessAlert *alert  = [BuyTopServiceSuccessAlert new];
+                alert.orderName = orderName;
+                [alert show];
+                alert.clickBlock = ^(UIButton *btn) {
+                    
+                    if (btn.tag == 100) {// 搜索职位
+                        weakself.tabBarController.selectedIndex = 0;
+                        [weakself.navigationController popViewControllerAnimated:NO];
+                        
+                    }else if (btn.tag == 101){// 查看订单
+                        MyOrderViewController *mvc = [[MyOrderViewController alloc]init];
+                        [weakself.navigationController pushViewController:mvc animated:YES];
+                    }
+                };
+            };
             [weakself.navigationController pushViewController:cvc animated:YES];
             
         };
@@ -271,6 +307,14 @@
     return cell;
 }
 
+
+-  (void)pushToMyOrder{
+    // GCD延时执行
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        MyOrderViewController *mvc = [[MyOrderViewController alloc]init];
+        [self.navigationController pushViewController:mvc animated:YES];
+    });
+}
 #pragma mark - 获取代金券金额
 - (void)savepaOrderDiscount:(NSString *)discountType{
     NSDictionary *paramDict = @{@"paMainId":PAMAINID,

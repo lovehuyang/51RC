@@ -30,14 +30,15 @@
 #import "OneMinuteCVViewController.h"
 #import "WKNavigationController.h"
 #import "AlertView.h"
+#import "MyOrderViewController.h"
 
 @interface PaIndexViewController ()<UIScrollViewDelegate, NetWebServiceRequestDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MLImageCropDelegate, WKPopViewDelegate>
-
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *viewInfo;
 @property (nonatomic, strong) NetWebServiceRequest *runningRequest;
 @property (nonatomic, strong) UIButton *btnCareerStatus;
 @property (nonatomic, strong) UIButton *btnLogout;
+@property (nonatomic, strong) UIView *optionSeparate4;
 @property float heightForScroll;
 @end
 
@@ -46,6 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:NOTIFICATION_PALOGINSUCCESS object:nil];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     UIView *viewStatusBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, STATUS_BAR_HEIGHT)];
@@ -112,28 +114,50 @@
     UIView *optionSeparate4 = [[UIView alloc] initWithFrame:CGRectMake(0, VIEW_BY(optionView), SCREEN_WIDTH, 10)];
     [optionSeparate4 setBackgroundColor:SEPARATECOLOR];
     [self.scrollView addSubview:optionSeparate4];
-    
     self.heightForScroll = VIEW_BY(optionSeparate4);
+    self.optionSeparate4 = optionSeparate4;
+}
+
+- (void)createCell:(NSString *)orderStatus{
+
+    for (UIView *subView in self.scrollView.subviews) {
+        self.heightForScroll = VIEW_BY(self.optionSeparate4);
+        
+        if ([subView isKindOfClass:[UIButton class]]) {
+            UIButton *btn = (UIButton *)subView;
+            if (btn.tag == 101 || btn.tag == 102 || btn.tag == 103 || btn.tag == 104) {
+                [btn removeFromSuperview];
+            }
+        }else if (subView.tag == 1000 || subView.tag == 1001){
+            [subView removeFromSuperview];
+        }
+    }
     
-//    [self otherButton:0];// 招聘会
-//    [self otherButton:1];// 查工资
-    [self otherButton:2];// 意见反馈
-    [self otherButton:3];// 切换角色
-    [self otherButton:4];// 关于我们
+    //    [self otherButton:0];// 招聘会
+    if ([orderStatus isEqualToString:@"1"]) {
+        [self otherButton:101];// 我的订单
+    }
+
+    [self otherButton:102];// 意见反馈
+    [self otherButton:103];// 切换角色
+    [self otherButton:104];// 关于我们
     
     // 分割线
     UIView *viewSeparate5 = [[UIView alloc] initWithFrame:CGRectMake(0, self.heightForScroll, SCREEN_WIDTH, 10)];
     [viewSeparate5 setBackgroundColor:SEPARATECOLOR];
+    viewSeparate5.tag = 1000;
     [self.scrollView addSubview:viewSeparate5];
     
     self.heightForScroll = VIEW_BY(viewSeparate5);
     
     // 底部灰色
     UIView *viewBounceBottom = [[UIView alloc] initWithFrame:CGRectMake(0, self.heightForScroll, SCREEN_WIDTH, 500)];
+    viewBounceBottom.tag = 1001;
     [viewBounceBottom setBackgroundColor:SEPARATECOLOR];
     [self.scrollView addSubview:viewBounceBottom];
     
     self.btnLogout = [[UIButton alloc] initWithFrame:CGRectMake(0, self.heightForScroll, SCREEN_WIDTH, 40)];
+    self.btnLogout.tag = 1002;
     [self.btnLogout setTitle:@"退出登录" forState:UIControlStateNormal];
     [self.btnLogout setBackgroundColor:[UIColor whiteColor]];
     [self.btnLogout addTarget:self action:@selector(logoutClick) forControlEvents:UIControlEventTouchUpInside];
@@ -352,19 +376,19 @@
 - (void)otherButton:(NSInteger)tag {
     NSString *title;
     switch (tag) {
-        case 0:
+        case 100:
             title = @"招聘会";
             break;
-        case 1:
-            title = @"查工资";
+        case 101:
+            title = @"我的订单";
             break;
-        case 2:
+        case 102:
             title = @"意见反馈";
             break;
-        case 3:
+        case 103:
             title = @"切换角色";
             break;
-        case 4:
+        case 104:
             title = @"关于我们";
             break;
         default:
@@ -423,22 +447,24 @@
 #pragma mark - cell的点击事件
 
 - (void)otherClick:(UIButton *)button {
-    if (button.tag == 0) {
+    if (button.tag == 100) {
         // 招聘会
     }
-    else if (button.tag == 1) {
-        // 查工资
+    else if (button.tag == 101) {
+        // 我的订单
+        MyOrderViewController *movc = [[MyOrderViewController alloc]init];
+        [self.navigationController pushViewController:movc animated:YES];
     }
-    else if (button.tag == 2) {
+    else if (button.tag == 102) {
         FeedbackViewController *feedbackCtrl = [[FeedbackViewController alloc] init];
         feedbackCtrl.title = @"意见反馈";
         [self.navigationController pushViewController:feedbackCtrl animated:YES];
     }
-    else if (button.tag == 3) {
+    else if (button.tag == 103) {
         RoleViewController *roleCtrl = [[RoleViewController alloc] init];
         [self presentViewController:roleCtrl animated:YES completion:nil];
     }
-    else if (button.tag == 4) {
+    else if (button.tag == 104) {
         AboutUsViewController *aboutUsCtrl = [[AboutUsViewController alloc] init];
         aboutUsCtrl.title = @"关于我们";
         [self.navigationController pushViewController:aboutUsCtrl animated:YES];
@@ -489,7 +515,9 @@
             [self loginClick];
             return;
         }
-        [self fillPaInfo:[arrayPaMain objectAtIndex:0]];
+        NSDictionary *dict = [arrayPaMain objectAtIndex:0];
+        [self fillPaInfo:dict];
+        [self createCell:dict[@"paOrderCnt"]];
     }
     else if (request.tag == 2) {
     }
