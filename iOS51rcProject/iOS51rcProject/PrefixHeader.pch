@@ -31,6 +31,7 @@
 #import "UIScrollView+EmptyDataSet.h"
 #import "UIImageView+WebCache.h"
 #import "BarButtonItem.h"// 重写导航栏按钮
+#import <UMAnalytics/MobClick.h>
 
 //#import "NetWebServiceRequest.h"
 

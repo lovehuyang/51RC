@@ -22,6 +22,7 @@
 #import "BuyTopServiceSuccessAlert.h"
 #import "MyOrderViewController.h"
 
+
 @interface ConfirmOrderController ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSInteger payMethodID;// 支付方式1微信，2支付宝（默认）
@@ -44,19 +45,28 @@
     [self.view addSubview:self.tableView];
     [self createUI];
     [self getConfirmOrder];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(alipayFailed) name:NOTIFICATION_ALIPAYFAILED object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(alipaySuccess) name:NOTIFICATION_ALIPAYSUCCESS object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(InquireWeiXinOrder:) name:NOTIFICATION_ALIPAYSUCCESS object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wxpayFailed) name:NOTIFICATION_WXPAYFAILED object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(InquireWeiXinOrder:) name:NOTIFICATION_WXPAYSUCCESS object:nil];
 }
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    
     [[NSNotificationCenter defaultCenter]removeObserver:self name:NOTIFICATION_ALIPAYFAILED object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:NOTIFICATION_ALIPAYSUCCESS object:nil];
+    
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:NOTIFICATION_WXPAYFAILED object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:NOTIFICATION_WXPAYSUCCESS object:nil];
 }
+
 - (void)dealloc{
    
     [[NSNotificationCenter defaultCenter]removeObserver:self];
@@ -97,7 +107,14 @@
     self.bottomPayView.money = [NSString stringWithFormat:@"%.2f",[self payTotalMoney]];
     __weak typeof(self)weakself = self;
     self.bottomPayView.payEvent = ^{
-        NSLog(@"去支付");
+        // 检测时候否安装了微信客户端
+        BOOL install = [WXApi isWXAppInstalled];
+        
+        if (!install && payMethodID == 1) {
+            [RCToast showMessage:@"您未安装微信客户端"];
+            return ;
+        }
+        
         [weakself getAppPayOrder];
     };
 }
@@ -402,6 +419,37 @@
 
 - (void)wxpayParamData:(NSString *)dataStr{
     NSDictionary *dataDict = [CommonTools translateJsonStrToDictionary:dataStr];
+    
+    //需要创建这个支付对象
+    PayReq *req   = [[PayReq alloc] init];
+    //由用户微信号和AppID组成的唯一标识，用于校验微信用户
+    req.openID = [dataDict objectForKey:@"appid"];
+    
+    // 商家id，在注册的时候给的
+    req.partnerId =  [dataDict objectForKey:@"partnerid"];
+    
+    // 预支付订单这个是后台跟微信服务器交互后，微信服务器传给你们服务器的，你们服务器再传给你
+    req.prepayId  =  [dataDict objectForKey:@"prepayid"];
+    
+    [[NSUserDefaults standardUserDefaults]setObject:dataDict[@"outTradeNo"] forKey:KEY_PAYORDERNUM];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
+    // 根据财付通文档填写的数据和签名
+    //这个比较特殊，是固定的，只能是即req.package = Sign=WXPay
+    req.package   =  [dataDict objectForKey:@"package"];
+    
+    // 随机编码，为了防止重复的，在后台生成
+    req.nonceStr  =  [dataDict objectForKey:@"noncestr"];
+    
+    // 这个是时间戳，也是在后台生成的，为了验证支付的
+    NSString * stamp =  [dataDict objectForKey:@"timestamp"];
+    req.timeStamp = stamp.intValue;
+    
+    // 这个签名也是后台做的
+    req.sign =  [dataDict objectForKey:@"sign"];
+    
+    //发送请求到微信，等待微信返回onResp
+    [WXApi sendReq:req];
 }
 
 - (void)alipayParamData:(NSString *)dataStr{
@@ -413,7 +461,12 @@
     [[AlipaySDK defaultService]payOrder:dataStr fromScheme:appScheme callback:^(NSDictionary *resultDic) {
         
         if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]){
-            [self alipaySuccess];
+            
+            // 查询支付结果
+            NSString *result = resultDic[@"result"];
+            NSDictionary *resultDict = [CommonTools translateJsonStrToDictionary:result];
+            NSString *out_trade_no = [resultDict[@"alipay_trade_app_pay_response"] objectForKey:@"out_trade_no"];
+            [self InquireWeiXinOrder:out_trade_no];
             
         }else{
             [self alipayFailed];
@@ -422,13 +475,63 @@
 }
 
 #pragma mark - 支付宝支付通知
+
 - (void)alipayFailed{
+   
     self.sendbackOrderName(NO, nil);
     [self.navigationController popViewControllerAnimated:NO];
 }
 - (void)alipaySuccess{
+
+    self.sendbackOrderName(YES,self.model.orderName);
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
+#pragma mark - 微信支付通知
+
+- (void)wxpayFailed{
+    
+    self.sendbackOrderName(NO, nil);
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
+- (void)wxpaySuccess{
     
     self.sendbackOrderName(YES,self.model.orderName);
     [self.navigationController popViewControllerAnimated:NO];
+}
+
+#pragma mark - 支付宝/微信查询支付结果
+- (void)InquireWeiXinOrder:(NSString *)orderNum{
+    if (![orderNum isKindOfClass:[NSString class]]) {
+        orderNum = [[NSUserDefaults standardUserDefaults]objectForKey:KEY_PAYORDERNUM];
+    }
+    
+    NSDictionary *paramDict = @{
+                                @"paMainId":PAMAINID,
+                                @"code":[USER_DEFAULT objectForKey:@"paMainCode"],
+                                @"orderNum":orderNum
+                                };
+    [AFNManager requestWithMethod:POST ParamDict:paramDict url:URL_INQUIREWEIXINORDER tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+        DLog(@"");
+        NSString *result = (NSString *)dataDict;
+        if (result != nil && [result isEqualToString:@"1"]) {
+            if (payMethodID == 2) {
+                [self alipaySuccess];
+            }else if (payMethodID == 1){
+                [self wxpaySuccess];
+            }
+        }else{
+            if (payMethodID == 2) {
+                [self alipayFailed];
+            }else if (payMethodID == 1){
+                [self wxpayFailed];
+            }
+        }
+        
+    } failureBlock:^(NSInteger errCode, NSString *msg) {
+        DLog(@"");
+        
+    }];
 }
 @end

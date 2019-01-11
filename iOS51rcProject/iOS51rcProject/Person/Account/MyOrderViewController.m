@@ -50,7 +50,6 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self getPaOrderList];
     });
-    
 }
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter]removeObserver:self name:NOTIFICATION_CANCELORDER object:nil];
@@ -114,7 +113,7 @@
         ConfirmPaymentOrderController *cvc = [[ConfirmPaymentOrderController alloc]init];
         cvc.model = self.dataArr[indexPath.row];
         __weak typeof(self)weakself = self;
-        cvc.alipayResult = ^(BOOL success) {
+        cvc.payResult = ^(BOOL success) {
             if (success) {
                 [weakself.tableView.mj_header beginRefreshing];
             }else{

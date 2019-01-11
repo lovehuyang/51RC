@@ -56,24 +56,34 @@
          self.tipLab = tipLab;
         
     }else if ([ticketType isEqualToString:@"2"]) {// 固定额度的代金券
-        tipLab.sd_layout
-        .topSpaceToView(imgView, 5)
-        .autoHeightRatio(0)
-        .leftSpaceToView(imgView, 10);
-        [tipLab setSingleLineAutoResizeWithMaxWidth:200];
-         self.tipLab = tipLab;
+        if(_model.disStartDate && _model.disEndDate && _model.disStartDate.length && _model.disEndDate.length){
+            tipLab.sd_layout
+            .topSpaceToView(imgView, 5)
+            .autoHeightRatio(0)
+            .leftSpaceToView(imgView, 10);
+            [tipLab setSingleLineAutoResizeWithMaxWidth:200];
+            self.tipLab = tipLab;
+            
+            // 有效期
+            UILabel *validDateLab = [UILabel new];
+            [imgView addSubview:validDateLab];
+            validDateLab.sd_layout
+            .leftEqualToView(tipLab)
+            .topSpaceToView(tipLab, 0)
+            .bottomSpaceToView(imgView, 0);
+            validDateLab.textColor = [UIColor whiteColor];
+            validDateLab.font = SMALLERFONT;
+            [validDateLab setSingleLineAutoResizeWithMaxWidth:300];
+            self.validDateLab = validDateLab;
         
-        // 有效期
-        UILabel *validDateLab = [UILabel new];
-        [imgView addSubview:validDateLab];
-        validDateLab.sd_layout
-        .leftEqualToView(tipLab)
-        .topSpaceToView(tipLab, 0)
-        .bottomSpaceToView(imgView, 0);
-        validDateLab.textColor = [UIColor whiteColor];
-        validDateLab.font = SMALLERFONT;
-        [validDateLab setSingleLineAutoResizeWithMaxWidth:300];
-        self.validDateLab = validDateLab;
+        }else{
+            tipLab.sd_layout
+            .autoHeightRatio(0)
+            .centerYEqualToView(imgView)
+            .leftSpaceToView(imgView, 10);
+            [tipLab setSingleLineAutoResizeWithMaxWidth:200];
+            self.tipLab = tipLab;
+        }
     }
     
     UILabel *subTipLab = [UILabel new];

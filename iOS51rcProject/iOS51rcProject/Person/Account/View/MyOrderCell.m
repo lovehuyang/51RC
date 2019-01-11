@@ -170,7 +170,10 @@
 
 - (void)setValue{
     
-    self.submitTimeLab.text = [NSString stringWithFormat:@"订单提交时间:%@",[self changeFormatWithDateString:_model.addDate]];
+    
+    NSString *addDate = [CommonTools changeDateWithDateString:_model.addDate];// 订单提交时间
+
+    self.submitTimeLab.text = [NSString stringWithFormat:@"订单提交时间:%@",addDate];
     self.orderNameLab.text = _model.cvOrderName;
     self.orderNumLab.text = [NSString stringWithFormat:@"订单号:%@",_model.payOrderNum];
     self.orderStatusLab.text = _model.cvTopStatus;
@@ -211,7 +214,6 @@
 
 -(NSString *)changeFormatWithDateString:(NSString *)date{
     //2019-01-07T09:43:58.233+08:00
-    //2019-01-04T17:54:00+08:00
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'+'ss:ss"];
     NSDate *currentDate = [dateFormatter dateFromString:date];

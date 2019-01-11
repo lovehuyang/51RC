@@ -29,10 +29,13 @@
 #import "AttachmentModel.h"// 简历附件模型
 #import "AttachMentView.h"
 #import "AlertView.h"
+#import "RCAlertView.h"
 
 @interface CvInfoChildViewController ()<NetWebServiceRequestDelegate, MLImageCropDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PaInfoModifyDelegate, IntentionModifyDelegate, WKPopViewDelegate, UITextFieldDelegate>
 {
     BOOL isUpdateHead;// 默认更新头像
+    BOOL isTop;// 置顶中、默认不置顶NO
+    BOOL isFullCV;// 是不是完整简历cvlevel，默认不是完整简历
 }
 @property (nonatomic, strong) NetWebServiceRequest *runningRequest;
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -43,7 +46,9 @@
 @property (nonatomic, strong) WKPopView *refreshPop;
 @property (nonatomic, strong) UIButton *btnAddAttachment;// 添加附件简历按钮
 @property (nonatomic, strong) WKButton *btnDelete;// 删除简历按钮
+@property (nonatomic , strong) UIButton *setTopBtn;// 置顶按钮
 @property (nonatomic , strong) NSMutableArray *attachmentData;// 附件简历模型
+@property (nonatomic , strong) UIImageView *tipSetTopView;// 提醒去简历置顶的view
 @property float heightForScroll;
 @end
 
@@ -54,6 +59,8 @@
     // Do any additional setup after loading the view.
     
     isUpdateHead = YES;
+    isTop = NO;
+    isFullCV = NO;
     
     if (!self.onlyOne) {
         UIView *viewSeparate = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
@@ -62,6 +69,7 @@
     }
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, (self.onlyOne ? 0 : 10), SCREEN_WIDTH, SCREEN_HEIGHT - STATUS_BAR_HEIGHT - TAB_BAR_HEIGHT - NAVIGATION_BAR_HEIGHT * (self.onlyOne ? 1 : 2))];
     [self.view addSubview:self.scrollView];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -92,11 +100,87 @@
     [request startAsynchronous];
     self.runningRequest = request;
 }
+#pragma mark - 获取置顶信息
+- (void)getPaOrder{
+    
+    NSArray *dataArr = [Common getArrayFromXml:self.xmlData tableName:@"PaOrder"];
+    if (dataArr == nil || dataArr.count == 0) {
+        return;
+    }
+    NSDictionary *paData = [dataArr objectAtIndex:0];
+    if(paData == nil){
+        return;
+    }
+    
+    isTop = YES;
+    // 简历置顶置顶到期时间
+    NSString *endDate = [self changeBeginFormatWithDateString:[paData objectForKey:@"endDate"]];
+    UILabel *endDateLab = [UILabel new];
+    endDateLab.frame = CGRectMake(0, 0, SCREEN_WIDTH, 40);
+    [self.scrollView addSubview:endDateLab];
+    endDateLab.textAlignment = NSTextAlignmentCenter;
+    endDateLab.font = SMALLERFONT;
+    NSString *endStr = [NSString stringWithFormat:@"简历置顶中      有效期至%@",endDate];
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc]initWithString:endStr];
+    NSRange range = [endStr rangeOfString:@"简历置顶中"];
+    [attrStr addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:DEFAULTFONTSIZE] range:range];
+    [attrStr addAttribute:NSForegroundColorAttributeName value:GREENCOLOR range:range];
+    endDateLab.attributedText = attrStr;
+    
+    UIView *lineView = [UIView new];
+    lineView.frame = CGRectMake(0, 35, SCREEN_WIDTH, 1);
+    lineView.backgroundColor = SEPARATECOLOR;
+    [self.scrollView addSubview:lineView];
+}
 
+#pragma mark - 提醒置顶简历
+- (void)reminderUserToSetTop{
+    NSDictionary *cvData = [[Common getArrayFromXml:self.xmlData tableName:@"CvMain"] objectAtIndex:0];
+    // 判断简历是不是完整的
+    isFullCV = [CommonTools cvIsFull:cvData[@"cvLevel"]];
+    // 浏览次数
+    NSInteger cacvviewCnt = [cvData[@"cacvviewCnt"] integerValue];
+    //是完整简历 && 当前简历无置顶 && 被浏览次数<5次，则展示该提示，6秒后自动隐藏
+    if (isFullCV && !isTop && cacvviewCnt < 5) {
+        
+        // 背景对话框
+        UIImageView *bgView = [UIImageView new];
+        bgView.image = [UIImage imageNamed:@"bg_resume_top_tishi_num"];
+        [self.scrollView addSubview:bgView];
+        self.tipSetTopView = bgView;
+        
+        UILabel *tipLab = [UILabel new];
+        [bgView addSubview:tipLab];
+        tipLab.text = [NSString stringWithFormat:@"该简历近期被浏览%ld次，建议购买置顶服务",(long)cacvviewCnt];
+        tipLab.font = SMALLERFONT;
+        tipLab.textColor = NAVBARCOLOR;
+        [tipLab setSingleLineAutoResizeWithMaxWidth:SCREEN_WIDTH];
+        
+        bgView.sd_layout
+        .bottomSpaceToView(self.setTopBtn, 5)
+        .rightSpaceToView(self.scrollView , 15)
+        .heightIs(30)
+        .widthRatioToView(tipLab, 1.02);
+        
+        tipLab.sd_layout
+        .bottomSpaceToView(bgView, 6)
+        .centerXEqualToView(bgView)
+        .topSpaceToView(bgView, 1);
+        
+        // GCD延时执行
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [bgView removeFromSuperview];
+            [tipLab removeFromSuperview];
+        });
+        
+    }else{
+        DLog(@"不提示简历置顶");
+    }
+}
 #pragma mark -
 - (void)fillData {
     NSDictionary *cvData = [[Common getArrayFromXml:self.xmlData tableName:@"CvMain"] objectAtIndex:0];
-    WKLabel *lbScore = [[WKLabel alloc] initWithFrame:CGRectMake(25, 15, 50, 30) content:[NSString stringWithFormat:@"%@分", [cvData objectForKey:@"Score"]] size:25 color:([[cvData objectForKey:@"Valid"] isEqualToString:@"0"] ? NAVBARCOLOR : GREENCOLOR)];
+    WKLabel *lbScore = [[WKLabel alloc] initWithFrame:CGRectMake(25,isTop ? 40 :15, 50, 30) content:[NSString stringWithFormat:@"%@分", [cvData objectForKey:@"Score"]] size:25 color:([[cvData objectForKey:@"Valid"] isEqualToString:@"0"] ? NAVBARCOLOR : GREENCOLOR)];
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:lbScore.text];
     [attrString addAttribute:NSForegroundColorAttributeName value:TEXTGRAYCOLOR range:NSMakeRange(lbScore.text.length - 1, 1)];
     [attrString addAttribute:NSFontAttributeName value:DEFAULTFONT range:NSMakeRange(lbScore.text.length - 1, 1)];
@@ -195,6 +279,7 @@
     UIButton *setTopBtn = [[UIButton alloc] initWithFrame:CGRectMake(VIEW_BX(btnRefresh), VIEW_Y(btnRefresh), SCREEN_WIDTH/3/2, VIEW_H(btnRefresh))];
     [setTopBtn addTarget:self action:@selector(setCvToTop) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:setTopBtn];
+    self.setTopBtn = setTopBtn;
 
     UIImageView *setTopImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, VIEW_W(setTopBtn), 25)];
     [setTopImg setImage:[UIImage imageNamed:@"pa_SetTop"]];
@@ -896,7 +981,22 @@
 }
 
 #pragma mark - 简历状态点击事件
-- (void)cvOpenClick:(UIButton *)button {
+- (void)cvOpenClick:(UIButton *)switchButton {
+    
+    if(isTop && switchButton.tag == 1){
+        RCAlertView *alert = [[RCAlertView alloc]initWithTitle:@"提示" content:@"隐藏简历后，您的置顶服务会继续倒计时，您确定隐藏么？" leftBtn:@"确定" rightBtn:@"取消"];
+        alert.clickBlock = ^(UIButton *button) {
+            if ([button.titleLabel.text isEqualToString:@"确定"]) {
+                [self changeCvOpenStatus:switchButton];
+            }
+        };
+        [alert show];
+    }else{
+        [self changeCvOpenStatus:switchButton];
+    }
+}
+// 改变隐藏/显示简历按钮的显示状态
+- (void)changeCvOpenStatus:(UIButton *)button{
     [self setOpen:(button.tag == 0 ? @"0" : @"1") nameHidden:@""];
     UIImageView *imgOpen;
     for (UIView *view in button.subviews) {
@@ -913,7 +1013,6 @@
         button.tag = 0;
     }
 }
-
 #pragma mark - 姓名状态/简历状态网络请求
 - (void)setOpen:(NSString *)cvHidden nameHidden:(NSString *)nameHidden {
     NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"OpenSet" Params:[NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", self.cvMainId, @"cvMainId", cvHidden, @"cvHidden", nameHidden, @"nameHidden", nil] viewController:nil];
@@ -952,7 +1051,9 @@
               responseData:(GDataXMLDocument *)requestData {
     if (request.tag == 1) {
         self.xmlData = requestData;
+        [self getPaOrder];// 获取置顶信息
         [self fillData];
+        [self reminderUserToSetTop];// 提醒用户去置顶简历
         [self fillBasic];
         [self fillJobIntention];
         [self fillEducation];
@@ -985,6 +1086,16 @@
 }
 
 - (void)delete {
+    
+    if(isTop){
+        RCAlertView *alert = [[RCAlertView alloc]initWithTitle:@"提示" content:@"该简历的“简历置顶”服务未到期，无法删除。若已找到工作，可隐藏简历或服务到期后删除" leftBtn:@"我知道了" rightBtn:nil];
+        alert.clickBlock = ^(UIButton *button) {
+            
+        };
+        [alert show];
+        return;
+    }
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"该简历删除后，对应的申请记录、面试通知会一并删除，您确认删除吗？" preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"DeleteResume" Params:[NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", self.cvMainId, @"cvMainId", nil] viewController:self];
@@ -1128,6 +1239,7 @@
 
 #pragma mark - 置顶
 - (void)setCvToTop{
+    [MobClick event:@"clickSetTopBtn"];
     SetCvTopViewController *cvTopVC = [SetCvTopViewController new];
     cvTopVC.cvMainId = self.cvMainId;
     [self.navigationController pushViewController:cvTopVC animated:YES];
@@ -1247,6 +1359,17 @@
     }
     
     self.heightForScroll = VIEW_BY(attachmentView);
+}
+
+#pragma mark - 时间转化
+-(NSString *)changeBeginFormatWithDateString:(NSString *)date{
+    // 2021-01-04T17:55:00+08:00
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'+'ss:ss"];
+    NSDate *currentDate = [dateFormatter dateFromString:date];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSString *dateStr=[dateFormatter stringFromDate:currentDate];
+    return dateStr;
 }
 
 @end

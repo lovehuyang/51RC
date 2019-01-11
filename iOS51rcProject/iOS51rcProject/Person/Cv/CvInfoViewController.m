@@ -90,7 +90,6 @@
               responseData:(GDataXMLDocument *)requestData {
     if (request.tag == 1) {
         NSArray *arrayCv = [Common getArrayFromXml:requestData tableName:@"Table"];
-        
         if(arrayCv.count == 0){// 一分钟填写简历
             [self createOneMinuteController:@"0"];
             return;
@@ -140,7 +139,7 @@
             [self setupAddCVBtn];
         }
         else {
-            self.navigationItem.rightBarButtonItem = NULL;
+//            self.navigationItem.rightBarButtonItem = NULL;
         }
     }
     else if (request.tag == 2) {

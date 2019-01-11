@@ -412,6 +412,7 @@
 		999070C71F03846E00B5E289 /* img_favorite2.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070C31F03846D00B5E289 /* img_favorite2.png */; };
 		999070C81F03846E00B5E289 /* img_mappoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070C41F03846D00B5E289 /* img_mappoint.png */; };
 		999070C91F03846E00B5E289 /* img_share.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070C51F03846D00B5E289 /* img_share.png */; };
+		999075F921E8219E0036A361 /* RCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 999075F821E8219E0036A361 /* RCAlertView.m */; };
 		9990A70521A6490200A320FD /* AttachMentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990A70421A6490200A320FD /* AttachMentView.m */; };
 		9993798F219A9C250087D404 /* PullDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9993798E219A9C240087D404 /* PullDownMenu.m */; };
 		99937992219AAB730087D404 /* MenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 99937990219AAB730087D404 /* MenuButton.m */; };
@@ -526,6 +527,7 @@
 		99ED2807219E90B000ED656A /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99ED2806219E90B000ED656A /* AlertView.m */; };
 		99EE84BE1F72028700B2AFF9 /* CpRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EE84BD1F72028700B2AFF9 /* CpRegisterViewController.m */; };
 		99EE84C11F7205B900B2AFF9 /* CpForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EE84C01F7205B900B2AFF9 /* CpForgetPasswordViewController.m */; };
+		99F174CC21E5C5B800E72976 /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F174CB21E5C5B700E72976 /* WXApiManager.m */; };
 		99F7FC7E204034190060E9F1 /* CvSearchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F7FC7D204034190060E9F1 /* CvSearchListViewController.m */; };
 		99F7FC8120404D490060E9F1 /* InvitationManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F7FC8020404D490060E9F1 /* InvitationManagerViewController.m */; };
 		99F7FC842041427D0060E9F1 /* WKCvTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F7FC832041427D0060E9F1 /* WKCvTableViewCell.m */; };
@@ -1149,6 +1151,8 @@
 		999070C31F03846D00B5E289 /* img_favorite2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_favorite2.png; sourceTree = "<group>"; };
 		999070C41F03846D00B5E289 /* img_mappoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_mappoint.png; sourceTree = "<group>"; };
 		999070C51F03846D00B5E289 /* img_share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_share.png; sourceTree = "<group>"; };
+		999075F721E8219E0036A361 /* RCAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCAlertView.h; sourceTree = "<group>"; };
+		999075F821E8219E0036A361 /* RCAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCAlertView.m; sourceTree = "<group>"; };
 		9990A70321A6490200A320FD /* AttachMentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttachMentView.h; sourceTree = "<group>"; };
 		9990A70421A6490200A320FD /* AttachMentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttachMentView.m; sourceTree = "<group>"; };
 		9993798D219A9C240087D404 /* PullDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullDownMenu.h; sourceTree = "<group>"; };
@@ -1346,6 +1350,8 @@
 		99EE84BD1F72028700B2AFF9 /* CpRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CpRegisterViewController.m; sourceTree = "<group>"; };
 		99EE84BF1F7205B900B2AFF9 /* CpForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpForgetPasswordViewController.h; sourceTree = "<group>"; };
 		99EE84C01F7205B900B2AFF9 /* CpForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CpForgetPasswordViewController.m; sourceTree = "<group>"; };
+		99F174CA21E5C5B700E72976 /* WXApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiManager.h; sourceTree = "<group>"; };
+		99F174CB21E5C5B700E72976 /* WXApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiManager.m; sourceTree = "<group>"; };
 		99F7FC7C204034190060E9F1 /* CvSearchListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CvSearchListViewController.h; sourceTree = "<group>"; };
 		99F7FC7D204034190060E9F1 /* CvSearchListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CvSearchListViewController.m; sourceTree = "<group>"; };
 		99F7FC7F20404D490060E9F1 /* InvitationManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvitationManagerViewController.h; sourceTree = "<group>"; };
@@ -2164,6 +2170,8 @@
 				991D7A88219D37A20019123A /* BarButtonItem.m */,
 				99EC66E421B0D79F00756113 /* RCRootViewController.h */,
 				99EC66E521B0D79F00756113 /* RCRootViewController.m */,
+				999075F721E8219E0036A361 /* RCAlertView.h */,
+				999075F821E8219E0036A361 /* RCAlertView.m */,
 			);
 			path = CustomUI;
 			sourceTree = "<group>";
@@ -2746,6 +2754,8 @@
 		9997439521AD201B00B076A2 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				99F174CA21E5C5B700E72976 /* WXApiManager.h */,
+				99F174CB21E5C5B700E72976 /* WXApiManager.m */,
 				998E889521D7739700E8D622 /* ZHAttributeTextView.h */,
 				998E889621D7739800E8D622 /* ZHAttributeTextView.m */,
 				9997439621AD204A00B076A2 /* OneMinuteArray.h */,
@@ -3420,6 +3430,7 @@
 				995231A02052AB0400C8836D /* ExpiredJobListViewController.m in Sources */,
 				996D64AF21B643BA0095EA95 /* SpeakBtn.m in Sources */,
 				9960E25D219019CC008E6DE5 /* MBProgressHUD+Gif.m in Sources */,
+				99F174CC21E5C5B800E72976 /* WXApiManager.m in Sources */,
 				9980766121D5BAED000BC5F8 /* PJobListModel.m in Sources */,
 				991A24421EE6D7A9008CD8E9 /* ASINetworkQueue.m in Sources */,
 				9952319D2052AAE200C8836D /* IssueJobListViewController.m in Sources */,
@@ -3617,6 +3628,7 @@
 				9919FA191EDE6A6100BE51F0 /* GuideViewController.m in Sources */,
 				99949F5321C248B2002109D1 /* InsertJobApplyModel.m in Sources */,
 				99C52C2F21DF4FDC00F9CF7A /* MyOrderCell.m in Sources */,
+				999075F921E8219E0036A361 /* RCAlertView.m in Sources */,
 				99DCE28321DDD6D30060B147 /* ConfirmOrderCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3799,6 +3811,7 @@
 					"$(PROJECT_DIR)/Pods/BaiduMapKit/BaiduMapKit/thirdlibs",
 					"$(PROJECT_DIR)/iOS51rcProject/Resource/Class/Third/BDSClientLib",
 					"$(PROJECT_DIR)/iOS51rcProject/ThirdLib/BDSClientLib",
+					"$(PROJECT_DIR)/iOS51rcProject/Resource/Class/Third/WechtSDK1.8.2",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -3840,6 +3853,7 @@
 					"$(PROJECT_DIR)/Pods/BaiduMapKit/BaiduMapKit/thirdlibs",
 					"$(PROJECT_DIR)/iOS51rcProject/Resource/Class/Third/BDSClientLib",
 					"$(PROJECT_DIR)/iOS51rcProject/ThirdLib/BDSClientLib",
+					"$(PROJECT_DIR)/iOS51rcProject/Resource/Class/Third/WechtSDK1.8.2",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

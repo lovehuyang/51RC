@@ -10,7 +10,7 @@
 @class OrderListModel;
 
 @interface ConfirmPaymentOrderController : RCRootViewController
-@property (nonatomic , copy)void (^alipayResult)(BOOL success);
+@property (nonatomic , copy)void (^payResult)(BOOL success);
 @property (nonatomic , strong)OrderListModel *model;
 
 @end

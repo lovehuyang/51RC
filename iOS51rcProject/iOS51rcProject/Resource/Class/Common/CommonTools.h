@@ -17,4 +17,7 @@
 
 + (NSDictionary *)translateJsonStrToDictionary:(NSString *)jsonStr;
 
++ (BOOL)cvIsFull:(NSString *)cvlevel;
+
++ (NSString *)changeDateWithDateString:(NSString *)date;
 @end

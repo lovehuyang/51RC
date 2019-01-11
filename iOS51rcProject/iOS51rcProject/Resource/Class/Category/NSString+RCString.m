@@ -20,6 +20,9 @@
             break;
         }
     }
+    if([provinceStr isEqualToString:@"北京市"]||[provinceStr isEqualToString:@"天津市"]||[provinceStr isEqualToString:@"上海市"]||[provinceStr isEqualToString:@"重庆市"]){
+        return regionStr;
+    }
     NSArray *seperateArr = [regionStr componentsSeparatedByString:provinceStr];
     
     return [seperateArr lastObject];

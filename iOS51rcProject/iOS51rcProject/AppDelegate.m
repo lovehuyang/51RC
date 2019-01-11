@@ -26,6 +26,9 @@
 #import "InterviewCpViewController.h"
 #import "IQKeyboardManager.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "WXApiManager.h"
+#import <UMCommon/UMCommon.h>
+
 
 @interface AppDelegate ()<JPUSHRegisterDelegate, UIAlertViewDelegate>
 
@@ -38,6 +41,11 @@
     // 打开键盘事件响应
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
+    
+    // 向微信注册,发起支付必须注册
+    [WXApi registerApp:WXPAY_AppID enableMTA:YES];
+    [self setupUM];// 初始化友盟数据统计
+    
 //    //将字典存入到document内
 //    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
 //    NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -131,6 +139,15 @@
         }
     }
     return YES;
+}
+
+#pragma mark - 友盟数据统计
+- (void)setupUM{
+    [UMConfigure setLogEnabled:YES];
+    [MobClick setScenarioType:E_UM_NORMAL];
+    [MobClick setCrashReportEnabled:YES];
+    [UMConfigure initWithAppkey:@"5c37fa92b465f5e389000d4d" channel:nil];
+
 }
 
 - (void)application:(UIApplication *)application
@@ -311,6 +328,10 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
             }
             NSLog(@"授权结果 authCode = %@", authCode?:@"");
         }];
+        
+    }else if ([sourceApplication isEqualToString:@"com.tencent.xin"]) {
+        //微信支付回调
+        return [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
     }
     return YES;
 }
@@ -324,6 +345,14 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
             NSLog(@"result = %@",resultDic);
             if ([[resultDic objectForKey:@"resultStatus"] isEqualToString:@"9000"]) {
+                
+                // 查询支付结果
+                NSString *result = resultDic[@"result"];
+                NSDictionary *resultDict = [CommonTools translateJsonStrToDictionary:result];
+                NSString *out_trade_no = [resultDict[@"alipay_trade_app_pay_response"] objectForKey:@"out_trade_no"];
+                [[NSUserDefaults standardUserDefaults] setObject:out_trade_no forKey:KEY_PAYORDERNUM];
+                [[NSUserDefaults standardUserDefaults]synchronize];
+                
                 // 支付成功
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ALIPAYSUCCESS object:nil];
             }else{
@@ -348,6 +377,10 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
             }
             NSLog(@"授权结果 authCode = %@", authCode?:@"");
         }];
+    
+    }else {
+        // 微信支付
+        return  [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
     }
     return YES;
 }

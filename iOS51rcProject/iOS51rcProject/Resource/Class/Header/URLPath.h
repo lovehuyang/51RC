@@ -61,6 +61,8 @@
 #define URL_GETPAORDERLIST @"GetPaOrderList"
 // 取消订单接口
 #define URL_WEIXINORDERCANCEL @"WeiXinOrderCancel"
+// 查询订单支付接口
+#define URL_INQUIREWEIXINORDER @"InquireWeiXinOrder"
 
 
 #pragma mark - 公司用户

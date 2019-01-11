@@ -10,7 +10,6 @@
 
 @interface BuyTopServiceSuccessAlert()
 
-
 @property (nonatomic , strong) UIView *bgView;
 @property (nonatomic , strong) UIImageView *successAlert;
 @property (nonatomic , strong) UIImageView *successView;

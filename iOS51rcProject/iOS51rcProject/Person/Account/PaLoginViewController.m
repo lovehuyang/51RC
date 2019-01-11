@@ -148,18 +148,7 @@
 
 - (IBAction)loginClick:(id)sender {
     [self.view endEditing:YES];
-    
-//    UITabBarController *personCtrl = [[UIStoryboard storyboardWithName:@"Person" bundle:nil] instantiateViewControllerWithIdentifier:@"personView"];
-//    [personCtrl setSelectedIndex:4];
-//    [self presentViewController:personCtrl animated:YES completion:^{
-//        [USER_DEFAULT setObject:@"1" forKey:@"positioned"];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PALOGINSUCCESS object:self];
-//    }];
-//
-//    return;
-    // 以上代码要删除
-    
-    
+
     if (self.txtUsername.text.length == 0) {
         [RCToast showMessage:self.txtUsername.placeholder];
         return;
@@ -177,6 +166,7 @@
     
     // 密码登录模式
     if (isPasswordLogin) {
+        [MobClick event:@"aLoginByPassword"];
         NSDictionary *param = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.txtUsername.text, @"userName", self.txtPassword.text, @"passWord", [USER_DEFAULT objectForKey:@"provinceId"], @"provinceID", @"ismobile:IOS", @"browser", @"0", @"autoLogin", [JPUSHService registrationID], @"jpushId", nil];
         
         NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:URL_LOGIN Params:param viewController:self];
@@ -186,8 +176,8 @@
         self.runningRequest = request;
     
     }else{// 验证码登录
+        [MobClick event:@"paLoginBySecurity"];
         [SVProgressHUD show];
-        
         NSDictionary *param = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.txtUsername.text, @"userName", self.txtPassword.text, @"mobileCerCode", [USER_DEFAULT objectForKey:@"provinceId"], @"provinceID", @"ismobile:IOS", @"browser", @"0", @"autoLogin", [JPUSHService registrationID], @"jpushId", nil];
         
         [AFNManager requestWithMethod:POST ParamDict:param url:URL_LOGINMOBILE tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {

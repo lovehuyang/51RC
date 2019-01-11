@@ -74,4 +74,5 @@
 + (BOOL) deptNumInputShouldNumber:(NSString *)str;
 
 + (NSString *)getIPaddress;
+
 @end

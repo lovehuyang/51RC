@@ -60,6 +60,7 @@
         [self.view makeToast:@"请勾选用户协议"];
         return;
     }
+    [MobClick endEvent:@"cpLogin"];
     NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrlCp:@"Login" Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:self.txtUsername.text, @"userName", self.txtPassword.text, @"passWord", @"0", @"provinceId", @"ismobile:IOS", @"browser", [JPUSHService registrationID], @"jpushId", nil] viewController:self];
     [request setTag:1];
     [request setDelegate:self];
