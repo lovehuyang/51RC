@@ -121,12 +121,12 @@
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT - 44) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT - 44 - 45 - 10) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.backgroundColor = SEPARATECOLOR;
         _tableView.tableFooterView = [UIView new];
-        _tableView.scrollEnabled = NO;
+//        _tableView.scrollEnabled = NO;
     }
     return _tableView;
 }
@@ -185,7 +185,7 @@
         };
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
-    }else if(indexPath.section == 1 && self.discountInfoArr.count){
+    }else if(indexPath.section == 1 && self.discountInfoArr.count){// 代金券
         DiscountCell *cell = [[DiscountCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil indexPath:indexPath];
         if (indexPath.row > 0) {
             cell.discountModel = self.discountInfoArr[indexPath.row - 1];
@@ -198,6 +198,7 @@
                     modle.isSelceted = NO;
                 }
             }
+            weakself.bottomPayView.money = [NSString stringWithFormat:@"%.2f",[self payTotalMoney]];
             [weakself.tableView reloadData];
         };
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -289,8 +290,11 @@
     // 计算优惠的金额
     CGFloat totalDiscountMoney = 0;
     for (DiscountInfoModle *model in self.discountInfoArr) {
-        CGFloat discountMoney = [model.Money floatValue];
-        totalDiscountMoney =+discountMoney;
+        if(model.isSelceted == YES){
+            CGFloat discountMoney = [model.Money floatValue];
+            totalDiscountMoney =+discountMoney;
+            break;
+        }
     }
     // 计算应付的金额
     CGFloat totalMoney = [self.model.nowPrice floatValue] - totalDiscountMoney;
@@ -376,8 +380,12 @@
     // 代金券id
     NSString *discountId = @"";
     if (self.discountInfoArr.count > 0) {
-        DiscountInfoModle *discountModel = [self.discountInfoArr firstObject];
-        discountId = discountModel.ID;
+        for (DiscountInfoModle *model in self.discountInfoArr) {
+            if (model.isSelceted == YES) {
+                discountId = model.ID;
+                break;
+            }
+        }
     }
     
     // ip地址

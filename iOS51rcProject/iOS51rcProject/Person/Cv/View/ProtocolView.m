@@ -39,8 +39,8 @@
         [self addSubview:self.alertView];
         self.alertView.sd_layout
         .centerXEqualToView(self)
-        .leftSpaceToView(self, 50)
-        .rightSpaceToView(self, 50)
+        .leftSpaceToView(self, 40)
+        .rightSpaceToView(self, 40)
         .heightIs(200)
         .centerYEqualToView(self);
         self.alertView.backgroundColor = [UIColor whiteColor];
@@ -87,9 +87,7 @@
     btn.titleLabel.font = DEFAULTFONT;
     [btn addTarget:self action:@selector(dissmiss) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.alertView setupAutoHeightWithBottomView:btn bottomMargin:10];
-
-    
+    [self.alertView setupAutoHeightWithBottomView:btn bottomMargin:15];
 }
 
 - (void)show{

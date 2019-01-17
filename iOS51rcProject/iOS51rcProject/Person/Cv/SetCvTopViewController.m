@@ -21,8 +21,9 @@
 #import "BuyTopServiceSuccessAlert.h"
 #import "ConfirmOrderController.h"
 #import "MyOrderViewController.h"
-
+#import "WXApi.h"
 @interface SetCvTopViewController ()<UITableViewDelegate,UITableViewDataSource>
+
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) UIImageView *headImgView;//
 @property (nonatomic , strong) UIView *footView;//
@@ -39,7 +40,9 @@
     [self getpaOrderResumeTop];
     [self.view addSubview:self.tableView];
 }
-
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 - (void)getpaOrderResumeTop{
     [SVProgressHUD show];
     NSDictionary *paramDict = @{@"paMainId":PAMAINID,
@@ -82,6 +85,7 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = SEPARATECOLOR;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
 }
@@ -268,13 +272,14 @@
             ShareView *shareView = [ShareView new];
             shareView.shareBlock = ^{
                 
+                NSString *shareContent = [CommonTools shareContent:self.JobPlaceName];
                 NSMutableDictionary *params = [NSMutableDictionary dictionary];
-                [params SSDKSetupShareParamsByText:@"test" images:[UIImage imageNamed:@"320logo.png"] url:[NSURL URLWithString:@"http://m.qlrc.com/personal/js/joblist"] title:@"亲，用过齐鲁人才网站找工作么?新增一大波招聘信息等你来" type:SSDKContentTypeAuto];
+                [params SSDKSetupShareParamsByText:@"齐鲁人才网" images:[UIImage imageNamed:@"320logo.png"] url:[NSURL URLWithString:@"http://m.qlrc.com/personal/js/joblist"] title:shareContent type:SSDKContentTypeAuto];
                 
                 [ShareSDK share:SSDKPlatformSubTypeWechatTimeline parameters:params onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
                     
                     switch (state) {
-                            
+
                         case SSDKResponseStateSuccess:
                             //成功
                             [weakself savepaOrderDiscount:model.discountType];
@@ -290,7 +295,7 @@
                             //取消
                             [RCToast showMessage:@"取消分享了"];
                             break;
-                            
+
                         default:
                             break;
                     }
@@ -331,4 +336,5 @@
         DLog(@"");
     }];
 }
+
 @end

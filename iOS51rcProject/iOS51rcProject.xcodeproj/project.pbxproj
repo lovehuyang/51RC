@@ -368,18 +368,6 @@
 		997B068F1F5500A000391289 /* PaInfoModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06491F5500A000391289 /* PaInfoModifyViewController.m */; };
 		997B06901F5500A000391289 /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B064B1F5500A000391289 /* PreviewViewController.m */; };
 		997B06911F5500A000391289 /* SpecialityModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B064D1F5500A000391289 /* SpecialityModifyViewController.m */; };
-		997B06921F5500A000391289 /* ApplyInvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06501F5500A000391289 /* ApplyInvitationViewController.m */; };
-		997B06931F5500A000391289 /* AttentionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06521F5500A000391289 /* AttentionViewController.m */; };
-		997B06941F5500A000391289 /* CpAttentionChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06541F5500A000391289 /* CpAttentionChangeViewController.m */; };
-		997B06951F5500A000391289 /* CpAttentionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06561F5500A000391289 /* CpAttentionViewController.m */; };
-		997B06961F5500A000391289 /* CpViewChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06581F5500A000391289 /* CpViewChildViewController.m */; };
-		997B06971F5500A000391289 /* CpViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B065A1F5500A000391289 /* CpViewViewController.m */; };
-		997B06981F5500A000391289 /* InterviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B065C1F5500A000391289 /* InterviewViewController.m */; };
-		997B06991F5500A000391289 /* InvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B065E1F5500A000391289 /* InvitationViewController.m */; };
-		997B069A1F5500A000391289 /* JobApplyChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06601F5500A000391289 /* JobApplyChildViewController.m */; };
-		997B069B1F5500A000391289 /* JobApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06621F5500A000391289 /* JobApplyViewController.m */; };
-		997B069C1F5500A000391289 /* JobAttentionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06641F5500A000391289 /* JobAttentionViewController.m */; };
-		997B069D1F5500A000391289 /* YourFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B06661F5500A000391289 /* YourFoodViewController.m */; };
 		997B06A91F5500B700391289 /* Company.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 997B06A71F5500B700391289 /* Company.storyboard */; };
 		997B0D0920203FD100ABB4F7 /* OrderApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997B0D0820203FD100ABB4F7 /* OrderApplyViewController.m */; };
 		9980766121D5BAED000BC5F8 /* PJobListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9980766021D5BAED000BC5F8 /* PJobListModel.m */; };
@@ -452,6 +440,19 @@
 		99AA4AAD2192B7780053F750 /* NSString+RCString.m in Sources */ = {isa = PBXBuildFile; fileRef = 99AA4AAC2192B7780053F750 /* NSString+RCString.m */; };
 		99AAD49B206BD25C0053C2A0 /* JobPushViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99AAD49A206BD25C0053C2A0 /* JobPushViewController.m */; };
 		99AAF5E4201EFC220047959C /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99AAF5E3201EFC220047959C /* OrderDetailViewController.m */; };
+		99B8069121EC6646004AC914 /* CpAttentionChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B8067921EC6646004AC914 /* CpAttentionChangeViewController.m */; };
+		99B8069221EC6646004AC914 /* AttentionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B8067C21EC6646004AC914 /* AttentionViewController.m */; };
+		99B8069321EC6646004AC914 /* CpViewChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B8067D21EC6646004AC914 /* CpViewChildViewController.m */; };
+		99B8069421EC6646004AC914 /* CpViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B8068321EC6646004AC914 /* CpViewViewController.m */; };
+		99B8069521EC6646004AC914 /* JobAttentionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B8068421EC6646004AC914 /* JobAttentionViewController.m */; };
+		99B8069621EC6647004AC914 /* YourFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B8068621EC6646004AC914 /* YourFoodViewController.m */; };
+		99B8069721EC6647004AC914 /* InterviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B8068721EC6646004AC914 /* InterviewViewController.m */; };
+		99B8069821EC6647004AC914 /* ApplyInvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B8068921EC6646004AC914 /* ApplyInvitationViewController.m */; };
+		99B8069921EC6647004AC914 /* CpAttentionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B8068A21EC6646004AC914 /* CpAttentionViewController.m */; };
+		99B8069A21EC6647004AC914 /* JobApplyChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B8068C21EC6646004AC914 /* JobApplyChildViewController.m */; };
+		99B8069B21EC6647004AC914 /* InvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B8068D21EC6646004AC914 /* InvitationViewController.m */; };
+		99B8069C21EC6647004AC914 /* JobApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B8068E21EC6646004AC914 /* JobApplyViewController.m */; };
+		99B806A121EC6DFF004AC914 /* PersonNoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B806A021EC6DFF004AC914 /* PersonNoticeModel.m */; };
 		99C52C2221DEFE7F00F9CF7A /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 99C52C2021DEFE7F00F9CF7A /* AlipaySDK.bundle */; };
 		99C52C2321DEFE7F00F9CF7A /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C52C2121DEFE7F00F9CF7A /* AlipaySDK.framework */; };
 		99C52C2521DEFEEA00F9CF7A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C52C2421DEFEEA00F9CF7A /* QuartzCore.framework */; };
@@ -1080,30 +1081,6 @@
 		997B064B1F5500A000391289 /* PreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewViewController.m; sourceTree = "<group>"; };
 		997B064C1F5500A000391289 /* SpecialityModifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialityModifyViewController.h; sourceTree = "<group>"; };
 		997B064D1F5500A000391289 /* SpecialityModifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialityModifyViewController.m; sourceTree = "<group>"; };
-		997B064F1F5500A000391289 /* ApplyInvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyInvitationViewController.h; sourceTree = "<group>"; };
-		997B06501F5500A000391289 /* ApplyInvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyInvitationViewController.m; sourceTree = "<group>"; };
-		997B06511F5500A000391289 /* AttentionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttentionViewController.h; sourceTree = "<group>"; };
-		997B06521F5500A000391289 /* AttentionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttentionViewController.m; sourceTree = "<group>"; };
-		997B06531F5500A000391289 /* CpAttentionChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpAttentionChangeViewController.h; sourceTree = "<group>"; };
-		997B06541F5500A000391289 /* CpAttentionChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CpAttentionChangeViewController.m; sourceTree = "<group>"; };
-		997B06551F5500A000391289 /* CpAttentionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpAttentionViewController.h; sourceTree = "<group>"; };
-		997B06561F5500A000391289 /* CpAttentionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CpAttentionViewController.m; sourceTree = "<group>"; };
-		997B06571F5500A000391289 /* CpViewChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpViewChildViewController.h; sourceTree = "<group>"; };
-		997B06581F5500A000391289 /* CpViewChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CpViewChildViewController.m; sourceTree = "<group>"; };
-		997B06591F5500A000391289 /* CpViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpViewViewController.h; sourceTree = "<group>"; };
-		997B065A1F5500A000391289 /* CpViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CpViewViewController.m; sourceTree = "<group>"; };
-		997B065B1F5500A000391289 /* InterviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterviewViewController.h; sourceTree = "<group>"; };
-		997B065C1F5500A000391289 /* InterviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterviewViewController.m; sourceTree = "<group>"; };
-		997B065D1F5500A000391289 /* InvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationViewController.h; sourceTree = "<group>"; };
-		997B065E1F5500A000391289 /* InvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationViewController.m; sourceTree = "<group>"; };
-		997B065F1F5500A000391289 /* JobApplyChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobApplyChildViewController.h; sourceTree = "<group>"; };
-		997B06601F5500A000391289 /* JobApplyChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobApplyChildViewController.m; sourceTree = "<group>"; };
-		997B06611F5500A000391289 /* JobApplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobApplyViewController.h; sourceTree = "<group>"; };
-		997B06621F5500A000391289 /* JobApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobApplyViewController.m; sourceTree = "<group>"; };
-		997B06631F5500A000391289 /* JobAttentionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobAttentionViewController.h; sourceTree = "<group>"; };
-		997B06641F5500A000391289 /* JobAttentionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobAttentionViewController.m; sourceTree = "<group>"; };
-		997B06651F5500A000391289 /* YourFoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YourFoodViewController.h; sourceTree = "<group>"; };
-		997B06661F5500A000391289 /* YourFoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YourFoodViewController.m; sourceTree = "<group>"; };
 		997B06A81F5500B700391289 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Company.storyboard; sourceTree = "<group>"; };
 		997B0D0720203FD100ABB4F7 /* OrderApplyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderApplyViewController.h; sourceTree = "<group>"; };
 		997B0D0820203FD100ABB4F7 /* OrderApplyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderApplyViewController.m; sourceTree = "<group>"; };
@@ -1220,6 +1197,32 @@
 		99AAD49A206BD25C0053C2A0 /* JobPushViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JobPushViewController.m; sourceTree = "<group>"; };
 		99AAF5E2201EFC220047959C /* OrderDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
 		99AAF5E3201EFC220047959C /* OrderDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
+		99B8067921EC6646004AC914 /* CpAttentionChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CpAttentionChangeViewController.m; sourceTree = "<group>"; };
+		99B8067A21EC6646004AC914 /* InterviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterviewViewController.h; sourceTree = "<group>"; };
+		99B8067B21EC6646004AC914 /* YourFoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YourFoodViewController.h; sourceTree = "<group>"; };
+		99B8067C21EC6646004AC914 /* AttentionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttentionViewController.m; sourceTree = "<group>"; };
+		99B8067D21EC6646004AC914 /* CpViewChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CpViewChildViewController.m; sourceTree = "<group>"; };
+		99B8067E21EC6646004AC914 /* CpAttentionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpAttentionViewController.h; sourceTree = "<group>"; };
+		99B8067F21EC6646004AC914 /* ApplyInvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyInvitationViewController.h; sourceTree = "<group>"; };
+		99B8068021EC6646004AC914 /* InvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationViewController.h; sourceTree = "<group>"; };
+		99B8068121EC6646004AC914 /* JobApplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobApplyViewController.h; sourceTree = "<group>"; };
+		99B8068221EC6646004AC914 /* JobApplyChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobApplyChildViewController.h; sourceTree = "<group>"; };
+		99B8068321EC6646004AC914 /* CpViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CpViewViewController.m; sourceTree = "<group>"; };
+		99B8068421EC6646004AC914 /* JobAttentionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobAttentionViewController.m; sourceTree = "<group>"; };
+		99B8068521EC6646004AC914 /* AttentionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttentionViewController.h; sourceTree = "<group>"; };
+		99B8068621EC6646004AC914 /* YourFoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YourFoodViewController.m; sourceTree = "<group>"; };
+		99B8068721EC6646004AC914 /* InterviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterviewViewController.m; sourceTree = "<group>"; };
+		99B8068821EC6646004AC914 /* CpAttentionChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpAttentionChangeViewController.h; sourceTree = "<group>"; };
+		99B8068921EC6646004AC914 /* ApplyInvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyInvitationViewController.m; sourceTree = "<group>"; };
+		99B8068A21EC6646004AC914 /* CpAttentionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CpAttentionViewController.m; sourceTree = "<group>"; };
+		99B8068B21EC6646004AC914 /* CpViewChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpViewChildViewController.h; sourceTree = "<group>"; };
+		99B8068C21EC6646004AC914 /* JobApplyChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobApplyChildViewController.m; sourceTree = "<group>"; };
+		99B8068D21EC6646004AC914 /* InvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationViewController.m; sourceTree = "<group>"; };
+		99B8068E21EC6646004AC914 /* JobApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobApplyViewController.m; sourceTree = "<group>"; };
+		99B8068F21EC6646004AC914 /* JobAttentionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobAttentionViewController.h; sourceTree = "<group>"; };
+		99B8069021EC6646004AC914 /* CpViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpViewViewController.h; sourceTree = "<group>"; };
+		99B8069F21EC6DFF004AC914 /* PersonNoticeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonNoticeModel.h; sourceTree = "<group>"; };
+		99B806A021EC6DFF004AC914 /* PersonNoticeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonNoticeModel.m; sourceTree = "<group>"; };
 		99C52C2021DEFE7F00F9CF7A /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		99C52C2121DEFE7F00F9CF7A /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		99C52C2421DEFEEA00F9CF7A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -2606,31 +2609,10 @@
 		997B064E1F5500A000391289 /* Invitation */ = {
 			isa = PBXGroup;
 			children = (
-				997B064F1F5500A000391289 /* ApplyInvitationViewController.h */,
-				997B06501F5500A000391289 /* ApplyInvitationViewController.m */,
-				997B06511F5500A000391289 /* AttentionViewController.h */,
-				997B06521F5500A000391289 /* AttentionViewController.m */,
-				997B06531F5500A000391289 /* CpAttentionChangeViewController.h */,
-				997B06541F5500A000391289 /* CpAttentionChangeViewController.m */,
-				997B06551F5500A000391289 /* CpAttentionViewController.h */,
-				997B06561F5500A000391289 /* CpAttentionViewController.m */,
-				997B06571F5500A000391289 /* CpViewChildViewController.h */,
-				997B06581F5500A000391289 /* CpViewChildViewController.m */,
-				997B06591F5500A000391289 /* CpViewViewController.h */,
-				997B065A1F5500A000391289 /* CpViewViewController.m */,
-				997B065B1F5500A000391289 /* InterviewViewController.h */,
-				997B065C1F5500A000391289 /* InterviewViewController.m */,
-				997B065D1F5500A000391289 /* InvitationViewController.h */,
-				997B065E1F5500A000391289 /* InvitationViewController.m */,
-				997B065F1F5500A000391289 /* JobApplyChildViewController.h */,
-				997B06601F5500A000391289 /* JobApplyChildViewController.m */,
-				997B06611F5500A000391289 /* JobApplyViewController.h */,
-				997B06621F5500A000391289 /* JobApplyViewController.m */,
-				997B06631F5500A000391289 /* JobAttentionViewController.h */,
-				997B06641F5500A000391289 /* JobAttentionViewController.m */,
-				997B06651F5500A000391289 /* YourFoodViewController.h */,
-				997B06661F5500A000391289 /* YourFoodViewController.m */,
+				99B8067821EC6646004AC914 /* Controller */,
 				998F8A7521916901003DBAB1 /* View */,
+				99B8069E21EC6652004AC914 /* Model */,
+				99B8069D21EC6651004AC914 /* Other */,
 			);
 			path = Invitation;
 			sourceTree = "<group>";
@@ -2773,6 +2755,53 @@
 				990431052094076900B4267D /* UIImage+Size.m */,
 			);
 			path = MLImageCrop;
+			sourceTree = "<group>";
+		};
+		99B8067821EC6646004AC914 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				99B8068521EC6646004AC914 /* AttentionViewController.h */,
+				99B8067C21EC6646004AC914 /* AttentionViewController.m */,
+				99B8068B21EC6646004AC914 /* CpViewChildViewController.h */,
+				99B8067D21EC6646004AC914 /* CpViewChildViewController.m */,
+				99B8067F21EC6646004AC914 /* ApplyInvitationViewController.h */,
+				99B8068921EC6646004AC914 /* ApplyInvitationViewController.m */,
+				99B8068221EC6646004AC914 /* JobApplyChildViewController.h */,
+				99B8068C21EC6646004AC914 /* JobApplyChildViewController.m */,
+				99B8068F21EC6646004AC914 /* JobAttentionViewController.h */,
+				99B8068421EC6646004AC914 /* JobAttentionViewController.m */,
+				99B8069021EC6646004AC914 /* CpViewViewController.h */,
+				99B8068321EC6646004AC914 /* CpViewViewController.m */,
+				99B8067B21EC6646004AC914 /* YourFoodViewController.h */,
+				99B8068621EC6646004AC914 /* YourFoodViewController.m */,
+				99B8067A21EC6646004AC914 /* InterviewViewController.h */,
+				99B8068721EC6646004AC914 /* InterviewViewController.m */,
+				99B8068821EC6646004AC914 /* CpAttentionChangeViewController.h */,
+				99B8067921EC6646004AC914 /* CpAttentionChangeViewController.m */,
+				99B8067E21EC6646004AC914 /* CpAttentionViewController.h */,
+				99B8068A21EC6646004AC914 /* CpAttentionViewController.m */,
+				99B8068021EC6646004AC914 /* InvitationViewController.h */,
+				99B8068D21EC6646004AC914 /* InvitationViewController.m */,
+				99B8068121EC6646004AC914 /* JobApplyViewController.h */,
+				99B8068E21EC6646004AC914 /* JobApplyViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		99B8069D21EC6651004AC914 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		99B8069E21EC6652004AC914 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				99B8069F21EC6DFF004AC914 /* PersonNoticeModel.h */,
+				99B806A021EC6DFF004AC914 /* PersonNoticeModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		99C52C1F21DEFE7600F9CF7A /* AliPay */ = {
@@ -3425,6 +3454,7 @@
 				997B067A1F5500A000391289 /* AccountManagerViewController.m in Sources */,
 				9993A57B218AD0320057B6FD /* UIColor+ChangeColor.m in Sources */,
 				991D7A90219D43230019123A /* ShieldSetEmptyDataView.m in Sources */,
+				99B8069621EC6647004AC914 /* YourFoodViewController.m in Sources */,
 				995231B72059104600C8836D /* ResponsibilityViewController.m in Sources */,
 				9947F2B32193ED25002C97F2 /* WKTabBarController.m in Sources */,
 				995231A02052AB0400C8836D /* ExpiredJobListViewController.m in Sources */,
@@ -3435,6 +3465,7 @@
 				991A24421EE6D7A9008CD8E9 /* ASINetworkQueue.m in Sources */,
 				9952319D2052AAE200C8836D /* IssueJobListViewController.m in Sources */,
 				9908DD3421D499130002B609 /* JobInfoViewController.m in Sources */,
+				99B8069821EC6647004AC914 /* ApplyInvitationViewController.m in Sources */,
 				99AAF5E4201EFC220047959C /* OrderDetailViewController.m in Sources */,
 				991C6F791FFE1B7B009FD82A /* InterviewCpDetailViewController.m in Sources */,
 				9908DD3021D499130002B609 /* JobSearchViewController.m in Sources */,
@@ -3446,29 +3477,29 @@
 				99ED2804219E499B00ED656A /* InputAlertView.m in Sources */,
 				997B068F1F5500A000391289 /* PaInfoModifyViewController.m in Sources */,
 				998E888B21D703C400E8D622 /* CVPackageView.m in Sources */,
-				997B06921F5500A000391289 /* ApplyInvitationViewController.m in Sources */,
 				9957BB9C207F4148000EEAF1 /* InterviewSendViewController.m in Sources */,
 				9919F9501EDE445300BE51F0 /* iOS51rcProject.xcdatamodeld in Sources */,
-				997B069C1F5500A000391289 /* JobAttentionViewController.m in Sources */,
 				991A24441EE6D7A9008CD8E9 /* GDataXMLNode.m in Sources */,
 				99D740422023FF7F005B2CD3 /* CvSearchViewController.m in Sources */,
 				997B068A1F5500A000391289 /* ExperienceModifyViewController.m in Sources */,
 				993ED84421B51E4100A988FF /* SpeechViewController.m in Sources */,
 				997B067C1F5500A000391289 /* FeedbackViewController.m in Sources */,
+				99B806A121EC6DFF004AC914 /* PersonNoticeModel.m in Sources */,
 				995231A62052ACCA00C8836D /* JobModifyViewController.m in Sources */,
 				99FCF1FD2011D320008B5A69 /* AccountListViewController.m in Sources */,
 				997B06851F5500A000391289 /* ChatViewController.m in Sources */,
 				9929852A1F5539CB0021F863 /* WKTableView.m in Sources */,
+				99B8069A21EC6647004AC914 /* JobApplyChildViewController.m in Sources */,
 				998E889721D7739800E8D622 /* ZHAttributeTextView.m in Sources */,
-				997B06971F5500A000391289 /* CpViewViewController.m in Sources */,
 				9957BB8F207C4B34000EEAF1 /* CvDetailViewController.m in Sources */,
 				992985261F5539CB0021F863 /* WKLoginView.m in Sources */,
 				997B068D1F5500A000391289 /* MajorViewController.m in Sources */,
 				9908DD2B21D499130002B609 /* NearSearchViewController.m in Sources */,
-				997B069A1F5500A000391289 /* JobApplyChildViewController.m in Sources */,
 				992985251F5539CB0021F863 /* WKLoadingView.m in Sources */,
+				99B8069221EC6646004AC914 /* AttentionViewController.m in Sources */,
 				99EE84C11F7205B900B2AFF9 /* CpForgetPasswordViewController.m in Sources */,
 				99C5EEB62018731600AC8FBD /* OrderStatusViewController.m in Sources */,
+				99B8069721EC6647004AC914 /* InterviewViewController.m in Sources */,
 				99DCE27A21DCBA890060B147 /* RedPacketView.m in Sources */,
 				997B06871F5500A000391289 /* CvInfoViewController.m in Sources */,
 				995231BA2059105700C8836D /* DemandViewController.m in Sources */,
@@ -3492,7 +3523,6 @@
 				998E888E21D7376C00E8D622 /* TopTableThirdCell.m in Sources */,
 				9980766421D5CE7E000BC5F8 /* PJobListCell.m in Sources */,
 				99EE84BE1F72028700B2AFF9 /* CpRegisterViewController.m in Sources */,
-				997B06991F5500A000391289 /* InvitationViewController.m in Sources */,
 				991D7A93219D48F50019123A /* AddShieldBtn.m in Sources */,
 				995C3D701EF7CD7100277468 /* SCNavTabBar.m in Sources */,
 				9993A573218AB1060057B6FD /* OnlineLab.m in Sources */,
@@ -3526,12 +3556,12 @@
 				9990A70521A6490200A320FD /* AttachMentView.m in Sources */,
 				991DAA9E21A557DD00586AA7 /* AttachmentImgView.m in Sources */,
 				9993A589218AD0C80057B6FD /* CvOperate.m in Sources */,
+				99B8069121EC6646004AC914 /* CpAttentionChangeViewController.m in Sources */,
 				9994848121D1CD7400C78955 /* MyTalentsTestViewController.m in Sources */,
 				9929852C1F5539CB0021F863 /* WKViewController.m in Sources */,
 				99C5EEB92018732600AC8FBD /* FeeStandardViewController.m in Sources */,
 				99DA6BAA2047F62600BBDA59 /* DownloadCvViewController.m in Sources */,
 				9980766B21D608DA000BC5F8 /* SetCvTopViewController.m in Sources */,
-				997B06951F5500A000391289 /* CpAttentionViewController.m in Sources */,
 				99DA6BA72047D58800BBDA59 /* ApplyCvViewController.m in Sources */,
 				997B068C1F5500A000391289 /* IntentionModifyViewController.m in Sources */,
 				991A24471EE6D7A9008CD8E9 /* SoapXmlParseHelper.m in Sources */,
@@ -3542,13 +3572,13 @@
 				991A24411EE6D7A9008CD8E9 /* ASIInputStream.m in Sources */,
 				9919F9441EDE445300BE51F0 /* main.mm in Sources */,
 				99A816B2208729BA0026802B /* InterviewSendRemarkViewController.m in Sources */,
-				997B06941F5500A000391289 /* CpAttentionChangeViewController.m in Sources */,
 				992985211F5539CB0021F863 /* WKApplyView.m in Sources */,
 				9993A587218AD0C80057B6FD /* Common.m in Sources */,
 				991C6F631FFB5A5F009FD82A /* CvManagerViewController.m in Sources */,
 				99EC66E621B0D79F00756113 /* RCRootViewController.m in Sources */,
 				99F7FC8B2043B7170060E9F1 /* CvRecruitmentListViewController.m in Sources */,
 				99DCE27421DC431A0060B147 /* ProtocolView.m in Sources */,
+				99B8069421EC6646004AC914 /* CpViewViewController.m in Sources */,
 				99F7FC842041427D0060E9F1 /* WKCvTableViewCell.m in Sources */,
 				992985221F5539CB0021F863 /* WKButton.m in Sources */,
 				997B0D0920203FD100ABB4F7 /* OrderApplyViewController.m in Sources */,
@@ -3562,17 +3592,16 @@
 				99AAD49B206BD25C0053C2A0 /* JobPushViewController.m in Sources */,
 				991A24401EE6D7A9008CD8E9 /* ASIHTTPRequest.m in Sources */,
 				991C6F731FFE1239009FD82A /* InterviewCpViewController.m in Sources */,
-				997B069B1F5500A000391289 /* JobApplyViewController.m in Sources */,
 				99F7FC8120404D490060E9F1 /* InvitationManagerViewController.m in Sources */,
-				997B06961F5500A000391289 /* CpViewChildViewController.m in Sources */,
+				99B8069321EC6646004AC914 /* CpViewChildViewController.m in Sources */,
 				996D64A921B60DB80095EA95 /* VoiceWaveImgView.m in Sources */,
 				99A826611EEA329800609D94 /* MLImageCrop.m in Sources */,
+				99B8069921EC6647004AC914 /* CpAttentionViewController.m in Sources */,
 				997B06861F5500A000391289 /* CvInfoChildViewController.m in Sources */,
 				997B067E1F5500A000391289 /* OneMinuteViewController.m in Sources */,
 				991C6F82200C49B1009FD82A /* CpLogoViewController.m in Sources */,
 				9908DD3121D499130002B609 /* CompanyDetailViewController.m in Sources */,
 				99DCE27D21DDAB410060B147 /* ConfirmOrderController.m in Sources */,
-				997B06981F5500A000391289 /* InterviewViewController.m in Sources */,
 				991C6F7F200C4995009FD82A /* CpModifyViewController.m in Sources */,
 				991DAA9B21A5528D00586AA7 /* AttachmentModel.m in Sources */,
 				991C6F671FFB6277009FD82A /* OrderViewController.m in Sources */,
@@ -3584,10 +3613,11 @@
 				9908DD2E21D499130002B609 /* JobViewController.m in Sources */,
 				9993C34721BF51FB0085A6F8 /* SpeakLoadingBtn.m in Sources */,
 				997B06831F5500A000391289 /* SalaryViewController.m in Sources */,
-				997B069D1F5500A000391289 /* YourFoodViewController.m in Sources */,
 				997B06841F5500A000391289 /* ChatListViewController.m in Sources */,
 				997B06801F5500A000391289 /* PaLoginViewController.m in Sources */,
 				991A243F1EE6D7A9008CD8E9 /* ASIFormDataRequest.m in Sources */,
+				99B8069B21EC6647004AC914 /* InvitationViewController.m in Sources */,
+				99B8069C21EC6647004AC914 /* JobApplyViewController.m in Sources */,
 				992985241F5539CB0021F863 /* WKLabel.m in Sources */,
 				9980766E21D6147C000BC5F8 /* TopTableFirstCell.m in Sources */,
 				9908DD2C21D499130002B609 /* KeywordViewController.m in Sources */,
@@ -3607,7 +3637,6 @@
 				9997438C21AD11DD00B076A2 /* OnMinuteSingleCell.m in Sources */,
 				992985281F5539CB0021F863 /* WKPopView.m in Sources */,
 				99FAAC3B20623D4A00921308 /* JobPlaceViewController.m in Sources */,
-				997B06931F5500A000391289 /* AttentionViewController.m in Sources */,
 				99E031E921ABE13400FB5530 /* CVListModel.m in Sources */,
 				9993A588218AD0C80057B6FD /* CommonTools.m in Sources */,
 				996C90882189368D00C0EF66 /* ComplainView.m in Sources */,
@@ -3622,6 +3651,7 @@
 				99D7404820273EE5005B2CD3 /* CvRecommendViewController.m in Sources */,
 				991A243B1EE6D7A9008CD8E9 /* ASIAuthenticationDialog.m in Sources */,
 				99FCF2002011D344008B5A69 /* AccountQuotaViewController.m in Sources */,
+				99B8069521EC6646004AC914 /* JobAttentionViewController.m in Sources */,
 				991A243D1EE6D7A9008CD8E9 /* ASIDataDecompressor.m in Sources */,
 				997B068B1F5500A000391289 /* ExperienceViewController.m in Sources */,
 				99C5EEBC2018733D00AC8FBD /* OrderListViewController.m in Sources */,

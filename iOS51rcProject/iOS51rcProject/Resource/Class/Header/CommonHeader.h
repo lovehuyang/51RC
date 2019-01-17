@@ -31,6 +31,9 @@
 
 #define NOTIFICATION_WXPAYSUCCESS @"Notification_WXPay_Success"// 微信支付成功
 #define NOTIFICATION_WXPAYFAILED @"Notification_WXPay_Failed"// 微信支付失败
+#define NOTIFICATION_WXSHARESUCCESS @"Notification_WXShare_Success"// 微信分享成功
+#define NOTIFICATION_WXSHAREFAILED @"Notification_WXShare_Failed"// 微信分享失败
+
 
 // 百度语音相关参数
 #define BD_APP_ID [CommonTools getBDSASRParameter:@"APP_ID"]

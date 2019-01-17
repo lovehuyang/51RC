@@ -17,6 +17,7 @@
 #import "YourFoodViewController.h"
 #import "AttentionViewController.h"
 #import "WKLoginView.h"
+#import "PersonNoticeModel.h"
 
 @interface InvitationViewController ()<NetWebServiceRequestDelegate>
 
@@ -58,7 +59,8 @@
     }
     [self.loginView removeFromSuperview];
     if ([PAMAINID length] > 0) {
-        NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetPersonNotice" Params:[NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", nil] viewController:self];
+        NSDictionary *paramDict = [NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", nil];
+        NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetPersonNotice" Params:paramDict viewController:self];
         [request setTag:1];
         [request setDelegate:self];
         [request startAsynchronous];
@@ -96,7 +98,9 @@
       finishedInfoToResult:(NSString *)result
               responseData:(GDataXMLDocument *)requestData {
     NSDictionary *countData = [[Common getArrayFromXml:requestData tableName:@"Table"] objectAtIndex:0];
-    if ([[countData objectForKey:@"JobAppliedCount"] integerValue] > 0) {
+    PersonNoticeModel *model = [PersonNoticeModel buideModel:countData];
+    
+    if ([model.JobAppliedCount integerValue] > 0) {
         [self.markApply setHidden:NO];
         [self.dateApply setHidden:NO];
         NSDictionary *applyData = [[Common getArrayFromXml:requestData tableName:@"Table1"] objectAtIndex:0];
@@ -115,7 +119,7 @@
         NSDictionary *interviewData = [[Common getArrayFromXml:requestData tableName:@"Table2"] objectAtIndex:0];
         [self.msgInterview setText:[NSString stringWithFormat:@"%@邀请您参加面试", [interviewData objectForKey:@"cpName"]]];
         [self.dateInterview setText:[Common stringFromDateString:[interviewData objectForKey:@"AddDate"] formatType:@"MM-dd"]];
-        [self.cntInterview setText:[countData objectForKey:@"InterviewCount"]];
+        [self.cntInterview setText:model.InterviewCount];
     }
     else {
         [self.markInterview setHidden:YES];
@@ -129,7 +133,7 @@
         NSDictionary *invitationData = [[Common getArrayFromXml:requestData tableName:@"Table3"] objectAtIndex:0];
         [self.msgInvitation setText:[NSString stringWithFormat:@"%@邀请您应聘职位“%@”", [invitationData objectForKey:@"CpName"], [invitationData objectForKey:@"JobName"]]];
         [self.dateInvitation setText:[Common stringFromDateString:[invitationData objectForKey:@"AddDate"] formatType:@"MM-dd"]];
-        [self.cntInvitation setText:[countData objectForKey:@"CpInvitationCount"]];
+        [self.cntInvitation setText:model.CpInvitationCount];
     }
     else {
         [self.markInvitation setHidden:YES];

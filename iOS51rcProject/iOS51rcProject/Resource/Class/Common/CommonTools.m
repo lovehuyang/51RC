@@ -128,4 +128,41 @@
     NSString *dateStr=[dateFormatter stringFromDate:currentDate];
     return dateStr;
 }
+
+
+/**
+ 随机获取分享内容
+
+ @param JobPlaceName 期望工作地点
+ @return 分享内容
+ */
++ (NSString *)shareContent:(NSString *)JobPlaceName{
+    
+    NSMutableArray *shareContentArr = [NSMutableArray array];
+    // 获取网站名称
+    NSString *webSiteName =  [USER_DEFAULT objectForKey:@"subsitename"];
+    NSString *shareContentStr1 = [NSString stringWithFormat:@"亲，用过%@找工作么？新增一大波招聘信息，快来看。",webSiteName];
+    NSString *shareContentStr2 = [NSString stringWithFormat:@"听说朋友圈里有人在找工作？推荐%@。",webSiteName];
+    [shareContentArr addObject:shareContentStr1];
+    [shareContentArr addObject:shareContentStr2];
+    
+   
+    if (JobPlaceName != nil && JobPlaceName.length > 0) {
+        NSString *shareContentSre3 = [NSString stringWithFormat:@"%@找工作的你，快来%@，好多高薪岗位在招聘。",JobPlaceName,webSiteName];
+        [shareContentArr addObject:shareContentSre3];
+    }
+    
+    int index = arc4random() % shareContentArr.count ;
+    
+    return [shareContentArr objectAtIndex:index];
+    
+    /*
+     1.亲，用过webSiteName找工作么？新增一大波招聘信息，快来看。
+     2.听说朋友圈里有人在找工作？推荐webSiteName。
+     3.city找工作的你，快来webSiteName，好多高薪岗位在招聘。
+     webSiteName：XX人才网，如：齐鲁人才网
+     city：从简历列表页面传递过来的城市名，取得jobPlaceName这个字段的值
+     */
+    
+}
 @end

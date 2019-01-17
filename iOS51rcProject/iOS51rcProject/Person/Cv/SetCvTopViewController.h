@@ -11,5 +11,5 @@
 @interface SetCvTopViewController : RCRootViewController
 
 @property (nonatomic , copy) NSString *cvMainId;// 简历id
-
+@property (nonatomic , copy) NSString *JobPlaceName;//期望工作地点
 @end

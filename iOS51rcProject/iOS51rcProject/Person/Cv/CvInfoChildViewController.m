@@ -36,6 +36,7 @@
     BOOL isUpdateHead;// 默认更新头像
     BOOL isTop;// 置顶中、默认不置顶NO
     BOOL isFullCV;// 是不是完整简历cvlevel，默认不是完整简历
+    NSString *JobPlaceName;// 期望工作地点
 }
 @property (nonatomic, strong) NetWebServiceRequest *runningRequest;
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -494,6 +495,8 @@
     
     WKLabel *lbPlace = [[WKLabel alloc] initWithFixedSpacing:CGRectMake(VIEW_BX(lbPlaceTitle), VIEW_Y(lbPlaceTitle), SCREEN_WIDTH - VIEW_BX(lbPlaceTitle) - 15, 20) content:[jobIntentionData objectForKey:@"JobPlaceName"] size:DEFAULTFONTSIZE color:nil spacing:0];
     [self.scrollView addSubview:lbPlace];
+    
+    JobPlaceName = [[NSString alloc]initWithString:[jobIntentionData objectForKey:@"JobPlaceName"] ?[jobIntentionData objectForKey:@"JobPlaceName"]:@""];
     
     WKLabel *lbJobTypeTitle = [[WKLabel alloc] initWithFixedSpacing:CGRectMake(0, (lbPlace.text.length > 0 ? VIEW_BY(lbPlace) : VIEW_BY(lbPlaceTitle)) + 10, 500, 20) content:@"期望职位类别：" size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR spacing:0];
     CGRect frameJobTypeTitle = lbJobTypeTitle.frame;
@@ -1242,6 +1245,7 @@
     [MobClick event:@"clickSetTopBtn"];
     SetCvTopViewController *cvTopVC = [SetCvTopViewController new];
     cvTopVC.cvMainId = self.cvMainId;
+    cvTopVC.JobPlaceName = JobPlaceName;
     [self.navigationController pushViewController:cvTopVC animated:YES];
 }
 

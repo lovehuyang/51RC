@@ -20,4 +20,6 @@
 + (BOOL)cvIsFull:(NSString *)cvlevel;
 
 + (NSString *)changeDateWithDateString:(NSString *)date;
+
++ (NSString *)shareContent:(NSString *)JobPlaceName;
 @end
