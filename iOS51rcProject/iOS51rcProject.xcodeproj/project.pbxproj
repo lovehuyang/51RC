@@ -539,7 +539,6 @@
 		99F1987E21FEE32300DB4F58 /* CvRecruitmentConditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F1987221FEE32300DB4F58 /* CvRecruitmentConditionViewController.m */; };
 		99F1987F21FEE32300DB4F58 /* CvRecruitmentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F1987421FEE32300DB4F58 /* CvRecruitmentListViewController.m */; };
 		99F1988021FEE32300DB4F58 /* CvSearchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F1987521FEE32300DB4F58 /* CvSearchListViewController.m */; };
-		99F1988321FEE41E00DB4F58 /* TestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F1988221FEE41E00DB4F58 /* TestView.m */; };
 		99F7FC842041427D0060E9F1 /* WKCvTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F7FC832041427D0060E9F1 /* WKCvTableViewCell.m */; };
 		99F7FC8720414AB80060E9F1 /* img_photowoman.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F7FC8520414AB80060E9F1 /* img_photowoman.png */; };
 		99F7FC8820414AB80060E9F1 /* img_photoman.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F7FC8620414AB80060E9F1 /* img_photoman.png */; };
@@ -1379,8 +1378,6 @@
 		99F1987521FEE32300DB4F58 /* CvSearchListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CvSearchListViewController.m; sourceTree = "<group>"; };
 		99F1987621FEE32300DB4F58 /* CvSearchConditionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CvSearchConditionViewController.h; sourceTree = "<group>"; };
 		99F1987721FEE32300DB4F58 /* CvSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CvSearchViewController.h; sourceTree = "<group>"; };
-		99F1988121FEE41E00DB4F58 /* TestView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestView.h; sourceTree = "<group>"; };
-		99F1988221FEE41E00DB4F58 /* TestView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestView.m; sourceTree = "<group>"; };
 		99F7FC822041427D0060E9F1 /* WKCvTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKCvTableViewCell.h; sourceTree = "<group>"; };
 		99F7FC832041427D0060E9F1 /* WKCvTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKCvTableViewCell.m; sourceTree = "<group>"; };
 		99F7FC8520414AB80060E9F1 /* img_photowoman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_photowoman.png; sourceTree = "<group>"; };
@@ -3224,8 +3221,6 @@
 		99F1987A21FEE32300DB4F58 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				99F1988121FEE41E00DB4F58 /* TestView.h */,
-				99F1988221FEE41E00DB4F58 /* TestView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3776,7 +3771,6 @@
 				996D64AC21B626B30095EA95 /* VoiceModel.m in Sources */,
 				99F197FF21FEE12B00DB4F58 /* PayMethodViewController.m in Sources */,
 				9993A570218AAA180057B6FD /* UserInfo.m in Sources */,
-				99F1988321FEE41E00DB4F58 /* TestView.m in Sources */,
 				99F197EB21FEE03900DB4F58 /* ResponsibilityViewController.m in Sources */,
 				99F1986A21FEE28800DB4F58 /* InterviewSendRemarkViewController.m in Sources */,
 				998E889421D739F200E8D622 /* CVTicketCell.m in Sources */,
