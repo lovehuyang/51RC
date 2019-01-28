@@ -34,6 +34,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
     NSInteger birthYear;// 出生年份
     NSString *moblieNumber;// 手机号
     NSString *intCareerStatus;// 求职状态
+    NSArray *regionData;// 省市id
 }
 @property (nonatomic , strong) UILabel *tipLab;//
 @property (nonatomic , strong) UITableView *tableview;
@@ -57,6 +58,8 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
     self.title = @"一分钟填写简历";
     self.view.backgroundColor = [UIColor whiteColor];
     
+    regionData = [Common getRegion];
+    
     // 接口参数
     self.dataParam = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                       @"", @"strVerifyCode",
@@ -64,7 +67,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
                       @"", @"Name",// 姓名
                       @"", @"Gender",// 性别
                       @"", @"Birthday",// 出生年月
-                      @"", @"JobPlace",// 期望工作地点
+                      @"3201", @"JobPlace",// 期望工作地点.默认济南3201
                       @"", @"Mobile", // 手机号
                       @"", @"Salary", // 期望月薪
                       @"", @"JobType",// 期望职位类别
@@ -118,11 +121,19 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
             
             [self resetDataValue:placeMark.subLocality?placeMark.subLocality:city key:@"工作地点"];
             // 参数字典添加位置
-            [self.dataParam setValue:placeMark.subLocality?placeMark.subLocality:city forKey:@"JobPlace"];
+            NSString *cityId = @"3201";// 默认济南3201
+            for (NSDictionary *dict in regionData) {
+                NSString *subCity = dict[@"value"];
+                if ([subCity containsString:city] || [city containsString:subCity]) {
+                    cityId = dict[@"id"];
+                    break;
+                }
+            }
+            
+            [self.dataParam setValue:cityId forKey:@"JobPlace"];
             [self.tableview reloadData];
         }
     }];
-    
 }
 
 - (void)getPaMain{
@@ -178,10 +189,24 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
         NSArray *arr = [(NSString *)dataDict componentsSeparatedByString:@"$"];
         [SVProgressHUD dismiss];
         [self createDataArr:self.paMainDict];
-    
-        [self resetDataValue:[arr lastObject] key:@"工作地点"];
-        // 参数字典添加位置
-        [self.dataParam setValue: [arr firstObject] forKey:@"JobPlace"];
+        
+        NSString *jobPlace;
+        NSString *jobPlaceId;
+        
+        if (arr.count >0) {
+            jobPlace = [arr lastObject];// 工作地点
+            jobPlaceId = [arr firstObject];// 工作地点的id
+        }
+        
+        if(jobPlace == nil || jobPlace == nil || jobPlace.length == 0 || jobPlaceId.length == 0){
+            [self startLocation];
+        
+        }else{
+            
+            [self resetDataValue:[arr lastObject] key:@"工作地点"];
+            // 参数字典添加位置
+            [self.dataParam setValue: [arr firstObject] forKey:@"JobPlace"];
+        }
         [self.tableview reloadData];
         [self setupAddHuaTongButton];
     
@@ -231,7 +256,7 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
 
 - (UITableView *)tableview{
     if (!_tableview) {
-        _tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, VIEW_BY(self.tipLab), SCREEN_WIDTH, SCREEN_HEIGHT - VIEW_BY(self.tipLab) - 30) style:UITableViewStylePlain];
+        _tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, VIEW_BY(self.tipLab), SCREEN_WIDTH, SCREEN_HEIGHT - HEIGHT_STATUS_NAV - VIEW_H(self.tipLab) - 49) style:UITableViewStylePlain];
         //(0, VIEW_BY(self.tipLab), SCREEN_WIDTH, SCREEN_HEIGHT - VIEW_BY(self.tipLab)
         _tableview.tableFooterView = self.footView;
         _tableview.delegate = self;

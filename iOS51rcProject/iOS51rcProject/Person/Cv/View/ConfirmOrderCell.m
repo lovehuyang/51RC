@@ -80,6 +80,10 @@
         [self.selectBtn setImage:[UIImage imageNamed:@"img_checksmall2"] forState:UIControlStateNormal];
         [self.selectBtn setImage:[UIImage imageNamed:@"img_checksmall1"] forState:UIControlStateSelected];
         [self.selectBtn addTarget:self action:@selector(selectClick) forControlEvents:UIControlEventTouchUpInside];
+        
+        if(data.count == 1){
+            self.selectBtn.hidden = YES;
+        }
     }
 }
 

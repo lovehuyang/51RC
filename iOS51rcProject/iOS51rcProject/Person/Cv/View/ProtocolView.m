@@ -86,7 +86,6 @@
     btn.sd_cornerRadius = @(3);
     btn.titleLabel.font = DEFAULTFONT;
     [btn addTarget:self action:@selector(dissmiss) forControlEvents:UIControlEventTouchUpInside];
-    
     [self.alertView setupAutoHeightWithBottomView:btn bottomMargin:15];
 }
 

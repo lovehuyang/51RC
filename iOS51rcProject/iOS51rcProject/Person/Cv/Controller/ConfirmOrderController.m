@@ -412,7 +412,7 @@
                                 @"payFrom":@"4"
                                 };
     
-    [AFNManager requestWithMethod:POST ParamDict:paramDict url:@"GetAppPayOrderIOS" tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+    [AFNManager requestWithMethod:POST ParamDict:paramDict url:URL_GETAPPPAYORDER tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
         [SVProgressHUD dismiss];
         if (payMethodID == 1) {
             [self wxpayParamData:(NSString *)dataDict];

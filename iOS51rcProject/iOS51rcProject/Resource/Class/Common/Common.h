@@ -60,6 +60,7 @@
 + (NSArray *)getCareerStatus;
 + (NSArray *)getEducation;
 + (NSArray *)getSalary;
++ (NSArray *)getRegion;
 
 + (NSDictionary *)welfare:(NSDictionary *)dict;
 + (NSDictionary *)welfare:(NSDictionary *)dict1 dict2:(NSDictionary *)dict2;

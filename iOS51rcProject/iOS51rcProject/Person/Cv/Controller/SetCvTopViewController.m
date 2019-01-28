@@ -120,10 +120,10 @@
         myTextView.numClickEvent = 2;                        // 有几个点击事件(只能设为1个或2个)
         myTextView.oneClickLeftBeginNum = 10;                 // 第一个点击的起始坐标数字是几
         myTextView.oneTitleLength = 8;                      // 第一个点击的文本长度是几
-        myTextView.twoClickLeftBeginNum = 64;                // 第二个点击的起始坐标数字是几
-        myTextView.twoTitleLength = 12;                      // 第二个点击的文本长度是几
+//        myTextView.twoClickLeftBeginNum = 64;                // 第二个点击的起始坐标数字是几
+//        myTextView.twoTitleLength = 12;                      // 第二个点击的文本长度是几
         myTextView.fontSize = DEFAULTFONTSIZE;                            // 可点击的字体大小
-        myTextView.titleTapColor = [UIColor blueColor];    // 可点击富文本字体颜色
+        myTextView.titleTapColor = UIColorFromHex(0x008AF7);    // 可点击富文本字体颜色
         // 设置了上面后要在最后设置内容
         myTextView.content = tipText;
         myTextView.eventblock = ^(NSAttributedString *contentStr) {
@@ -271,7 +271,6 @@
         cell.getTicketBlock = ^(CVTicketModel *model) {
             ShareView *shareView = [ShareView new];
             shareView.shareBlock = ^{
-                
                 NSString *shareContent = [CommonTools shareContent:self.JobPlaceName];
                 NSMutableDictionary *params = [NSMutableDictionary dictionary];
                 [params SSDKSetupShareParamsByText:@"齐鲁人才网" images:[UIImage imageNamed:@"320logo.png"] url:[NSURL URLWithString:@"http://m.qlrc.com/personal/js/joblist"] title:shareContent type:SSDKContentTypeAuto];

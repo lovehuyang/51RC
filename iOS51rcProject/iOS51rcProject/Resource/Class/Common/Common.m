@@ -796,6 +796,26 @@
                                   };
     return welfareDict;
 }
++ (NSArray *)getRegion{
+    NSMutableArray *arrayData = [NSMutableArray array];
+    NSMutableArray *provinData = [NSMutableArray array];
+    NSString *sqlString;
+    sqlString = [NSString stringWithFormat:@"SELECT * FROM dcRegion WHERE ParentId = '%@' ORDER BY CASE _id WHEN %@ THEN 0 ELSE _id END", @"0", [USER_DEFAULT stringForKey:@"provinceId"]];
+    FMDatabase *dataBase;
+    NSArray *array = [Common querySql:sqlString dataBase:dataBase];
+    [provinData addObjectsFromArray:array];
+    [arrayData addObjectsFromArray:provinData];
+    
+    for (int i = 0; i < provinData.count;i ++){
+        NSString *parentId = [[provinData objectAtIndex:i ]  objectForKey:@"id"];
+        sqlString = [NSString stringWithFormat:@"SELECT * FROM dcRegion WHERE ParentId = '%@' ORDER BY CASE _id WHEN %@ THEN 0 ELSE _id END", parentId, [USER_DEFAULT stringForKey:@"provinceId"]];
+        FMDatabase *dataBase;
+        NSArray *array = [Common querySql:sqlString dataBase:dataBase];
+        [arrayData addObjectsFromArray:array];
+    }
+
+    return arrayData;
+}
 
 + (NSDictionary *)welfare:(NSDictionary *)dict1 dict2:(NSDictionary *)dict2{
     NSDictionary *welfareDict =@{

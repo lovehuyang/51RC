@@ -1091,9 +1091,9 @@
 - (void)delete {
     
     if(isTop){
-        RCAlertView *alert = [[RCAlertView alloc]initWithTitle:@"提示" content:@"该简历的“简历置顶”服务未到期，无法删除。若已找到工作，可隐藏简历或服务到期后删除" leftBtn:@"我知道了" rightBtn:nil];
+        RCAlertView *alert = [[RCAlertView alloc]initWithTitle:@"提示" content:@"该简历的“简历置顶”服务未到期，无法删除。若已找到工作，可隐藏简历或服务到期后删除。" leftBtn:@"我知道了" rightBtn:nil];
         alert.clickBlock = ^(UIButton *button) {
-            
+
         };
         [alert show];
         return;

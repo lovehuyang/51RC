@@ -19,6 +19,7 @@
 #import "WKApplyView.h"
 #import "UIView+Toast.h"
 #import "OnlineLab.h"
+#import "YourFoodModel.h"
 
 @interface YourFoodViewController ()<UITableViewDelegate, UITableViewDataSource, NetWebServiceRequestDelegate, WKApplyViewDelegate>
 
@@ -87,7 +88,8 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *data = [self.arrData objectAtIndex:indexPath.row];
+    YourFoodModel *model = [self.arrData objectAtIndex:indexPath.row];
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
@@ -96,14 +98,14 @@
         [view removeFromSuperview];
     }
     UIButton *btnCheck = [[UIButton alloc] initWithFrame:CGRectMake(5, 15, 50, 50)];
-    if (![[data objectForKey:@"Valid"] boolValue]) {
+    if (![model.Valid boolValue]) {
         UIImageView *imgJobExpired = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         [imgJobExpired setImage:[UIImage imageNamed:@"pa_jobexpired.png"]];
         [cell.contentView addSubview:imgJobExpired];
     }
     else {
         [btnCheck setTag:0];
-        [btnCheck setTitle:[data objectForKey:@"JobID"] forState:UIControlStateNormal];
+        [btnCheck setTitle:model.JobID forState:UIControlStateNormal];
         [btnCheck setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
         [btnCheck addTarget:self action:@selector(checkClick:) forControlEvents:UIControlEventTouchUpInside];
         [cell.contentView addSubview:btnCheck];
@@ -112,17 +114,17 @@
         [imgCheck setImage:[UIImage imageNamed:@"img_checksmall2.png"]];
         [btnCheck addSubview:imgCheck];
         
-        if ([self.arrSelected containsObject:[data objectForKey:@"JobID"]]) {
+        if ([self.arrSelected containsObject:model.JobID]) {
             [btnCheck setTag:1];
             [imgCheck setImage:[UIImage imageNamed:@"img_checksmall1.png"]];
         }
     }
     
     float maxWidth = SCREEN_WIDTH - VIEW_BX(btnCheck) - 20;
-    WKLabel *lbJob = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_BX(btnCheck) + 5, VIEW_Y(btnCheck) - 5, maxWidth - 80, 20) content:[data objectForKey:@"JobName"] size:BIGGERFONTSIZE color:[UIColor blackColor]];
+    WKLabel *lbJob = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_BX(btnCheck) + 5, VIEW_Y(btnCheck) - 5, maxWidth - 80, 20) content:model.JobName size:BIGGERFONTSIZE color:[UIColor blackColor]];
     [cell.contentView addSubview:lbJob];
     
-    if ([[data objectForKey:@"IsOnline"] boolValue]) {
+    if ([model.IsOnline boolValue]) {
         
         OnlineLab *onlineLab = [[OnlineLab alloc]initWithFrame:CGRectMake(VIEW_BX(lbJob) + 3, VIEW_Y(lbJob) + 2, 30, 16)];
         [cell.contentView addSubview:onlineLab];
@@ -133,26 +135,26 @@
 //        [cell.contentView addSubview:imgOnline];
     }
     
-    WKLabel *lbSalary = [[WKLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 80, VIEW_Y(lbJob), 65, 20) content:[Common getSalary:[data objectForKey:@"dcSalaryID"] salaryMin:[data objectForKey:@"Salary"] salaryMax:[data objectForKey:@"SalaryMax"] negotiable:@""] size:DEFAULTFONTSIZE color:NAVBARCOLOR];
+    WKLabel *lbSalary = [[WKLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 80, VIEW_Y(lbJob), 65, 20) content:[Common getSalary:model.dcSalaryID salaryMin:model.Salary salaryMax:model.SalaryMax negotiable:@""] size:DEFAULTFONTSIZE color:NAVBARCOLOR];
     [lbSalary setTextAlignment:NSTextAlignmentRight];
     [cell.contentView addSubview:lbSalary];
     
-    WKLabel *lbCompany = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_X(lbJob), VIEW_BY(lbJob), maxWidth - 65, 20) content:[data objectForKey:@"CpName"] size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR];
+    WKLabel *lbCompany = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_X(lbJob), VIEW_BY(lbJob), maxWidth - 65, 20) content:model.CpName size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR];
     [cell.contentView addSubview:lbCompany];
     
-    WKLabel *lbDate = [[WKLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 65, VIEW_Y(lbCompany), 50, 20) content:[Common stringFromDateString:[data objectForKey:@"AddDate"] formatType:@"MM-dd"] size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR];
+    WKLabel *lbDate = [[WKLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 65, VIEW_Y(lbCompany), 50, 20) content:[Common stringFromDateString:model.AddDate formatType:@"MM-dd"] size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR];
     [lbDate setTextAlignment:NSTextAlignmentRight];
     [cell.contentView addSubview:lbDate];
     
-    NSString *experience = [data objectForKey:@"Experience"];
+    NSString *experience = model.Experience;
     if ([experience isEqualToString:@"不限"]) {
         experience = @"经验不限";
     }
-    NSString *education = [data objectForKey:@"Education"];
+    NSString *education = model.Education;
     if ([education length] == 0) {
         education = @"学历不限";
     }
-    WKLabel *lbDetail = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_X(lbCompany), VIEW_BY(lbCompany), maxWidth, 20) content:[NSString stringWithFormat:@"%@ | %@ | %@", [data objectForKey:@"Region"], experience, education] size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR];
+    WKLabel *lbDetail = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_X(lbCompany), VIEW_BY(lbCompany), maxWidth, 20) content:[NSString stringWithFormat:@"%@ | %@ | %@", model.Region, experience, education] size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR];
     [cell.contentView addSubview:lbDetail];
     
     UIView *viewSeparate = [[UIView alloc] initWithFrame:CGRectMake(15, VIEW_BY(lbDetail) + 10, SCREEN_WIDTH - 30, 1)];
@@ -165,13 +167,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSDictionary *data = [self.arrData objectAtIndex:indexPath.row];
-    if (![[data objectForKey:@"Valid"] boolValue]) {
+    YourFoodModel *model = [self.arrData objectAtIndex:indexPath.row];
+    if (![model.Valid boolValue]) {
         return;
     }
     WKNavigationController *jobNav = [[UIStoryboard storyboardWithName:@"Person" bundle:nil] instantiateViewControllerWithIdentifier:@"jobView"];
     JobViewController *jobCtrl = jobNav.viewControllers[0];
-    jobCtrl.jobId = [data objectForKey:@"JobID"];
+    jobCtrl.jobId = model.JobID;
     [self presentViewController:jobNav animated:YES completion:nil];
 }
 
@@ -238,7 +240,10 @@
               responseData:(GDataXMLDocument *)requestData {
     if (request.tag == 1) {
         NSArray *arrayData = [Common getArrayFromXml:requestData tableName:@"Table"];
-        [self.arrData addObjectsFromArray:arrayData];
+        for (NSDictionary *dict in arrayData) {
+            YourFoodModel *model = [YourFoodModel buideModel:dict];
+            [self.arrData addObject:model];
+        }
         [self.tableView reloadData];
         if (arrayData.count < 20) {
             if (self.page == 1) {
@@ -290,15 +295,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

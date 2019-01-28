@@ -15,6 +15,7 @@
 #import "MJRefresh.h"
 #import "WKTableView.h"
 #import "CpAttentionChangeViewController.h"
+#import "CpAttentionModel.h"
 
 @interface CpAttentionViewController ()<UITableViewDelegate, UITableViewDataSource, NetWebServiceRequestDelegate>
 
@@ -40,9 +41,14 @@
     [self.view addSubview:self.tableView];
 }
 
+- (NSMutableArray *)arrData{
+    if (!_arrData) {
+        _arrData = [NSMutableArray array];
+    }
+    return _arrData;
+}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.arrData = [[NSMutableArray alloc] init];
     self.page = 1;
     [self getData];
 }
@@ -64,7 +70,11 @@
       finishedInfoToResult:(NSString *)result
               responseData:(GDataXMLDocument *)requestData {
     NSArray *arrayData = [Common getArrayFromXml:requestData tableName:@"Table"];
-    [self.arrData addObjectsFromArray:arrayData];
+    for (NSDictionary *dict in arrayData) {
+        CpAttentionModel *model = [CpAttentionModel buideModel:dict];
+        [self.arrData addObject:model];
+    }
+    
     [self.tableView reloadData];
     if (arrayData.count < 20) {
         if (self.page == 1) {
@@ -92,7 +102,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *data = [self.arrData objectAtIndex:indexPath.row];
+    CpAttentionModel *model = self.arrData[indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
@@ -101,17 +111,17 @@
         [view removeFromSuperview];
     }
     UIImageView *imgLogo = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, 50, 50)];
-    [imgLogo sd_setImageWithURL:[NSURL URLWithString:[data objectForKey:@"LogoUrl"]] placeholderImage:[UIImage imageNamed:@"img_defaultlogo.png"]];
+    [imgLogo sd_setImageWithURL:[NSURL URLWithString:model.LogoUrl] placeholderImage:[UIImage imageNamed:@"img_defaultlogo.png"]];
     [cell.contentView addSubview:imgLogo];
     
     float maxWidth = SCREEN_WIDTH - VIEW_BX(imgLogo) - 30;
-    WKLabel *lbCompany = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_BX(imgLogo) + 15, VIEW_Y(imgLogo) - 5, maxWidth, 20) content:[data objectForKey:@"Name"] size:BIGGERFONTSIZE color:nil];
+    WKLabel *lbCompany = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_BX(imgLogo) + 15, VIEW_Y(imgLogo) - 5, maxWidth, 20) content:model.Name size:BIGGERFONTSIZE color:nil];
     [cell.contentView addSubview:lbCompany];
     
-    WKLabel *lbDetail = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_X(lbCompany), VIEW_BY(lbCompany), maxWidth, 20) content:[NSString stringWithFormat:@"%@ | %@ | %@", [data objectForKey:@"DcCompanyKindName"], [data objectForKey:@"CompanySizeName"], [data objectForKey:@"Industry"]] size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR];
+    WKLabel *lbDetail = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_X(lbCompany), VIEW_BY(lbCompany), maxWidth, 20) content:[NSString stringWithFormat:@"%@ | %@ | %@", model.DcCompanyKindName, model.CompanySizeName, model.Industry] size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR];
     [cell.contentView addSubview:lbDetail];
     
-    WKLabel *lbDate = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_X(lbCompany), VIEW_BY(lbDetail), maxWidth, 20) content:[NSString stringWithFormat:@"%@关注", [Common stringFromDateString:[data objectForKey:@"AddDate"] formatType:@"MM-dd"]] size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR];
+    WKLabel *lbDate = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_X(lbCompany), VIEW_BY(lbDetail), maxWidth, 20) content:[NSString stringWithFormat:@"%@关注", [Common stringFromDateString:model.AddDate formatType:@"MM-dd"]] size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR];
     [lbDate setTextAlignment:NSTextAlignmentCenter];
     [cell.contentView addSubview:lbDate];
     
@@ -124,12 +134,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    CpAttentionModel *model = self.arrData[indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSDictionary *data = [self.arrData objectAtIndex:indexPath.row];
     CpAttentionChangeViewController *changeCtrl = [[CpAttentionChangeViewController alloc] init];
     changeCtrl.title = @"企业动态";
-    changeCtrl.cpMainId = [data objectForKey:@"CpMainID"];
-    changeCtrl.attentionId = [data objectForKey:@"ID"];
+    changeCtrl.cpMainId = model.CpMainID;
+    changeCtrl.attentionId = model.ID;
     [self.navigationController pushViewController:changeCtrl animated:YES];
 }
 
@@ -137,15 +147,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

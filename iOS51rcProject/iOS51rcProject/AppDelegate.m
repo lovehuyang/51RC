@@ -113,6 +113,15 @@
     }
     //[USER_DEFAULT removeObjectForKey:@"caMainId"];
     //[USER_DEFAULT setObject:@"2" forKey:@"userType"];
+    
+    
+    //该处代码需要删除
+    GuideViewController *guideCtrl = [[GuideViewController alloc] init];
+    self.window.rootViewController = guideCtrl;
+    return YES;
+    //
+    
+    
     if ([[USER_DEFAULT objectForKey:@"userType"] length] == 0) {
         GuideViewController *guideCtrl = [[GuideViewController alloc] init];
         self.window.rootViewController = guideCtrl;

@@ -1,35 +1,36 @@
 //
-//  AccountManagerViewController.m
+//  ForgetPasswordViewController.m
 //  iOS51rcProject
 //
-//  Created by Lucifer on 2017/6/9.
+//  Created by Lucifer on 2017/6/5.
 //  Copyright © 2017年 Lucifer. All rights reserved.
 //
 
-#import "AccountManagerViewController.h"
+#import "ForgetPasswordViewController.h"
 #import "CommonMacro.h"
-#import "WKLoadingView.h"
 @import WebKit;
 
-@interface AccountManagerViewController ()<WKNavigationDelegate, WKScriptMessageHandler>
+@interface ForgetPasswordViewController ()<WKNavigationDelegate, WKScriptMessageHandler>
 
 @end
 
-@implementation AccountManagerViewController
+@implementation ForgetPasswordViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"取回密码";
     WKWebViewConfiguration *config =
     [[WKWebViewConfiguration alloc] init];
-    [config.userContentController addScriptMessageHandler:self name:@"popView"];
+    [config.userContentController addScriptMessageHandler:self name:@"dismissView"];
+    
     WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, NAVIGATION_BAR_HEIGHT + STATUS_BAR_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT - STATUS_BAR_HEIGHT) configuration:config];
     [webView setNavigationDelegate:self];
-    
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@%@?paMainId=%@&code=%@", [USER_DEFAULT valueForKey:@"subsite"], self.url, PAMAINID, [USER_DEFAULT valueForKey:@"paMainCode"]]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/personal/sys/getpassword", [USER_DEFAULT valueForKey:@"subsite"]]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
     [self.view addSubview:webView];
+    
     [[self.view viewWithTag:LOADINGTAG] setHidden:NO];
 }
 
@@ -43,27 +44,12 @@
         [[self.view viewWithTag:LOADINGTAG] setHidden:YES];
     }];
     if ([[[webView.URL absoluteString] lowercaseString] rangeOfString:@"success"].location != NSNotFound) {
-        [webView evaluateJavaScript:@"$('.ConfirmButton').attr('onclick', '').click(function(){window.webkit.messageHandlers.popView.postMessage('')})" completionHandler:nil];
+        [webView evaluateJavaScript:@"$('.ConfirmButton').attr('onclick', '').click(function(){window.webkit.messageHandlers.dismissView.postMessage('')})" completionHandler:nil];
     }
 }
 
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    [[self.view viewWithTag:LOADINGTAG] setHidden:NO];
-    decisionHandler(WKNavigationActionPolicyAllow);
-}
-
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

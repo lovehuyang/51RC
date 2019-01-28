@@ -53,7 +53,7 @@
 #define URL_SAVAPAORDERDISCOUNT @"SavepaOrderDiscount"
 // 确认订单页面
 #define URL_GETCONFIRMORDER @"GetConfirmOrder"
-// WX、Ali统一下单接口
+// WX、Ali统一下单接口 GetAppPayOrder
 #define URL_GETAPPPAYORDER @"GetAppPayOrder"
 //获取待支付订单
 #define URL_GETWAITPAYORDER @"GetWaitPayOrder"

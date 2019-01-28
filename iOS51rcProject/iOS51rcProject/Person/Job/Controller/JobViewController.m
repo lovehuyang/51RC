@@ -64,7 +64,8 @@
 
 - (void)getData {
     if (self.jobId.length > 0) {
-        NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetJobInfoWithCpInfo" Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", self.jobId, @"jobId", nil] viewController:self];
+        NSMutableDictionary *paramDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", self.jobId, @"jobId", nil];
+        NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetJobInfoWithCpInfo" Params:paramDict viewController:self];
         [request setTag:1];
         [request setDelegate:self];
         [request startAsynchronous];

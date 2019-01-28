@@ -263,7 +263,7 @@
                                 @"payFrom":@"4"
                                 };
     
-    [AFNManager requestWithMethod:POST ParamDict:paramDict url:@"GetAppPayOrderIOS" tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+    [AFNManager requestWithMethod:POST ParamDict:paramDict url:URL_GETAPPPAYORDER tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
         [SVProgressHUD dismiss];
         if ([self.model.payMethod integerValue] == 1) {
             DLog(@"");
