@@ -21,6 +21,8 @@
 #import "OrderApplyViewController.h"
 #import "WKNavigationController.h"
 #import "JobViewController.h"
+#import "CpJobListModel.h"
+#import "IssueJobListCell.h"
 
 @interface IssueJobListViewController ()<UITableViewDelegate, UITableViewDataSource, NetWebServiceRequestDelegate, UITextFieldDelegate, WKPopViewDelegate>
 
@@ -57,8 +59,13 @@
         [self getData];
     }];
     [self.view addSubview:self.tableView];
-    
-    self.arrData = [[NSMutableArray alloc] init];
+}
+
+- (NSMutableArray *)arrData{
+    if (!_arrData) {
+        _arrData = [NSMutableArray array];
+    }
+    return _arrData;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -94,7 +101,11 @@
             [self.arrData removeAllObjects];
         }
         NSArray *arrayData = [Common getArrayFromXml:requestData tableName:@"Table"];
-        [self.arrData addObjectsFromArray:arrayData];
+        for (NSDictionary *dict in arrayData) {
+            CpJobListModel *model = [CpJobListModel buildModelWithDic:dict];
+            [self.arrData addObject:model];
+        }
+        
         if (arrayData.count < 20) {
             if (self.page == 1) {
                 [self.tableView.mj_footer removeFromSuperview];
@@ -130,8 +141,8 @@
         [self.delegate expiredListReload];
     }
     else if (request.tag == 4) {
-        NSDictionary *data = [self.arrData objectAtIndex:self.selectedRowIndex];
-        WKLabel *lbName = [[WKLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35) content:[NSString stringWithFormat:@"刷新：%@", [data objectForKey:@"Name"]] size:DEFAULTFONTSIZE color:nil];
+        CpJobListModel *model = [self.arrData objectAtIndex:self.selectedRowIndex];
+        WKLabel *lbName = [[WKLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35) content:[NSString stringWithFormat:@"刷新：%@", model.Name] size:DEFAULTFONTSIZE color:nil];
         [lbName setTextAlignment:NSTextAlignmentCenter];
         [self.viewRefreshPop addSubview:lbName];
         
@@ -177,84 +188,41 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [self tableView:self.tableView cellForRowAtIndexPath:indexPath];
-    return cell.frame.size.height;
+
+    return [self.tableView cellHeightForIndexPath:indexPath model:self.arrData[indexPath.row] keyPath:@"model" cellClass:[IssueJobListCell class] contentViewWidth:SCREEN_WIDTH];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *data = [self.arrData objectAtIndex:indexPath.section];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    }
-    for (UIView *view in cell.contentView.subviews) {
-        [view removeFromSuperview];
-    }
-    float widthForLable = SCREEN_WIDTH - 105;
-    WKLabel *lbName = [[WKLabel alloc] initWithFixedSpacing:CGRectMake(15, 10, widthForLable, 20) content:[data objectForKey:@"Name"] size:BIGGERFONTSIZE color:nil spacing:10];
-    [cell.contentView addSubview:lbName];
-    
-    WKLabel *lbDate = [[WKLabel alloc] initWithFixedSpacing:CGRectMake(VIEW_X(lbName), VIEW_BY(lbName) + 10, widthForLable, 20) content:[NSString stringWithFormat:@"发布计划：%@ 至 %@", [Common stringFromDateString:[data objectForKey:@"IssueDate"] formatType:@"yyyy-MM-dd"], [Common stringFromDateString:[data objectForKey:@"IssueEnd"] formatType:@"yyyy-MM-dd"]] size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR spacing:10];
-    [cell.contentView addSubview:lbDate];
-    
-    WKLabel *lbRefresh = [[WKLabel alloc] initWithFixedSpacing:CGRectMake(VIEW_X(lbName), VIEW_BY(lbDate) + 10, widthForLable, 20) content:[NSString stringWithFormat:@"刷新时间：%@", [Common stringFromDateString:[data objectForKey:@"RefreshDate"] formatType:@"yyyy-MM-dd HH:mm"]] size:DEFAULTFONTSIZE color:TEXTGRAYCOLOR spacing:10];
-    [cell.contentView addSubview:lbRefresh];
-    
-    UIButton *btnApply = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 90, 0, 90, VIEW_BY(lbRefresh))];
-    [btnApply setTag:indexPath.section];
-    [btnApply addTarget:self action:@selector(applyClick:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.contentView addSubview:btnApply];
-    
-    UIView *viewMiddle = [[UIView alloc] initWithFrame:CGRectMake(0, VIEW_Y(lbName), 1, VIEW_BY(lbRefresh) - VIEW_Y(lbName))];
-    [viewMiddle setBackgroundColor:SEPARATECOLOR];
-    [btnApply addSubview:viewMiddle];
-    
-    // 应聘简历的数量
-    NSString *applyCountStr = [data objectForKey:@"ApplyCount"];
-    WKLabel *lbApplyCount = [[WKLabel alloc] initWithFrame:CGRectMake(15, VIEW_Y(viewMiddle) + 15, 60, 20) content:[data objectForKey:@"ApplyCount"] size:BIGGESTFONTSIZE color:[applyCountStr integerValue] == 0 ?TEXTGRAYCOLOR: GREENCOLOR];
-    [lbApplyCount setTextAlignment:NSTextAlignmentCenter];
-    [btnApply addSubview:lbApplyCount];
-    
-    WKLabel *lbApply = [[WKLabel alloc] initWithFrame:CGRectMake(VIEW_X(lbApplyCount), VIEW_BY(lbApplyCount), VIEW_W(lbApplyCount), 20) content:@"应聘简历" size:DEFAULTFONTSIZE color:nil];
-    [lbApply setTextAlignment:NSTextAlignmentCenter];
-    [btnApply addSubview:lbApply];
-    
-    UIView *viewSeparate = [[UIView alloc] initWithFrame:CGRectMake(0, VIEW_BY(lbRefresh) + 10, SCREEN_WIDTH, 1)];
-    [viewSeparate setBackgroundColor:SEPARATECOLOR];
-    [cell.contentView addSubview:viewSeparate];
-    
-    WKButton *btnRefresh = [[WKButton alloc] initImageButtonWithFrame:CGRectMake(0, VIEW_BY(viewSeparate), SCREEN_WIDTH / 3, 30) image:@"cp_jobrefresh.png" title:@"刷新" fontSize:SMALLERFONTSIZE color:nil bgColor:nil];
-    [btnRefresh setTag:indexPath.section];
-    [btnRefresh addTarget:self action:@selector(refreshClick:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.contentView addSubview:btnRefresh];
-    
-    WKButton *btnIssue = [[WKButton alloc] initImageButtonWithFrame:CGRectMake(VIEW_BX(btnRefresh), VIEW_Y(btnRefresh), VIEW_W(btnRefresh), VIEW_H(btnRefresh)) image:@"cp_jobissue.png" title:@"修改计划" fontSize:SMALLERFONTSIZE color:nil bgColor:nil];
-    [btnIssue addTarget:self action:@selector(issueClick:) forControlEvents:UIControlEventTouchUpInside];
-    [btnIssue setTag:indexPath.section];
-    [cell.contentView addSubview:btnIssue];
-    
-    WKButton *btnModify = [[WKButton alloc] initImageButtonWithFrame:CGRectMake(VIEW_BX(btnIssue), VIEW_Y(btnRefresh), VIEW_W(btnRefresh), VIEW_H(btnRefresh)) image:@"cp_jobmodify.png" title:@"编辑职位" fontSize:SMALLERFONTSIZE color:nil bgColor:nil];
-    [btnModify addTarget:self action:@selector(modifyClick:) forControlEvents:UIControlEventTouchUpInside];
-    [btnModify setTag:indexPath.section];
-    [cell.contentView addSubview:btnModify];
-    
-    [cell setFrame:CGRectMake(0, 0, SCREEN_WIDTH, VIEW_BY(btnModify))];
+    CpJobListModel *model = [self.arrData objectAtIndex:indexPath.section];
+    IssueJobListCell *cell = [[IssueJobListCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"issueCell"];
+    cell.model = model;
+    __weak typeof(self)weakself = self;
+    cell.issueCellBlock = ^(UIButton *btn, CpJobListModel *model) {
+        if (btn.tag == 100) {// 应聘简历
+            [weakself applyClick:model];
+        }else if (btn.tag == 101){//刷新
+            [weakself refreshClick:model indexPath:indexPath];
+        }else if (btn.tag == 102){// 修改计划
+            [weakself issueClick:indexPath];
+        }else if (btn.tag == 103){// 编辑职位
+            [weakself modifyClick:model];
+        }
+    };
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSDictionary *data = [self.arrData objectAtIndex:indexPath.section];
+    CpJobListModel *model = [self.arrData objectAtIndex:indexPath.section];
     WKNavigationController *jobNav = [[UIStoryboard storyboardWithName:@"Person" bundle:nil] instantiateViewControllerWithIdentifier:@"jobView"];
     JobViewController *jobCtrl = jobNav.viewControllers[0];
-    jobCtrl.jobId = [data objectForKey:@"ID"];
+    jobCtrl.jobId = model.ID;
     [self presentViewController:jobNav animated:YES completion:nil];
 }
 
 #pragma mark - 应聘简历点击
-- (void)applyClick:(UIButton *)button {
-    NSDictionary *data = [self.arrData objectAtIndex:button.tag];
-    NSString *applyCountStr = [data objectForKey:@"ApplyCount"];
+- (void)applyClick:(CpJobListModel *)model {
+    NSString *applyCountStr = model.ApplyCount;
     if ([applyCountStr integerValue] ==0) {
         return;
     }
@@ -262,19 +230,18 @@
 //    cvManagerCtrl.jobId = [data objectForKey:@"ID"];
 //    [self.navigationController pushViewController:cvManagerCtrl animated:YES];
     ApplyCvViewController *applyCvCtrl = [[ApplyCvViewController alloc] init];
-    applyCvCtrl.jobId = [data objectForKey:@"ID"];
+    applyCvCtrl.jobId = model.ID;
     [self.navigationController pushViewController:applyCvCtrl animated:YES];
 }
-
-- (void)modifyClick:(UIButton *)button {
-    NSDictionary *data = [self.arrData objectAtIndex:button.tag];
+#pragma mark - 编辑职位
+- (void)modifyClick:(CpJobListModel *)model {
     JobModifyViewController *jobModifyCtrl = [[UIStoryboard storyboardWithName:@"Company" bundle:nil] instantiateViewControllerWithIdentifier:@"jobModifyView"];
-    jobModifyCtrl.jobId = [data objectForKey:@"ID"];
+    jobModifyCtrl.jobId = model.ID;
     [self.navigationController pushViewController:jobModifyCtrl animated:YES];
 }
-
-- (void)issueClick:(UIButton *)button {
-    self.selectedRowIndex = button.tag;
+#pragma mark - 修改计划
+- (void)issueClick:(NSIndexPath *)indexPath {
+    self.selectedRowIndex = indexPath.section;
     UIView *viewIssuePop = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 130)];
     UIButton *btnIssue = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
     [btnIssue setTag:9999];
@@ -326,8 +293,8 @@
     [issuePop setTag:1];
     [issuePop showPopView:self];
 }
-
-- (void)refreshClick:(UIButton *)button {
+#pragma mark - 刷新
+- (void)refreshClick:(CpJobListModel *)model indexPath:(NSIndexPath *)indexPath{
     if (self.viewRefreshPop == nil) {
         self.viewRefreshPop = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 130)];
     }
@@ -336,9 +303,8 @@
             [view removeFromSuperview];
         }
     }
-    self.selectedRowIndex = button.tag;
-    NSDictionary *data = [self.arrData objectAtIndex:button.tag];
-    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrlCp:@"GetCpRefreshNumber" Params:[NSDictionary dictionaryWithObjectsAndKeys:CAMAINID, @"caMainID", CAMAINCODE, @"Code", [data objectForKey:@"ID"], @"JobID", CPMAINID, @"cpMainID", nil] viewController:self];
+    self.selectedRowIndex = indexPath.section;
+    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrlCp:@"GetCpRefreshNumber" Params:[NSDictionary dictionaryWithObjectsAndKeys:CAMAINID, @"caMainID", CAMAINCODE, @"Code", model.ID, @"JobID", CPMAINID, @"cpMainID", nil] viewController:self];
     [request setTag:4];
     [request setDelegate:self];
     [request startAsynchronous];
@@ -367,17 +333,17 @@
 
 - (void)WKPopViewConfirm:(WKPopView *)popView {
     if (popView.tag == 1) {
-        NSDictionary *jobData = [self.arrData objectAtIndex:self.selectedRowIndex];
+        CpJobListModel *model = [self.arrData objectAtIndex:self.selectedRowIndex];
         UIButton *btnIssue = [[popView viewWithTag:POPVIEWCONTENTTAG] viewWithTag:9999];
         if ([btnIssue.titleLabel.text isEqualToString:@"1"]) {
-            NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrlCp:@"IssueJob" Params:[NSDictionary dictionaryWithObjectsAndKeys:CAMAINID, @"caMainID", CAMAINCODE, @"Code", CPMAINID, @"cpMainID", [jobData objectForKey:@"ID"], @"JobID", [self.txtIssueEnd.text substringToIndex:10], @"IssueEnd", nil] viewController:self];
+            NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrlCp:@"IssueJob" Params:[NSDictionary dictionaryWithObjectsAndKeys:CAMAINID, @"caMainID", CAMAINCODE, @"Code", CPMAINID, @"cpMainID", model.ID, @"JobID", [self.txtIssueEnd.text substringToIndex:10], @"IssueEnd", nil] viewController:self];
             [request setTag:2];
             [request setDelegate:self];
             [request startAsynchronous];
             self.runningRequest = request;
         }
         else {
-            NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrlCp:@"StopJob" Params:[NSDictionary dictionaryWithObjectsAndKeys:CAMAINID, @"caMainID", CAMAINCODE, @"Code", CPMAINID, @"cpMainID", [jobData objectForKey:@"ID"], @"JobID", nil] viewController:self];
+            NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrlCp:@"StopJob" Params:[NSDictionary dictionaryWithObjectsAndKeys:CAMAINID, @"caMainID", CAMAINCODE, @"Code", CPMAINID, @"cpMainID", model.ID, @"JobID", nil] viewController:self];
             [request setTag:3];
             [request setDelegate:self];
             [request startAsynchronous];
@@ -456,15 +422,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

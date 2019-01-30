@@ -15,6 +15,7 @@
 #import "CommonMacro.h"
 #import "Common.h"
 #import "UIView+Toast.h"
+#import "CpMainInfoModel.h"
 
 @interface JobManagerViewController ()<IssueJobListViewDelegate, ExpiredJobListViewDelegate, NetWebServiceRequestDelegate>
 
@@ -111,11 +112,12 @@
     if (request.tag == 1) {
         NSArray *arrayCpMain = [Common getArrayFromXml:requestData tableName:@"TableCp"];
         NSDictionary *companyData = [arrayCpMain objectAtIndex:0];
-        [USER_DEFAULT setObject:[companyData objectForKey:@"MemberType"] forKey:@"cpMemberType"];
-        self.maxJobNumber = [[companyData objectForKey:@"MaxJobNumber"] integerValue];
-        self.currentJobNumber = [[companyData objectForKey:@"JobNumber"] integerValue];
+        CpMainInfoModel *model = [CpMainInfoModel buildModelWithDic:companyData];
+        [USER_DEFAULT setObject:model.MemberType forKey:@"cpMemberType"];
+        self.maxJobNumber = [model.MaxJobNumber integerValue];
+        self.currentJobNumber = [model.JobNumber integerValue];
         
-        if ([[companyData objectForKey:@"IsJobRefreshOldCompany"] isEqualToString:@"1"]) {
+        if ([model.IsJobRefreshOldCompany isEqualToString:@"1"]) {
             UIButton *btnRefresh = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
             [btnRefresh.widthAnchor constraintEqualToConstant:25].active = YES;
             [btnRefresh.heightAnchor constraintEqualToConstant:25].active = YES;
@@ -135,15 +137,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

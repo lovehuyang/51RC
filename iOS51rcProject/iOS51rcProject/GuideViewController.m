@@ -136,7 +136,6 @@
         [image1 setImage:[UIImage imageNamed:@"cp_guidepic1.png"]];
         [image1 setContentMode:UIViewContentModeScaleAspectFit];
         [self.viewGuideCp addSubview:image1];
-        
         CGRect afterRect2 = CGRectMake(0, afterRect1.origin.y - 10, SCREEN_WIDTH, SCREEN_HEIGHT - afterRect1.origin.y);
         CGRect beforeRect2 = afterRect2;
         beforeRect2.origin.x = SCREEN_WIDTH + beforeRect2.size.width;
@@ -144,7 +143,7 @@
         [image2 setImage:[UIImage imageNamed:@"cp_guidepic2.png"]];
         [image2 setContentMode:UIViewContentModeScaleAspectFill];
         [self.viewGuideCp addSubview:image2];
-        
+    
         [UIView animateWithDuration:0.5 animations:^{
             [imageBackground setAlpha:1];
         } completion:^(BOOL finished) {

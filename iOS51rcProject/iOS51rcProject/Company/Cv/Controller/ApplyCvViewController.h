@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RCRootViewController.h"
 #import "WKViewController.h"
 
-@interface ApplyCvViewController : WKViewController
+@interface ApplyCvViewController : RCRootViewController
 
 @property (nonatomic, strong) NSString *jobId;
 @end
