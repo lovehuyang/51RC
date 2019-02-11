@@ -40,7 +40,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     [Common changeFontSize:self.view];
     if (self.jobId == nil) {
         self.jobId = @"0";

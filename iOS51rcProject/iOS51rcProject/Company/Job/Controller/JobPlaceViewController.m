@@ -22,6 +22,7 @@
 @property (nonatomic, strong) BMKMapView *mapView;
 @property (nonatomic, strong) BMKGeoCodeSearch *geoCodeSearch;
 @property (nonatomic, strong) BMKLocationService *locService;
+
 @end
 
 @implementation JobPlaceViewController

@@ -22,7 +22,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.title = @"福利待遇";
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
