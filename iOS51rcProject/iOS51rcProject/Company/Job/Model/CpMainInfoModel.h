@@ -76,4 +76,5 @@
 @property (nonatomic , copy) NSString *dcSubSiteID;
 
 + (id)buildModelWithDic:(NSDictionary *)dic;
+
 @end

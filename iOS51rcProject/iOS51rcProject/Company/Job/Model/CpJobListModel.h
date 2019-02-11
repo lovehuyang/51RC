@@ -64,4 +64,5 @@
 @property (nonatomic , copy) NSString *jobrefreshIng;
 
 + (id)buildModelWithDic:(NSDictionary *)dic;
+
 @end

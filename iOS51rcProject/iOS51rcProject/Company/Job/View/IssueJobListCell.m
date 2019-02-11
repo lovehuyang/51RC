@@ -84,4 +84,5 @@
 - (void)btnClick:(UIButton *)btn{
     self.issueCellBlock(btn, _model);
 }
+
 @end

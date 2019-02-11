@@ -14,4 +14,5 @@
 @property (nonatomic , strong) CpJobListModel *model;
 @property (nonatomic , copy) void(^expiredCellBlock)(UIButton *btn,CpJobListModel *model);
 
+
 @end

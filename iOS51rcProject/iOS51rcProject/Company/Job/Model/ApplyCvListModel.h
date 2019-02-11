@@ -48,5 +48,7 @@
 @property (nonatomic , copy) NSString *paMainID;
 @property (nonatomic , copy) NSString *paName;
 @property (nonatomic , copy) NSString *RemindDate;
+
 + (id)buildModelWithDic:(NSDictionary *)dic;
+
 @end
