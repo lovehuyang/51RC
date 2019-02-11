@@ -66,13 +66,7 @@
         OnlineLab *onlineLab = [[OnlineLab alloc]initWithFrame:CGRectMake(xForName + 5, VIEW_Y(lbName) + 7, 30, 16)];
         [self.contentView addSubview:onlineLab];
         xForName = VIEW_BX(onlineLab);
-        
-        // “聊”图标
-        //        UIImageView *imgOnline = [[UIImageView alloc] initWithFrame:CGRectMake(xForName + 5, VIEW_Y(lbName) + 7, 16, 16)];
-        //        [imgOnline setImage:[UIImage imageNamed:@"pa_chat.png"]];
-        //        [imgOnline setContentMode:UIViewContentModeScaleAspectFit];
-        //        [cell.contentView addSubview:imgOnline];
-        //        xForName = VIEW_BX(imgOnline);
+
     }
     
     if ([_model.RemindDate length] > 0 && [_model.Reply isEqualToString:@"0"]) {

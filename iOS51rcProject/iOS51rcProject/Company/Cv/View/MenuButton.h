@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MenuButton : UIButton
+
 - (instancetype)initWithFrame:(CGRect)frame;
 
 @end

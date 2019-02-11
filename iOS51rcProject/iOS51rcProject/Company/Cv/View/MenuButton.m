@@ -17,9 +17,8 @@
         self.titleLabel.font = DEFAULTFONT;
         self.backgroundColor = [UIColor clearColor];
         [self setTitleColor:GREENCOLOR forState:UIControlStateNormal];
-//        [self setTitleColor:Color_Theme forState:UIControlStateSelected];
         [self setImage:[UIImage imageNamed:@"xialajiantou"] forState:UIControlStateNormal];
-//         [self setImage:[UIImage imageNamed:@"up_orange"] forState:UIControlStateSelected];
+
     }
     return self;
 }

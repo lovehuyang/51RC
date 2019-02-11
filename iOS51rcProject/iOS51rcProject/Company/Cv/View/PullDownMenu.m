@@ -11,6 +11,7 @@
 #import "Common.h"
 
 @interface PullDownMenu()
+
 @property (nonatomic , strong) UILabel *replyRateLab;
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) MenuButton *menuBtn;

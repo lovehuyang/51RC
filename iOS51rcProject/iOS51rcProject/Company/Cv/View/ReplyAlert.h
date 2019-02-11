@@ -13,7 +13,6 @@ typedef void (^ReplyBlock)(NSInteger tag);
 @interface ReplyAlert : UIView
 
 @property (nonatomic , strong) NSString *name;
-
 @property (nonatomic , copy) ReplyBlock replyBlock;
 
 @end

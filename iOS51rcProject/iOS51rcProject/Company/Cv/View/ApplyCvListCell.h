@@ -10,7 +10,9 @@
 @class ApplyCvListModel;
 
 @interface ApplyCvListCell : UITableViewCell
+
 @property (nonatomic , strong) ApplyCvListModel *model;
 @property (nonatomic , copy) void(^replyBlock)(ApplyCvListModel *model);
 @property (nonatomic , copy) void(^chatBlock)(ApplyCvListModel *model);
+
 @end
