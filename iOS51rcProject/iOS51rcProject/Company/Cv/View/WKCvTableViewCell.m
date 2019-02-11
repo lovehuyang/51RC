@@ -30,17 +30,6 @@
     return self;
 }
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
 - (void)fillCvInfo:(NSString *)topString gender:(NSString *)gender name:(NSString *)name relatedWorkYears:(NSString *)relatedWorkYears age:(NSString *)age degree:(NSString *)degree livePlace:(NSString *)livePlace loginDate:(NSString *)loginDate mobileVerifyDate:(NSString *)mobileVerifyDate paPhoto:(NSString *)paPhoto online:(NSString *)online paMainId:(NSString *)paMainId cvMainId:(NSString *)cvMainId {
     self.cvMainId = cvMainId;
     UIButton *btnOnline = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 85, 0, 70, 40)];
@@ -84,11 +73,6 @@
         
         OnlineLab *onlineLab = [[OnlineLab alloc]initWithFrame:CGRectMake(xForName + 5, VIEW_Y(lbName) + 7, 30, 16)];
         [self.contentView addSubview:onlineLab];
-        // "聊"图标
-//        UIImageView *imgOnline = [[UIImageView alloc] initWithFrame:CGRectMake(xForName + 5, VIEW_Y(lbName) + 7, 16, 16)];
-//        [imgOnline setImage:[UIImage imageNamed:@"pa_chat.png"]];
-//        [imgOnline setContentMode:UIViewContentModeScaleAspectFit];
-//        [self.contentView addSubview:imgOnline];
     }
     
     NSString *workYears = @"";

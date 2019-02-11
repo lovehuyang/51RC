@@ -61,6 +61,7 @@
     [self.view addSubview:self.tableView];
 }
 
+#pragma mark - 懒加载
 - (NSMutableArray *)arrData{
     if (!_arrData) {
         _arrData = [NSMutableArray array];

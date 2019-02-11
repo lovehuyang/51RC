@@ -19,8 +19,8 @@
 #import "WKPopView.h"
 #import "CvOperate.h"
 #import "PullDownMenu.h"
-#import "OnlineLab.h"
 #import "ApplyCvListModel.h"
+#import "ApplyCvListCell.h"
 
 static const CGFloat Menu_H =  35;// 菜单栏的高度//35
 
@@ -211,8 +211,10 @@ static const CGFloat Menu_H =  35;// 菜单栏的高度//35
     if (tableView == self.menuTableview) {
         return 35;
     }
-    UITableViewCell *cell = [self tableView:self.tableView cellForRowAtIndexPath:indexPath];
-    return cell.frame.size.height;
+    
+    return [self.tableView cellHeightForIndexPath:indexPath model:self.arrData[indexPath.row] keyPath:@"model" cellClass:[ApplyCvListCell class] contentViewWidth:SCREEN_WIDTH];
+//    UITableViewCell *cell = [self tableView:self.tableView cellForRowAtIndexPath:indexPath];
+//    return cell.frame.size.height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -228,132 +230,24 @@ static const CGFloat Menu_H =  35;// 菜单栏的高度//35
     
     // 简历的cell
     ApplyCvListModel *model = [self.arrData objectAtIndex:indexPath.section];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    ApplyCvListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        cell = [[ApplyCvListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    for (UIView *view in cell.contentView.subviews) {
-        [view removeFromSuperview];
-    }
-    WKLabel *lbMatch = [[WKLabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 95, 0, 80, 40) content:@"" size:DEFAULTFONTSIZE color:nil];
-    [lbMatch setTextAlignment:NSTextAlignmentRight];
-    [cell.contentView addSubview:lbMatch];
-    
-    NSMutableAttributedString *matchString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"匹配度%@%%", model.cvMatch]];
-    [matchString addAttribute:NSForegroundColorAttributeName value:GREENCOLOR range:NSMakeRange(3, matchString.length - 3)];
-    [lbMatch setAttributedText:matchString];
-    
-    WKLabel *lbJob = [[WKLabel alloc] initWithFixedHeight:CGRectMake(15, 0, VIEW_X(lbMatch) - 15, VIEW_H(lbMatch)) content:[NSString stringWithFormat:@"应聘职位：%@", model.JobName] size:DEFAULTFONTSIZE color:nil];
-    [cell.contentView addSubview:lbJob];
-    
-    UIView *viewSeparateTop = [[UIView alloc] initWithFrame:CGRectMake(0, VIEW_BY(lbJob), SCREEN_WIDTH, 1)];
-    [viewSeparateTop setBackgroundColor:SEPARATECOLOR];
-    [cell.contentView addSubview:viewSeparateTop];
-    
-    UIImageView *imgPhoto = [[UIImageView alloc] initWithFrame:CGRectMake(VIEW_X(lbJob), VIEW_BY(viewSeparateTop) + 10, 50, 50)];
-    [imgPhoto setImage:[UIImage imageNamed:([model.Gender boolValue] ? @"img_photowoman.png" : @"img_photoman.png")]];
-    [imgPhoto setContentMode:UIViewContentModeScaleAspectFill];
-    [imgPhoto.layer setMasksToBounds:YES];
-    [imgPhoto.layer setCornerRadius:25];
-    [cell.contentView addSubview:imgPhoto];
-    if ([model.PaPhoto length] > 0) {
-        [imgPhoto sd_setImageWithURL:[NSURL URLWithString:[Common getPaPhotoUrl:model.PaPhoto paMainId:model.paMainID]]];
-    }
-    
-    WKLabel *lbName = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_BX(imgPhoto) + 15, VIEW_Y(imgPhoto), 500, 30) content:model.paName size:BIGGERFONTSIZE color:nil];
-    [cell.contentView addSubview:lbName];
-    
-    float xForName = VIEW_BX(lbName);
-    if ([model.MobileVerifyDate length] > 0) {
-        UIImageView *imgMobileCer = [[UIImageView alloc] initWithFrame:CGRectMake(xForName + 5, VIEW_Y(lbName) + 7, 16, 16)];
-        [imgMobileCer setImage:[UIImage imageNamed:@"cp_mobilecer.png"]];
-        [imgMobileCer setContentMode:UIViewContentModeScaleAspectFit];
-        [cell.contentView addSubview:imgMobileCer];
-        xForName = VIEW_BX(imgMobileCer);
-    }
-    
-    if ([model.IsOnline boolValue]) {
+
+    cell.model = model;
+    __weak typeof(self)weakself = self;
+    cell.chatBlock = ^(ApplyCvListModel *model) {
+        UIButton *tempBtn = [UIButton new];
+        tempBtn.tag = indexPath.section;
+        [weakself chatClick:tempBtn];
         
-        OnlineLab *onlineLab = [[OnlineLab alloc]initWithFrame:CGRectMake(xForName + 5, VIEW_Y(lbName) + 7, 30, 16)];
-        [cell.contentView addSubview:onlineLab];
-        xForName = VIEW_BX(onlineLab);
-        
-        // “聊”图标
-//        UIImageView *imgOnline = [[UIImageView alloc] initWithFrame:CGRectMake(xForName + 5, VIEW_Y(lbName) + 7, 16, 16)];
-//        [imgOnline setImage:[UIImage imageNamed:@"pa_chat.png"]];
-//        [imgOnline setContentMode:UIViewContentModeScaleAspectFit];
-//        [cell.contentView addSubview:imgOnline];
-//        xForName = VIEW_BX(imgOnline);
-    }
-    
-    if ([model.RemindDate length] > 0 && [model.Reply isEqualToString:@"0"]) {
-        NSTimeInterval interval = [[Common dateFromString:model.RemindDate] timeIntervalSinceDate:[NSDate date]];
-        float remindDay = (interval / (24 * 3600));
-        UIImageView *imgRemind = [[UIImageView alloc] initWithFrame:CGRectMake(xForName + 5, VIEW_Y(lbName) + 7, 50, 16)];
-        if (remindDay > 3) {
-            [imgRemind setImage:[UIImage imageNamed:@"cp_jobreplyno.png"]];
-        }
-        else {
-            [imgRemind setImage:[UIImage imageNamed:@"cp_jobreply.png"]];
-        }
-        [imgRemind setContentMode:UIViewContentModeScaleAspectFit];
-        [cell.contentView addSubview:imgRemind];
-    }
-    
-    NSString *workYears = @"";
-    if ([model.RelatedWorkYears isEqualToString:@"0"]) {
-        workYears = @"无";
-    }
-    else if ([model.RelatedWorkYears isEqualToString:@"11"]) {
-        workYears = @"10年以上";
-    }
-    else if ([model.RelatedWorkYears length] > 0) {
-        workYears = [NSString stringWithFormat:@"%@年", model.RelatedWorkYears];
-    }
-    WKLabel *lbInfo = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_X(lbName), VIEW_BY(lbName), 500, 25) content:[NSString stringWithFormat:@"%@ | %@岁 | %@ | %@工作经验 | %@", ([model.Gender boolValue] ? @"女" : @"男"), model.Age, model.DegreeName, workYears, model.LivePlaceName] size:DEFAULTFONTSIZE color:nil];
-    [cell.contentView addSubview:lbInfo];
-    
-    UIView *viewSeparateBottom = [[UIView alloc] initWithFrame:CGRectMake(0, VIEW_BY(imgPhoto) + 10, SCREEN_WIDTH, 1)];
-    [viewSeparateBottom setBackgroundColor:SEPARATECOLOR];
-    [cell.contentView addSubview:viewSeparateBottom];
-    
-    UIButton *btnReply = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 80, VIEW_BY(viewSeparateBottom) + 7, 75, 26)];
-    [btnReply setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [btnReply setBackgroundColor:[UIColor clearColor]];
-    [btnReply.titleLabel setFont:DEFAULTFONT];
-    [cell.contentView addSubview:btnReply];
-    
-    if ([model.Reply isEqualToString:@"0"]) {
-        [btnReply setTag:indexPath.section];
-        [btnReply setTitle:@"答复" forState:UIControlStateNormal];
-        [btnReply setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [btnReply setBackgroundColor:GREENCOLOR];
-        [btnReply.layer setCornerRadius:5];
-        [btnReply addTarget:self action:@selector(replyClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    else if ([model.Reply isEqualToString:@"1"]) {
-        [btnReply setTitle:@"符合要求" forState:UIControlStateNormal];
-    }
-    else if ([model.Reply isEqualToString:@"5"]) {
-        [btnReply setTitle:@"储备(自动)" forState:UIControlStateNormal];
-    }
-    else { // 2
-        [btnReply setTitle:@"储备" forState:UIControlStateNormal];
-    }
-    
-    UIButton *btnOnline = [[UIButton alloc] initWithFrame:CGRectMake(VIEW_X(btnReply) - 95, VIEW_Y(btnReply), 85, VIEW_H(btnReply))];
-    [btnOnline setTag:indexPath.section];
-    [btnOnline setTitle:@"跟TA聊聊" forState:UIControlStateNormal];
-    [btnOnline setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [btnOnline setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
-    [btnOnline.titleLabel setFont:DEFAULTFONT];
-    [btnOnline addTarget:self action:@selector(chatClick:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.contentView addSubview:btnOnline];
-    
-    WKLabel *lbLoginDate = [[WKLabel alloc] initWithFixedHeight:CGRectMake(VIEW_X(lbJob), VIEW_Y(btnReply), 500, VIEW_H(btnOnline)) content:[NSString stringWithFormat:@"应聘时间：%@", [Common stringFromDateString:model.AddDate formatType:@"yyyy-MM-dd"]] size:DEFAULTFONTSIZE color:nil];
-    [cell.contentView addSubview:lbLoginDate];
-    
-    [cell setFrame:CGRectMake(0, 0, SCREEN_WIDTH, VIEW_BY(lbLoginDate) + 5)];
+    };
+    cell.replyBlock = ^(ApplyCvListModel *model) {
+        UIButton *tempBtn = [UIButton new];
+        tempBtn.tag = indexPath.section;
+        [weakself replyClick:tempBtn];
+    };
     return cell;
 }
 
@@ -376,6 +270,7 @@ static const CGFloat Menu_H =  35;// 菜单栏的高度//35
     [self.navigationController pushViewController:cvDetailCtrl animated:YES];
 }
 
+#pragma mark - 答复
 - (void)replyClick:(UIButton *)button {
     ApplyCvListModel *model = [self.arrData objectAtIndex:button.tag];
     UIView *viewContent = [[UIView alloc] init];
@@ -437,6 +332,7 @@ static const CGFloat Menu_H =  35;// 菜单栏的高度//35
     [self getCpData];
 }
 
+#pragma mark - 聊聊
 - (void)chatClick:(UIButton *)button {
     ApplyCvListModel *model = [self.arrData objectAtIndex:button.tag];
     self.operate = [[CvOperate alloc] init:model.cvMainID paName:model.paName viewController:self];

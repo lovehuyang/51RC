@@ -172,6 +172,9 @@
 		9931FA3221D330C000CFB45F /* mima_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9931FA3021D330C000CFB45F /* mima_icon.png */; };
 		9931FA3521D3346400CFB45F /* mima_icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9931FA3321D3346300CFB45F /* mima_icon1.png */; };
 		9931FA3621D3346400CFB45F /* duanxin_icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9931FA3421D3346400CFB45F /* duanxin_icon1.png */; };
+		9933E719221153A400C12708 /* ApplyCvListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9933E718221153A400C12708 /* ApplyCvListCell.m */; };
+		9933E71C22115DD000C12708 /* DownloadCVModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9933E71B22115DD000C12708 /* DownloadCVModel.m */; };
+		9933E71F221161EE00C12708 /* WKCvTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9933E71D221161ED00C12708 /* WKCvTableViewCell.m */; };
 		993ED84121B510F700A988FF /* SpeechButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 993ED84021B510F700A988FF /* SpeechButton.m */; };
 		993ED85321B528AB00A988FF /* “013”副本.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 993ED84621B528AA00A988FF /* “013”副本.mp3 */; };
 		993ED85421B528AB00A988FF /* voicejobtype.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 993ED84721B528AA00A988FF /* voicejobtype.mp3 */; };
@@ -544,7 +547,6 @@
 		99F1988021FEE32300DB4F58 /* CvSearchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F1987521FEE32300DB4F58 /* CvSearchListViewController.m */; };
 		99F1988621FEF52700DB4F58 /* CpMainInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F1988521FEF52700DB4F58 /* CpMainInfoModel.m */; };
 		99F1988921FEFBA900DB4F58 /* CpJobListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F1988821FEFBA900DB4F58 /* CpJobListModel.m */; };
-		99F7FC842041427D0060E9F1 /* WKCvTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F7FC832041427D0060E9F1 /* WKCvTableViewCell.m */; };
 		99F7FC8720414AB80060E9F1 /* img_photowoman.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F7FC8520414AB80060E9F1 /* img_photowoman.png */; };
 		99F7FC8820414AB80060E9F1 /* img_photoman.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F7FC8620414AB80060E9F1 /* img_photoman.png */; };
 		99FCF1FA2011BECE008B5A69 /* cp_imgclose.png in Resources */ = {isa = PBXBuildFile; fileRef = 99FCF1F92011BECE008B5A69 /* cp_imgclose.png */; };
@@ -818,6 +820,12 @@
 		9931FA3021D330C000CFB45F /* mima_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mima_icon.png; sourceTree = "<group>"; };
 		9931FA3321D3346300CFB45F /* mima_icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mima_icon1.png; sourceTree = "<group>"; };
 		9931FA3421D3346400CFB45F /* duanxin_icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = duanxin_icon1.png; sourceTree = "<group>"; };
+		9933E717221153A400C12708 /* ApplyCvListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplyCvListCell.h; sourceTree = "<group>"; };
+		9933E718221153A400C12708 /* ApplyCvListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplyCvListCell.m; sourceTree = "<group>"; };
+		9933E71A22115DD000C12708 /* DownloadCVModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadCVModel.h; sourceTree = "<group>"; };
+		9933E71B22115DD000C12708 /* DownloadCVModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadCVModel.m; sourceTree = "<group>"; };
+		9933E71D221161ED00C12708 /* WKCvTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKCvTableViewCell.m; sourceTree = "<group>"; };
+		9933E71E221161EE00C12708 /* WKCvTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKCvTableViewCell.h; sourceTree = "<group>"; };
 		993ED83F21B510F600A988FF /* SpeechButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeechButton.h; sourceTree = "<group>"; };
 		993ED84021B510F700A988FF /* SpeechButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpeechButton.m; sourceTree = "<group>"; };
 		993ED84621B528AA00A988FF /* “013”副本.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "“013”副本.mp3"; sourceTree = "<group>"; };
@@ -1393,8 +1401,6 @@
 		99F1988521FEF52700DB4F58 /* CpMainInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CpMainInfoModel.m; sourceTree = "<group>"; };
 		99F1988721FEFBA900DB4F58 /* CpJobListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CpJobListModel.h; sourceTree = "<group>"; };
 		99F1988821FEFBA900DB4F58 /* CpJobListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CpJobListModel.m; sourceTree = "<group>"; };
-		99F7FC822041427D0060E9F1 /* WKCvTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKCvTableViewCell.h; sourceTree = "<group>"; };
-		99F7FC832041427D0060E9F1 /* WKCvTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKCvTableViewCell.m; sourceTree = "<group>"; };
 		99F7FC8520414AB80060E9F1 /* img_photowoman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_photowoman.png; sourceTree = "<group>"; };
 		99F7FC8620414AB80060E9F1 /* img_photoman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_photoman.png; sourceTree = "<group>"; };
 		99FCF1F92011BECE008B5A69 /* cp_imgclose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cp_imgclose.png; sourceTree = "<group>"; };
@@ -2116,8 +2122,6 @@
 				9929851E1F5539CB0021F863 /* WKTextView.m */,
 				9929851F1F5539CB0021F863 /* WKViewController.h */,
 				992985201F5539CB0021F863 /* WKViewController.m */,
-				99F7FC822041427D0060E9F1 /* WKCvTableViewCell.h */,
-				99F7FC832041427D0060E9F1 /* WKCvTableViewCell.m */,
 				991D7A87219D37A20019123A /* BarButtonItem.h */,
 				991D7A88219D37A20019123A /* BarButtonItem.m */,
 				99EC66E421B0D79F00756113 /* RCRootViewController.h */,
@@ -2583,12 +2587,16 @@
 		9993798C219A9C240087D404 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9933E71E221161EE00C12708 /* WKCvTableViewCell.h */,
+				9933E71D221161ED00C12708 /* WKCvTableViewCell.m */,
 				99937991219AAB730087D404 /* MenuButton.h */,
 				99937990219AAB730087D404 /* MenuButton.m */,
 				9993798D219A9C240087D404 /* PullDownMenu.h */,
 				9993798E219A9C240087D404 /* PullDownMenu.m */,
 				990EF79B21A3903900C63AEB /* ReplyAlert.h */,
 				990EF79C21A3903900C63AEB /* ReplyAlert.m */,
+				9933E717221153A400C12708 /* ApplyCvListCell.h */,
+				9933E718221153A400C12708 /* ApplyCvListCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3172,8 +3180,8 @@
 			children = (
 				99F1985421FEE28800DB4F58 /* ApplyInvitationCpViewController.h */,
 				99F1984921FEE28800DB4F58 /* ApplyInvitationCpViewController.m */,
-				99F1984A21FEE28800DB4F58 /* DownloadCvViewController.m */,
 				99F1985321FEE28800DB4F58 /* DownloadCvViewController.h */,
+				99F1984A21FEE28800DB4F58 /* DownloadCvViewController.m */,
 				99F1985621FEE28800DB4F58 /* InvitationManagerViewController.h */,
 				99F1984C21FEE28800DB4F58 /* InvitationManagerViewController.m */,
 				99F1984E21FEE28800DB4F58 /* InterviewSendRemarkViewController.h */,
@@ -3199,6 +3207,8 @@
 		99F1985E21FEE28800DB4F58 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9933E71A22115DD000C12708 /* DownloadCVModel.h */,
+				9933E71B22115DD000C12708 /* DownloadCVModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3744,6 +3754,7 @@
 				99F1986621FEE28800DB4F58 /* FavoriteCvViewController.m in Sources */,
 				99F1980121FEE12B00DB4F58 /* OrderDetailViewController.m in Sources */,
 				9960E25D219019CC008E6DE5 /* MBProgressHUD+Gif.m in Sources */,
+				9933E71F221161EE00C12708 /* WKCvTableViewCell.m in Sources */,
 				99F174CC21E5C5B800E72976 /* WXApiManager.m in Sources */,
 				9980766121D5BAED000BC5F8 /* PJobListModel.m in Sources */,
 				99F197E221FEE03900DB4F58 /* JobPlaceViewController.m in Sources */,
@@ -3862,7 +3873,6 @@
 				99DCE27421DC431A0060B147 /* ProtocolView.m in Sources */,
 				99B8069421EC6646004AC914 /* CpViewViewController.m in Sources */,
 				99F1988021FEE32300DB4F58 /* CvSearchListViewController.m in Sources */,
-				99F7FC842041427D0060E9F1 /* WKCvTableViewCell.m in Sources */,
 				99F1988921FEFBA900DB4F58 /* CpJobListModel.m in Sources */,
 				992985221F5539CB0021F863 /* WKButton.m in Sources */,
 				996C908C21894F8500C0EF66 /* AFNManager.m in Sources */,
@@ -3879,6 +3889,7 @@
 				99B8069321EC6646004AC914 /* CpViewChildViewController.m in Sources */,
 				996D64A921B60DB80095EA95 /* VoiceWaveImgView.m in Sources */,
 				99F1983521FEE1A700DB4F58 /* AccountInfoViewController.m in Sources */,
+				9933E719221153A400C12708 /* ApplyCvListCell.m in Sources */,
 				99A826611EEA329800609D94 /* MLImageCrop.m in Sources */,
 				99B8069921EC6647004AC914 /* CpAttentionViewController.m in Sources */,
 				9908DD3121D499130002B609 /* CompanyDetailViewController.m in Sources */,
@@ -3941,6 +3952,7 @@
 				991A243D1EE6D7A9008CD8E9 /* ASIDataDecompressor.m in Sources */,
 				99F197E421FEE03900DB4F58 /* IssueJobListViewController.m in Sources */,
 				9919FA191EDE6A6100BE51F0 /* GuideViewController.m in Sources */,
+				9933E71C22115DD000C12708 /* DownloadCVModel.m in Sources */,
 				99949F5321C248B2002109D1 /* InsertJobApplyModel.m in Sources */,
 				99C52C2F21DF4FDC00F9CF7A /* MyOrderCell.m in Sources */,
 				999075F921E8219E0036A361 /* RCAlertView.m in Sources */,

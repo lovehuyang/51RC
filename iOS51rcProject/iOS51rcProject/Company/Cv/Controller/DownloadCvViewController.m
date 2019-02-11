@@ -15,6 +15,7 @@
 #import "WKTableView.h"
 #import "WKCvTableViewCell.h"
 #import "CvDetailViewController.h"
+#import "DownloadCVModel.h"
 
 @interface DownloadCvViewController ()<UITableViewDelegate, UITableViewDataSource, NetWebServiceRequestDelegate>
 
@@ -38,10 +39,15 @@
         [self getData];
     }];
     [self.view addSubview:self.tableView];
-    
-    self.arrData = [[NSMutableArray alloc] init];
 }
 
+#pragma mark - 懒加载
+- (NSMutableArray *)arrData{
+    if (!_arrData) {
+        _arrData = [NSMutableArray array];
+    }
+    return _arrData;
+}
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.page = 1;
@@ -68,7 +74,11 @@
         [self.arrData removeAllObjects];
     }
     NSArray *arrayData = [Common getArrayFromXml:requestData tableName:@"Table1"];
-    [self.arrData addObjectsFromArray:arrayData];
+    for (NSDictionary *dict in arrayData) {
+        DownloadCVModel *model = [DownloadCVModel buildModelWithDic:dict];
+        [self.arrData addObject:model];
+    }
+    
     if (arrayData.count < 20) {
         if (self.page == 1) {
             [self.tableView.mj_footer removeFromSuperview];
@@ -110,7 +120,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *data = [self.arrData objectAtIndex:indexPath.section];
+    DownloadCVModel *model = [self.arrData objectAtIndex:indexPath.section];
     WKCvTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
         cell = [[WKCvTableViewCell alloc] initWithListType:1 reuseIdentifier:@"cell" viewController:self];
@@ -118,15 +128,15 @@
     for (UIView *view in cell.contentView.subviews) {
         [view removeFromSuperview];
     }
-    [cell fillCvInfo:[NSString stringWithFormat:@"期望月薪%@ | 毕业于%@", [data objectForKey:@"dcSalaryName"], [data objectForKey:@"College"]] gender:[data objectForKey:@"Gender"] name:[data objectForKey:@"paName"] relatedWorkYears:[data objectForKey:@"RelatedWorkYears"] age:[data objectForKey:@"Age"] degree:[data objectForKey:@"DegreeName"] livePlace:[data objectForKey:@"LivePlaceName"] loginDate:[data objectForKey:@"AddDate"] mobileVerifyDate:[data objectForKey:@"MobileVerifyDate"] paPhoto:[data objectForKey:@"PaPhoto"] online:[data objectForKey:@"IsOnline"] paMainId:[data objectForKey:@"paMainID"] cvMainId:[data objectForKey:@"cvMainID"]];
+    [cell fillCvInfo:[NSString stringWithFormat:@"期望月薪%@ | 毕业于%@", model.dcSalaryName, model.College] gender:model.Gender name:model.paName relatedWorkYears:model.RelatedWorkYears age:model.Age degree:model.DegreeName livePlace:model.LivePlaceName loginDate:model.AddDate mobileVerifyDate:model.MobileVerifyDate paPhoto:model.PaPhoto online:model.IsOnline paMainId:model.paMainID cvMainId:model.cvMainID];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSDictionary *data = [self.arrData objectAtIndex:indexPath.section];
+    DownloadCVModel *model = [self.arrData objectAtIndex:indexPath.section];
     CvDetailViewController *cvDetailCtrl = [[CvDetailViewController alloc] init];
-    cvDetailCtrl.cvMainId = [data objectForKey:@"cvMainID"];
+    cvDetailCtrl.cvMainId = model.cvMainID;
     [self.navigationController pushViewController:cvDetailCtrl animated:YES];
 }
 
@@ -134,15 +144,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

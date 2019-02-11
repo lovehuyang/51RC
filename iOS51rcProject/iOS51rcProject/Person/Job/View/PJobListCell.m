@@ -78,7 +78,5 @@
     [self.contentView addSubview:viewSeparate];
     
     [self setupAutoHeightWithBottomView:viewSeparate bottomMargin:0];
-    
 }
-
 @end
