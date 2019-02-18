@@ -210,7 +210,7 @@
     frameGrowPlaceTitle.origin.x = (IS_IPHONE_6Plus ? 110 : 100) - frameGrowPlaceTitle.size.width;
     [lbGrowPlaceTitle setFrame:frameGrowPlaceTitle];
     [viewContent addSubview:lbGrowPlaceTitle];
-    
+
     WKLabel *lbGrowPlace = [[WKLabel alloc] initWithFixedSpacing:CGRectMake(VIEW_BX(lbGrowPlaceTitle), VIEW_Y(lbGrowPlaceTitle), self.widthForView - VIEW_BX(lbGrowPlaceTitle) - 15, 20) content:[paData objectForKey:@"GrowRegion"] size:DEFAULTFONTSIZE color:nil spacing:0];
     [viewContent addSubview:lbGrowPlace];
     
@@ -769,7 +769,7 @@
 - (void)netRequestFinished:(NetWebServiceRequest *)request
       finishedInfoToResult:(NSString *)result
               responseData:(GDataXMLDocument *)requestData {
-    if (request.tag == 1) {
+    if (request.tag == 1) {// 简历详情的数据
         self.xmlData = requestData;
         [self fillData];
         [self fillBasic];

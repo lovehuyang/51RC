@@ -337,6 +337,8 @@
 		996EB7B0218C3687000B475E /* NavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 996EB7AF218C3687000B475E /* NavBar.m */; };
 		996F504E2188292900D2A7E9 /* OptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 996F504D2188292900D2A7E9 /* OptionView.m */; };
 		996F50572188340200D2A7E9 /* TABButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 996F50562188340200D2A7E9 /* TABButton.m */; };
+		997AACD22216AB6D00BC38E8 /* ChatListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 997AACD12216AB6D00BC38E8 /* ChatListModel.m */; };
+		997AACD52216AE0200BC38E8 /* ChatListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 997AACD42216AE0200BC38E8 /* ChatListCell.m */; };
 		997B06A91F5500B700391289 /* Company.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 997B06A71F5500B700391289 /* Company.storyboard */; };
 		9980766121D5BAED000BC5F8 /* PJobListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9980766021D5BAED000BC5F8 /* PJobListModel.m */; };
 		9980766421D5CE7E000BC5F8 /* PJobListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9980766321D5CE7E000BC5F8 /* PJobListCell.m */; };
@@ -1029,6 +1031,10 @@
 		996F505121882FDE00D2A7E9 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		996F50552188340200D2A7E9 /* TABButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TABButton.h; sourceTree = "<group>"; };
 		996F50562188340200D2A7E9 /* TABButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TABButton.m; sourceTree = "<group>"; };
+		997AACD02216AB6D00BC38E8 /* ChatListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatListModel.h; sourceTree = "<group>"; };
+		997AACD12216AB6D00BC38E8 /* ChatListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatListModel.m; sourceTree = "<group>"; };
+		997AACD32216AE0200BC38E8 /* ChatListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatListCell.h; sourceTree = "<group>"; };
+		997AACD42216AE0200BC38E8 /* ChatListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatListCell.m; sourceTree = "<group>"; };
 		997B06A81F5500B700391289 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Company.storyboard; sourceTree = "<group>"; };
 		9980765F21D5BAED000BC5F8 /* PJobListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PJobListModel.h; sourceTree = "<group>"; };
 		9980766021D5BAED000BC5F8 /* PJobListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PJobListModel.m; sourceTree = "<group>"; };
@@ -3144,6 +3150,8 @@
 		99F1983A21FEE24F00DB4F58 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				997AACD02216AB6D00BC38E8 /* ChatListModel.h */,
+				997AACD12216AB6D00BC38E8 /* ChatListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3171,6 +3179,8 @@
 		99F1984321FEE25000DB4F58 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				997AACD32216AE0200BC38E8 /* ChatListCell.h */,
+				997AACD42216AE0200BC38E8 /* ChatListCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3788,8 +3798,10 @@
 				993F76F921F0232C00DF6CA0 /* PreviewViewController.m in Sources */,
 				9929852A1F5539CB0021F863 /* WKTableView.m in Sources */,
 				99B8069A21EC6647004AC914 /* JobApplyChildViewController.m in Sources */,
+				997AACD22216AB6D00BC38E8 /* ChatListModel.m in Sources */,
 				998E889721D7739800E8D622 /* ZHAttributeTextView.m in Sources */,
 				992985261F5539CB0021F863 /* WKLoginView.m in Sources */,
+				997AACD52216AE0200BC38E8 /* ChatListCell.m in Sources */,
 				9986408D220128C6009A77E2 /* ExpiredJobListCell.m in Sources */,
 				99F1983921FEE1A700DB4F58 /* CpModifyViewController.m in Sources */,
 				9908DD2B21D499130002B609 /* NearSearchViewController.m in Sources */,

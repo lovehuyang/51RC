@@ -28,11 +28,11 @@
     CvSearchConditionViewController *cvSearchConditionCtrl = [[UIStoryboard storyboardWithName:@"Company" bundle:nil] instantiateViewControllerWithIdentifier:@"cvSearchConditionView"];
     cvSearchConditionCtrl.title = @"搜索简历";
     
-    CvRecruitmentConditionViewController *cvRecruitmentConditionCtrl = [[UIStoryboard storyboardWithName:@"Company" bundle:nil] instantiateViewControllerWithIdentifier:@"cvRecruitmentConditionView"];
-    cvRecruitmentConditionCtrl.title = @"招聘会简历";
+//    CvRecruitmentConditionViewController *cvRecruitmentConditionCtrl = [[UIStoryboard storyboardWithName:@"Company" bundle:nil] instantiateViewControllerWithIdentifier:@"cvRecruitmentConditionView"];
+//    cvRecruitmentConditionCtrl.title = @"招聘会简历";
     
     SCNavTabBarController *navTabCtrl = [[SCNavTabBarController alloc] init];
-    navTabCtrl.subViewControllers = @[cvRecommendCtrl, cvSearchConditionCtrl, cvRecruitmentConditionCtrl];
+    navTabCtrl.subViewControllers = @[cvRecommendCtrl, cvSearchConditionCtrl];
     navTabCtrl.scrollEnabled = YES;
     navTabCtrl.isCompany = YES;
     [navTabCtrl addParentController:self];
@@ -42,15 +42,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -61,7 +61,8 @@
     [self.webView loadRequest:request];
     [self.viewContent addSubview:self.webView];
     
-    [[self.view viewWithTag:LOADINGTAG] setHidden:NO];
+//    [[self.view viewWithTag:LOADINGTAG] setHidden:NO];
+    [SVProgressHUD show];
     
     [self.webView setUserInteractionEnabled:YES];
     [self.webView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(webViewClick)]];
@@ -108,6 +109,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
     [self.runningRequest cancel];
 }
 
@@ -144,7 +146,11 @@
 }
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
-    [[self.view viewWithTag:LOADINGTAG] setHidden:YES];
+//    [[self.view viewWithTag:LOADINGTAG] setHidden:YES];
+    [SVProgressHUD dismiss];
+}
+- (void)netRequestFailed:(NetWebServiceRequest *)request didRequestError:(int *)error{
+    [SVProgressHUD dismiss];
 }
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {

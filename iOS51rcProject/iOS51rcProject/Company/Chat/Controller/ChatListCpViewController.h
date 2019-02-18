@@ -7,7 +7,8 @@
 //
 
 #import "WKViewController.h"
+#import "RCRootViewController.h"
 
-@interface ChatListCpViewController : WKViewController
+@interface ChatListCpViewController : RCRootViewController
 
 @end

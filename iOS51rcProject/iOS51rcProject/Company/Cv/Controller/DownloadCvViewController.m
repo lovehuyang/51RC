@@ -125,9 +125,11 @@
     if (cell == nil) {
         cell = [[WKCvTableViewCell alloc] initWithListType:1 reuseIdentifier:@"cell" viewController:self];
     }
+    
     for (UIView *view in cell.contentView.subviews) {
         [view removeFromSuperview];
     }
+   
     [cell fillCvInfo:[NSString stringWithFormat:@"期望月薪%@ | 毕业于%@", model.dcSalaryName, model.College] gender:model.Gender name:model.paName relatedWorkYears:model.RelatedWorkYears age:model.Age degree:model.DegreeName livePlace:model.LivePlaceName loginDate:model.AddDate mobileVerifyDate:model.MobileVerifyDate paPhoto:model.PaPhoto online:model.IsOnline paMainId:model.paMainID cvMainId:model.cvMainID];
     return cell;
 }
