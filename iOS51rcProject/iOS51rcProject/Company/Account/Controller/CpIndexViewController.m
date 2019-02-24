@@ -27,6 +27,7 @@
 #import "AccountInfoViewController.h"
 #import "CpMobileVerifyViewController.h"
 #import "CpModifyViewController.h"
+#import "AlertView.h"
 
 @interface CpIndexViewController ()<UIScrollViewDelegate, NetWebServiceRequestDelegate, UINavigationControllerDelegate, UITextFieldDelegate, WKPopViewDelegate>
 
@@ -298,6 +299,7 @@
     [self presentViewController:loginCtrl animated:YES completion:nil];
 }
 
+#pragma mark - 登出
 - (void)logoutClick {
     if (!COMPANYLOGIN) {
         return;
@@ -384,10 +386,33 @@
         html5Ctrl.secondId = [self.companyData objectForKey:@"SecondId"];
         [self.navigationController pushViewController:html5Ctrl animated:YES];
     }
-    else if (button.tag == 5) {
-        RoleViewController *roleCtrl = [[RoleViewController alloc] init];
-        roleCtrl.isCompany = YES;
-        [self presentViewController:roleCtrl animated:YES completion:nil];
+    else if (button.tag == 5) {// 切换角色
+        
+        AlertView *alertView = [[AlertView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        __weak __typeof(alertView)WeakAlertView = alertView;
+        [WeakAlertView initWithTitle:@"提示" content:@"您确定要切换角色吗？" btnTitleArr:@[@"取消",@"确定"] canDismiss:YES];
+        WeakAlertView.clickButtonBlock = ^(UIButton *button) {
+            
+            if (button.tag == 101) {
+                
+                NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrlCp:@"DeleteCpIOSBind" Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:CAMAINID, @"caMainID", CAMAINCODE, @"Code", [JPUSHService registrationID], @"uniqueID", nil] viewController:nil];
+                [request setTag:3];
+                [request setDelegate:self];
+                [request startAsynchronous];
+                self.runningRequest = request;
+                
+                [USER_DEFAULT removeObjectForKey:@"caMainId"];
+                [USER_DEFAULT removeObjectForKey:@"caMainCode"];
+                [USER_DEFAULT removeObjectForKey:@"cpMainId"];
+                
+                RoleViewController *roleCtrl = [[RoleViewController alloc] init];
+                roleCtrl.isCompany = YES;
+                [self presentViewController:roleCtrl animated:YES completion:nil];
+
+            }
+        };
+        [WeakAlertView show];
+
     }
     else if (button.tag == 6) {
         FeedbackViewController *feedbackCtrl = [[FeedbackViewController alloc] init];
@@ -485,20 +510,5 @@
     UIViewController *cpLogoCtrl = [[UIStoryboard storyboardWithName:@"Company" bundle:nil] instantiateViewControllerWithIdentifier:@"cpLogoView"];
     [self.navigationController pushViewController:cpLogoCtrl animated:YES];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

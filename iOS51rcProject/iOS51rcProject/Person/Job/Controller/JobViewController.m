@@ -162,7 +162,6 @@
         CGRect frameJob = self.jobInfoCtrl.view.frame;
         frameJob.origin.x = 0;
         [self.jobInfoCtrl.view setFrame:frameJob];
-        
         CGRect frameCompany = self.companyInfoCtrl.view.frame;
         frameCompany.origin.x = SCREEN_WIDTH;
         [self.companyInfoCtrl.view setFrame:frameCompany];

@@ -461,9 +461,32 @@
         feedbackCtrl.title = @"意见反馈";
         [self.navigationController pushViewController:feedbackCtrl animated:YES];
     }
-    else if (button.tag == 103) {
-        RoleViewController *roleCtrl = [[RoleViewController alloc] init];
-        [self presentViewController:roleCtrl animated:YES completion:nil];
+    else if (button.tag == 103) {// 切换角色
+        
+        AlertView *alertView = [[AlertView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        __weak __typeof(alertView)WeakAlertView = alertView;
+        [WeakAlertView initWithTitle:@"提示" content:@"您确定要切换角色吗？" btnTitleArr:@[@"取消",@"确定"] canDismiss:YES];
+        WeakAlertView.clickButtonBlock = ^(UIButton *button) {
+            
+            if (button.tag == 101) {
+                
+                NSMutableDictionary *paramDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", [JPUSHService registrationID], @"uniqueID", nil];
+                NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"DeletePaIOSBind" Params:paramDict viewController:nil];
+                [request setTag:4];
+                [request setDelegate:self];
+                [request startAsynchronous];
+                self.runningRequest = request;
+                
+                [USER_DEFAULT removeObjectForKey:@"paMainId"];
+                [USER_DEFAULT removeObjectForKey:@"paMainCode"];
+                
+                RoleViewController *roleCtrl = [[RoleViewController alloc] init];
+                [self presentViewController:roleCtrl animated:YES completion:nil];
+            }
+        };
+        [WeakAlertView show];
+        
+        
     }
     else if (button.tag == 104) {
         AboutUsViewController *aboutUsCtrl = [[AboutUsViewController alloc] init];

@@ -139,6 +139,7 @@
             self.window.rootViewController = companyCtrl;
         }
     }
+    
     return YES;
 }
 

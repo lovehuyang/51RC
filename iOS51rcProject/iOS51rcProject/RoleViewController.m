@@ -7,12 +7,14 @@
 //
 
 #import "RoleViewController.h"
+#import "NetWebServiceRequest.h"
 #import "CommonMacro.h"
 #import "WKLabel.h"
 #import "UIView+Toast.h"
 
-@interface RoleViewController ()
+@interface RoleViewController ()<NetWebServiceRequestDelegate>
 
+@property (nonatomic, strong) NetWebServiceRequest *runningRequest;
 @property (nonatomic, strong) UIButton *btnPa;
 @property (nonatomic, strong) UIButton *btnCp;
 @property int activeStatus;
@@ -100,29 +102,40 @@
     [self.view addSubview:self.btnCp];
 }
 
+#pragma mark - 确定
 - (void)confirmClick {
-    if ([[USER_DEFAULT valueForKey:@"userType"] isEqualToString:[NSString stringWithFormat:@"%d", self.activeStatus]]) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-        return;
-    }
-    if (self.activeStatus == 1) {
+    
+    [self jpushLoginOut];
+    
+//    if ([[USER_DEFAULT valueForKey:@"userType"] isEqualToString:[NSString stringWithFormat:@"%d", self.activeStatus]]) {
+//        [self dismissViewControllerAnimated:YES completion:nil];
+//        return;
+//    }
+    
+    if (self.activeStatus == 1){// 跳转至个人端
+        
         [USER_DEFAULT setValue:@"1" forKey:@"userType"];
-        if (!PERSONLOGIN) {
+        
+        if (!PERSONLOGIN) {// 跳转至个人登录页面
             UIViewController *loginCtrl = [[UIStoryboard storyboardWithName:@"Person" bundle:nil] instantiateViewControllerWithIdentifier:@"loginView"];
             [self presentViewController:loginCtrl animated:NO completion:nil];
         }
-        else {
+        else {// 跳转至个人端
+            
             UITabBarController *personCtrl = [[UIStoryboard storyboardWithName:@"Person" bundle:nil] instantiateViewControllerWithIdentifier:@"personView"];
             [self presentViewController:personCtrl animated:NO completion:nil];
         }
-    }
-    else if (self.activeStatus == 2) {
+    
+    }else if (self.activeStatus == 2){
+        
         [USER_DEFAULT setValue:@"2" forKey:@"userType"];
-        if (!COMPANYLOGIN) {
+        
+        if (!COMPANYLOGIN) {// 跳转至企业登录页面
             UIViewController *loginCtrl = [[UIStoryboard storyboardWithName:@"Company" bundle:nil] instantiateViewControllerWithIdentifier:@"loginView"];
             [self presentViewController:loginCtrl animated:NO completion:nil];
         }
-        else {
+        else {// 跳转至企业端
+            
             UITabBarController *companyCtrl = [[UIStoryboard storyboardWithName:@"Company" bundle:nil] instantiateViewControllerWithIdentifier:@"companyView"];
             [self presentViewController:companyCtrl animated:NO completion:nil];
         }
@@ -132,19 +145,39 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (void)jpushLoginOut{
+    
+    // 切换至个人端
+    if (self.activeStatus == 1){
+        // 企业端如果在登录状态则应该登出（目的是取消推送）
+        if(COMPANYLOGIN){
+            NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrlCp:@"DeleteCpIOSBind" Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:CAMAINID, @"caMainID", CAMAINCODE, @"Code", [JPUSHService registrationID], @"uniqueID", nil] viewController:nil];
+            [request setTag:3];
+            [request setDelegate:self];
+            [request startAsynchronous];
+            self.runningRequest = request;
+        }
+    }
+    
+    // 切换至企业端
+    if(self.activeStatus == 2){
+        
+        // 个人端如果在登录状态则应该登出（目的是取消推送）
+        if (PERSONLOGIN) {
+            if (PERSONLOGIN) {
+                NSMutableDictionary *paramDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", [JPUSHService registrationID], @"uniqueID", nil];
+                NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"DeletePaIOSBind" Params:paramDict viewController:nil];
+                [request setTag:4];
+                [request setDelegate:self];
+                [request startAsynchronous];
+                self.runningRequest = request;
+            }
+        }
+    }
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - NetWebServiceRequestDelegate
+- (void)netRequestFinished:(NetWebServiceRequest *)request finishedInfoToResult:(NSString *)result responseData:(GDataXMLDocument *)requestData{
+    
 }
-*/
-
 @end

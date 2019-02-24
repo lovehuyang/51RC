@@ -372,6 +372,8 @@
 		999070C91F03846E00B5E289 /* img_share.png in Resources */ = {isa = PBXBuildFile; fileRef = 999070C51F03846D00B5E289 /* img_share.png */; };
 		999075F921E8219E0036A361 /* RCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 999075F821E8219E0036A361 /* RCAlertView.m */; };
 		9990A70521A6490200A320FD /* AttachMentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990A70421A6490200A320FD /* AttachMentView.m */; };
+		9990CB4B22222A99000C2A3E /* AccountListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990CB4A22222A99000C2A3E /* AccountListModel.m */; };
+		9990CB4E22222EBD000C2A3E /* AccountListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9990CB4D22222EBD000C2A3E /* AccountListCell.m */; };
 		9993798F219A9C250087D404 /* PullDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9993798E219A9C240087D404 /* PullDownMenu.m */; };
 		99937992219AAB730087D404 /* MenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 99937990219AAB730087D404 /* MenuButton.m */; };
 		9993A570218AAA180057B6FD /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9993A56F218AAA180057B6FD /* UserInfo.m */; };
@@ -1084,6 +1086,10 @@
 		999075F821E8219E0036A361 /* RCAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCAlertView.m; sourceTree = "<group>"; };
 		9990A70321A6490200A320FD /* AttachMentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttachMentView.h; sourceTree = "<group>"; };
 		9990A70421A6490200A320FD /* AttachMentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttachMentView.m; sourceTree = "<group>"; };
+		9990CB4922222A99000C2A3E /* AccountListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountListModel.h; sourceTree = "<group>"; };
+		9990CB4A22222A99000C2A3E /* AccountListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountListModel.m; sourceTree = "<group>"; };
+		9990CB4C22222EBD000C2A3E /* AccountListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountListCell.h; sourceTree = "<group>"; };
+		9990CB4D22222EBD000C2A3E /* AccountListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountListCell.m; sourceTree = "<group>"; };
 		9993798D219A9C240087D404 /* PullDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullDownMenu.h; sourceTree = "<group>"; };
 		9993798E219A9C240087D404 /* PullDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullDownMenu.m; sourceTree = "<group>"; };
 		99937990219AAB730087D404 /* MenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuButton.m; sourceTree = "<group>"; };
@@ -3049,8 +3055,8 @@
 			children = (
 				99F197F721FEE12B00DB4F58 /* OrderListViewController.h */,
 				99F197F021FEE12B00DB4F58 /* OrderListViewController.m */,
-				99F197F121FEE12B00DB4F58 /* OrderDetailViewController.m */,
 				99F197FB21FEE12B00DB4F58 /* OrderDetailViewController.h */,
+				99F197F121FEE12B00DB4F58 /* OrderDetailViewController.m */,
 				99F197F221FEE12B00DB4F58 /* OrderStatusViewController.h */,
 				99F197FA21FEE12B00DB4F58 /* OrderStatusViewController.m */,
 				99F197F921FEE12B00DB4F58 /* OrderApplyViewController.h */,
@@ -3136,6 +3142,8 @@
 		99F1982821FEE1A700DB4F58 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9990CB4922222A99000C2A3E /* AccountListModel.h */,
+				9990CB4A22222A99000C2A3E /* AccountListModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3143,6 +3151,8 @@
 		99F1982921FEE1A700DB4F58 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9990CB4C22222EBD000C2A3E /* AccountListCell.h */,
+				9990CB4D22222EBD000C2A3E /* AccountListCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3752,6 +3762,7 @@
 				99F197FE21FEE12B00DB4F58 /* OrderViewController.m in Sources */,
 				99937992219AAB730087D404 /* MenuButton.m in Sources */,
 				9997439821AD204A00B076A2 /* OneMinuteArray.m in Sources */,
+				9990CB4B22222A99000C2A3E /* AccountListModel.m in Sources */,
 				99F1980221FEE12B00DB4F58 /* OrderApplyViewController.m in Sources */,
 				99F1986321FEE28800DB4F58 /* InvitationManagerViewController.m in Sources */,
 				9993A57B218AD0320057B6FD /* UIColor+ChangeColor.m in Sources */,
@@ -3936,6 +3947,7 @@
 				99F197E621FEE03900DB4F58 /* WelfareViewController.m in Sources */,
 				9980767421D62882000BC5F8 /* CVTopPackageModel.m in Sources */,
 				99F1983421FEE1A700DB4F58 /* AccountListViewController.m in Sources */,
+				9990CB4E22222EBD000C2A3E /* AccountListCell.m in Sources */,
 				99BED71F21F6B5B30017492B /* MyTalentsTestViewController.m in Sources */,
 				9993798F219A9C250087D404 /* PullDownMenu.m in Sources */,
 				99F1982B21FEE1A700DB4F58 /* Html5ViewController.m in Sources */,

@@ -398,6 +398,7 @@
     }
 }
 
+#pragma mark - 点击申请职位并查看联系方式
 - (void)contactClick {
     if ([[USER_DEFAULT objectForKey:@"userType"] isEqualToString:@"2"]) {
         [self.view.window makeToast:@"您当前的角色为企业，请切换至求职者后方可操作"];
@@ -407,8 +408,8 @@
         [self loginClick];
         return;
     }
-    
-    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetCvListApply" Params:[NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", nil] viewController:nil];
+    NSDictionary *parmaDict = [NSDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainID", [USER_DEFAULT objectForKey:@"paMainCode"], @"code", nil];
+    NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetCvListApply" Params:parmaDict viewController:nil];
     [request setTag:7];
     [request setDelegate:self];
     [request startAsynchronous];
@@ -534,7 +535,7 @@
         if (arrayCv.count == 0) {
             [self presentOneMinutesViewController];
         
-        }else if(arrayCv.count == 1){
+        }else if(arrayCv.count >= 1){
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定要查看该联系方式吗？" preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
                 NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrl:@"GetContact" Params:[NSMutableDictionary dictionaryWithObjectsAndKeys:PAMAINID, @"paMainId", [USER_DEFAULT valueForKey:@"paMainCode"], @"code", [self.jobData objectForKey:@"id"], @"jobId", nil] viewController:self];
