@@ -54,50 +54,5 @@
 @property (nonatomic , copy) NSString *dcSubSiteID;//32;
 
 + (UserInfo *)buideModel:(NSDictionary *)dic;
-/*
- AccountPlace = 3201;
- AccountRegion = "\U6d4e\U5357\U5e02";
- AddDate = "2015-10-25T08:57:00+08:00";
- Age = 28;
- BirthDay = 199001;
- BlockCount = 0;
- CareerStatus = "\U76ee\U524d\U5728\U804c\Uff0c\U6b63\U5728\U5bfb\U627e\U66f4\U597d\U673a\U4f1a";
- Email = "lovehuyang90@163.com";
- Gender = false;
- GrowPlace = 3201;
- GrowRegion = "\U6d4e\U5357\U5e02";
- HasPhoto = 1;
- HideConditions = "<\U5b9d\U667a\U7f51\U7edc>";
- ID = 26395818;
- IsDefaultPassword = false;
- IsReceiveSms = false;
- IsUseYourFood = true;
- LastLoginDate = "2018-11-01T08:41:38.24+08:00";
- LastLoginIP = "60.215.144.163";
- LastModifyDate = "2018-10-27T22:43:00+08:00";
- LivePlace = 3201;
- LiveRegion = "\U6d4e\U5357\U5e02";
- Mobile = 15665889905;
- MobileCount = 2;
- MobileVerifyDate = "2017-06-27T17:04:00+08:00";
- Name = "\U80e1\U9c81\U9633";
- Password = "$2a$10$toW35RcNkBwXc9gZ6E0GzOR63pzFS2TcorlLRswhXCMHxfhoSlbji";
- PerfectDate = "2015-11-03T00:00:00+08:00";
- PhotoProcessed = "26395818_20180907173042.jpg";
- PrevLoginDate = "2018-10-31T08:18:00+08:00";
- RegisterFrom = 3;
- RegisterIP = IOS;
- RegisterMode = 0;
- RegisterType = 1;
- TodayLoginNum = 1;
- TotalLoginNum = 100;
- UserName = "lovehuyang90@163.com";
- UserNameLower = "lovehuyang90@163.com";
- VerifyCount = 5;
- WechatBind = 1;
- dcCareerStatus = 2;
- dcProvinceID = 32;
- dcSubSiteID = 32;
- 
- */
+
 @end

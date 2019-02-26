@@ -149,7 +149,6 @@
     [MobClick setScenarioType:E_UM_NORMAL];
     [MobClick setCrashReportEnabled:YES];
     [UMConfigure initWithAppkey:@"5c37fa92b465f5e389000d4d" channel:nil];
-
 }
 
 - (void)application:(UIApplication *)application

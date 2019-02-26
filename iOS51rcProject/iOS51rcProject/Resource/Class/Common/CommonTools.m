@@ -2,8 +2,8 @@
 //  CommonTools.m
 //  iOS51rcProject
 //
-//  Created by Lucifer on 2018/11/1.
-//  Copyright © 2018年 Jerry. All rights reserved.
+//  Created by Lucifer on 2019/1/30.
+//  Copyright © 2019年 Jerry. All rights reserved.
 //
 
 #import "CommonTools.h"

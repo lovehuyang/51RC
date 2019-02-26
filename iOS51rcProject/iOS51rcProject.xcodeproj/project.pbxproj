@@ -1604,24 +1604,14 @@
 			isa = PBXGroup;
 			children = (
 				996F505121882FDE00D2A7E9 /* PrefixHeader.pch */,
+				9919F9561EDE445300BE51F0 /* Info.plist */,
+				9919F94E1EDE445300BE51F0 /* iOS51rcProject.xcdatamodeld */,
 				9919F9991EDE482D00BE51F0 /* iOS51rcProject.entitlements */,
+				99D7A7E72223C20100B330DC /* AppDelegate */,
 				9919F9421EDE445300BE51F0 /* Supporting Files */,
 				9919F9781EDE467600BE51F0 /* Resource */,
 				997B061A1F5500A000391289 /* Person */,
 				992985021F550EB00021F863 /* Company */,
-				9919F9451EDE445300BE51F0 /* AppDelegate.h */,
-				9919F9461EDE445300BE51F0 /* AppDelegate.m */,
-				9919F94B1EDE445300BE51F0 /* Person.storyboard */,
-				997B06A71F5500B700391289 /* Company.storyboard */,
-				9919F9531EDE445300BE51F0 /* LaunchScreen.storyboard */,
-				9919F9561EDE445300BE51F0 /* Info.plist */,
-				9919F94E1EDE445300BE51F0 /* iOS51rcProject.xcdatamodeld */,
-				9919FA171EDE6A6100BE51F0 /* GuideViewController.h */,
-				9919FA181EDE6A6100BE51F0 /* GuideViewController.m */,
-				9919FA231EDF9BB500BE51F0 /* RoleViewController.h */,
-				9919FA241EDF9BB500BE51F0 /* RoleViewController.m */,
-				99906F191EFB47CE00B5E289 /* AboutUsViewController.h */,
-				99906F1A1EFB47CE00B5E289 /* AboutUsViewController.m */,
 			);
 			path = iOS51rcProject;
 			sourceTree = "<group>";
@@ -2054,6 +2044,7 @@
 		992985021F550EB00021F863 /* Company */ = {
 			isa = PBXGroup;
 			children = (
+				997B06A71F5500B700391289 /* Company.storyboard */,
 				995231972052AA7900C8836D /* Job */,
 				991C6F641FFB5CDA009FD82A /* Order */,
 				992985031F550EB00021F863 /* Account */,
@@ -2525,6 +2516,7 @@
 		997B061A1F5500A000391289 /* Person */ = {
 			isa = PBXGroup;
 			children = (
+				9919F94B1EDE445300BE51F0 /* Person.storyboard */,
 				997B061B1F5500A000391289 /* Account */,
 				997B06301F5500A000391289 /* Chat */,
 				997B06351F5500A000391289 /* Cv */,
@@ -2808,6 +2800,8 @@
 				99BED71221F6B5B30017492B /* FeedbackViewController.m */,
 				99BED71521F6B5B30017492B /* SalaryViewController.h */,
 				99BED70521F6B5B30017492B /* SalaryViewController.m */,
+				99906F191EFB47CE00B5E289 /* AboutUsViewController.h */,
+				99906F1A1EFB47CE00B5E289 /* AboutUsViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2983,6 +2977,20 @@
 				99D2350321E32E8A00194F3E /* BDSSpeechSynthesizerErrors.h */,
 			);
 			path = TTS;
+			sourceTree = "<group>";
+		};
+		99D7A7E72223C20100B330DC /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				9919F9531EDE445300BE51F0 /* LaunchScreen.storyboard */,
+				9919F9451EDE445300BE51F0 /* AppDelegate.h */,
+				9919F9461EDE445300BE51F0 /* AppDelegate.m */,
+				9919FA171EDE6A6100BE51F0 /* GuideViewController.h */,
+				9919FA181EDE6A6100BE51F0 /* GuideViewController.m */,
+				9919FA231EDF9BB500BE51F0 /* RoleViewController.h */,
+				9919FA241EDF9BB500BE51F0 /* RoleViewController.m */,
+			);
+			path = AppDelegate;
 			sourceTree = "<group>";
 		};
 		99F197CA21FEE03900DB4F58 /* Controller */ = {
