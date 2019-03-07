@@ -124,42 +124,59 @@
     self.payMethodLab.font = DEFAULTFONT;
     [self.payMethodLab setSingleLineAutoResizeWithMaxWidth:SCREEN_WIDTH];
     
-    //置顶开始时间
-    BOOL show = NO;
-    if (_model.beginDate &&  _model.endDate){
-        show = YES;
-        self.setTopTimeLab = [UILabel new];
-        [self.contentView addSubview:self.setTopTimeLab];
-        self.setTopTimeLab.sd_layout
+    if([self.model.orderType isEqualToString:@"3"]){
+        
+        // 分割线
+        UIView *separateView = [UIView new];
+        [self.contentView addSubview:separateView];
+        separateView.sd_layout
+        .leftSpaceToView(self.contentView, 0)
+        .rightSpaceToView(self.contentView, 0)
+        .topSpaceToView(self.payMethodLab, 10)
+        .heightIs(10);
+        separateView.backgroundColor = SEPARATECOLOR;
+        
+        [self setupAutoHeightWithBottomView:separateView bottomMargin:0];
+        
+    }else{
+        
+        //置顶开始时间
+        BOOL show = NO;
+        if (_model.beginDate &&  _model.endDate){
+            show = YES;
+            self.setTopTimeLab = [UILabel new];
+            [self.contentView addSubview:self.setTopTimeLab];
+            self.setTopTimeLab.sd_layout
+            .leftEqualToView(self.orderNameLab)
+            .topSpaceToView(self.orderNameLab, 10)
+            .autoHeightRatio(0);
+            [self.setTopTimeLab setSingleLineAutoResizeWithMaxWidth:SCREEN_WIDTH];
+            self.setTopTimeLab.font = DEFAULTFONT;
+        }
+        
+        // 置顶简历名
+        self.cvNameLab = [UILabel new];
+        [self.contentView addSubview:self.cvNameLab];
+        self.cvNameLab.sd_layout
         .leftEqualToView(self.orderNameLab)
-        .topSpaceToView(self.orderNameLab, 10)
+        .topSpaceToView( show ? self.setTopTimeLab: self.orderNameLab, 10)
+        .rightSpaceToView(self.contentView, 15)
         .autoHeightRatio(0);
-        [self.setTopTimeLab setSingleLineAutoResizeWithMaxWidth:SCREEN_WIDTH];
-        self.setTopTimeLab.font = DEFAULTFONT;
+        self.cvNameLab.textColor = TEXTGRAYCOLOR;
+        self.cvNameLab.font = DEFAULTFONT;
+        
+        // 分割线
+        UIView *separateView = [UIView new];
+        [self.contentView addSubview:separateView];
+        separateView.sd_layout
+        .leftSpaceToView(self.contentView, 0)
+        .rightSpaceToView(self.contentView, 0)
+        .topSpaceToView(self.cvNameLab, 10)
+        .heightIs(10);
+        separateView.backgroundColor = SEPARATECOLOR;
+        
+        [self setupAutoHeightWithBottomView:separateView bottomMargin:0];
     }
-    
-    // 置顶简历名
-    self.cvNameLab = [UILabel new];
-    [self.contentView addSubview:self.cvNameLab];
-    self.cvNameLab.sd_layout
-    .leftEqualToView(self.orderNameLab)
-    .topSpaceToView( show ? self.setTopTimeLab: self.orderNameLab, 10)
-    .rightSpaceToView(self.contentView, 15)
-    .autoHeightRatio(0);
-    self.cvNameLab.textColor = TEXTGRAYCOLOR;
-    self.cvNameLab.font = DEFAULTFONT;
-    
-    // 分割线
-    UIView *separateView = [UIView new];
-    [self.contentView addSubview:separateView];
-    separateView.sd_layout
-    .leftSpaceToView(self.contentView, 0)
-    .rightSpaceToView(self.contentView, 0)
-    .topSpaceToView(self.cvNameLab, 10)
-    .heightIs(10);
-    separateView.backgroundColor = SEPARATECOLOR;
-    
-    [self setupAutoHeightWithBottomView:separateView bottomMargin:0];
 }
 
 - (void)setModel:(OrderListModel *)model{
@@ -209,7 +226,7 @@
     NSString *cvName = _model.CvName == nil ? @"(简历已删除)":_model.CvName;
     self.cvNameLab.text = [NSString stringWithFormat:@"简历：%@",cvName];
     
-    [self.contentView updateLayout];
+//    [self.contentView updateLayout];
 }
 
 -(NSString *)changeFormatWithDateString:(NSString *)date{

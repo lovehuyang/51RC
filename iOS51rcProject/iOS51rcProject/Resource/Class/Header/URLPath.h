@@ -63,6 +63,12 @@
 #define URL_WEIXINORDERCANCEL @"WeiXinOrderCancel"
 // 查询订单支付接口
 #define URL_INQUIREWEIXINORDER @"InquireWeiXinOrder"
+// 人才测评套餐页面接口
+#define URL_GETASSESSINDEX @"GetAssessIndex"
+// 自我测评
+#define URL_GETMYASSESSYEST @"GetMyAssessTest"
+// 企业邀请测评
+#define URL_GETCPINVITTEST @"GetCpInvitTest"
 
 
 #pragma mark - 公司用户

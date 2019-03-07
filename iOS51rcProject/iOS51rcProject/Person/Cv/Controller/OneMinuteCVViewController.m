@@ -18,6 +18,7 @@
 #import "SpeechViewController.h"
 #import "WKNavigationController.h"
 #import <CoreLocation/CoreLocation.h>
+#import "AssessIndexModel.h"
 
 NSInteger const WKPopViewTag_Gender = 1;//性别
 NSInteger const WKPopViewTag_Birthday = 2;//出生年月
@@ -87,6 +88,11 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
     [self.view addSubview:self.tableview];
 //    [self setupAddHuaTongButton];// 语音输入按钮
     [self getPaMain];
+    
+    if(self.pageType == PageType_AssessIndex){
+        
+        self.navigationItem.rightBarButtonItem = [[BarButtonItem alloc]initWithTitle:@"跳过" style:UIBarButtonItemStylePlain target:self action:@selector(skipEvent)];
+    }
 }
 
 //开始定位
@@ -704,8 +710,10 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
                     self.tabBarController.selectedIndex = 0;// 跳转至“职位”页面
                 }else if (self.pageType == PageType_JobInfo){
                     [self.navigationController popViewControllerAnimated:YES];
+                }else if (self.pageType == PageType_AssessIndex){
+                    self.returnToAssessViewController(self.assessModle);
+                    [self.navigationController popViewControllerAnimated:YES];
                 }
-    
             });
 
         }else if (result == -100){
@@ -756,5 +764,11 @@ NSInteger const WKPopViewTag_careerStatus = 7;// 求职状态
             DLog(@"");
         }];
     }
+}
+
+#pragma mark - 跳过
+- (void)skipEvent{
+    self.returnToAssessViewController(self.assessModle);
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

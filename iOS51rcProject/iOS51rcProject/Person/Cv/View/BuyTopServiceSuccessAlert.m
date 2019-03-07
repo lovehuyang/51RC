@@ -73,7 +73,7 @@
     .heightEqualToWidth();
     closeBtn.sd_cornerRadius = @(15);
     closeBtn.backgroundColor = SEPARATECOLOR;
-    [closeBtn setImage:[UIImage imageNamed:@"paySuccessClose"] forState:UIControlStateNormal];
+    [closeBtn setImage:[UIImage imageNamed:@"icon_pay_success_close"] forState:UIControlStateNormal];
     [closeBtn addTarget:self action:@selector(dissmiss) forControlEvents:UIControlEventTouchUpInside];
     
     // 喜欢的职位还需要主动申请哦~

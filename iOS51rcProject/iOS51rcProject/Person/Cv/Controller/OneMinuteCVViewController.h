@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "RCRootViewController.h"
+@class AssessIndexModel;
 
 // 页面类型
 typedef enum _PageType {
     PageType_Login = 0,// 登录成功跳转
     PageType_CV = 1,// “简历”页面跳转
-    PageType_JobInfo// 职位详情页面跳转
+    PageType_JobInfo,// 职位详情页面跳转
+    PageType_AssessIndex// 测评页面跳转
 } PageType;
 
 @interface OneMinuteCVViewController : RCRootViewController
@@ -21,5 +23,10 @@ typedef enum _PageType {
 @property (nonatomic , assign) PageType  pageType;
 @property (nonatomic , copy) NSString *intCvMainID;//一分钟简历的id（无简历时id = 0，有简历时id为不完整简历的id）
 @property (nonatomic , copy) void (^completeOneCV)(NSString * tempStr);// 完成一分钟简历
+
+
+#pragma mark - 人才测评页面传值
+@property (nonatomic , strong)AssessIndexModel *assessModle;//
+@property (nonatomic , strong) void(^returnToAssessViewController)(AssessIndexModel *assessIndex);
 
 @end

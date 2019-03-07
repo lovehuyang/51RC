@@ -35,7 +35,7 @@
     .rightSpaceToView(self.view, 15)
     .topSpaceToView(self.view, 0)
     .heightIs(40);
-    tipLab.text = @"以下是您的简历置顶订单，记录保存12个月";
+    tipLab.text = @"以下是您的订单，记录保存12个月";
     tipLab.font = DEFAULTFONT;
     [self.view addSubview:self.tableView];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{

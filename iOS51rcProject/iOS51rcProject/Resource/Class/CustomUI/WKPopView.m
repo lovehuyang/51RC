@@ -406,7 +406,7 @@
                 sqlString = @"SELECT * FROM dcRegion WHERE 1 = 2";
             }
             else {
-                sqlString = [NSString stringWithFormat:@"SELECT * FROM dcRegion WHERE ParentId = '%@' ORDER BY CASE _id WHEN %@ THEN 0 ELSE _id END", parentId, [USER_DEFAULT stringForKey:@"provinceId"]];
+                sqlString = [NSString stringWithFormat:@"SELECT * FROM dcRegion WHERE ParentID = '%@' ORDER BY CASE _id WHEN %@ THEN 0 ELSE _id END", parentId, [USER_DEFAULT stringForKey:@"provinceId"]];
             }
             [self querySql:sqlString index:i];
         }

@@ -4,7 +4,7 @@
 //
 //  Created by Lucifer on 2018/11/6.
 //  Copyright © 2018年 Jerry. All rights reserved.
-//
+//  废了
 
 #import "TalentsTestController.h"
 #import "MyTalentsTestViewController.h"

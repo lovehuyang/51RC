@@ -156,6 +156,18 @@
 		991DAA9721A4EA7A00586AA7 /* pa_cvitem6.png in Resources */ = {isa = PBXBuildFile; fileRef = 991DAA9621A4EA7A00586AA7 /* pa_cvitem6.png */; };
 		991DAA9B21A5528D00586AA7 /* AttachmentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 991DAA9A21A5528D00586AA7 /* AttachmentModel.m */; };
 		991DAA9E21A557DD00586AA7 /* AttachmentImgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 991DAA9D21A557DD00586AA7 /* AttachmentImgView.m */; };
+		99266055222F9837008DA0D2 /* TalentsTestNativeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9926604D222F9837008DA0D2 /* TalentsTestNativeViewController.m */; };
+		99266056222F9837008DA0D2 /* TalentsTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9926604E222F9837008DA0D2 /* TalentsTestController.m */; };
+		99266057222F9837008DA0D2 /* AssessIndexWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99266051222F9837008DA0D2 /* AssessIndexWebController.m */; };
+		99266058222F9837008DA0D2 /* MyTalentsTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99266052222F9837008DA0D2 /* MyTalentsTestViewController.m */; };
+		99266059222F9837008DA0D2 /* MyAssessIndexController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99266054222F9837008DA0D2 /* MyAssessIndexController.m */; };
+		9926605C222F98B1008DA0D2 /* ConfirmAssessOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9926605A222F98B0008DA0D2 /* ConfirmAssessOrderController.m */; };
+		9926605F222F99C9008DA0D2 /* MyselfAssessIndexController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9926605E222F99C9008DA0D2 /* MyselfAssessIndexController.m */; };
+		99266062222F9A00008DA0D2 /* CompanyInvitationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99266061222F9A00008DA0D2 /* CompanyInvitationController.m */; };
+		99266065222F9E15008DA0D2 /* MyselfAssessModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99266064222F9E15008DA0D2 /* MyselfAssessModel.m */; };
+		99266068222FA2CC008DA0D2 /* MyselfAssessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99266067222FA2CC008DA0D2 /* MyselfAssessCell.m */; };
+		9926606B222FDB12008DA0D2 /* CpInvitTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9926606A222FDB12008DA0D2 /* CpInvitTestModel.m */; };
+		9926606E222FDC58008DA0D2 /* CpInvitTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9926606D222FDC58008DA0D2 /* CpInvitTestCell.m */; };
 		992985211F5539CB0021F863 /* WKApplyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9929850A1F5539CB0021F863 /* WKApplyView.m */; };
 		992985221F5539CB0021F863 /* WKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9929850C1F5539CB0021F863 /* WKButton.m */; };
 		992985231F5539CB0021F863 /* WKFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9929850E1F5539CB0021F863 /* WKFilterView.m */; };
@@ -423,13 +435,11 @@
 		99BED71621F6B5B30017492B /* AgreementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BED6F921F6B5B30017492B /* AgreementViewController.m */; };
 		99BED71721F6B5B30017492B /* ConfirmPaymentOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BED6FA21F6B5B30017492B /* ConfirmPaymentOrderController.m */; };
 		99BED71821F6B5B30017492B /* EmploymentNewsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BED6FB21F6B5B30017492B /* EmploymentNewsController.m */; };
-		99BED71921F6B5B30017492B /* TalentsTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BED6FD21F6B5B30017492B /* TalentsTestController.m */; };
 		99BED71A21F6B5B30017492B /* PaIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BED70121F6B5B30017492B /* PaIndexViewController.m */; };
 		99BED71B21F6B5B30017492B /* AccountManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BED70321F6B5B30017492B /* AccountManagerViewController.m */; };
 		99BED71C21F6B5B30017492B /* OneMinuteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BED70421F6B5B30017492B /* OneMinuteViewController.m */; };
 		99BED71D21F6B5B30017492B /* SalaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BED70521F6B5B30017492B /* SalaryViewController.m */; };
 		99BED71E21F6B5B30017492B /* MyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BED70621F6B5B30017492B /* MyOrderViewController.m */; };
-		99BED71F21F6B5B30017492B /* MyTalentsTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BED70A21F6B5B30017492B /* MyTalentsTestViewController.m */; };
 		99BED72021F6B5B30017492B /* PaLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BED70B21F6B5B30017492B /* PaLoginViewController.m */; };
 		99BED72121F6B5B30017492B /* RecruitmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BED70D21F6B5B30017492B /* RecruitmentViewController.m */; };
 		99BED72221F6B5B30017492B /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BED71121F6B5B30017492B /* ForgetPasswordViewController.m */; };
@@ -492,6 +502,11 @@
 		99DCE28C21DDED720060B147 /* PayWayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DCE28B21DDED720060B147 /* PayWayModel.m */; };
 		99DCE28F21DDFB120060B147 /* BottomPayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DCE28E21DDFB120060B147 /* BottomPayView.m */; };
 		99E031E921ABE13400FB5530 /* CVListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E031E821ABE13400FB5530 /* CVListModel.m */; };
+		99E71FF3222E127B004BB75F /* AssessIndexModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E71FF2222E127B004BB75F /* AssessIndexModel.m */; };
+		99E71FF6222E16C2004BB75F /* AssessIndexCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E71FF5222E16C2004BB75F /* AssessIndexCell.m */; };
+		99E71FF9222E404C004BB75F /* AssessShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E71FF8222E404C004BB75F /* AssessShareView.m */; };
+		99E71FFC222E4F53004BB75F /* AssessPayAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E71FFB222E4F53004BB75F /* AssessPayAlert.m */; };
+		99E72002222E797D004BB75F /* AssessPaySuccessAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 99E72001222E797D004BB75F /* AssessPaySuccessAlert.m */; };
 		99EC66E621B0D79F00756113 /* RCRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99EC66E521B0D79F00756113 /* RCRootViewController.m */; };
 		99ED2804219E499B00ED656A /* InputAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99ED2803219E499B00ED656A /* InputAlertView.m */; };
 		99ED2807219E90B000ED656A /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99ED2806219E90B000ED656A /* AlertView.m */; };
@@ -797,6 +812,30 @@
 		991DAA9A21A5528D00586AA7 /* AttachmentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttachmentModel.m; sourceTree = "<group>"; };
 		991DAA9C21A557DD00586AA7 /* AttachmentImgView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttachmentImgView.h; sourceTree = "<group>"; };
 		991DAA9D21A557DD00586AA7 /* AttachmentImgView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AttachmentImgView.m; sourceTree = "<group>"; };
+		9926604B222F9837008DA0D2 /* MyTalentsTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTalentsTestViewController.h; sourceTree = "<group>"; };
+		9926604C222F9837008DA0D2 /* AssessIndexWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssessIndexWebController.h; sourceTree = "<group>"; };
+		9926604D222F9837008DA0D2 /* TalentsTestNativeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalentsTestNativeViewController.m; sourceTree = "<group>"; };
+		9926604E222F9837008DA0D2 /* TalentsTestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalentsTestController.m; sourceTree = "<group>"; };
+		9926604F222F9837008DA0D2 /* MyAssessIndexController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAssessIndexController.h; sourceTree = "<group>"; };
+		99266050222F9837008DA0D2 /* TalentsTestNativeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalentsTestNativeViewController.h; sourceTree = "<group>"; };
+		99266051222F9837008DA0D2 /* AssessIndexWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssessIndexWebController.m; sourceTree = "<group>"; };
+		99266052222F9837008DA0D2 /* MyTalentsTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTalentsTestViewController.m; sourceTree = "<group>"; };
+		99266053222F9837008DA0D2 /* TalentsTestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalentsTestController.h; sourceTree = "<group>"; };
+		99266054222F9837008DA0D2 /* MyAssessIndexController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAssessIndexController.m; sourceTree = "<group>"; };
+		9926605A222F98B0008DA0D2 /* ConfirmAssessOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmAssessOrderController.m; sourceTree = "<group>"; };
+		9926605B222F98B1008DA0D2 /* ConfirmAssessOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmAssessOrderController.h; sourceTree = "<group>"; };
+		9926605D222F99C9008DA0D2 /* MyselfAssessIndexController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyselfAssessIndexController.h; sourceTree = "<group>"; };
+		9926605E222F99C9008DA0D2 /* MyselfAssessIndexController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyselfAssessIndexController.m; sourceTree = "<group>"; };
+		99266060222F9A00008DA0D2 /* CompanyInvitationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyInvitationController.h; sourceTree = "<group>"; };
+		99266061222F9A00008DA0D2 /* CompanyInvitationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyInvitationController.m; sourceTree = "<group>"; };
+		99266063222F9E15008DA0D2 /* MyselfAssessModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyselfAssessModel.h; sourceTree = "<group>"; };
+		99266064222F9E15008DA0D2 /* MyselfAssessModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyselfAssessModel.m; sourceTree = "<group>"; };
+		99266066222FA2CC008DA0D2 /* MyselfAssessCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyselfAssessCell.h; sourceTree = "<group>"; };
+		99266067222FA2CC008DA0D2 /* MyselfAssessCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyselfAssessCell.m; sourceTree = "<group>"; };
+		99266069222FDB12008DA0D2 /* CpInvitTestModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CpInvitTestModel.h; sourceTree = "<group>"; };
+		9926606A222FDB12008DA0D2 /* CpInvitTestModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CpInvitTestModel.m; sourceTree = "<group>"; };
+		9926606C222FDC58008DA0D2 /* CpInvitTestCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CpInvitTestCell.h; sourceTree = "<group>"; };
+		9926606D222FDC58008DA0D2 /* CpInvitTestCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CpInvitTestCell.m; sourceTree = "<group>"; };
 		992985091F5539CB0021F863 /* WKApplyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKApplyView.h; sourceTree = "<group>"; };
 		9929850A1F5539CB0021F863 /* WKApplyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKApplyView.m; sourceTree = "<group>"; };
 		9929850B1F5539CB0021F863 /* WKButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKButton.h; sourceTree = "<group>"; };
@@ -1171,12 +1210,10 @@
 		99B8069021EC6646004AC914 /* CpViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpViewViewController.h; sourceTree = "<group>"; };
 		99B8069F21EC6DFF004AC914 /* PersonNoticeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonNoticeModel.h; sourceTree = "<group>"; };
 		99B806A021EC6DFF004AC914 /* PersonNoticeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonNoticeModel.m; sourceTree = "<group>"; };
-		99BED6F821F6B5B30017492B /* MyTalentsTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTalentsTestViewController.h; sourceTree = "<group>"; };
 		99BED6F921F6B5B30017492B /* AgreementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgreementViewController.m; sourceTree = "<group>"; };
 		99BED6FA21F6B5B30017492B /* ConfirmPaymentOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmPaymentOrderController.m; sourceTree = "<group>"; };
 		99BED6FB21F6B5B30017492B /* EmploymentNewsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmploymentNewsController.m; sourceTree = "<group>"; };
 		99BED6FC21F6B5B30017492B /* RecruitmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecruitmentViewController.h; sourceTree = "<group>"; };
-		99BED6FD21F6B5B30017492B /* TalentsTestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalentsTestController.m; sourceTree = "<group>"; };
 		99BED6FE21F6B5B30017492B /* PaLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaLoginViewController.h; sourceTree = "<group>"; };
 		99BED6FF21F6B5B30017492B /* PaRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaRegisterViewController.h; sourceTree = "<group>"; };
 		99BED70021F6B5B30017492B /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
@@ -1189,9 +1226,7 @@
 		99BED70721F6B5B30017492B /* EmploymentNewsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmploymentNewsController.h; sourceTree = "<group>"; };
 		99BED70821F6B5B30017492B /* ConfirmPaymentOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmPaymentOrderController.h; sourceTree = "<group>"; };
 		99BED70921F6B5B30017492B /* AgreementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgreementViewController.h; sourceTree = "<group>"; };
-		99BED70A21F6B5B30017492B /* MyTalentsTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTalentsTestViewController.m; sourceTree = "<group>"; };
 		99BED70B21F6B5B30017492B /* PaLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaLoginViewController.m; sourceTree = "<group>"; };
-		99BED70C21F6B5B30017492B /* TalentsTestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalentsTestController.h; sourceTree = "<group>"; };
 		99BED70D21F6B5B30017492B /* RecruitmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecruitmentViewController.m; sourceTree = "<group>"; };
 		99BED70E21F6B5B30017492B /* OneMinuteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneMinuteViewController.h; sourceTree = "<group>"; };
 		99BED70F21F6B5B30017492B /* AccountManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManagerViewController.h; sourceTree = "<group>"; };
@@ -1295,6 +1330,16 @@
 		99DCE28E21DDFB120060B147 /* BottomPayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BottomPayView.m; sourceTree = "<group>"; };
 		99E031E721ABE13400FB5530 /* CVListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVListModel.h; sourceTree = "<group>"; };
 		99E031E821ABE13400FB5530 /* CVListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CVListModel.m; sourceTree = "<group>"; };
+		99E71FF1222E127B004BB75F /* AssessIndexModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssessIndexModel.h; sourceTree = "<group>"; };
+		99E71FF2222E127B004BB75F /* AssessIndexModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssessIndexModel.m; sourceTree = "<group>"; };
+		99E71FF4222E16C2004BB75F /* AssessIndexCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssessIndexCell.h; sourceTree = "<group>"; };
+		99E71FF5222E16C2004BB75F /* AssessIndexCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssessIndexCell.m; sourceTree = "<group>"; };
+		99E71FF7222E404C004BB75F /* AssessShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssessShareView.h; sourceTree = "<group>"; };
+		99E71FF8222E404C004BB75F /* AssessShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssessShareView.m; sourceTree = "<group>"; };
+		99E71FFA222E4F53004BB75F /* AssessPayAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssessPayAlert.h; sourceTree = "<group>"; };
+		99E71FFB222E4F53004BB75F /* AssessPayAlert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssessPayAlert.m; sourceTree = "<group>"; };
+		99E72000222E797D004BB75F /* AssessPaySuccessAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssessPaySuccessAlert.h; sourceTree = "<group>"; };
+		99E72001222E797D004BB75F /* AssessPaySuccessAlert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssessPaySuccessAlert.m; sourceTree = "<group>"; };
 		99EC66E421B0D79F00756113 /* RCRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCRootViewController.h; sourceTree = "<group>"; };
 		99EC66E521B0D79F00756113 /* RCRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCRootViewController.m; sourceTree = "<group>"; };
 		99ED2802219E499B00ED656A /* InputAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputAlertView.h; sourceTree = "<group>"; };
@@ -2041,6 +2086,29 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		9926604A222F9837008DA0D2 /* AssessController */ = {
+			isa = PBXGroup;
+			children = (
+				99266050222F9837008DA0D2 /* TalentsTestNativeViewController.h */,
+				9926604D222F9837008DA0D2 /* TalentsTestNativeViewController.m */,
+				9926604C222F9837008DA0D2 /* AssessIndexWebController.h */,
+				99266051222F9837008DA0D2 /* AssessIndexWebController.m */,
+				9926604F222F9837008DA0D2 /* MyAssessIndexController.h */,
+				99266054222F9837008DA0D2 /* MyAssessIndexController.m */,
+				9926605D222F99C9008DA0D2 /* MyselfAssessIndexController.h */,
+				9926605E222F99C9008DA0D2 /* MyselfAssessIndexController.m */,
+				99266060222F9A00008DA0D2 /* CompanyInvitationController.h */,
+				99266061222F9A00008DA0D2 /* CompanyInvitationController.m */,
+				9926605B222F98B1008DA0D2 /* ConfirmAssessOrderController.h */,
+				9926605A222F98B0008DA0D2 /* ConfirmAssessOrderController.m */,
+				9926604B222F9837008DA0D2 /* MyTalentsTestViewController.h */,
+				99266052222F9837008DA0D2 /* MyTalentsTestViewController.m */,
+				9926604E222F9837008DA0D2 /* TalentsTestController.m */,
+				99266053222F9837008DA0D2 /* TalentsTestController.h */,
+			);
+			path = AssessController;
+			sourceTree = "<group>";
+		};
 		992985021F550EB00021F863 /* Company */ = {
 			isa = PBXGroup;
 			children = (
@@ -2509,6 +2577,18 @@
 				9960E258218FCA95008E6DE5 /* CountdownBtn.m */,
 				99C52C2D21DF4FDC00F9CF7A /* MyOrderCell.h */,
 				99C52C2E21DF4FDC00F9CF7A /* MyOrderCell.m */,
+				99E71FF4222E16C2004BB75F /* AssessIndexCell.h */,
+				99E71FF5222E16C2004BB75F /* AssessIndexCell.m */,
+				99E71FF7222E404C004BB75F /* AssessShareView.h */,
+				99E71FF8222E404C004BB75F /* AssessShareView.m */,
+				99E71FFA222E4F53004BB75F /* AssessPayAlert.h */,
+				99E71FFB222E4F53004BB75F /* AssessPayAlert.m */,
+				99E72000222E797D004BB75F /* AssessPaySuccessAlert.h */,
+				99E72001222E797D004BB75F /* AssessPaySuccessAlert.m */,
+				99266066222FA2CC008DA0D2 /* MyselfAssessCell.h */,
+				99266067222FA2CC008DA0D2 /* MyselfAssessCell.m */,
+				9926606C222FDC58008DA0D2 /* CpInvitTestCell.h */,
+				9926606D222FDC58008DA0D2 /* CpInvitTestCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2770,16 +2850,12 @@
 		99BED6F721F6B5B30017492B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				99BED6F821F6B5B30017492B /* MyTalentsTestViewController.h */,
-				99BED70A21F6B5B30017492B /* MyTalentsTestViewController.m */,
 				99BED70821F6B5B30017492B /* ConfirmPaymentOrderController.h */,
 				99BED6FA21F6B5B30017492B /* ConfirmPaymentOrderController.m */,
 				99BED70721F6B5B30017492B /* EmploymentNewsController.h */,
 				99BED6FB21F6B5B30017492B /* EmploymentNewsController.m */,
 				99BED6FC21F6B5B30017492B /* RecruitmentViewController.h */,
 				99BED70D21F6B5B30017492B /* RecruitmentViewController.m */,
-				99BED70C21F6B5B30017492B /* TalentsTestController.h */,
-				99BED6FD21F6B5B30017492B /* TalentsTestController.m */,
 				99BED6FF21F6B5B30017492B /* PaRegisterViewController.h */,
 				99BED71321F6B5B30017492B /* PaRegisterViewController.m */,
 				99BED71021F6B5B30017492B /* PaIndexViewController.h */,
@@ -2802,6 +2878,7 @@
 				99BED70521F6B5B30017492B /* SalaryViewController.m */,
 				99906F191EFB47CE00B5E289 /* AboutUsViewController.h */,
 				99906F1A1EFB47CE00B5E289 /* AboutUsViewController.m */,
+				9926604A222F9837008DA0D2 /* AssessController */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2827,6 +2904,12 @@
 			children = (
 				99C52C3121DF5BAE00F9CF7A /* OrderListModel.h */,
 				99C52C3221DF5BAE00F9CF7A /* OrderListModel.m */,
+				99E71FF1222E127B004BB75F /* AssessIndexModel.h */,
+				99E71FF2222E127B004BB75F /* AssessIndexModel.m */,
+				99266063222F9E15008DA0D2 /* MyselfAssessModel.h */,
+				99266064222F9E15008DA0D2 /* MyselfAssessModel.m */,
+				99266069222FDB12008DA0D2 /* CpInvitTestModel.h */,
+				9926606A222FDB12008DA0D2 /* CpInvitTestModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3778,16 +3861,19 @@
 				99B8069621EC6647004AC914 /* YourFoodViewController.m in Sources */,
 				9947F2B32193ED25002C97F2 /* WKTabBarController.m in Sources */,
 				99F1987E21FEE32300DB4F58 /* CvRecruitmentConditionViewController.m in Sources */,
+				99E71FF3222E127B004BB75F /* AssessIndexModel.m in Sources */,
 				99F1986721FEE28800DB4F58 /* InterviewSendViewController.m in Sources */,
 				996D64AF21B643BA0095EA95 /* SpeakBtn.m in Sources */,
 				99F1986621FEE28800DB4F58 /* FavoriteCvViewController.m in Sources */,
 				99F1980121FEE12B00DB4F58 /* OrderDetailViewController.m in Sources */,
 				9960E25D219019CC008E6DE5 /* MBProgressHUD+Gif.m in Sources */,
+				9926605F222F99C9008DA0D2 /* MyselfAssessIndexController.m in Sources */,
 				9933E71F221161EE00C12708 /* WKCvTableViewCell.m in Sources */,
 				99F174CC21E5C5B800E72976 /* WXApiManager.m in Sources */,
 				9980766121D5BAED000BC5F8 /* PJobListModel.m in Sources */,
 				99F197E221FEE03900DB4F58 /* JobPlaceViewController.m in Sources */,
 				991A24421EE6D7A9008CD8E9 /* ASINetworkQueue.m in Sources */,
+				99266057222F9837008DA0D2 /* AssessIndexWebController.m in Sources */,
 				9908DD3421D499130002B609 /* JobInfoViewController.m in Sources */,
 				9986409022013838009A77E2 /* ApplyCvListModel.m in Sources */,
 				99BED71621F6B5B30017492B /* AgreementViewController.m in Sources */,
@@ -3798,9 +3884,12 @@
 				9908DD3021D499130002B609 /* JobSearchViewController.m in Sources */,
 				992985271F5539CB0021F863 /* WKNavigationController.m in Sources */,
 				99BED71E21F6B5B30017492B /* MyOrderViewController.m in Sources */,
+				99E71FF6222E16C2004BB75F /* AssessIndexCell.m in Sources */,
 				99DCE28621DDE38B0060B147 /* DiscountCell.m in Sources */,
 				993F76FC21F0232C00DF6CA0 /* ExperienceModifyViewController.m in Sources */,
+				99266068222FA2CC008DA0D2 /* MyselfAssessCell.m in Sources */,
 				99ED2804219E499B00ED656A /* InputAlertView.m in Sources */,
+				99266065222F9E15008DA0D2 /* MyselfAssessModel.m in Sources */,
 				998E888B21D703C400E8D622 /* CVPackageView.m in Sources */,
 				99F1984521FEE25000DB4F58 /* ChatCpViewController.m in Sources */,
 				993F76F521F0232C00DF6CA0 /* ExperienceViewController.m in Sources */,
@@ -3811,6 +3900,7 @@
 				991A24441EE6D7A9008CD8E9 /* GDataXMLNode.m in Sources */,
 				99F1983121FEE1A700DB4F58 /* CpLoginViewController.m in Sources */,
 				99B806A121EC6DFF004AC914 /* PersonNoticeModel.m in Sources */,
+				9926606B222FDB12008DA0D2 /* CpInvitTestModel.m in Sources */,
 				993F76FE21F0232C00DF6CA0 /* SpecialityModifyViewController.m in Sources */,
 				99BED71B21F6B5B30017492B /* AccountManagerViewController.m in Sources */,
 				99F197E821FEE03900DB4F58 /* DemandViewController.m in Sources */,
@@ -3818,6 +3908,7 @@
 				9929852A1F5539CB0021F863 /* WKTableView.m in Sources */,
 				99B8069A21EC6647004AC914 /* JobApplyChildViewController.m in Sources */,
 				997AACD22216AB6D00BC38E8 /* ChatListModel.m in Sources */,
+				99E71FF9222E404C004BB75F /* AssessShareView.m in Sources */,
 				998E889721D7739800E8D622 /* ZHAttributeTextView.m in Sources */,
 				992985261F5539CB0021F863 /* WKLoginView.m in Sources */,
 				997AACD52216AE0200BC38E8 /* ChatListCell.m in Sources */,
@@ -3829,6 +3920,7 @@
 				993F76FF21F0232C00DF6CA0 /* LongVoiceInputController.m in Sources */,
 				99B8069721EC6647004AC914 /* InterviewViewController.m in Sources */,
 				99DCE27A21DCBA890060B147 /* RedPacketView.m in Sources */,
+				99E71FFC222E4F53004BB75F /* AssessPayAlert.m in Sources */,
 				99DCE28921DDECDA0060B147 /* PayWayCell.m in Sources */,
 				9908DD3321D499130002B609 /* JobListViewController.m in Sources */,
 				993F76F221F0232C00DF6CA0 /* CvInfoViewController.m in Sources */,
@@ -3836,6 +3928,7 @@
 				99ED2807219E90B000ED656A /* AlertView.m in Sources */,
 				9919F9471EDE445300BE51F0 /* AppDelegate.m in Sources */,
 				9929852B1F5539CB0021F863 /* WKTextView.m in Sources */,
+				99266062222F9A00008DA0D2 /* CompanyInvitationController.m in Sources */,
 				99906F1B1EFB47CF00B5E289 /* AboutUsViewController.m in Sources */,
 				996D64AC21B626B30095EA95 /* VoiceModel.m in Sources */,
 				99F197FF21FEE12B00DB4F58 /* PayMethodViewController.m in Sources */,
@@ -3845,6 +3938,7 @@
 				998E889421D739F200E8D622 /* CVTicketCell.m in Sources */,
 				998E888E21D7376C00E8D622 /* TopTableThirdCell.m in Sources */,
 				9980766421D5CE7E000BC5F8 /* PJobListCell.m in Sources */,
+				99266058222F9837008DA0D2 /* MyTalentsTestViewController.m in Sources */,
 				991D7A93219D48F50019123A /* AddShieldBtn.m in Sources */,
 				995C3D701EF7CD7100277468 /* SCNavTabBar.m in Sources */,
 				99F197EA21FEE03900DB4F58 /* ExpiredJobListViewController.m in Sources */,
@@ -3862,8 +3956,10 @@
 				99DCE28F21DDFB120060B147 /* BottomPayView.m in Sources */,
 				990EF79D21A3903A00C63AEB /* ReplyAlert.m in Sources */,
 				996F504E2188292900D2A7E9 /* OptionView.m in Sources */,
+				99E72002222E797D004BB75F /* AssessPaySuccessAlert.m in Sources */,
 				992985231F5539CB0021F863 /* WKFilterView.m in Sources */,
 				99F1984421FEE25000DB4F58 /* ChatListCpViewController.m in Sources */,
+				9926605C222F98B1008DA0D2 /* ConfirmAssessOrderController.m in Sources */,
 				99F1983821FEE1A700DB4F58 /* CpEnvironmentViewController.m in Sources */,
 				993F76F621F0232C00DF6CA0 /* EducationModifyViewController.m in Sources */,
 				9908DD2F21D499130002B609 /* CompanyInfoViewController.m in Sources */,
@@ -3922,7 +4018,9 @@
 				99F1983521FEE1A700DB4F58 /* AccountInfoViewController.m in Sources */,
 				9933E719221153A400C12708 /* ApplyCvListCell.m in Sources */,
 				99A826611EEA329800609D94 /* MLImageCrop.m in Sources */,
+				99266056222F9837008DA0D2 /* TalentsTestController.m in Sources */,
 				99B8069921EC6647004AC914 /* CpAttentionViewController.m in Sources */,
+				9926606E222FDC58008DA0D2 /* CpInvitTestCell.m in Sources */,
 				9908DD3121D499130002B609 /* CompanyDetailViewController.m in Sources */,
 				991DAA9B21A5528D00586AA7 /* AttachmentModel.m in Sources */,
 				996EB7AB218BE824000B475E /* RCToast.m in Sources */,
@@ -3932,6 +4030,7 @@
 				9908DD2E21D499130002B609 /* JobViewController.m in Sources */,
 				99F1988621FEF52700DB4F58 /* CpMainInfoModel.m in Sources */,
 				9993C34721BF51FB0085A6F8 /* SpeakLoadingBtn.m in Sources */,
+				99266055222F9837008DA0D2 /* TalentsTestNativeViewController.m in Sources */,
 				991A243F1EE6D7A9008CD8E9 /* ASIFormDataRequest.m in Sources */,
 				99B8069B21EC6647004AC914 /* InvitationViewController.m in Sources */,
 				99B8069C21EC6647004AC914 /* JobApplyViewController.m in Sources */,
@@ -3956,7 +4055,6 @@
 				9980767421D62882000BC5F8 /* CVTopPackageModel.m in Sources */,
 				99F1983421FEE1A700DB4F58 /* AccountListViewController.m in Sources */,
 				9990CB4E22222EBD000C2A3E /* AccountListCell.m in Sources */,
-				99BED71F21F6B5B30017492B /* MyTalentsTestViewController.m in Sources */,
 				9993798F219A9C250087D404 /* PullDownMenu.m in Sources */,
 				99F1982B21FEE1A700DB4F58 /* Html5ViewController.m in Sources */,
 				996CD9BC21E431620066779C /* BuyTopServiceSuccessAlert.m in Sources */,
@@ -3979,6 +4077,7 @@
 				99F1987D21FEE32300DB4F58 /* CvSearchViewController.m in Sources */,
 				993F770A21F025F900DF6CA0 /* ChatListViewController.m in Sources */,
 				993F770B21F025F900DF6CA0 /* ChatViewController.m in Sources */,
+				99266059222F9837008DA0D2 /* MyAssessIndexController.m in Sources */,
 				99B8069521EC6646004AC914 /* JobAttentionViewController.m in Sources */,
 				99F1987B21FEE32300DB4F58 /* CvSearchConditionViewController.m in Sources */,
 				991A243D1EE6D7A9008CD8E9 /* ASIDataDecompressor.m in Sources */,
@@ -3991,7 +4090,6 @@
 				99C8932F21F947DC0026235B /* YourFoodModel.m in Sources */,
 				993F76F721F0232C00DF6CA0 /* ConfirmOrderController.m in Sources */,
 				99DCE28321DDD6D30060B147 /* ConfirmOrderCell.m in Sources */,
-				99BED71921F6B5B30017492B /* TalentsTestController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

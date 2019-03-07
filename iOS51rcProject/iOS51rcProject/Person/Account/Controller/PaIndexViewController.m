@@ -18,7 +18,7 @@
 #import "RecruitmentViewController.h"
 #import "SalaryViewController.h"
 #import "EmploymentNewsController.h"
-#import "TalentsTestController.h"
+#import "TalentsTestNativeViewController.h"
 #import "FeedbackViewController.h"
 #import "RoleViewController.h"
 #import "AboutUsViewController.h"
@@ -512,9 +512,12 @@
         [self.navigationController pushViewController:evc animated:YES];
         
     }else if([optionTitle isEqualToString:@"人才测评"]){
-        TalentsTestController *tvc = [TalentsTestController new];
-        tvc.title = @"人才测评";
-        tvc.urlString = [NSString stringWithFormat:@"/personal/assess/index?PaMainID=%@&Code=%@",PAMAINID,[USER_DEFAULT valueForKey:@"paMainCode"]];
+//        TalentsTestController *tvc = [TalentsTestController new];
+//        tvc.title = @"人才测评";
+//        tvc.urlString = [NSString stringWithFormat:@"/personal/assess/index?PaMainID=%@&Code=%@",PAMAINID,[USER_DEFAULT valueForKey:@"paMainCode"]];
+//        [self.navigationController pushViewController:tvc animated:YES];
+        
+        TalentsTestNativeViewController *tvc = [[TalentsTestNativeViewController alloc]init];
         [self.navigationController pushViewController:tvc animated:YES];
     }
 }
