@@ -13,10 +13,13 @@
 #import "AssessPayAlert.h"
 #import "AssessIndexModel.h"
 #import "ConfirmAssessOrderController.h"
+#import "AssessDeliverAlert.h"
+#import "EmptyDataView.h"
 
 @interface MyselfAssessIndexController ()<UITableViewDelegate , UITableViewDataSource>
 @property (nonatomic , strong) NSMutableArray *dataArr;
 @property (nonatomic , strong) UITableView *tableView;
+@property (nonatomic , strong) EmptyDataView *emptyView;
 @end
 
 @implementation MyselfAssessIndexController
@@ -28,6 +31,7 @@
     [SVProgressHUD show];
     [self.view addSubview:self.tableView];
     self.view.backgroundColor = SEPARATECOLOR;
+    [self createEmptyView];
 }
 - (UITableView *)tableView{
     if (!_tableView) {
@@ -47,7 +51,20 @@
     }
     return _dataArr;
 }
-
+- (void)createEmptyView{
+    self.emptyView = [[EmptyDataView alloc]initWithTip:@"呀！您还没做过人才测评"];
+    [self.view addSubview:self.emptyView];
+    self.emptyView.sd_layout
+    .leftSpaceToView(self.view, 0)
+    .rightSpaceToView(self.view, 0)
+    .topSpaceToView(self.view, 0)
+    .bottomSpaceToView(self.view, 120);
+    self.emptyView.hidden = YES;
+    __weak typeof(self)weakself = self;
+    self.emptyView.emptyDataTouch = ^{
+        [weakself getMyAssessTest];
+    };
+}
 #pragma mark - UITableViewDelegate , UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArr.count;
@@ -58,6 +75,7 @@
     if (cell == nil) {
         cell = [[MyselfAssessCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"myselfAssessCell"];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.model = model;
     cell.cellBlock = ^(MyselfAssessModel *myselfModel, UIButton *button) {
         if (button.tag == 100) {// 查看报告
@@ -86,6 +104,7 @@
 //    return 200;
     return [self.tableView cellHeightForIndexPath:indexPath model:self.dataArr[indexPath.row] keyPath:@"model" cellClass:[MyselfAssessCell class] contentViewWidth:SCREEN_WIDTH];
 }
+
 #pragma mark - 我的测评
 - (void)getMyAssessTest{
     NSDictionary *paramDict = @{
@@ -102,11 +121,19 @@
                 [self.dataArr addObject:model];
             }
         }
+        
+        if (self.dataArr.count > 0) {
+            self.tableView.hidden = NO;
+            self.emptyView.hidden = YES;
+        }else{
+            self.tableView.hidden = YES;
+            self.emptyView.hidden = NO;
+        }
+        
         [self.tableView reloadData];
-        DLog(@"");
     } failureBlock:^(NSInteger errCode, NSString *msg) {
-        DLog(@"");
         [SVProgressHUD dismiss];
+    
     }];
 }
 
@@ -121,8 +148,32 @@
     [AFNManager requestWithMethod:POST ParamDict:paramDict url:@"ChangeAssessStatus" tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
         [SVProgressHUD dismiss];
         [self getMyAssessTest];
+        if((dataDict != nil) && [(NSString *)dataDict isEqualToString:@"1"]){
+            
+            NSString *titleStr = nil;
+            NSString *markStr = nil;
+            NSString *contenStr = nil;
+            if ([model.IsOpen boolValue]) {
+                titleStr = @"已成功修改为不可投递状态";
+                markStr = @"不可投递";
+                contenStr = @"申请职位时，不投递本份测评报告。";
+            }else{
+                titleStr = @"已成功修改为可投递状态";
+                markStr = @"可投递";
+                contenStr = @"申请职位时，自动投递本份测评报告。";
+            }
+            
+            AssessDeliverAlert *alert = [[AssessDeliverAlert alloc]init];
+            [alert setTitle:titleStr markContent:markStr content:contenStr btnTitle:@"知道了"];
+            [alert show];
+            
+        }else{
+            [RCToast showMessage:@"设置失败"];
+        }
+        
     } failureBlock:^(NSInteger errCode, NSString *msg) {
         [SVProgressHUD dismiss];
+        [RCToast showMessage:@"设置失败"];
     }];
 }
 

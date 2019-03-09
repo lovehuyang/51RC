@@ -253,6 +253,7 @@
             }
             AssessIndexModel *model = [self.dataArr firstObject];
             [self.headerImgView sd_setImageWithURL:[NSURL URLWithString:model.indexImageUrl]];
+            [self.headerImgView sd_setImageWithURL:[NSURL URLWithString:model.indexImageUrl] placeholderImage:[UIImage imageNamed:@"bg_talent_top_Placehoder"]];
         }
         
         [self.tableView reloadData];

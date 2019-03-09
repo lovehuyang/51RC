@@ -174,7 +174,7 @@
                                 @"orderTypeNew":@"3",
                                 };
     //  URL_GETAPPPAYORDER
-    [AFNManager requestWithMethod:POST ParamDict:paramDict url:@"GetAppPayOrderIOS" tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
+    [AFNManager requestWithMethod:POST ParamDict:paramDict url:URL_GETAPPPAYORDER tableName:@"" successBlock:^(NSArray *requestData, NSDictionary *dataDict) {
         [SVProgressHUD dismiss];
         DLog(@"");
         if (payMethodID == 1) {

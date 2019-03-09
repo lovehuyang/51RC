@@ -10,10 +10,12 @@
 #import "AssessIndexWebController.h"
 #import "CpInvitTestModel.h"
 #import "CpInvitTestCell.h"
+#import "EmptyDataView.h"
 
 @interface CompanyInvitationController ()<UITableViewDelegate , UITableViewDataSource>
 @property (nonatomic , strong) NSMutableArray *dataArr;
 @property (nonatomic , strong) UITableView *tableView;
+@property (nonatomic , strong) EmptyDataView *emptyView;
 @end
 
 @implementation CompanyInvitationController
@@ -24,11 +26,27 @@
     [self.view addSubview:self.tableView];
     [SVProgressHUD show];
     [self getCpInvitTest];
+    [self createEmptyView];
+}
+
+- (void)createEmptyView{
+    self.emptyView = [[EmptyDataView alloc]initWithTip:@"还没有企业邀请您"];
+    [self.view addSubview:self.emptyView];
+    self.emptyView.sd_layout
+    .leftSpaceToView(self.view, 0)
+    .rightSpaceToView(self.view, 0)
+    .topSpaceToView(self.view, 0)
+    .bottomSpaceToView(self.view, 120);
+    self.emptyView.hidden = YES;
+    __weak typeof(self)weakself = self;
+    self.emptyView.emptyDataTouch = ^{
+        [weakself getCpInvitTest];
+    };
 }
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, SCREEN_HEIGHT - STATUS_BAR_HEIGHT - NAVIGATION_BAR_HEIGHT - 44 - 44 - 10) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - STATUS_BAR_HEIGHT - NAVIGATION_BAR_HEIGHT - 44 - 44) style:UITableViewStylePlain];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -55,6 +73,7 @@
     if (cell == nil) {
         cell = [[CpInvitTestCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cpInvitCell"];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.model = model;
     cell.cellBlock = ^(CpInvitTestModel *model) {
         
@@ -91,6 +110,14 @@
                 [self.dataArr addObject:model];
             }
         }
+        if(self.dataArr.count > 0){
+            self.tableView.hidden = NO;
+            self.emptyView.hidden = YES;
+        }else{
+            self.tableView.hidden = YES;
+            self.emptyView.hidden = NO;
+        }
+        
         [self.tableView reloadData];
     } failureBlock:^(NSInteger errCode, NSString *msg) {
         [SVProgressHUD dismiss];

@@ -651,6 +651,12 @@
     if(requestData.count == 1){
         
         NSDictionary *dict = [requestData firstObject];
+        NSArray *keys = [dict allKeys];
+        if (![keys containsObject:@"Welfare1"]) {
+            // 没有设置福利待遇
+            self.welfareDict = nil;
+            return;
+        }
         NSDictionary *welfareDict = [Common welfare:dict];
         self.welfareDict = [NSDictionary dictionaryWithDictionary:welfareDict];
         [self fillWelfare];

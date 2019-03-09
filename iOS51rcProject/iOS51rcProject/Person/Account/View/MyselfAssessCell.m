@@ -76,8 +76,8 @@
         self.openBtn.sd_layout
         .leftSpaceToView(setLab, 3)
         .centerYEqualToView(setLab)
-        .heightRatioToView(setLab, 1.03)
-        .widthIs(75);
+        .heightRatioToView(setLab, 1.1)
+        .widthIs(78);
         [self.openBtn setBackgroundImage:[UIImage imageNamed:@"ico_switch_close"] forState:UIControlStateSelected];
         [self.openBtn setBackgroundImage:[UIImage imageNamed:@"ico_switch_open"] forState:UIControlStateNormal];
         [self.openBtn setTitle:@"不可投递" forState:UIControlStateSelected];
@@ -97,7 +97,7 @@
             .rightSpaceToView(self.contentView, 10);
             tipLab.font = SMALLERFONT;
             tipLab.textColor = TEXTGRAYCOLOR;
-            tipLab.text = @"申请职位时，定投递本份测评报告";
+            tipLab.text = @"申请职位时，自动投递本份测评报告";
         }
         
         UILabel *line = [UILabel new];

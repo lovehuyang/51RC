@@ -10,7 +10,7 @@
 #import "SCNavTabBarController.h"
 #import "CompanyInvitationController.h"
 #import "MyselfAssessIndexController.h"
-
+#import "FeedbackViewController.h"
 
 @interface MyAssessIndexController ()
 
@@ -38,14 +38,25 @@
     UIButton *btn = [UIButton new];
     btn.frame = CGRectMake(0, SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT - STATUS_BAR_HEIGHT - 44, SCREEN_WIDTH, 44);
     [self.view addSubview:btn];
-    btn.backgroundColor = [UIColor lightGrayColor];
+    btn.backgroundColor = UIColorFromHex(0xDFDFDF);
     [btn setTitle:@"我要测评" forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     btn.titleLabel.font = DEFAULTFONT;
     [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    self.navigationItem.rightBarButtonItem = [[BarButtonItem alloc]initWithTitle:@"测评反馈" style:UIBarButtonItemStylePlain target:self action:@selector(assessFeedback)];
+    
 }
 - (void)btnClick{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - 测评反馈
+- (void)assessFeedback{
+    FeedbackViewController *feedbackCtrl = [[FeedbackViewController alloc] init];
+    feedbackCtrl.title = @"意见反馈";
+    [self.navigationController pushViewController:feedbackCtrl animated:YES];
 }
 
 @end

@@ -419,6 +419,8 @@
 		99A816AF2085A7C60026802B /* cp_chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 99A816AE2085A7C60026802B /* cp_chat.png */; };
 		99A826611EEA329800609D94 /* MLImageCrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 99A826601EEA329800609D94 /* MLImageCrop.m */; };
 		99AA4AAD2192B7780053F750 /* NSString+RCString.m in Sources */ = {isa = PBXBuildFile; fileRef = 99AA4AAC2192B7780053F750 /* NSString+RCString.m */; };
+		99ADC3422230A1D80007CB71 /* AssessDeliverAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 99ADC3412230A1D80007CB71 /* AssessDeliverAlert.m */; };
+		99ADC345223108ED0007CB71 /* EmptyDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99ADC344223108EC0007CB71 /* EmptyDataView.m */; };
 		99B8069121EC6646004AC914 /* CpAttentionChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B8067921EC6646004AC914 /* CpAttentionChangeViewController.m */; };
 		99B8069221EC6646004AC914 /* AttentionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B8067C21EC6646004AC914 /* AttentionViewController.m */; };
 		99B8069321EC6646004AC914 /* CpViewChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B8067D21EC6646004AC914 /* CpViewChildViewController.m */; };
@@ -1184,6 +1186,10 @@
 		99A826601EEA329800609D94 /* MLImageCrop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLImageCrop.m; sourceTree = "<group>"; };
 		99AA4AAB2192B7780053F750 /* NSString+RCString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+RCString.h"; sourceTree = "<group>"; };
 		99AA4AAC2192B7780053F750 /* NSString+RCString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+RCString.m"; sourceTree = "<group>"; };
+		99ADC3402230A1D80007CB71 /* AssessDeliverAlert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssessDeliverAlert.h; sourceTree = "<group>"; };
+		99ADC3412230A1D80007CB71 /* AssessDeliverAlert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AssessDeliverAlert.m; sourceTree = "<group>"; };
+		99ADC343223108EC0007CB71 /* EmptyDataView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmptyDataView.h; sourceTree = "<group>"; };
+		99ADC344223108EC0007CB71 /* EmptyDataView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmptyDataView.m; sourceTree = "<group>"; };
 		99B8067921EC6646004AC914 /* CpAttentionChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CpAttentionChangeViewController.m; sourceTree = "<group>"; };
 		99B8067A21EC6646004AC914 /* InterviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterviewViewController.h; sourceTree = "<group>"; };
 		99B8067B21EC6646004AC914 /* YourFoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YourFoodViewController.h; sourceTree = "<group>"; };
@@ -2589,6 +2595,10 @@
 				99266067222FA2CC008DA0D2 /* MyselfAssessCell.m */,
 				9926606C222FDC58008DA0D2 /* CpInvitTestCell.h */,
 				9926606D222FDC58008DA0D2 /* CpInvitTestCell.m */,
+				99ADC3402230A1D80007CB71 /* AssessDeliverAlert.h */,
+				99ADC3412230A1D80007CB71 /* AssessDeliverAlert.m */,
+				99ADC343223108EC0007CB71 /* EmptyDataView.h */,
+				99ADC344223108EC0007CB71 /* EmptyDataView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3847,6 +3857,7 @@
 			files = (
 				993F76EE21F0232C00DF6CA0 /* IntentionModifyViewController.m in Sources */,
 				99F1982D21FEE1A700DB4F58 /* CpIndexViewController.m in Sources */,
+				99ADC3422230A1D80007CB71 /* AssessDeliverAlert.m in Sources */,
 				9919FA411EDFC24400BE51F0 /* UIView+Toast.m in Sources */,
 				99F1986121FEE28800DB4F58 /* ApplyInvitationCpViewController.m in Sources */,
 				99C8932C21F9453D0026235B /* CpViewModel.m in Sources */,
@@ -3871,6 +3882,7 @@
 				9933E71F221161EE00C12708 /* WKCvTableViewCell.m in Sources */,
 				99F174CC21E5C5B800E72976 /* WXApiManager.m in Sources */,
 				9980766121D5BAED000BC5F8 /* PJobListModel.m in Sources */,
+				99ADC345223108ED0007CB71 /* EmptyDataView.m in Sources */,
 				99F197E221FEE03900DB4F58 /* JobPlaceViewController.m in Sources */,
 				991A24421EE6D7A9008CD8E9 /* ASINetworkQueue.m in Sources */,
 				99266057222F9837008DA0D2 /* AssessIndexWebController.m in Sources */,
