@@ -361,8 +361,9 @@
         [self.navigationController pushViewController:orderApplyCtrl animated:YES];
     }
     else if (popView.tag == 4) { //有刷新数
-        NSDictionary *jobData = [self.arrData objectAtIndex:self.selectedRowIndex];
-        NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrlCp:@"RefreshJob" Params:[NSDictionary dictionaryWithObjectsAndKeys:CAMAINID, @"caMainID", CAMAINCODE, @"Code", CPMAINID, @"cpMainID", [jobData objectForKey:@"ID"], @"JobID", nil] viewController:self];
+        CpJobListModel *jobData = [self.arrData objectAtIndex:self.selectedRowIndex];
+        NSDictionary *paramDict = [NSDictionary dictionaryWithObjectsAndKeys:CAMAINID, @"caMainID", CAMAINCODE, @"Code", CPMAINID, @"cpMainID", jobData.ID, @"JobID", nil];
+        NetWebServiceRequest *request = [NetWebServiceRequest serviceRequestUrlCp:@"RefreshJob" Params:paramDict viewController:self];
         [request setTag:5];
         [request setDelegate:self];
         [request startAsynchronous];
