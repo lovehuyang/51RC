@@ -485,8 +485,6 @@
             }
         };
         [WeakAlertView show];
-        
-        
     }
     else if (button.tag == 104) {
         AboutUsViewController *aboutUsCtrl = [[AboutUsViewController alloc] init];

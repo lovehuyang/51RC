@@ -233,7 +233,7 @@
 /**
  处理时间
 
- @param date ISO格式时间
+ @param date ISO格式时间 2019-03-22T15:11:00+08:00
  @return 处理结果
  */
 + (NSString *)stringFromRefreshDate:(NSString *)date {

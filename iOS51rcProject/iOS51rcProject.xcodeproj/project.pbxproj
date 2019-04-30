@@ -103,7 +103,7 @@
 		9919F97E1EDE467600BE51F0 /* jcore-ios-1.1.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9919F97B1EDE467600BE51F0 /* jcore-ios-1.1.3.a */; };
 		9919F97F1EDE467600BE51F0 /* jpush-ios-3.0.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9919F97C1EDE467600BE51F0 /* jpush-ios-3.0.5.a */; };
 		9919F9821EDE46AA00BE51F0 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9919F9811EDE46AA00BE51F0 /* CFNetwork.framework */; };
-		9919F9841EDE46B600BE51F0 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9919F9831EDE46B600BE51F0 /* CoreFoundation.framework */; };
+		9919F9841EDE46B600BE51F0 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9919F9831EDE46B600BE51F0 /* CoreFoundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		9919F9861EDE46C200BE51F0 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9919F9851EDE46C200BE51F0 /* CoreTelephony.framework */; };
 		9919F9881EDE46D100BE51F0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9919F9871EDE46D100BE51F0 /* SystemConfiguration.framework */; };
 		9919F98A1EDE46E600BE51F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9919F9891EDE46E500BE51F0 /* CoreGraphics.framework */; };
@@ -184,6 +184,7 @@
 		9931FA3221D330C000CFB45F /* mima_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9931FA3021D330C000CFB45F /* mima_icon.png */; };
 		9931FA3521D3346400CFB45F /* mima_icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9931FA3321D3346300CFB45F /* mima_icon1.png */; };
 		9931FA3621D3346400CFB45F /* duanxin_icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9931FA3421D3346400CFB45F /* duanxin_icon1.png */; };
+		9932D8ED2275A962009A6E49 /* dataJS.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9932D8EC2275A961009A6E49 /* dataJS.txt */; };
 		9933E719221153A400C12708 /* ApplyCvListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9933E718221153A400C12708 /* ApplyCvListCell.m */; };
 		9933E71C22115DD000C12708 /* DownloadCVModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9933E71B22115DD000C12708 /* DownloadCVModel.m */; };
 		9933E71F221161EE00C12708 /* WKCvTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9933E71D221161ED00C12708 /* WKCvTableViewCell.m */; };
@@ -434,6 +435,7 @@
 		99B8069B21EC6647004AC914 /* InvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B8068D21EC6646004AC914 /* InvitationViewController.m */; };
 		99B8069C21EC6647004AC914 /* JobApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B8068E21EC6646004AC914 /* JobApplyViewController.m */; };
 		99B806A121EC6DFF004AC914 /* PersonNoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B806A021EC6DFF004AC914 /* PersonNoticeModel.m */; };
+		99BD46DD22755545005A388B /* CompanyRenzhengViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BD46DC22755545005A388B /* CompanyRenzhengViewController.m */; };
 		99BED71621F6B5B30017492B /* AgreementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BED6F921F6B5B30017492B /* AgreementViewController.m */; };
 		99BED71721F6B5B30017492B /* ConfirmPaymentOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BED6FA21F6B5B30017492B /* ConfirmPaymentOrderController.m */; };
 		99BED71821F6B5B30017492B /* EmploymentNewsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BED6FB21F6B5B30017492B /* EmploymentNewsController.m */; };
@@ -459,8 +461,6 @@
 		99C8932F21F947DC0026235B /* YourFoodModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99C8932E21F947DC0026235B /* YourFoodModel.m */; };
 		99D18D81219D688D00FBEDD6 /* TagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D18D7F219D688C00FBEDD6 /* TagView.m */; };
 		99D18D84219D6E4B00FBEDD6 /* TagViewBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 99D18D83219D6E4B00FBEDD6 /* TagViewBtn.m */; };
-		99D2350421E32E8A00194F3E /* libBaiduSpeechSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99D234C221E32E8A00194F3E /* libBaiduSpeechSDK.a */; };
-		99D2350521E32E8A00194F3E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 99D234C321E32E8A00194F3E /* .gitignore */; };
 		99D2350621E32E8A00194F3E /* bds_license.dat in Resources */ = {isa = PBXBuildFile; fileRef = 99D234C721E32E8A00194F3E /* bds_license.dat */; };
 		99D2350721E32E8A00194F3E /* bds_easr_basic_model.dat in Resources */ = {isa = PBXBuildFile; fileRef = 99D234C821E32E8A00194F3E /* bds_easr_basic_model.dat */; };
 		99D2350821E32E8A00194F3E /* bds_easr_mfe_cmvn.dat in Resources */ = {isa = PBXBuildFile; fileRef = 99D234C921E32E8A00194F3E /* bds_easr_mfe_cmvn.dat */; };
@@ -494,6 +494,8 @@
 		99D2352421E32E8A00194F3E /* Chinese_Text.dat in Resources */ = {isa = PBXBuildFile; fileRef = 99D234E921E32E8A00194F3E /* Chinese_Text.dat */; };
 		99D2352521E32E8A00194F3E /* Chinese_Speech_Female.dat in Resources */ = {isa = PBXBuildFile; fileRef = 99D234EA21E32E8A00194F3E /* Chinese_Speech_Female.dat */; };
 		99D2352621E32E8A00194F3E /* .gitIgnore in Resources */ = {isa = PBXBuildFile; fileRef = 99D234F021E32E8A00194F3E /* .gitIgnore */; };
+		99DC8BAE2275315E005D9DD4 /* libBaiduSpeechSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99DC8BAC2275315E005D9DD4 /* libBaiduSpeechSDK.a */; };
+		99DC8BAF2275315E005D9DD4 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 99DC8BAD2275315E005D9DD4 /* .gitignore */; };
 		99DCE27421DC431A0060B147 /* ProtocolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DCE27321DC431A0060B147 /* ProtocolView.m */; };
 		99DCE27721DC915D0060B147 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DCE27621DC915D0060B147 /* ShareView.m */; };
 		99DCE27A21DCBA890060B147 /* RedPacketView.m in Sources */ = {isa = PBXBuildFile; fileRef = 99DCE27921DCBA890060B147 /* RedPacketView.m */; };
@@ -865,6 +867,7 @@
 		9931FA3021D330C000CFB45F /* mima_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mima_icon.png; sourceTree = "<group>"; };
 		9931FA3321D3346300CFB45F /* mima_icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mima_icon1.png; sourceTree = "<group>"; };
 		9931FA3421D3346400CFB45F /* duanxin_icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = duanxin_icon1.png; sourceTree = "<group>"; };
+		9932D8EC2275A961009A6E49 /* dataJS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dataJS.txt; sourceTree = "<group>"; };
 		9933E717221153A400C12708 /* ApplyCvListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplyCvListCell.h; sourceTree = "<group>"; };
 		9933E718221153A400C12708 /* ApplyCvListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplyCvListCell.m; sourceTree = "<group>"; };
 		9933E71A22115DD000C12708 /* DownloadCVModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadCVModel.h; sourceTree = "<group>"; };
@@ -1216,6 +1219,8 @@
 		99B8069021EC6646004AC914 /* CpViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpViewViewController.h; sourceTree = "<group>"; };
 		99B8069F21EC6DFF004AC914 /* PersonNoticeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonNoticeModel.h; sourceTree = "<group>"; };
 		99B806A021EC6DFF004AC914 /* PersonNoticeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersonNoticeModel.m; sourceTree = "<group>"; };
+		99BD46DB22755545005A388B /* CompanyRenzhengViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyRenzhengViewController.h; sourceTree = "<group>"; };
+		99BD46DC22755545005A388B /* CompanyRenzhengViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyRenzhengViewController.m; sourceTree = "<group>"; };
 		99BED6F921F6B5B30017492B /* AgreementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgreementViewController.m; sourceTree = "<group>"; };
 		99BED6FA21F6B5B30017492B /* ConfirmPaymentOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmPaymentOrderController.m; sourceTree = "<group>"; };
 		99BED6FB21F6B5B30017492B /* EmploymentNewsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmploymentNewsController.m; sourceTree = "<group>"; };
@@ -1261,8 +1266,6 @@
 		99D18D80219D688D00FBEDD6 /* TagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagView.h; sourceTree = "<group>"; };
 		99D18D82219D6E4B00FBEDD6 /* TagViewBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TagViewBtn.h; sourceTree = "<group>"; };
 		99D18D83219D6E4B00FBEDD6 /* TagViewBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TagViewBtn.m; sourceTree = "<group>"; };
-		99D234C221E32E8A00194F3E /* libBaiduSpeechSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduSpeechSDK.a; sourceTree = "<group>"; };
-		99D234C321E32E8A00194F3E /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		99D234C721E32E8A00194F3E /* bds_license.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bds_license.dat; sourceTree = "<group>"; };
 		99D234C821E32E8A00194F3E /* bds_easr_basic_model.dat */ = {isa = PBXFileReference; lastKnownFileType = file; path = bds_easr_basic_model.dat; sourceTree = "<group>"; };
 		99D234C921E32E8A00194F3E /* bds_easr_mfe_cmvn.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bds_easr_mfe_cmvn.dat; sourceTree = "<group>"; };
@@ -1316,6 +1319,8 @@
 		99D2350121E32E8A00194F3E /* BDSSynthesizerLogLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSynthesizerLogLevel.h; sourceTree = "<group>"; };
 		99D2350221E32E8A00194F3E /* BDSTTSEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSTTSEventManager.h; sourceTree = "<group>"; };
 		99D2350321E32E8A00194F3E /* BDSSpeechSynthesizerErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDSSpeechSynthesizerErrors.h; sourceTree = "<group>"; };
+		99DC8BAC2275315E005D9DD4 /* libBaiduSpeechSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduSpeechSDK.a; sourceTree = "<group>"; };
+		99DC8BAD2275315E005D9DD4 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		99DCE27221DC431A0060B147 /* ProtocolView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProtocolView.h; sourceTree = "<group>"; };
 		99DCE27321DC431A0060B147 /* ProtocolView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProtocolView.m; sourceTree = "<group>"; };
 		99DCE27521DC915D0060B147 /* ShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
@@ -1486,7 +1491,7 @@
 				996D64C421B66E550095EA95 /* CoreLocation.framework in Frameworks */,
 				996D64C221B66E290095EA95 /* AudioToolbox.framework in Frameworks */,
 				996D64C021B66E1D0095EA95 /* libz.1.2.5.tbd in Frameworks */,
-				99D2350421E32E8A00194F3E /* libBaiduSpeechSDK.a in Frameworks */,
+				99DC8BAE2275315E005D9DD4 /* libBaiduSpeechSDK.a in Frameworks */,
 				996D64BE21B66DFC0095EA95 /* libc++.tbd in Frameworks */,
 				993ED86121B52AC500A988FF /* AVFoundation.framework in Frameworks */,
 				9919F9C61EDE508F00BE51F0 /* MessageUI.framework in Frameworks */,
@@ -1696,6 +1701,7 @@
 		9919F9781EDE467600BE51F0 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				9932D8EC2275A961009A6E49 /* dataJS.txt */,
 				991970362092F4ED003C31CB /* dictionary.db */,
 				991A24041EE64D5F008CD8E9 /* Media.xcassets */,
 				993ED84521B528AA00A988FF /* AudioFile */,
@@ -2061,8 +2067,8 @@
 		991D7A94219D5E340019123A /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				99DC8BAB2275315E005D9DD4 /* BDSClientLib */,
 				99D234EB21E32E8A00194F3E /* BDSClientHeaders */,
-				99D234C121E32E8A00194F3E /* BDSClientLib */,
 				99D234C421E32E8A00194F3E /* BDSClientResource */,
 				99C52C1F21DEFE7600F9CF7A /* AliPay */,
 			);
@@ -2275,10 +2281,10 @@
 		993F770221F025F900DF6CA0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				993F770321F025F900DF6CA0 /* ChatListViewController.m */,
-				993F770421F025F900DF6CA0 /* ChatViewController.m */,
 				993F770521F025F900DF6CA0 /* ChatListViewController.h */,
+				993F770321F025F900DF6CA0 /* ChatListViewController.m */,
 				993F770621F025F900DF6CA0 /* ChatViewController.h */,
+				993F770421F025F900DF6CA0 /* ChatViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2924,15 +2930,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		99D234C121E32E8A00194F3E /* BDSClientLib */ = {
-			isa = PBXGroup;
-			children = (
-				99D234C221E32E8A00194F3E /* libBaiduSpeechSDK.a */,
-				99D234C321E32E8A00194F3E /* .gitignore */,
-			);
-			path = BDSClientLib;
-			sourceTree = "<group>";
-		};
 		99D234C421E32E8A00194F3E /* BDSClientResource */ = {
 			isa = PBXGroup;
 			children = (
@@ -3086,6 +3083,15 @@
 			path = AppDelegate;
 			sourceTree = "<group>";
 		};
+		99DC8BAB2275315E005D9DD4 /* BDSClientLib */ = {
+			isa = PBXGroup;
+			children = (
+				99DC8BAC2275315E005D9DD4 /* libBaiduSpeechSDK.a */,
+				99DC8BAD2275315E005D9DD4 /* .gitignore */,
+			);
+			path = BDSClientLib;
+			sourceTree = "<group>";
+		};
 		99F197CA21FEE03900DB4F58 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -3220,6 +3226,8 @@
 				99F1981B21FEE1A700DB4F58 /* CpMobileVerifyViewController.m */,
 				99F1981D21FEE1A700DB4F58 /* AccountViewController.h */,
 				99F1981221FEE1A700DB4F58 /* AccountViewController.m */,
+				99BD46DB22755545005A388B /* CompanyRenzhengViewController.h */,
+				99BD46DC22755545005A388B /* CompanyRenzhengViewController.m */,
 				99F1981F21FEE1A700DB4F58 /* CpModify */,
 			);
 			path = Controller;
@@ -3520,7 +3528,6 @@
 				99D2352521E32E8A00194F3E /* Chinese_Speech_Female.dat in Resources */,
 				996131AB1FDFC5A700194271 /* cp_account4.png in Resources */,
 				992DC19F206B7A2C00563456 /* ico_mapcenter.png in Resources */,
-				99D2350521E32E8A00194F3E /* .gitignore in Resources */,
 				995C3DB41EF7D02100277468 /* pa_account2.png in Resources */,
 				995C3DAD1EF7D02100277468 /* img_password2.png in Resources */,
 				990E9D7F21BF7DF30066082A /* BDSASRParameter.plist in Resources */,
@@ -3627,6 +3634,7 @@
 				990A3BC81F42F387006CB3CF /* 2.gif in Resources */,
 				995C3DAE1EF7D02100277468 /* img_rolebg.png in Resources */,
 				996D64A421B60D170095EA95 /* voice_loading_1.png in Resources */,
+				99DC8BAF2275315E005D9DD4 /* .gitignore in Resources */,
 				9990707D1EFC97D500B5E289 /* img_nodata.png in Resources */,
 				9919FA011EDE519900BE51F0 /* ShareSDK.bundle in Resources */,
 				9993C34221BF50F20085A6F8 /* voice_loadingleft_6.png in Resources */,
@@ -3661,6 +3669,7 @@
 				99F7FC8720414AB80060E9F1 /* img_photowoman.png in Resources */,
 				990A3BC21F42F387006CB3CF /* 14.gif in Resources */,
 				990A3BE71F42F387006CB3CF /* 48.gif in Resources */,
+				9932D8ED2275A962009A6E49 /* dataJS.txt in Resources */,
 				99D2351421E32E8A00194F3E /* lightBlue.bundle in Resources */,
 				994C83171F1E069C00414E98 /* pa_cvpreitem5.png in Resources */,
 				996D649D21B60D170095EA95 /* voice_loading_9.png in Resources */,
@@ -4080,6 +4089,7 @@
 				99E031E921ABE13400FB5530 /* CVListModel.m in Sources */,
 				9993A588218AD0C80057B6FD /* CommonTools.m in Sources */,
 				996C90882189368D00C0EF66 /* ComplainView.m in Sources */,
+				99BD46DD22755545005A388B /* CompanyRenzhengViewController.m in Sources */,
 				99F1980021FEE12B00DB4F58 /* OrderListViewController.m in Sources */,
 				993F76FA21F0232C00DF6CA0 /* EducationViewController.m in Sources */,
 				99AA4AAD2192B7780053F750 /* NSString+RCString.m in Sources */,
@@ -4205,7 +4215,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -4247,7 +4257,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -4285,10 +4295,13 @@
 					"$(PROJECT_DIR)/iOS51rcProject/ThirdLib/BDSClientLib",
 					"$(PROJECT_DIR)/iOS51rcProject/Resource/Class/Third/WechtSDK1.8.2",
 				);
+				MACH_O_TYPE = mh_execute;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lxml2",
 					"$(inherited)",
+					"-undefined",
+					dynamic_lookup,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.51rc.iOS51rcProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4327,10 +4340,13 @@
 					"$(PROJECT_DIR)/iOS51rcProject/ThirdLib/BDSClientLib",
 					"$(PROJECT_DIR)/iOS51rcProject/Resource/Class/Third/WechtSDK1.8.2",
 				);
+				MACH_O_TYPE = mh_execute;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lxml2",
 					"$(inherited)",
+					"-undefined",
+					dynamic_lookup,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.51rc.iOS51rcProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";

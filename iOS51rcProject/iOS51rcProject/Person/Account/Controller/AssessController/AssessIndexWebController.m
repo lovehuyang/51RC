@@ -70,8 +70,7 @@
     self.progressView.hidden = NO;
     self.progressView.transform = CGAffineTransformMakeScale(1.0f, 1.5f);
     [self.view bringSubviewToFront:self.progressView];
-    
-    
+
     NSString *requestString = webView.URL.absoluteString;
     if([requestString containsString:@"assess/mytest"]){
         [self.navigationController popViewControllerAnimated:YES];

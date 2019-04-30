@@ -13,6 +13,7 @@
 #import "CpModifyViewController.h"
 #import "CpLogoViewController.h"
 #import "CpEnvironmentViewController.h"
+#import "CompanyRenzhengViewController.h"
 
 @interface SysViewController ()
 
@@ -26,10 +27,11 @@
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:SEPARATECOLOR];
     self.heightForScroll = STATUS_BAR_HEIGHT + NAVIGATION_BAR_HEIGHT + 10;
-    [self initButton:0];
-    [self initButton:1];
-    [self initButton:2];
-    [self initButton:3];
+    [self initButton:0];//企业基本信息
+    [self initButton:1];// 企业logo
+    [self initButton:2];// 企业环境照片
+    [self initButton:3];// 企业认证
+    [self initButton:4];// 用户管理
 }
 
 - (void)initButton:(NSInteger)tag {
@@ -45,6 +47,9 @@
             title = @"企业环境照片";
             break;
         case 3:
+            title = @"企业认证";
+            break;
+        case 4:
             title = @"用户管理";
             break;
         default:
@@ -86,7 +91,11 @@
         CpEnvironmentViewController *cpEnvironmentCtrl = [[CpEnvironmentViewController alloc] init];
         [self.navigationController pushViewController:cpEnvironmentCtrl animated:YES];
     }
-    else if (button.tag == 3) {
+    else if (button.tag == 3){// 企业认证
+        CompanyRenzhengViewController *rvc = [CompanyRenzhengViewController new];
+        [self.navigationController pushViewController:rvc animated:YES];
+    }
+    else if (button.tag == 4) {
         AccountViewController *accountCtrl = [[AccountViewController alloc] init];
         [self.navigationController pushViewController:accountCtrl animated:YES];
     }
