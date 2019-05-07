@@ -42,9 +42,16 @@
     }
     self = [super initWithFrame:frame];
     [self setNumberOfLines:0];
+    
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:content];
     [attributedString addAttribute:NSFontAttributeName value:FONT(size) range:NSMakeRange(0, content.length)];
     [attributedString addAttribute:NSForegroundColorAttributeName value:(color == nil ? [UIColor blackColor] : color) range:NSMakeRange(0, content.length)];
+    if ([content containsString:@" 企业认证 "]) {
+        NSRange range = [content rangeOfString:@"企业认证"];
+        [attributedString addAttribute:NSBackgroundColorAttributeName value:UIColorWithRGBA(255, 216, 1, 1) range:range];
+        [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:range];
+    }
+    
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:spacing];
     [paragraphStyle setLineBreakMode:NSLineBreakByWordWrapping];

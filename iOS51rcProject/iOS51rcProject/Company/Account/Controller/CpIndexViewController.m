@@ -107,7 +107,8 @@
         memberTitle = @"信息不完整";
     }
     else if (memberType == 1) {
-        memberInfo = @"成为普通认证会员可同时发布5个职位，可以查看开放简历的联系方式。请到电脑端完成企业认证";
+//        memberInfo = @"成为普通认证会员可同时发布5个职位，可以查看开放简历的联系方式。请到电脑端完成企业认证";
+        memberInfo = @"建议您立即 企业认证   普通会员可同时发布5个职位，实名认证会员可同时发布10个职位。";
         memberTitle = @"未认证会员";
     }
     else if (memberType == 2) {
@@ -126,7 +127,7 @@
         memberTitle = @"VIP会员";
     }
     
-    WKLabel *lbMemberInfo = [[WKLabel alloc] initWithFixedSpacing:CGRectMake(VIEW_X(lbCompanyId), VIEW_BY(lbCompanyId) + 10, widthForLabel, 1) content:memberInfo size:DEFAULTFONTSIZE color:[UIColor whiteColor] spacing:5];
+    WKLabel *lbMemberInfo = [[WKLabel alloc] initWithFixedSpacing:CGRectMake(VIEW_X(lbCompanyId), VIEW_BY(lbCompanyId) + 10, widthForLabel, 1) content:memberInfo size:DEFAULTFONTSIZE color:[UIColor whiteColor] spacing:2];
     [self.viewInfo addSubview:lbMemberInfo];
     
     CGRect frameInfo = self.viewInfo.frame;
